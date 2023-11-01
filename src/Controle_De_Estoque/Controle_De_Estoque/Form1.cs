@@ -22,10 +22,10 @@ namespace Controle_De_Estoque
             listaProdutoTapecaria.Add(new ProdutoTapecaria() {Tipo = TipoTapecaria.cortina, DataEntrada = new DateTime() });
             listaProdutoTapecaria.Add(new ProdutoTapecaria() {Tipo = TipoTapecaria.estofado, DataEntrada = new DateTime() });
 
-           /* for (var i = 0; i < listaProdutoTapecaria.Count; i++)
+            for (var i = 0; i < listaProdutoTapecaria.Count; i++)
             {
                 listaProdutoTapecaria[i].Id = i+1;
-            }*/
+            }
 
             dataGridView1.DataSource = listaProdutoTapecaria;
         }
