@@ -1,6 +1,6 @@
 ﻿namespace Controle_De_Estoque
 {
-    partial class Form1
+    partial class TelaInicial
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -37,7 +37,7 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(647, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(798, 150);
             this.dataGridView1.TabIndex = 0;
             // 
             // Form1

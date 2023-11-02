@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Controle_De_Estoque
 {
-    public partial class Form1 : Form
+    public partial class TelaInicial : Form
     {
-        public Form1()
+        public TelaInicial()
         {
             InitializeComponent();
 
