@@ -18,9 +18,9 @@ namespace Controle_De_Estoque
 
             List<ProdutoTapecaria> listaProdutoTapecaria = new List<ProdutoTapecaria>();
 
-            listaProdutoTapecaria.Add(new ProdutoTapecaria() {Tipo = TipoTapecaria.tapete, DataEntrada = new DateTime()});
-            listaProdutoTapecaria.Add(new ProdutoTapecaria() {Tipo = TipoTapecaria.cortina, DataEntrada = new DateTime() });
-            listaProdutoTapecaria.Add(new ProdutoTapecaria() {Tipo = TipoTapecaria.estofado, DataEntrada = new DateTime() });
+            listaProdutoTapecaria.Add(new ProdutoTapecaria() {Tipo = TipoTapecaria.Tapete, DataEntrada = new DateTime()});
+            listaProdutoTapecaria.Add(new ProdutoTapecaria() {Tipo = TipoTapecaria.Cortina, DataEntrada = new DateTime() });
+            listaProdutoTapecaria.Add(new ProdutoTapecaria() {Tipo = TipoTapecaria.Estofado, DataEntrada = new DateTime() });
 
             for (var i = 0; i < listaProdutoTapecaria.Count; i++)
             {
@@ -30,5 +30,15 @@ namespace Controle_De_Estoque
             dataGridView1.DataSource = listaProdutoTapecaria;
         }
 
+        private void aoClicarEmCadastar(object sender, EventArgs e)
+        {
+            var newForm = new TelaCadastroDeProduto();
+            newForm.Show();
+        }
+
+        private void TelaInicial_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

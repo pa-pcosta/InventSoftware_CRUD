@@ -21,6 +21,6 @@ namespace Controle_De_Estoque
 
     public enum TipoTapecaria
     {
-        tapete, cortina, estofado, outros
+        Tapete, Cortina, Estofado, Outros
     };
 }
