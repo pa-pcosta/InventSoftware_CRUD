@@ -16,6 +16,12 @@ namespace Controle_De_Estoque
         {
             InitializeComponent();
             InitializeComboBoxTipo();
+            InitializeTextBoxPrecoMetroQuadrado();
+        }
+
+        private void InitializeTextBoxPrecoMetroQuadrado()
+        {
+            textBoxPrecoMetroQuadrado.Text = string.Empty;
         }
 
         private void InitializeComboBoxTipo()
@@ -26,25 +32,6 @@ namespace Controle_De_Estoque
         private void TelaCadastroDeProduto_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-      
-
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-       
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            comboBoxTipo.Items.AddRange(Enum.GetNames(typeof(TipoTapecaria)));
         }
 
     }
