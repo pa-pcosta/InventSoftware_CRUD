@@ -27,13 +27,13 @@ namespace Controle_De_Estoque
                 listaProdutoTapecaria[i].Id = i+1;
             }
 
-            dataGridView1.DataSource = listaProdutoTapecaria;
+            dataGridViewListaProdutoTapecaria.DataSource = listaProdutoTapecaria;
         }
 
         private void aoClicarEmCadastar(object sender, EventArgs e)
         {
             var newForm = new TelaCadastroDeProduto();
-            newForm.Show();
+            newForm.ShowDialog();
         }
 
         private void TelaInicial_Load(object sender, EventArgs e)

@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewListaProdutoTapecaria = new System.Windows.Forms.DataGridView();
             this.BotaoCadastrarProdutoTapecaria = new System.Windows.Forms.Button();
             this.BotaoRemoverProdutoTapecaria = new System.Windows.Forms.Button();
             this.BotaoEditarProdutoTapecaria = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListaProdutoTapecaria)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dataGridViewListaProdutosTapecaria
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(734, 406);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridViewListaProdutoTapecaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewListaProdutoTapecaria.Location = new System.Drawing.Point(12, 12);
+            this.dataGridViewListaProdutoTapecaria.Name = "dataGridViewListaProdutosTapecaria";
+            this.dataGridViewListaProdutoTapecaria.Size = new System.Drawing.Size(734, 406);
+            this.dataGridViewListaProdutoTapecaria.TabIndex = 0;
             // 
             // BotaoCadastrarProdutoTapecaria
             // 
@@ -79,18 +79,18 @@
             this.Controls.Add(this.BotaoEditarProdutoTapecaria);
             this.Controls.Add(this.BotaoRemoverProdutoTapecaria);
             this.Controls.Add(this.BotaoCadastrarProdutoTapecaria);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridViewListaProdutoTapecaria);
             this.Name = "TelaInicial";
             this.Text = "Produtos de Tapeçaria";
             this.Load += new System.EventHandler(this.TelaInicial_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListaProdutoTapecaria)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewListaProdutoTapecaria;
         private System.Windows.Forms.Button BotaoCadastrarProdutoTapecaria;
         private System.Windows.Forms.Button BotaoRemoverProdutoTapecaria;
         private System.Windows.Forms.Button BotaoEditarProdutoTapecaria;
