@@ -12,6 +12,8 @@ namespace Controle_De_Estoque
 {
     public partial class TelaInicial : Form
     {
+        public ProdutoTapecaria novoProdutoTapecaria = TelaCadastroDeProduto.novoProdutoTapecaria;
+
         public TelaInicial()
         {
             InitializeComponent();
@@ -21,6 +23,8 @@ namespace Controle_De_Estoque
             listaProdutoTapecaria.Add(new ProdutoTapecaria() {Tipo = TipoTapecaria.Tapete, DataEntrada = new DateTime()});
             listaProdutoTapecaria.Add(new ProdutoTapecaria() {Tipo = TipoTapecaria.Cortina, DataEntrada = new DateTime() });
             listaProdutoTapecaria.Add(new ProdutoTapecaria() {Tipo = TipoTapecaria.Estofado, DataEntrada = new DateTime() });
+            listaProdutoTapecaria.Add(novoProdutoTapecaria);
+
 
             for (var i = 0; i < listaProdutoTapecaria.Count; i++)
             {

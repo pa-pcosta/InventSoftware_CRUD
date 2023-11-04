@@ -12,6 +12,8 @@ namespace Controle_De_Estoque
 {
     public partial class TelaCadastroDeProduto : Form
     {
+        public static ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria() { Detalhes = "Veio da TelaDeCadastro"};
+
         public TelaCadastroDeProduto()
         {
             InitializeComponent();
