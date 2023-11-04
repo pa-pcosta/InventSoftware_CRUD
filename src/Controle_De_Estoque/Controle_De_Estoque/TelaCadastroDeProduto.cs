@@ -19,7 +19,6 @@ namespace Controle_De_Estoque
         public TelaCadastroDeProduto(TelaInicial telaInicial)
         {
             InitializeComponent();
-            InitializeComboBoxTipo();
             InitializeTextBoxPrecoMetroQuadrado();
 
             this.telaInicial = telaInicial;
@@ -30,19 +29,24 @@ namespace Controle_De_Estoque
             textBoxPrecoMetroQuadrado.Text = string.Empty;
         }
 
-        private void InitializeComboBoxTipo()
-        {
-            comboBoxTipo.Items.AddRange(Enum.GetNames(typeof(TipoTapecaria)));
-        }
-
         private void TelaCadastroDeProduto_Load(object sender, EventArgs e)
         {
+
 
         }
 
         private void aoClicarEmSalvar(object sender, EventArgs e)
         {
-            ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria() { Detalhes = "Botao salvar" };
+            ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria()
+            {
+                Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex,
+                DataEntrada = dateTimePickerDataEntrada.Value,
+                Area = Convert.ToDouble(textBoxArea.Text),
+                //PrecoMetroQuadrado = Convert.ToDecimal(textBoxPrecoMetroQuadrado),
+                EntregarAposServico = checkBoxEntregarAposServico.Checked,
+                Detalhes = textBoxDetalhes.Text
+            };
+
             telaInicial.listaProdutoTapecaria.Add(novoProdutoTapecaria);
 
             telaInicial.atualizaDataGridView();

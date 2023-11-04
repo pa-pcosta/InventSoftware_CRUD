@@ -1,4 +1,6 @@
-﻿namespace Controle_De_Estoque
+﻿using System;
+
+namespace Controle_De_Estoque
 {
     partial class TelaCadastroDeProduto
     {
@@ -34,11 +36,11 @@
             this.labelDataEntrada = new System.Windows.Forms.Label();
             this.labelArea = new System.Windows.Forms.Label();
             this.labelPrecoMetroQuadrado = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.labelDetalhes = new System.Windows.Forms.Label();
             this.textBoxPrecoMetroQuadrado = new System.Windows.Forms.TextBox();
             this.comboBoxTipo = new System.Windows.Forms.ComboBox();
             this.checkBoxEntregarAposServico = new System.Windows.Forms.CheckBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBoxDetalhes = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -101,14 +103,14 @@
             this.labelPrecoMetroQuadrado.TabIndex = 6;
             this.labelPrecoMetroQuadrado.Text = "Preço:";
             // 
-            // label5
+            // labelDetalhes
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 183);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 13);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Observações:";
+            this.labelDetalhes.AutoSize = true;
+            this.labelDetalhes.Location = new System.Drawing.Point(9, 183);
+            this.labelDetalhes.Name = "labelDetalhes";
+            this.labelDetalhes.Size = new System.Drawing.Size(52, 13);
+            this.labelDetalhes.TabIndex = 7;
+            this.labelDetalhes.Text = "Detalhes:";
             // 
             // textBoxPrecoMetroQuadrado
             // 
@@ -121,6 +123,11 @@
             // 
             this.comboBoxTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTipo.FormattingEnabled = true;
+            this.comboBoxTipo.Items.AddRange(new object[] {
+            "Tapete",
+            "Cortina",
+            "Estofado",
+            "Outros"});
             this.comboBoxTipo.Location = new System.Drawing.Point(15, 41);
             this.comboBoxTipo.Name = "comboBoxTipo";
             this.comboBoxTipo.Size = new System.Drawing.Size(121, 21);
@@ -138,13 +145,13 @@
             this.checkBoxEntregarAposServico.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.checkBoxEntregarAposServico.UseVisualStyleBackColor = true;
             // 
-            // textBox4
+            // textBoxDetalhes
             // 
-            this.textBox4.Location = new System.Drawing.Point(12, 199);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(261, 71);
-            this.textBox4.TabIndex = 14;
+            this.textBoxDetalhes.Location = new System.Drawing.Point(12, 199);
+            this.textBoxDetalhes.Multiline = true;
+            this.textBoxDetalhes.Name = "textBoxDetalhes";
+            this.textBoxDetalhes.Size = new System.Drawing.Size(261, 71);
+            this.textBoxDetalhes.TabIndex = 14;
             // 
             // label6
             // 
@@ -200,11 +207,11 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.textBoxDetalhes);
             this.Controls.Add(this.checkBoxEntregarAposServico);
             this.Controls.Add(this.comboBoxTipo);
             this.Controls.Add(this.textBoxPrecoMetroQuadrado);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.labelDetalhes);
             this.Controls.Add(this.labelPrecoMetroQuadrado);
             this.Controls.Add(this.labelArea);
             this.Controls.Add(this.labelDataEntrada);
@@ -227,11 +234,11 @@
         private System.Windows.Forms.Label labelDataEntrada;
         private System.Windows.Forms.Label labelArea;
         private System.Windows.Forms.Label labelPrecoMetroQuadrado;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelDetalhes;
         private System.Windows.Forms.TextBox textBoxPrecoMetroQuadrado;
         private System.Windows.Forms.ComboBox comboBoxTipo;
         private System.Windows.Forms.CheckBox checkBoxEntregarAposServico;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBoxDetalhes;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;

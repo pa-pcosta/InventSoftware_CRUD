@@ -20,9 +20,6 @@ namespace Controle_De_Estoque
         {
             InitializeComponent();
 
-            //listaProdutoTapecaria.Add(new ProdutoTapecaria() {Tipo = TipoTapecaria.Tapete, DataEntrada = new DateTime()});
-            //listaProdutoTapecaria.Add(new ProdutoTapecaria() {Tipo = TipoTapecaria.Cortina, DataEntrada = new DateTime() });
-            //listaProdutoTapecaria.Add(new ProdutoTapecaria() {Tipo = TipoTapecaria.Estofado, DataEntrada = new DateTime() });
             listaProdutoTapecaria.Add(novoProdutoTapecaria);
 
 
