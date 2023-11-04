@@ -63,6 +63,7 @@
             this.botaoSalvar.TabIndex = 1;
             this.botaoSalvar.Text = "Salvar";
             this.botaoSalvar.UseVisualStyleBackColor = true;
+            this.botaoSalvar.Click += new System.EventHandler(this.aoClicarEmSalvar);
             // 
             // labelTipo
             // 

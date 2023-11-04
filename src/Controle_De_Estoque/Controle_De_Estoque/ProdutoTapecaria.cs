@@ -12,7 +12,7 @@ namespace Controle_De_Estoque
         public bool EntregarAposServico { get; set; }
         public string Detalhes { get; set; }
     }
-
+    
     public enum TipoTapecaria
     {
         Tapete, Cortina, Estofado, Outros

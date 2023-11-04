@@ -12,13 +12,17 @@ namespace Controle_De_Estoque
 {
     public partial class TelaCadastroDeProduto : Form
     {
+        TelaInicial telaInicial;
+
         public static ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria() { Detalhes = "Veio da TelaDeCadastro"};
 
-        public TelaCadastroDeProduto()
+        public TelaCadastroDeProduto(TelaInicial telaInicial)
         {
             InitializeComponent();
             InitializeComboBoxTipo();
             InitializeTextBoxPrecoMetroQuadrado();
+
+            this.telaInicial = telaInicial;
         }
 
         private void InitializeTextBoxPrecoMetroQuadrado()
@@ -36,5 +40,13 @@ namespace Controle_De_Estoque
 
         }
 
+        private void aoClicarEmSalvar(object sender, EventArgs e)
+        {
+            ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria() { Detalhes = "Botao salvar" };
+            telaInicial.listaProdutoTapecaria.Add(novoProdutoTapecaria);
+
+            telaInicial.atualizaDataGridView();
+
+        }
     }
 }

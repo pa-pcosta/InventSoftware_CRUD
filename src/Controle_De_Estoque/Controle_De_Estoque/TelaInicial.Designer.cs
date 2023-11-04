@@ -28,18 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dataGridViewListaProdutoTapecaria = new System.Windows.Forms.DataGridView();
             this.BotaoCadastrarProdutoTapecaria = new System.Windows.Forms.Button();
             this.BotaoRemoverProdutoTapecaria = new System.Windows.Forms.Button();
             this.BotaoEditarProdutoTapecaria = new System.Windows.Forms.Button();
+            this.telaInicialBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListaProdutoTapecaria)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.telaInicialBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridViewListaProdutosTapecaria
+            // dataGridViewListaProdutoTapecaria
             // 
             this.dataGridViewListaProdutoTapecaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewListaProdutoTapecaria.Location = new System.Drawing.Point(12, 12);
-            this.dataGridViewListaProdutoTapecaria.Name = "dataGridViewListaProdutosTapecaria";
+            this.dataGridViewListaProdutoTapecaria.Name = "dataGridViewListaProdutoTapecaria";
             this.dataGridViewListaProdutoTapecaria.Size = new System.Drawing.Size(734, 406);
             this.dataGridViewListaProdutoTapecaria.TabIndex = 0;
             // 
@@ -71,6 +74,10 @@
             this.BotaoEditarProdutoTapecaria.Text = "Editar";
             this.BotaoEditarProdutoTapecaria.UseVisualStyleBackColor = true;
             // 
+            // telaInicialBindingSource
+            // 
+            this.telaInicialBindingSource.DataSource = typeof(Controle_De_Estoque.TelaInicial);
+            // 
             // TelaInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -84,16 +91,18 @@
             this.Text = "Produtos de Tapeçaria";
             this.Load += new System.EventHandler(this.TelaInicial_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListaProdutoTapecaria)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.telaInicialBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridViewListaProdutoTapecaria;
+        public System.Windows.Forms.DataGridView dataGridViewListaProdutoTapecaria;
         private System.Windows.Forms.Button BotaoCadastrarProdutoTapecaria;
         private System.Windows.Forms.Button BotaoRemoverProdutoTapecaria;
         private System.Windows.Forms.Button BotaoEditarProdutoTapecaria;
+        private System.Windows.Forms.BindingSource telaInicialBindingSource;
     }
 }
 
