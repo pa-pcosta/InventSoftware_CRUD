@@ -19,14 +19,8 @@ namespace Controle_De_Estoque
         public TelaCadastroDeProduto(TelaInicial telaInicial)
         {
             InitializeComponent();
-            InitializeTextBoxPrecoMetroQuadrado();
 
             this.telaInicial = telaInicial;
-        }
-
-        private void InitializeTextBoxPrecoMetroQuadrado()
-        {
-            textBoxPrecoMetroQuadrado.Text = string.Empty;
         }
 
         private void TelaCadastroDeProduto_Load(object sender, EventArgs e)
@@ -37,20 +31,25 @@ namespace Controle_De_Estoque
 
         private void aoClicarEmSalvar(object sender, EventArgs e)
         {
+            //Constroi objeto do tipo ProdutoTapecaria com base nos valores passados no formulario
             ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria()
             {
                 Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex,
                 DataEntrada = dateTimePickerDataEntrada.Value,
                 Area = Convert.ToDouble(textBoxArea.Text),
-                //PrecoMetroQuadrado = Convert.ToDecimal(textBoxPrecoMetroQuadrado),
+                PrecoMetroQuadrado = Convert.ToDecimal(textBoxPrecoMetroQuadrado.Text),
                 EntregarAposServico = checkBoxEntregarAposServico.Checked,
                 Detalhes = textBoxDetalhes.Text
             };
 
+            //Adiciona objeto criado a Lista de Produtos definida na TelaInicial
             telaInicial.listaProdutoTapecaria.Add(novoProdutoTapecaria);
 
+            //Chama a função que atualiza a tabela da TelaInicial
             telaInicial.atualizaDataGridView();
-
+            
+            //Fecha a janela do formúlario
+            Close();
         }
     }
 }
