@@ -41,16 +41,14 @@ namespace Controle_De_Estoque
             this.comboBoxTipo = new System.Windows.Forms.ComboBox();
             this.checkBoxEntregarAposServico = new System.Windows.Forms.CheckBox();
             this.textBoxDetalhes = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.dateTimePickerDataEntrada = new System.Windows.Forms.DateTimePicker();
             this.textBoxArea = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // botaoCancelar
             // 
-            this.botaoCancelar.Location = new System.Drawing.Point(12, 289);
+            this.botaoCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.botaoCancelar.Location = new System.Drawing.Point(116, 289);
             this.botaoCancelar.Name = "botaoCancelar";
             this.botaoCancelar.Size = new System.Drawing.Size(75, 23);
             this.botaoCancelar.TabIndex = 0;
@@ -60,6 +58,7 @@ namespace Controle_De_Estoque
             // 
             // botaoSalvar
             // 
+            this.botaoSalvar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.botaoSalvar.Location = new System.Drawing.Point(198, 289);
             this.botaoSalvar.Name = "botaoSalvar";
             this.botaoSalvar.Size = new System.Drawing.Size(75, 23);
@@ -79,6 +78,7 @@ namespace Controle_De_Estoque
             // 
             // labelDataEntrada
             // 
+            this.labelDataEntrada.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelDataEntrada.AutoSize = true;
             this.labelDataEntrada.Location = new System.Drawing.Point(173, 26);
             this.labelDataEntrada.Name = "labelDataEntrada";
@@ -88,24 +88,28 @@ namespace Controle_De_Estoque
             // 
             // labelArea
             // 
+            this.labelArea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
             this.labelArea.AutoSize = true;
-            this.labelArea.Location = new System.Drawing.Point(125, 103);
+            this.labelArea.Location = new System.Drawing.Point(113, 103);
             this.labelArea.Name = "labelArea";
-            this.labelArea.Size = new System.Drawing.Size(55, 13);
+            this.labelArea.Size = new System.Drawing.Size(69, 13);
             this.labelArea.TabIndex = 5;
-            this.labelArea.Text = "Tamanho:";
+            this.labelArea.Text = "Tamanho m²:";
             // 
             // labelPrecoMetroQuadrado
             // 
+            this.labelPrecoMetroQuadrado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.labelPrecoMetroQuadrado.AutoSize = true;
             this.labelPrecoMetroQuadrado.Location = new System.Drawing.Point(12, 103);
             this.labelPrecoMetroQuadrado.Name = "labelPrecoMetroQuadrado";
-            this.labelPrecoMetroQuadrado.Size = new System.Drawing.Size(38, 13);
+            this.labelPrecoMetroQuadrado.Size = new System.Drawing.Size(55, 13);
             this.labelPrecoMetroQuadrado.TabIndex = 6;
-            this.labelPrecoMetroQuadrado.Text = "Preço:";
+            this.labelPrecoMetroQuadrado.Text = "Preço R$:";
             // 
             // labelDetalhes
             // 
+            this.labelDetalhes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.labelDetalhes.AutoSize = true;
             this.labelDetalhes.Location = new System.Drawing.Point(9, 183);
             this.labelDetalhes.Name = "labelDetalhes";
@@ -115,9 +119,11 @@ namespace Controle_De_Estoque
             // 
             // textBoxPrecoMetroQuadrado
             // 
-            this.textBoxPrecoMetroQuadrado.Location = new System.Drawing.Point(33, 119);
+            this.textBoxPrecoMetroQuadrado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.textBoxPrecoMetroQuadrado.Location = new System.Drawing.Point(15, 119);
             this.textBoxPrecoMetroQuadrado.Name = "textBoxPrecoMetroQuadrado";
-            this.textBoxPrecoMetroQuadrado.Size = new System.Drawing.Size(39, 20);
+            this.textBoxPrecoMetroQuadrado.Size = new System.Drawing.Size(66, 20);
             this.textBoxPrecoMetroQuadrado.TabIndex = 9;
             // 
             // comboBoxTipo
@@ -131,9 +137,11 @@ namespace Controle_De_Estoque
             // 
             // checkBoxEntregarAposServico
             // 
+            this.checkBoxEntregarAposServico.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.checkBoxEntregarAposServico.AutoSize = true;
             this.checkBoxEntregarAposServico.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.checkBoxEntregarAposServico.Location = new System.Drawing.Point(204, 125);
+            this.checkBoxEntregarAposServico.Location = new System.Drawing.Point(207, 122);
             this.checkBoxEntregarAposServico.Name = "checkBoxEntregarAposServico";
             this.checkBoxEntregarAposServico.Size = new System.Drawing.Size(66, 17);
             this.checkBoxEntregarAposServico.TabIndex = 13;
@@ -143,41 +151,16 @@ namespace Controle_De_Estoque
             // 
             // textBoxDetalhes
             // 
+            this.textBoxDetalhes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxDetalhes.Location = new System.Drawing.Point(12, 199);
             this.textBoxDetalhes.Multiline = true;
             this.textBoxDetalhes.Name = "textBoxDetalhes";
             this.textBoxDetalhes.Size = new System.Drawing.Size(261, 71);
             this.textBoxDetalhes.TabIndex = 14;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(168, 123);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(18, 13);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "m²";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(72, 126);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(23, 13);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "/m²";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 126);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(21, 13);
-            this.label8.TabIndex = 17;
-            this.label8.Text = "R$";
-            // 
             // dateTimePickerDataEntrada
             // 
+            this.dateTimePickerDataEntrada.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.dateTimePickerDataEntrada.CustomFormat = "";
             this.dateTimePickerDataEntrada.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerDataEntrada.Location = new System.Drawing.Point(176, 42);
@@ -188,9 +171,10 @@ namespace Controle_De_Estoque
             // 
             // textBoxArea
             // 
-            this.textBoxArea.Location = new System.Drawing.Point(128, 119);
+            this.textBoxArea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.textBoxArea.Location = new System.Drawing.Point(116, 119);
             this.textBoxArea.Name = "textBoxArea";
-            this.textBoxArea.Size = new System.Drawing.Size(39, 20);
+            this.textBoxArea.Size = new System.Drawing.Size(66, 20);
             this.textBoxArea.TabIndex = 19;
             // 
             // TelaCadastroDeProduto
@@ -200,9 +184,6 @@ namespace Controle_De_Estoque
             this.ClientSize = new System.Drawing.Size(285, 323);
             this.Controls.Add(this.textBoxArea);
             this.Controls.Add(this.dateTimePickerDataEntrada);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
             this.Controls.Add(this.textBoxDetalhes);
             this.Controls.Add(this.checkBoxEntregarAposServico);
             this.Controls.Add(this.comboBoxTipo);
@@ -234,9 +215,6 @@ namespace Controle_De_Estoque
         private System.Windows.Forms.ComboBox comboBoxTipo;
         private System.Windows.Forms.CheckBox checkBoxEntregarAposServico;
         private System.Windows.Forms.TextBox textBoxDetalhes;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DateTimePicker dateTimePickerDataEntrada;
         private System.Windows.Forms.TextBox textBoxArea;
     }

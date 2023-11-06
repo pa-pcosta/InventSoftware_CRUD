@@ -40,15 +40,18 @@
             // 
             // dataGridViewListaProdutoTapecaria
             // 
+            this.dataGridViewListaProdutoTapecaria.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewListaProdutoTapecaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewListaProdutoTapecaria.Location = new System.Drawing.Point(12, 12);
             this.dataGridViewListaProdutoTapecaria.Name = "dataGridViewListaProdutoTapecaria";
             this.dataGridViewListaProdutoTapecaria.Size = new System.Drawing.Size(734, 406);
             this.dataGridViewListaProdutoTapecaria.TabIndex = 0;
-            this.dataGridViewListaProdutoTapecaria.DataSource = listaProdutoTapecaria;
             // 
             // BotaoCadastrarProdutoTapecaria
             // 
+            this.BotaoCadastrarProdutoTapecaria.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.BotaoCadastrarProdutoTapecaria.Location = new System.Drawing.Point(671, 424);
             this.BotaoCadastrarProdutoTapecaria.Name = "BotaoCadastrarProdutoTapecaria";
             this.BotaoCadastrarProdutoTapecaria.Size = new System.Drawing.Size(75, 23);
@@ -59,7 +62,8 @@
             // 
             // BotaoRemoverProdutoTapecaria
             // 
-            this.BotaoRemoverProdutoTapecaria.Location = new System.Drawing.Point(12, 424);
+            this.BotaoRemoverProdutoTapecaria.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BotaoRemoverProdutoTapecaria.Location = new System.Drawing.Point(509, 424);
             this.BotaoRemoverProdutoTapecaria.Name = "BotaoRemoverProdutoTapecaria";
             this.BotaoRemoverProdutoTapecaria.Size = new System.Drawing.Size(75, 23);
             this.BotaoRemoverProdutoTapecaria.TabIndex = 2;
@@ -68,7 +72,8 @@
             // 
             // BotaoEditarProdutoTapecaria
             // 
-            this.BotaoEditarProdutoTapecaria.Location = new System.Drawing.Point(93, 424);
+            this.BotaoEditarProdutoTapecaria.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BotaoEditarProdutoTapecaria.Location = new System.Drawing.Point(590, 424);
             this.BotaoEditarProdutoTapecaria.Name = "BotaoEditarProdutoTapecaria";
             this.BotaoEditarProdutoTapecaria.Size = new System.Drawing.Size(75, 23);
             this.BotaoEditarProdutoTapecaria.TabIndex = 3;
@@ -83,7 +88,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(758, 450);
+            this.ClientSize = new System.Drawing.Size(758, 452);
             this.Controls.Add(this.BotaoEditarProdutoTapecaria);
             this.Controls.Add(this.BotaoRemoverProdutoTapecaria);
             this.Controls.Add(this.BotaoCadastrarProdutoTapecaria);
