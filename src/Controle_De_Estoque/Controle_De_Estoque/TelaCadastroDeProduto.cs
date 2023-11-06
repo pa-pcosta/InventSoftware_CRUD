@@ -52,5 +52,10 @@ namespace Controle_De_Estoque
             //Fecha a janela do formúlario
             Close();
         }
+
+        private void aoClicarEmCancelar(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

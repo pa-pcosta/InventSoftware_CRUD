@@ -54,8 +54,9 @@ namespace Controle_De_Estoque
             this.botaoCancelar.Name = "botaoCancelar";
             this.botaoCancelar.Size = new System.Drawing.Size(75, 23);
             this.botaoCancelar.TabIndex = 0;
-            this.botaoCancelar.Text = "button1";
+            this.botaoCancelar.Text = "Cancelar";
             this.botaoCancelar.UseVisualStyleBackColor = true;
+            this.botaoCancelar.Click += new System.EventHandler(this.aoClicarEmCancelar);
             // 
             // botaoSalvar
             // 
@@ -123,7 +124,11 @@ namespace Controle_De_Estoque
             // 
             this.comboBoxTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTipo.FormattingEnabled = true;
-            this.comboBoxTipo.Items.AddRange(Enum.GetNames(typeof(TipoTapecaria)));
+            this.comboBoxTipo.Items.AddRange(new object[] {
+            "Tapete",
+            "Cortina",
+            "Estofado",
+            "Outros"});
             this.comboBoxTipo.Location = new System.Drawing.Point(15, 41);
             this.comboBoxTipo.Name = "comboBoxTipo";
             this.comboBoxTipo.Size = new System.Drawing.Size(121, 21);
@@ -184,7 +189,7 @@ namespace Controle_De_Estoque
             this.dateTimePickerDataEntrada.Name = "dateTimePickerDataEntrada";
             this.dateTimePickerDataEntrada.Size = new System.Drawing.Size(99, 20);
             this.dateTimePickerDataEntrada.TabIndex = 18;
-            this.dateTimePickerDataEntrada.Value = DateTime.Today;
+            this.dateTimePickerDataEntrada.Value = new System.DateTime(2023, 11, 6, 0, 0, 0, 0);
             // 
             // textBoxArea
             // 
