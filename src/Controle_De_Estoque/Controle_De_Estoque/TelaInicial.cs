@@ -12,23 +12,13 @@ namespace Controle_De_Estoque
 {
     public partial class TelaInicial : Form
     {
-        public ProdutoTapecaria novoProdutoTapecaria = TelaCadastroDeProduto.novoProdutoTapecaria;
-
         public List<ProdutoTapecaria> listaProdutoTapecaria = new List<ProdutoTapecaria>();
 
         public TelaInicial()
         {
             InitializeComponent();
 
-            listaProdutoTapecaria.Add(novoProdutoTapecaria);
-
-
-            for (var i = 0; i < listaProdutoTapecaria.Count; i++)
-            {
-                listaProdutoTapecaria[i].Id = i+1;
-            }
-
-            dataGridViewListaProdutoTapecaria.DataSource = listaProdutoTapecaria;
+            
         }
 
         private void aoClicarEmCadastar(object sender, EventArgs e)

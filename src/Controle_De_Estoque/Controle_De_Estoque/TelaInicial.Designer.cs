@@ -45,6 +45,7 @@
             this.dataGridViewListaProdutoTapecaria.Name = "dataGridViewListaProdutoTapecaria";
             this.dataGridViewListaProdutoTapecaria.Size = new System.Drawing.Size(734, 406);
             this.dataGridViewListaProdutoTapecaria.TabIndex = 0;
+            this.dataGridViewListaProdutoTapecaria.DataSource = listaProdutoTapecaria;
             // 
             // BotaoCadastrarProdutoTapecaria
             // 

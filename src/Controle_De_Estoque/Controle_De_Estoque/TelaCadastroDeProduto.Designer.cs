@@ -184,7 +184,7 @@ namespace Controle_De_Estoque
             this.dateTimePickerDataEntrada.Name = "dateTimePickerDataEntrada";
             this.dateTimePickerDataEntrada.Size = new System.Drawing.Size(99, 20);
             this.dateTimePickerDataEntrada.TabIndex = 18;
-            this.dateTimePickerDataEntrada.Value = new System.DateTime(2023, 11, 3, 10, 11, 6, 0);
+            this.dateTimePickerDataEntrada.Value = DateTime.Today;
             // 
             // textBoxArea
             // 

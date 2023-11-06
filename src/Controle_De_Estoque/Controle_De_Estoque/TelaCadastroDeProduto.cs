@@ -14,7 +14,7 @@ namespace Controle_De_Estoque
     {
         TelaInicial telaInicial;
 
-        public static ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria() { Detalhes = "Veio da TelaDeCadastro"};
+        static int ultimoIdUtilizado = 0;
 
         public TelaCadastroDeProduto(TelaInicial telaInicial)
         {
@@ -34,6 +34,7 @@ namespace Controle_De_Estoque
             //Constroi objeto do tipo ProdutoTapecaria com base nos valores passados no formulario
             ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria()
             {
+                Id = ++TelaCadastroDeProduto.ultimoIdUtilizado,
                 Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex,
                 DataEntrada = dateTimePickerDataEntrada.Value,
                 Area = Convert.ToDouble(textBoxArea.Text),
