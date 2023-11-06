@@ -51,10 +51,7 @@ namespace Controle_De_Estoque
 
         private int geraId()
         {
-            //int novoId;
-
             ++ultimoIdUtilizado;
-            //novoId = ultimoIdUtilizado;
 
             return ultimoIdUtilizado;
         }
