@@ -51,12 +51,12 @@ namespace Controle_De_Estoque
 
         private int geraId()
         {
-            int novoId;
+            //int novoId;
 
-            ultimoIdUtilizado++;
-            novoId = ultimoIdUtilizado;
+            ++ultimoIdUtilizado;
+            //novoId = ultimoIdUtilizado;
 
-            return novoId;
+            return ultimoIdUtilizado;
         }
 
         private void aoClicarEmCancelar(object sender, EventArgs e)
