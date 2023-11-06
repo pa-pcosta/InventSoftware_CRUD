@@ -9,12 +9,15 @@ namespace Controle_De_Estoque
         public DateTime DataEntrada { get; set; }
         public double Area { get; set; }
         public decimal PrecoMetroQuadrado { get; set; }
-        public bool EntregarAposServico { get; set; }
+        public bool EhEntrega { get; set; }
         public string Detalhes { get; set; }
     }
     
     public enum TipoTapecaria
     {
-        Tapete, Cortina, Estofado, Outros
+        Tapete, 
+        Cortina, 
+        Estofado, 
+        Outros
     };
 }

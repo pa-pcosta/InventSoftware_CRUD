@@ -55,7 +55,7 @@
             this.BotaoCadastrarProdutoTapecaria.TabIndex = 1;
             this.BotaoCadastrarProdutoTapecaria.Text = "Cadastrar";
             this.BotaoCadastrarProdutoTapecaria.UseVisualStyleBackColor = true;
-            this.BotaoCadastrarProdutoTapecaria.Click += new System.EventHandler(this.aoClicarEmCadastar);
+            this.BotaoCadastrarProdutoTapecaria.Click += new System.EventHandler(this.aoClicarEmCadastrar);
             // 
             // BotaoRemoverProdutoTapecaria
             // 
@@ -90,7 +90,6 @@
             this.Controls.Add(this.dataGridViewListaProdutoTapecaria);
             this.Name = "TelaInicial";
             this.Text = "Produtos de Tapeçaria";
-            this.Load += new System.EventHandler(this.TelaInicial_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListaProdutoTapecaria)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.telaInicialBindingSource)).EndInit();
             this.ResumeLayout(false);

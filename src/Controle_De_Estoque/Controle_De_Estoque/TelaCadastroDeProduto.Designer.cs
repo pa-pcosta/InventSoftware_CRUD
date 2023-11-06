@@ -124,11 +124,6 @@ namespace Controle_De_Estoque
             // 
             this.comboBoxTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTipo.FormattingEnabled = true;
-            this.comboBoxTipo.Items.AddRange(new object[] {
-            "Tapete",
-            "Cortina",
-            "Estofado",
-            "Outros"});
             this.comboBoxTipo.Location = new System.Drawing.Point(15, 41);
             this.comboBoxTipo.Name = "comboBoxTipo";
             this.comboBoxTipo.Size = new System.Drawing.Size(121, 21);
@@ -221,7 +216,6 @@ namespace Controle_De_Estoque
             this.Controls.Add(this.botaoCancelar);
             this.Name = "TelaCadastroDeProduto";
             this.Text = "Cadastro - Produto Tapeçaria";
-            this.Load += new System.EventHandler(this.TelaCadastroDeProduto_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

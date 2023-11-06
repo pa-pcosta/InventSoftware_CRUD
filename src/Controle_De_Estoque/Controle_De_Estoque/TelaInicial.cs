@@ -17,19 +17,12 @@ namespace Controle_De_Estoque
         public TelaInicial()
         {
             InitializeComponent();
-
-            
         }
 
-        private void aoClicarEmCadastar(object sender, EventArgs e)
+        private void aoClicarEmCadastrar(object sender, EventArgs e)
         {
             TelaCadastroDeProduto newForm = new TelaCadastroDeProduto(this);
             newForm.ShowDialog();
-        }
-
-        private void TelaInicial_Load(object sender, EventArgs e)
-        {
-            
         }
 
         public void atualizaDataGridView()
