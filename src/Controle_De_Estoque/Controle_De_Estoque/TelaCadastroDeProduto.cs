@@ -8,7 +8,7 @@ namespace Controle_De_Estoque
     {
         TelaInicial telaInicial;
 
-        static int ultimoIdUtilizado = 0;
+        private static int _ultimoIdUtilizado = 0;
 
         public TelaCadastroDeProduto(TelaInicial telaInicial)
         {
@@ -23,11 +23,11 @@ namespace Controle_De_Estoque
             comboBox.Items.AddRange(Enum.GetNames(typeof(TipoTapecaria)));
         }
 
-        private void aoClicarEmSalvar(object sender, EventArgs e)
+        private void AoClicarEmSalvar(object sender, EventArgs e)
         {
             ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria()
             {
-                Id = geraId(),
+                Id = GeraId(),
                 Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex,
                 DataEntrada = dateTimePickerDataEntrada.Value,
                 Area = Convert.ToDouble(textBoxArea.Text),
@@ -43,12 +43,12 @@ namespace Controle_De_Estoque
             Close();
         }
 
-        private int geraId()
+        private int GeraId()
         {
-            return ++ultimoIdUtilizado;
+            return ++_ultimoIdUtilizado;
         }
 
-        private void aoClicarEmCancelar(object sender, EventArgs e)
+        private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             Close();
         }

@@ -54,7 +54,7 @@ namespace Controle_De_Estoque
             this.botaoCancelar.TabIndex = 0;
             this.botaoCancelar.Text = "Cancelar";
             this.botaoCancelar.UseVisualStyleBackColor = true;
-            this.botaoCancelar.Click += new System.EventHandler(this.aoClicarEmCancelar);
+            this.botaoCancelar.Click += new System.EventHandler(this.AoClicarEmCancelar);
             // 
             // botaoSalvar
             // 
@@ -65,7 +65,7 @@ namespace Controle_De_Estoque
             this.botaoSalvar.TabIndex = 1;
             this.botaoSalvar.Text = "Salvar";
             this.botaoSalvar.UseVisualStyleBackColor = true;
-            this.botaoSalvar.Click += new System.EventHandler(this.aoClicarEmSalvar);
+            this.botaoSalvar.Click += new System.EventHandler(this.AoClicarEmSalvar);
             // 
             // labelTipo
             // 
