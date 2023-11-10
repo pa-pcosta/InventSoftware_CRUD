@@ -6,7 +6,7 @@ namespace Controle_De_Estoque
 {
     public partial class TelaCadastroDeProduto : Form
     {
-        TelaInicial telaInicial;
+        TelaInicial _telaInicial;
 
         private static int _ultimoIdUtilizado = 0;
 
@@ -14,33 +14,48 @@ namespace Controle_De_Estoque
         {
             InitializeComponent();
             InitializeComboBox(comboBoxTipo);
-            
-            this.telaInicial = telaInicial;
+            _telaInicial = telaInicial; 
         }
 
         private void InitializeComboBox(ComboBox comboBox)
         {
             comboBox.Items.AddRange(Enum.GetNames(typeof(TipoTapecaria)));
+            comboBox.SelectedIndex = (Enum.GetValues(typeof(TipoTapecaria)).Length)-1;
         }
 
-        private void AoClicarEmSalvar(object sender, EventArgs e)
+        public void AoClicarEmSalvar(object sender, EventArgs e)
         {
-            ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria()
+            ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria();
+
+            ValidacaoProdutoTapecaria validacaoProdutoTapecaria = new ValidacaoProdutoTapecaria();
+
+            try
             {
-                Id = GeraId(),
-                Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex,
-                DataEntrada = dateTimePickerDataEntrada.Value,
-                Area = Convert.ToDouble(textBoxArea.Text),
-                PrecoMetroQuadrado = Convert.ToDecimal(textBoxPrecoMetroQuadrado.Text),
-                EhEntrega = checkBoxEntregarAposServico.Checked,
-                Detalhes = textBoxDetalhes.Text
-            };
-
-            telaInicial.listaProdutoTapecaria.Add(novoProdutoTapecaria);
-
-            telaInicial.atualizaDataGridView();
+                novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex;
+                novoProdutoTapecaria.DataEntrada = dateTimePickerDataEntrada.Value;
+                novoProdutoTapecaria.Area = Convert.ToDouble(textBoxArea.Text);
+                novoProdutoTapecaria.PrecoMetroQuadrado = Convert.ToDecimal(textBoxPrecoMetroQuadrado.Text);
+                novoProdutoTapecaria.EhEntrega = checkBoxEntregarAposServico.Checked;
+                novoProdutoTapecaria.Detalhes = textBoxDetalhes.Text;
             
-            Close();
+                validacaoProdutoTapecaria.ValidaProduto(novoProdutoTapecaria);
+            }
+            catch 
+            {             
+                MessageBox.Show(validacaoProdutoTapecaria.RetornaListaDeErros());
+            }
+
+            if (validacaoProdutoTapecaria.RetornaListaDeErros() != string.Empty)
+            {
+                novoProdutoTapecaria.Id = GeraId();
+
+                _telaInicial.listaProdutoTapecaria.Add(novoProdutoTapecaria);
+
+                _telaInicial.atualizaDataGridView();
+
+
+                Close();
+            }
         }
 
         private int GeraId()
