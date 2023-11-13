@@ -15,8 +15,16 @@ namespace Controle_De_Estoque
 
         private void aoClicarEmCadastrar(object sender, EventArgs e)
         {
-            TelaCadastroDeProduto newForm = new TelaCadastroDeProduto(this);
+            ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria();
+            TelaCadastroDeProduto newForm = new TelaCadastroDeProduto(novoProdutoTapecaria);
             newForm.ShowDialog();
+
+            if(newForm.DialogResult.Equals(DialogResult.OK))
+            {
+                listaProdutoTapecaria.Add(novoProdutoTapecaria);
+                atualizaDataGridView();
+                MessageBox.Show("Novo produto cadastrado com sucesso");
+            }
         }
 
         public void atualizaDataGridView()

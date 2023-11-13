@@ -6,15 +6,15 @@ namespace Controle_De_Estoque
 {
     public partial class TelaCadastroDeProduto : Form
     {
-        TelaInicial _telaInicial;
+        ProdutoTapecaria _novoProdutoTapecaria;
 
         private static int _ultimoIdUtilizado = 0;
 
-        public TelaCadastroDeProduto(TelaInicial telaInicial)
+        public TelaCadastroDeProduto(ProdutoTapecaria novoProdutoTapecaria)
         {
             InitializeComponent();
             InitializeComboBox(comboBoxTipo);
-            _telaInicial = telaInicial; 
+            _novoProdutoTapecaria = novoProdutoTapecaria;
         }
 
         private void InitializeComboBox(ComboBox comboBox)
@@ -25,36 +25,27 @@ namespace Controle_De_Estoque
 
         public void AoClicarEmSalvar(object sender, EventArgs e)
         {
-            ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria();
+            ValidacaoProdutoTapecaria validacaoProdutoTapecaria = new ValidacaoProdutoTapecaria(this);
 
-            ValidacaoProdutoTapecaria validacaoProdutoTapecaria = new ValidacaoProdutoTapecaria();
+            validacaoProdutoTapecaria.ValidaProduto();
 
-            try
+            if (validacaoProdutoTapecaria.RetornaListaDeErros() == string.Empty)
             {
-                novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex;
-                novoProdutoTapecaria.DataEntrada = dateTimePickerDataEntrada.Value;
-                novoProdutoTapecaria.Area = Convert.ToDouble(textBoxArea.Text);
-                novoProdutoTapecaria.PrecoMetroQuadrado = Convert.ToDecimal(textBoxPrecoMetroQuadrado.Text);
-                novoProdutoTapecaria.EhEntrega = checkBoxEntregarAposServico.Checked;
-                novoProdutoTapecaria.Detalhes = textBoxDetalhes.Text;
-            
-                validacaoProdutoTapecaria.ValidaProduto(novoProdutoTapecaria);
-            }
-            catch 
-            {             
-                MessageBox.Show(validacaoProdutoTapecaria.RetornaListaDeErros());
-            }
+                _novoProdutoTapecaria.Id = GeraId();
+                _novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex;
+                _novoProdutoTapecaria.DataEntrada = dateTimePickerDataEntrada.Value;
+                _novoProdutoTapecaria.PrecoMetroQuadrado = Convert.ToDecimal(textBoxPrecoMetroQuadrado.Text);
+                _novoProdutoTapecaria.Area = Convert.ToDouble(textBoxArea.Text);
+                _novoProdutoTapecaria.EhEntrega = checkBoxEntregarAposServico.Checked;
+                _novoProdutoTapecaria.Detalhes = textBoxDetalhes.Text;
 
-            if (validacaoProdutoTapecaria.RetornaListaDeErros() != string.Empty)
-            {
-                novoProdutoTapecaria.Id = GeraId();
-
-                _telaInicial.listaProdutoTapecaria.Add(novoProdutoTapecaria);
-
-                _telaInicial.atualizaDataGridView();
-
+                DialogResult = DialogResult.OK;
 
                 Close();
+            }
+            else
+            {
+                MessageBox.Show(validacaoProdutoTapecaria.RetornaListaDeErros());
             }
         }
 

@@ -211,11 +211,11 @@ namespace Controle_De_Estoque
         private System.Windows.Forms.Label labelArea;
         private System.Windows.Forms.Label labelPrecoMetroQuadrado;
         private System.Windows.Forms.Label labelDetalhes;
-        private System.Windows.Forms.TextBox textBoxPrecoMetroQuadrado;
-        private System.Windows.Forms.ComboBox comboBoxTipo;
+        public System.Windows.Forms.TextBox textBoxPrecoMetroQuadrado;
+        public System.Windows.Forms.ComboBox comboBoxTipo;
         private System.Windows.Forms.CheckBox checkBoxEntregarAposServico;
         private System.Windows.Forms.TextBox textBoxDetalhes;
-        private System.Windows.Forms.DateTimePicker dateTimePickerDataEntrada;
-        private System.Windows.Forms.TextBox textBoxArea;
+        public System.Windows.Forms.DateTimePicker dateTimePickerDataEntrada;
+        public System.Windows.Forms.TextBox textBoxArea;
     }
 }

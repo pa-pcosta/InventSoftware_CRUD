@@ -10,16 +10,27 @@ namespace Controle_De_Estoque
 {
     public class ValidacaoProdutoTapecaria
     {
+        TelaCadastroDeProduto _telaCadastroDeProduto;
+
         public List<string> _listaDeErros = new List<string>();
 
-        public void ValidaProduto(ProdutoTapecaria produtoTapecaria)
+        public ValidacaoProdutoTapecaria(TelaCadastroDeProduto telaCadastroDeProduto) 
         {
+            _telaCadastroDeProduto = telaCadastroDeProduto;
+        }
+
+        public void ValidaProduto()
+        {
+            ProdutoTapecaria testeProdutoTapecaria = new ProdutoTapecaria();
+
             //Valida campo comboBoxTipo
             try
             {
-                if (!(Convert.ToInt32(produtoTapecaria.Tipo) >= 0) && (Convert.ToInt32(produtoTapecaria.Tipo) < Enum.GetValues(typeof(TipoTapecaria)).Length))
+                testeProdutoTapecaria.Tipo = (TipoTapecaria)_telaCadastroDeProduto.comboBoxTipo.SelectedIndex;
+
+                if (((int)testeProdutoTapecaria.Tipo < 0) || ((int)testeProdutoTapecaria.Tipo >= Enum.GetValues(typeof(TipoTapecaria)).Length))
                 {
-                    throw new Exception("O tipo do produto não pode ser vazio.");
+                    throw new Exception("TIPO inválido.");
                 }
             }
             catch (Exception exception)
@@ -30,22 +41,11 @@ namespace Controle_De_Estoque
             //Valida campo dateTimePickerDataEntrada
             try
             {
-                if (!(produtoTapecaria.DataEntrada < DateTime.Now))
-                {
-                    throw new Exception("Data de Entrada do produto inválida.");
-                }
-            }
-            catch (Exception exception)
-            {
-                _listaDeErros.Add(exception.Message);
-            }
+                testeProdutoTapecaria.DataEntrada = _telaCadastroDeProduto.dateTimePickerDataEntrada.Value;
 
-            //Valida campo textBoxArea
-            try
-            {
-                if (!(produtoTapecaria.Area < 0))
+                if (_telaCadastroDeProduto.dateTimePickerDataEntrada.Value > DateTime.Now)
                 {
-                    throw new Exception("Tamanho do produto inválido");
+                    throw new Exception("DATA DE ENTRADA não pode ser maior que a data atual.");
                 }
             }
             catch (Exception exception)
@@ -56,10 +56,31 @@ namespace Controle_De_Estoque
             //Valida campo textBoxPrecoMetroQuadrado
             try
             {
-                if (!(produtoTapecaria.PrecoMetroQuadrado < 0))
+                testeProdutoTapecaria.PrecoMetroQuadrado = Convert.ToDecimal(_telaCadastroDeProduto.textBoxPrecoMetroQuadrado.Text);
+
+                if ((testeProdutoTapecaria.PrecoMetroQuadrado) < 0)
                 {
-                    throw new Exception("Preço do produto inválido");
+                    _listaDeErros.Add("Menor que 0");
                 }
+            }
+            catch (FormatException)
+            {
+                _listaDeErros.Add("PREÇO deve ser um número.");
+            }
+
+            //Valida campo textBoxArea
+            try
+            {
+                testeProdutoTapecaria.Area = Convert.ToDouble(_telaCadastroDeProduto.textBoxArea.Text);
+
+                if (testeProdutoTapecaria.Area <= 0)
+                {
+                    throw new Exception("TAMANHO do produto inválido");
+                }
+            }
+            catch(FormatException)
+            {
+                _listaDeErros.Add("TAMANHO deve ser um número");
             }
             catch (Exception exception)
             {
