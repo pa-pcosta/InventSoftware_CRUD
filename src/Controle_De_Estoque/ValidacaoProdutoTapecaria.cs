@@ -60,7 +60,7 @@ namespace Controle_De_Estoque
 
                 if ((testeProdutoTapecaria.PrecoMetroQuadrado) < 0)
                 {
-                    _listaDeErros.Add("Menor que 0");
+                    _listaDeErros.Add("PREÇO inválido");
                 }
             }
             catch (FormatException)

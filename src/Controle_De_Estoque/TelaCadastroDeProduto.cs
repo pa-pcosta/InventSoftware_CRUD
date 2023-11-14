@@ -14,13 +14,8 @@ namespace Controle_De_Estoque
         {
             InitializeComponent();
             InitializeComboBox(comboBoxTipo);
+            InitializeDateTimePicker();
             _novoProdutoTapecaria = novoProdutoTapecaria;
-        }
-
-        private void InitializeComboBox(ComboBox comboBox)
-        {
-            comboBox.Items.AddRange(Enum.GetNames(typeof(TipoTapecaria)));
-            comboBox.SelectedIndex = (Enum.GetValues(typeof(TipoTapecaria)).Length)-1;
         }
 
         public void AoClicarEmSalvar(object sender, EventArgs e)
@@ -45,7 +40,7 @@ namespace Controle_De_Estoque
             }
             else
             {
-                MessageBox.Show(validacaoProdutoTapecaria.RetornaListaDeErros());
+                MessageBox.Show(validacaoProdutoTapecaria.RetornaListaDeErros(),"ERRO!", MessageBoxButtons.OK ,MessageBoxIcon.Error);
             }
         }
 
@@ -57,6 +52,56 @@ namespace Controle_De_Estoque
         private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void InitializeDateTimePicker()
+        {
+            dateTimePickerDataEntrada.Value = DateTime.Today;
+        }
+
+        private void InitializeComboBox(ComboBox comboBox)
+        {
+            comboBox.Items.AddRange(Enum.GetNames(typeof(TipoTapecaria)));
+        }
+
+        private void textBoxPrecoMetroQuadrado_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char tecla = e.KeyChar;
+
+            if (tecla == 46 && textBoxPrecoMetroQuadrado.Text.IndexOf('.') != -1)
+            {
+                e.Handled = true;
+            }
+
+            if (tecla == 46 && textBoxPrecoMetroQuadrado.Text.IndexOf(',') != -1)
+            {
+                e.Handled = true;
+            }
+
+            if (!Char.IsDigit(tecla) && tecla != 8 && tecla != 46 && tecla != 44)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBoxArea_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char tecla = e.KeyChar;
+
+            if (tecla == 46 && textBoxPrecoMetroQuadrado.Text.IndexOf('.') != -1)
+            {
+                e.Handled = true;
+            }
+
+            if (tecla == 46 && textBoxPrecoMetroQuadrado.Text.IndexOf(',') != -1)
+            {
+                e.Handled = true;
+            }
+
+            if (!Char.IsDigit(tecla) && tecla != 8 && tecla != 46 && tecla != 44)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

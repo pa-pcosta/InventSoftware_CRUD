@@ -125,6 +125,7 @@ namespace Controle_De_Estoque
             this.textBoxPrecoMetroQuadrado.Name = "textBoxPrecoMetroQuadrado";
             this.textBoxPrecoMetroQuadrado.Size = new System.Drawing.Size(66, 20);
             this.textBoxPrecoMetroQuadrado.TabIndex = 9;
+            this.textBoxPrecoMetroQuadrado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPrecoMetroQuadrado_KeyPress);
             // 
             // comboBoxTipo
             // 
@@ -176,6 +177,7 @@ namespace Controle_De_Estoque
             this.textBoxArea.Name = "textBoxArea";
             this.textBoxArea.Size = new System.Drawing.Size(66, 20);
             this.textBoxArea.TabIndex = 19;
+            this.textBoxArea.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxArea_KeyPress);
             // 
             // TelaCadastroDeProduto
             // 
