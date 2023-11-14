@@ -13,7 +13,7 @@ namespace Controle_De_Estoque
         TelaCadastroDeProduto _telaCadastroDeProduto;
 
         public List<string> _listaDeErros = new List<string>();
-
+        
         public ValidacaoProdutoTapecaria(TelaCadastroDeProduto telaCadastroDeProduto) 
         {
             _telaCadastroDeProduto = telaCadastroDeProduto;
@@ -29,6 +29,8 @@ namespace Controle_De_Estoque
                 var erro = "TIPO inválido.";
                 _listaDeErros.Add(erro);
             }
+
+            _listaDeErros.an
 
             //Valida campo dateTimePickerDataEntrada
             try
@@ -88,3 +90,5 @@ namespace Controle_De_Estoque
         }
     }
 }
+
+Regex.IsMatch(string, padrao);

@@ -87,6 +87,12 @@ namespace Controle_De_Estoque
         private void textBoxPrecoMetroQuadrado_KeyPress(object sender, KeyPressEventArgs e)
         {
             char tecla = e.KeyChar;
+
+            //valor
+            //patern
+            //pega retorno true ou false
+
+            //valida no if
             
             if (tecla == 46 && textBoxPrecoMetroQuadrado.Text.IndexOf('.') != -1)
             {
