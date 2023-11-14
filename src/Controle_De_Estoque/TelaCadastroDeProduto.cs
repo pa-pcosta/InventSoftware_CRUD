@@ -51,6 +51,7 @@ namespace Controle_De_Estoque
 
         private void AoClicarEmCancelar(object sender, EventArgs e)
         {
+            DialogResult = DialogResult.Cancel;
             Close();
         }
 
