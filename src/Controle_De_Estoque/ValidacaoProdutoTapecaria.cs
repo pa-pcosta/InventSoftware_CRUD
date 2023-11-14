@@ -19,23 +19,15 @@ namespace Controle_De_Estoque
             _telaCadastroDeProduto = telaCadastroDeProduto;
         }
 
-        public void ValidaProduto()
+        public List<string> ValidarProduto()
         {
             ProdutoTapecaria testeProdutoTapecaria = new ProdutoTapecaria();
 
-            //Valida campo comboBoxTipo
-            try
+            var ehTipoValido = ((int)testeProdutoTapecaria.Tipo < 0) || ((int)testeProdutoTapecaria.Tipo >= Enum.GetValues(typeof(TipoTapecaria)).Length);
+            if (ehTipoValido)
             {
-                testeProdutoTapecaria.Tipo = (TipoTapecaria)_telaCadastroDeProduto.comboBoxTipo.SelectedIndex;
-
-                if (((int)testeProdutoTapecaria.Tipo < 0) || ((int)testeProdutoTapecaria.Tipo >= Enum.GetValues(typeof(TipoTapecaria)).Length))
-                {
-                    throw new Exception("TIPO inválido.");
-                }
-            }
-            catch (Exception exception)
-            {
-                _listaDeErros.Add(exception.Message);
+                var erro = "TIPO inválido.";
+                _listaDeErros.Add(erro);
             }
 
             //Valida campo dateTimePickerDataEntrada
@@ -86,6 +78,8 @@ namespace Controle_De_Estoque
             {
                 _listaDeErros.Add(exception.Message);
             }
+
+            return _listaDeErros;
         }
 
         public string RetornaListaDeErros ()

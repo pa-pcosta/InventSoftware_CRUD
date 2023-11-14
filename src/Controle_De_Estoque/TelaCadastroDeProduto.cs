@@ -1,6 +1,7 @@
 ﻿using System;
-
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Controle_De_Estoque
 {
@@ -13,62 +14,80 @@ namespace Controle_De_Estoque
         public TelaCadastroDeProduto(ProdutoTapecaria novoProdutoTapecaria)
         {
             InitializeComponent();
-            InitializeComboBox(comboBoxTipo);
-            InitializeDateTimePicker();
+            InicializaCampos();
+
             _novoProdutoTapecaria = novoProdutoTapecaria;
+        }
+
+        private void InicializaCampos()
+        {
+            dateTimePickerDataEntrada.Value = DateTime.Today;
+
+            comboBoxTipo.Items.AddRange(Enum.GetNames(typeof(TipoTapecaria)));
         }
 
         public void AoClicarEmSalvar(object sender, EventArgs e)
         {
-            ValidacaoProdutoTapecaria validacaoProdutoTapecaria = new ValidacaoProdutoTapecaria(this);
-
-            validacaoProdutoTapecaria.ValidaProduto();
-
-            if (validacaoProdutoTapecaria.RetornaListaDeErros() == string.Empty)
+            try
             {
-                _novoProdutoTapecaria.Id = GeraId();
-                _novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex;
-                _novoProdutoTapecaria.DataEntrada = dateTimePickerDataEntrada.Value;
-                _novoProdutoTapecaria.PrecoMetroQuadrado = Convert.ToDecimal(textBoxPrecoMetroQuadrado.Text);
-                _novoProdutoTapecaria.Area = Convert.ToDouble(textBoxArea.Text);
-                _novoProdutoTapecaria.EhEntrega = checkBoxEntregarAposServico.Checked;
-                _novoProdutoTapecaria.Detalhes = textBoxDetalhes.Text;
+                ValidacaoProdutoTapecaria validacaoProdutoTapecaria = new ValidacaoProdutoTapecaria(this);
+                validacaoProdutoTapecaria.ValidarProduto();
 
-                DialogResult = DialogResult.OK;
+                if (validacaoProdutoTapecaria.RetornaListaDeErros() == string.Empty)
+                {
+                    AtribuiAoProdutoTapecaria();
 
-                Close();
+                    DialogResult = DialogResult.OK;
+
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show(validacaoProdutoTapecaria.RetornaListaDeErros(), "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show(validacaoProdutoTapecaria.RetornaListaDeErros(),"ERRO!", MessageBoxButtons.OK ,MessageBoxIcon.Error);
+                //mostrarmodalde mensagem de erro
+                throw;
             }
+
         }
 
-        private int GeraId()
+        private void AtribuiAoProdutoTapecaria()
+        {
+            _novoProdutoTapecaria.Id = ObterProximoId();
+            _novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex; ;
+            _novoProdutoTapecaria.DataEntrada = dateTimePickerDataEntrada.Value;
+            _novoProdutoTapecaria.Area = Convert.ToDouble(textBoxArea.Text);
+            _novoProdutoTapecaria.PrecoMetroQuadrado = Convert.ToDecimal(textBoxPrecoMetroQuadrado.Text);
+            _novoProdutoTapecaria.EhEntrega = checkBoxEntregarAposServico.Checked;
+            _novoProdutoTapecaria.Detalhes = textBoxDetalhes.Text;
+        }
+
+        private int ObterProximoId()
         {
             return ++_ultimoIdUtilizado;
         }
 
         private void AoClicarEmCancelar(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
-            Close();
-        }
+            try
+            {
 
-        private void InitializeDateTimePicker()
-        {
-            dateTimePickerDataEntrada.Value = DateTime.Today;
-        }
-
-        private void InitializeComboBox(ComboBox comboBox)
-        {
-            comboBox.Items.AddRange(Enum.GetNames(typeof(TipoTapecaria)));
+                DialogResult = DialogResult.Cancel;
+                Close();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         private void textBoxPrecoMetroQuadrado_KeyPress(object sender, KeyPressEventArgs e)
         {
             char tecla = e.KeyChar;
-
+            
             if (tecla == 46 && textBoxPrecoMetroQuadrado.Text.IndexOf('.') != -1)
             {
                 e.Handled = true;
