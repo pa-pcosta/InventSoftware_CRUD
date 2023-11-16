@@ -59,9 +59,7 @@ namespace Controle_De_Estoque
                     var erro = "PREÇO inválido.";
                     _listaDeErros.Add(erro);
                 }
-
             }
-            
 
             //Valida campo textBoxArea
             var areaEhNumero = Regex.IsMatch(_telaCadastroDeProduto.textBoxArea.Text, "^[0-9]+([,.][0-9]{1,2})?$");
