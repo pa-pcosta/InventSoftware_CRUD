@@ -19,76 +19,71 @@ namespace Controle_De_Estoque
             _telaCadastroDeProduto = telaCadastroDeProduto;
         }
 
-        public List<string> ValidarProduto()
+        public string ValidarProduto()
         {
-            ProdutoTapecaria testeProdutoTapecaria = new ProdutoTapecaria();
-
-            var ehTipoValido = ((int)testeProdutoTapecaria.Tipo < 0) || ((int)testeProdutoTapecaria.Tipo >= Enum.GetValues(typeof(TipoTapecaria)).Length);
-            if (ehTipoValido)
+            //Valida combobox tipoTapecaria
+            var tipoTapecaria = _telaCadastroDeProduto.comboBoxTipo.SelectedIndex;
+            var ehTipoValido = (tipoTapecaria >= 0) && (tipoTapecaria < Enum.GetValues(typeof(TipoTapecaria)).Length);
+            
+            if (!ehTipoValido)
             {
                 var erro = "TIPO inválido.";
                 _listaDeErros.Add(erro);
             }
 
-            _listaDeErros.an
-
             //Valida campo dateTimePickerDataEntrada
-            try
-            {
-                testeProdutoTapecaria.DataEntrada = _telaCadastroDeProduto.dateTimePickerDataEntrada.Value;
+            var dataEntrada = _telaCadastroDeProduto.dateTimePickerDataEntrada.Value;
+            var ehDataValida = dataEntrada <= DateTime.Now;
 
-                if (_telaCadastroDeProduto.dateTimePickerDataEntrada.Value > DateTime.Now)
-                {
-                    throw new Exception("DATA DE ENTRADA não pode ser maior que a data atual.");
-                }
-            }
-            catch (Exception exception)
+            if (!ehDataValida)
             {
-                _listaDeErros.Add(exception.Message);
+                var erro = "DATA DE ENTRADA não pode ser maior que a data atual.";
+                _listaDeErros.Add(erro);
             }
 
             //Valida campo textBoxPrecoMetroQuadrado
-            try
-            {
-                testeProdutoTapecaria.PrecoMetroQuadrado = Convert.ToDecimal(_telaCadastroDeProduto.textBoxPrecoMetroQuadrado.Text);
+            var precoEhNumero = Regex.IsMatch(_telaCadastroDeProduto.textBoxPrecoMetroQuadrado.Text, "^[0-9]+([,.][0-9]{1,2})?$");
 
-                if ((testeProdutoTapecaria.PrecoMetroQuadrado) < 0)
-                {
-                    _listaDeErros.Add("PREÇO inválido");
-                }
-            }
-            catch (FormatException)
+            if (!precoEhNumero)
             {
-                _listaDeErros.Add("PREÇO deve ser um número.");
+                var erro = "PREÇO deve ser um número.";
+                _listaDeErros.Add(erro);
             }
+            else
+            {
+                var precoMetroQuadrado = Convert.ToDecimal(_telaCadastroDeProduto.textBoxPrecoMetroQuadrado.Text);
+                var ehPrecoValido = precoMetroQuadrado >= 0;
+
+                if (!ehPrecoValido)
+                {
+                    var erro = "PREÇO inválido.";
+                    _listaDeErros.Add(erro);
+                }
+
+            }
+            
 
             //Valida campo textBoxArea
-            try
-            {
-                testeProdutoTapecaria.Area = Convert.ToDouble(_telaCadastroDeProduto.textBoxArea.Text);
+            var areaEhNumero = Regex.IsMatch(_telaCadastroDeProduto.textBoxArea.Text, "^[0-9]+([,.][0-9]{1,2})?$");
 
-                if (testeProdutoTapecaria.Area <= 0)
+            if (!areaEhNumero)
+            {
+                var erro = "TAMANHO deve ser um número.";
+                _listaDeErros.Add(erro);
+            }
+            else
                 {
-                    throw new Exception("TAMANHO do produto inválido");
+                var area = Convert.ToDouble(_telaCadastroDeProduto.textBoxArea.Text);
+                var ehAreaValida = area > 0.0;
+
+                if (!ehAreaValida)
+                {
+                    var erro = "TAMANHO do produto inválido.";
+                    _listaDeErros.Add(erro);
                 }
             }
-            catch(FormatException)
-            {
-                _listaDeErros.Add("TAMANHO deve ser um número");
-            }
-            catch (Exception exception)
-            {
-                _listaDeErros.Add(exception.Message);
-            }
 
-            return _listaDeErros;
-        }
-
-        public string RetornaListaDeErros ()
-        {
             return String.Join(Environment.NewLine, _listaDeErros);
         }
     }
 }
-
-Regex.IsMatch(string, padrao);

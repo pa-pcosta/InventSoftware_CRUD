@@ -31,9 +31,9 @@ namespace Controle_De_Estoque
             try
             {
                 ValidacaoProdutoTapecaria validacaoProdutoTapecaria = new ValidacaoProdutoTapecaria(this);
-                validacaoProdutoTapecaria.ValidarProduto();
+                var mensagemErro = validacaoProdutoTapecaria.ValidarProduto();
 
-                if (validacaoProdutoTapecaria.RetornaListaDeErros() == string.Empty)
+                if (mensagemErro == string.Empty)
                 {
                     AtribuiAoProdutoTapecaria();
 
@@ -43,15 +43,13 @@ namespace Controle_De_Estoque
                 }
                 else
                 {
-                    MessageBox.Show(validacaoProdutoTapecaria.RetornaListaDeErros(), "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(mensagemErro, "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                //mostrarmodalde mensagem de erro
-                throw;
+                MessageBox.Show(ex.Message, "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void AtribuiAoProdutoTapecaria()
@@ -74,37 +72,30 @@ namespace Controle_De_Estoque
         {
             try
             {
-
                 DialogResult = DialogResult.Cancel;
                 Close();
             }
             catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message, "ERRO!", MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
         private void textBoxPrecoMetroQuadrado_KeyPress(object sender, KeyPressEventArgs e)
         {
-            char tecla = e.KeyChar;
+            string tecla = e.KeyChar.ToString();
+            var ehValido = Regex.IsMatch(tecla, "[0-9]|[\b]|[.,]");
+            var ehPontoOuVirgula = Regex.IsMatch(tecla, "[.,]");
+            var posicaoDoPonto = textBoxPrecoMetroQuadrado.Text.IndexOf('.');
+            var posicaoDaVirgula = textBoxPrecoMetroQuadrado.Text.IndexOf(',');
+            var naoExisteOcorrencia = -1;
 
-            //valor
-            //patern
-            //pega retorno true ou false
-
-            //valida no if
-            
-            if (tecla == 46 && textBoxPrecoMetroQuadrado.Text.IndexOf('.') != -1)
+            if (!ehValido)
             {
                 e.Handled = true;
             }
 
-            if (tecla == 46 && textBoxPrecoMetroQuadrado.Text.IndexOf(',') != -1)
-            {
-                e.Handled = true;
-            }
-
-            if (!Char.IsDigit(tecla) && tecla != 8 && tecla != 46 && tecla != 44)
+            if (ehPontoOuVirgula && (posicaoDoPonto != naoExisteOcorrencia || posicaoDaVirgula != naoExisteOcorrencia))
             {
                 e.Handled = true;
             }
@@ -112,19 +103,19 @@ namespace Controle_De_Estoque
 
         private void textBoxArea_KeyPress(object sender, KeyPressEventArgs e)
         {
-            char tecla = e.KeyChar;
+            string tecla = e.KeyChar.ToString();
+            var ehValido = Regex.IsMatch(tecla, "[0-9]|[\b]|[.,]");
+            var ehPontoOuVirgula = Regex.IsMatch(tecla, "[.,]");
+            var posicaoDoPonto = textBoxPrecoMetroQuadrado.Text.IndexOf('.');
+            var posicaoDaVirgula = textBoxPrecoMetroQuadrado.Text.IndexOf(',');
+            var naoExisteOcorrencia = -1;
 
-            if (tecla == 46 && textBoxPrecoMetroQuadrado.Text.IndexOf('.') != -1)
+            if (!ehValido)
             {
                 e.Handled = true;
             }
 
-            if (tecla == 46 && textBoxPrecoMetroQuadrado.Text.IndexOf(',') != -1)
-            {
-                e.Handled = true;
-            }
-
-            if (!Char.IsDigit(tecla) && tecla != 8 && tecla != 46 && tecla != 44)
+            if (ehPontoOuVirgula && (posicaoDoPonto != naoExisteOcorrencia || posicaoDaVirgula != naoExisteOcorrencia))
             {
                 e.Handled = true;
             }
