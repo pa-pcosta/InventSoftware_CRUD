@@ -40,12 +40,15 @@
             // 
             // dataGridViewListaProdutoTapecaria
             // 
+            this.dataGridViewListaProdutoTapecaria.AllowUserToAddRows = false;
+            this.dataGridViewListaProdutoTapecaria.AllowUserToDeleteRows = false;
             this.dataGridViewListaProdutoTapecaria.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewListaProdutoTapecaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewListaProdutoTapecaria.Location = new System.Drawing.Point(12, 12);
             this.dataGridViewListaProdutoTapecaria.Name = "dataGridViewListaProdutoTapecaria";
+            this.dataGridViewListaProdutoTapecaria.ReadOnly = true;
             this.dataGridViewListaProdutoTapecaria.Size = new System.Drawing.Size(734, 406);
             this.dataGridViewListaProdutoTapecaria.TabIndex = 0;
             // 

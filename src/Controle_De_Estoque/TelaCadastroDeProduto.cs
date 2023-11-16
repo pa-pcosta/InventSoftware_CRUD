@@ -30,12 +30,14 @@ namespace Controle_De_Estoque
         {
             try
             {
-                ValidacaoProdutoTapecaria validacaoProdutoTapecaria = new ValidacaoProdutoTapecaria(this);
-                var mensagemErro = validacaoProdutoTapecaria.ValidarProduto();
+                AtribuiAoProdutoTapecaria();
+
+                ValidacaoProdutoTapecaria validacaoProdutoTapecaria = new ValidacaoProdutoTapecaria(_novoProdutoTapecaria);
+                var mensagemErro = String.Join(Environment.NewLine, validacaoProdutoTapecaria.ValidarProduto());
 
                 if (mensagemErro == string.Empty)
                 {
-                    AtribuiAoProdutoTapecaria();
+                    _novoProdutoTapecaria.Id = ObterProximoId();
 
                     DialogResult = DialogResult.OK;
 
@@ -54,7 +56,6 @@ namespace Controle_De_Estoque
 
         private void AtribuiAoProdutoTapecaria()
         {
-            _novoProdutoTapecaria.Id = ObterProximoId();
             _novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex; ;
             _novoProdutoTapecaria.DataEntrada = dateTimePickerDataEntrada.Value;
             _novoProdutoTapecaria.Area = Convert.ToDouble(textBoxArea.Text);
