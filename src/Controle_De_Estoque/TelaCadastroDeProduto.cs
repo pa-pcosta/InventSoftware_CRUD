@@ -106,8 +106,8 @@ namespace Controle_De_Estoque
             string tecla = e.KeyChar.ToString();
             var ehValido = Regex.IsMatch(tecla, "[0-9]|[\b]|[.,]");
             var ehPontoOuVirgula = Regex.IsMatch(tecla, "[.,]");
-            var posicaoDoPonto = textBoxPrecoMetroQuadrado.Text.IndexOf('.');
-            var posicaoDaVirgula = textBoxPrecoMetroQuadrado.Text.IndexOf(',');
+            var posicaoDoPonto = textBoxArea.Text.IndexOf('.');
+            var posicaoDaVirgula = textBoxArea.Text.IndexOf(',');
             var naoExisteOcorrencia = -1;
 
             if (!ehValido)
