@@ -1,28 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Controle_De_Estoque
 {
     public partial class TelaCadastroDeProduto : Form
     {
-        ProdutoTapecaria _novoProdutoTapecaria;
+        public readonly ProdutoTapecaria _novoProdutoTapecaria;
 
         private static int _ultimoIdUtilizado = 0;
 
         public TelaCadastroDeProduto(ProdutoTapecaria novoProdutoTapecaria)
         {
             InitializeComponent();
-            InicializaCampos();
+            InicializarCampos();
 
             _novoProdutoTapecaria = novoProdutoTapecaria;
         }
 
-        private void InicializaCampos()
+        private void InicializarCampos()
         {
             dateTimePickerDataEntrada.Value = DateTime.Today;
-
             comboBoxTipo.Items.AddRange(Enum.GetNames(typeof(TipoTapecaria)));
         }
 
@@ -30,38 +31,52 @@ namespace Controle_De_Estoque
         {
             try
             {
-                AtribuiAoProdutoTapecaria();
+                var valoresParaValidar = ObterValoresDosCampos();
 
-                ValidacaoProdutoTapecaria validacaoProdutoTapecaria = new ValidacaoProdutoTapecaria(_novoProdutoTapecaria);
-                var mensagemErro = String.Join(Environment.NewLine, validacaoProdutoTapecaria.ValidarProduto());
+                ValidacaoProdutoTapecaria validacaoProdutoTapecaria = new ValidacaoProdutoTapecaria();
+                var listaErros = validacaoProdutoTapecaria.ValidarProduto(valoresParaValidar);
 
-                if (mensagemErro == string.Empty)
+                if (!listaErros.Any())
                 {
-                    _novoProdutoTapecaria.Id = ObterProximoId();
-
+                    ConstruirObjetoTapecaria();
                     DialogResult = DialogResult.OK;
-
                     Close();
                 }
                 else
                 {
-                    MessageBox.Show(mensagemErro, "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(string.Join("\r", listaErros), "Houve erros no formulário!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "ERRO inesperado!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void AtribuiAoProdutoTapecaria()
+        private void ConstruirObjetoTapecaria()
         {
+            _novoProdutoTapecaria.Id = ObterProximoId();
             _novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex; ;
             _novoProdutoTapecaria.DataEntrada = dateTimePickerDataEntrada.Value;
             _novoProdutoTapecaria.Area = Convert.ToDouble(textBoxArea.Text);
             _novoProdutoTapecaria.PrecoMetroQuadrado = Convert.ToDecimal(textBoxPrecoMetroQuadrado.Text);
             _novoProdutoTapecaria.EhEntrega = checkBoxEntregarAposServico.Checked;
             _novoProdutoTapecaria.Detalhes = textBoxDetalhes.Text;
+        }
+
+        private Dictionary<string, string> ObterValoresDosCampos()
+        {
+            Dictionary<string, string> camposParaValidar = new Dictionary<string, string>()
+            {
+                { comboBoxTipo.Name, comboBoxTipo.SelectedIndex.ToString() },
+                { dateTimePickerDataEntrada.Name, dateTimePickerDataEntrada.Value.ToString() },
+                { textBoxArea.Name, textBoxArea.Text },
+                { textBoxPrecoMetroQuadrado.Name, textBoxPrecoMetroQuadrado.Text },
+                { checkBoxEntregarAposServico.Name, checkBoxEntregarAposServico.Checked.ToString() },
+                { textBoxDetalhes.Name, textBoxDetalhes.Text }
+            };
+
+            return camposParaValidar;
         }
 
         private int ObterProximoId()
@@ -85,21 +100,34 @@ namespace Controle_De_Estoque
         private void textBoxPrecoMetroQuadrado_KeyPress(object sender, KeyPressEventArgs e)
         {
             string tecla = e.KeyChar.ToString();
-            var ehValido = Regex.IsMatch(tecla, "[0-9]|[\b]|[.,]");
-            var ehPontoOuVirgula = Regex.IsMatch(tecla, "[.,]");
-            var posicaoDoPonto = textBoxPrecoMetroQuadrado.Text.IndexOf('.');
-            var posicaoDaVirgula = textBoxPrecoMetroQuadrado.Text.IndexOf(',');
-            var naoExisteOcorrencia = -1;
+            var ehValido = Regex.IsMatch(tecla, "[0-9]|[\b]");
+            //var ehPontoOuVirgula = Regex.IsMatch(tecla, "[.,]");
+            //var posicaoDoPonto = textBoxPrecoMetroQuadrado.Text.IndexOf('.');
+            //var posicaoDaVirgula = textBoxPrecoMetroQuadrado.Text.IndexOf(',');
+            //var naoExisteOcorrencia = -1;
+
 
             if (!ehValido)
             {
                 e.Handled = true;
             }
-
-            if (ehPontoOuVirgula && (posicaoDoPonto != naoExisteOcorrencia || posicaoDaVirgula != naoExisteOcorrencia))
+            else
             {
-                e.Handled = true;
+                string valor = textBoxPrecoMetroQuadrado.Text;
+                var tamanhoString = textBoxPrecoMetroQuadrado.TextLength;
+                
+                if (tamanhoString == 2)
+                {
+                    valor.Insert(tamanhoString, ",");
+                }
+                
+                
             }
+
+            //if (ehPontoOuVirgula && (posicaoDoPonto != naoExisteOcorrencia || posicaoDaVirgula != naoExisteOcorrencia))
+            //{
+            //    e.Handled = true;
+            //}
         }
 
         private void textBoxArea_KeyPress(object sender, KeyPressEventArgs e)

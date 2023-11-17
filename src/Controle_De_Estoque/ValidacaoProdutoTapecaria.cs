@@ -1,84 +1,75 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Controle_De_Estoque
 {
     public class ValidacaoProdutoTapecaria
     {
-        ProdutoTapecaria _produtoTapecaria;
-
-        public List<string> _listaDeErros = new List<string>();
-        
-        public ValidacaoProdutoTapecaria(ProdutoTapecaria produtoTapecaria) 
+        public List<string> ValidarProduto(Dictionary<string, string> produtoTapecaria)
         {
-            _produtoTapecaria = produtoTapecaria;
-        }
+            List<string> listaDeErros = new List<string>();
 
-        public List<string> ValidarProduto()
-        {
-            var tipoSelecionado = Convert.ToInt32(_produtoTapecaria.Tipo);
-            var tamanhoEnum = Enum.GetValues(typeof(TipoTapecaria)).Length;
-            var ehTipoValido = (tipoSelecionado >= 0) && (tipoSelecionado < tamanhoEnum);
-            
-            if (!ehTipoValido)
+            foreach (var item in produtoTapecaria)
             {
-                var erro = "TIPO inválido.";
-                _listaDeErros.Add(erro);
-            }
-
-            var dataEntrada = _produtoTapecaria.DataEntrada;
-            var ehDataValida = dataEntrada <= DateTime.Now;
-
-            if (!ehDataValida)
-            {
-                var erro = "DATA DE ENTRADA não pode ser maior que a data atual.";
-                _listaDeErros.Add(erro);
-            }
-
-            var precoMetroQuadrado = _produtoTapecaria.PrecoMetroQuadrado.ToString();
-            var precoEhNumero = Regex.IsMatch(precoMetroQuadrado, "^[0-9]+([,.][0-9]+)?$");
-
-            if (!precoEhNumero)
-            {
-                var erro = "PREÇO deve ser um número.";
-                _listaDeErros.Add(erro);
-            }
-            else
-            {
-                var ehPrecoValido =  _produtoTapecaria.PrecoMetroQuadrado >= 0;
-
-                if (!ehPrecoValido)
+                if (item.Key == "comboBoxTipo")
                 {
-                    var erro = "PREÇO inválido.";
-                    _listaDeErros.Add(erro);
+                    var valorInvalido = -1;
+                    var ehValido = item.Value != valorInvalido.ToString();
+
+                    if (!ehValido)
+                        listaDeErros.Add("TIPO inválido.");
+                }
+
+                if(item.Key == "dateTimePickerDataEntrada")
+                {
+                    var ehVazio = string.IsNullOrWhiteSpace(item.Value);
+                    var ehValorValido = DateTime.TryParse(item.Value, out var dataSaida);
+                    var ehDataValida = dataSaida <= DateTime.Now;
+
+                    if (ehVazio || !ehValorValido || !ehDataValida)
+                        listaDeErros.Add("DATA DE ENTRADA não pode ser maior que a data atual.");
+                }
+
+                if(item.Key == "textBoxPrecoMetroQuadrado")
+                {
+                    var precoMetroQuadrado = item.Value;
+                    var precoEhNumero = Regex.IsMatch(precoMetroQuadrado, @"^\d");
+
+                    if (!precoEhNumero)
+                    {
+                        listaDeErros.Add("PREÇO deve ser um número.");
+                    }
+                    else
+                    {
+                        var valorMetroQuadrado = int.Parse(precoMetroQuadrado);
+                        const int valorInvalido = 0;
+                        if (valorMetroQuadrado <= valorInvalido)
+                            listaDeErros.Add("PREÇO deve ser maior que zero.");
+                    }
+                }
+
+
+                if(item.Key == "textBoxArea")
+                {
+                    var valorArea = item.Value;
+                    var metroArea = Regex.IsMatch(valorArea, @"^\d");
+
+                    if (!metroArea)
+                    {
+                        listaDeErros.Add("TAMANHO deve ser um número.");
+                    }
+                    else
+                    {
+                        var valorMetroQuadrado = int.Parse(valorArea);
+                        const int valorInvalido = 0;
+                        if (valorMetroQuadrado <= valorInvalido)
+                            listaDeErros.Add("TAMANHO do produto deve ser maior que zero.");
+                    }
                 }
             }
 
-            var  area = _produtoTapecaria.PrecoMetroQuadrado.ToString();
-            var areaEhNumero = Regex.IsMatch(area, "^[0-9]+([,.][0-9]+)?$");
-
-            if (!areaEhNumero)
-            {
-                var erro = "TAMANHO deve ser um número.";
-                _listaDeErros.Add(erro);
-            }
-            else
-            {
-                var ehAreaValida = _produtoTapecaria.Area > 0.0;
-
-                if (!ehAreaValida)
-                {
-                    var erro = "TAMANHO do produto inválido.";
-                    _listaDeErros.Add(erro);
-                }
-            }
-
-            return _listaDeErros;
+            return listaDeErros;
         }
     }
 }
