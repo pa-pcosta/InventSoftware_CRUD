@@ -26,16 +26,18 @@ namespace Controle_De_Estoque
                     var ehVazio = string.IsNullOrWhiteSpace(item.Value);
                     var ehValorValido = DateTime.TryParse(item.Value, out var dataSaida);
                     var ehDataValida = dataSaida <= DateTime.Now;
-
+                    
                     if (ehVazio || !ehValorValido || !ehDataValida)
                         listaDeErros.Add("DATA DE ENTRADA não pode ser maior que a data atual.");
                 }
 
                 if(item.Key == "textBoxPrecoMetroQuadrado")
                 {
-                    var precoMetroQuadrado = item.Value;
-                    var precoEhNumero = Regex.IsMatch(precoMetroQuadrado, @"^\d");
 
+                    var precoMetroQuadrado = item.Value.ToString().Replace(".", ",");
+                    decimal.TryParse(precoMetroQuadrado, out decimal teste);
+                    var precoEhNumero = Regex.IsMatch(teste.ToString(), @"^\d");
+                    
                     if (!precoEhNumero)
                     {
                         listaDeErros.Add("PREÇO deve ser um número.");

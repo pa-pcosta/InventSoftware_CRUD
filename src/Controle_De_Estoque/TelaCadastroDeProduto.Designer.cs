@@ -37,12 +37,12 @@ namespace Controle_De_Estoque
             this.labelArea = new System.Windows.Forms.Label();
             this.labelPrecoMetroQuadrado = new System.Windows.Forms.Label();
             this.labelDetalhes = new System.Windows.Forms.Label();
-            this.textBoxPrecoMetroQuadrado = new System.Windows.Forms.TextBox();
             this.comboBoxTipo = new System.Windows.Forms.ComboBox();
             this.checkBoxEntregarAposServico = new System.Windows.Forms.CheckBox();
             this.textBoxDetalhes = new System.Windows.Forms.TextBox();
             this.dateTimePickerDataEntrada = new System.Windows.Forms.DateTimePicker();
             this.textBoxArea = new System.Windows.Forms.TextBox();
+            this.textBoxPrecoMetroQuadrado = new System.Windows.Forms.MaskedTextBox();
             this.SuspendLayout();
             // 
             // botaoCancelar
@@ -117,16 +117,6 @@ namespace Controle_De_Estoque
             this.labelDetalhes.TabIndex = 7;
             this.labelDetalhes.Text = "Detalhes:";
             // 
-            // textBoxPrecoMetroQuadrado
-            // 
-            this.textBoxPrecoMetroQuadrado.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBoxPrecoMetroQuadrado.Location = new System.Drawing.Point(15, 119);
-            this.textBoxPrecoMetroQuadrado.Name = "textBoxPrecoMetroQuadrado";
-            this.textBoxPrecoMetroQuadrado.Size = new System.Drawing.Size(66, 20);
-            this.textBoxPrecoMetroQuadrado.TabIndex = 9;
-            this.textBoxPrecoMetroQuadrado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPrecoMetroQuadrado_KeyPress);
-            // 
             // comboBoxTipo
             // 
             this.comboBoxTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -179,17 +169,25 @@ namespace Controle_De_Estoque
             this.textBoxArea.TabIndex = 19;
             this.textBoxArea.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxArea_KeyPress);
             // 
+            // textBoxPrecoMetroQuadrado
+            // 
+            this.textBoxPrecoMetroQuadrado.Location = new System.Drawing.Point(10, 122);
+            this.textBoxPrecoMetroQuadrado.Mask = "00,00";
+            this.textBoxPrecoMetroQuadrado.Name = "textBoxPrecoMetroQuadrado";
+            this.textBoxPrecoMetroQuadrado.Size = new System.Drawing.Size(57, 20);
+            this.textBoxPrecoMetroQuadrado.TabIndex = 20;
+            // 
             // TelaCadastroDeProduto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(285, 323);
+            this.Controls.Add(this.textBoxPrecoMetroQuadrado);
             this.Controls.Add(this.textBoxArea);
             this.Controls.Add(this.dateTimePickerDataEntrada);
             this.Controls.Add(this.textBoxDetalhes);
             this.Controls.Add(this.checkBoxEntregarAposServico);
             this.Controls.Add(this.comboBoxTipo);
-            this.Controls.Add(this.textBoxPrecoMetroQuadrado);
             this.Controls.Add(this.labelDetalhes);
             this.Controls.Add(this.labelPrecoMetroQuadrado);
             this.Controls.Add(this.labelArea);
@@ -213,11 +211,11 @@ namespace Controle_De_Estoque
         private System.Windows.Forms.Label labelArea;
         private System.Windows.Forms.Label labelPrecoMetroQuadrado;
         private System.Windows.Forms.Label labelDetalhes;
-        public System.Windows.Forms.TextBox textBoxPrecoMetroQuadrado;
         public System.Windows.Forms.ComboBox comboBoxTipo;
         private System.Windows.Forms.CheckBox checkBoxEntregarAposServico;
         private System.Windows.Forms.TextBox textBoxDetalhes;
         public System.Windows.Forms.DateTimePicker dateTimePickerDataEntrada;
         public System.Windows.Forms.TextBox textBoxArea;
+        private System.Windows.Forms.MaskedTextBox textBoxPrecoMetroQuadrado;
     }
 }
