@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -30,14 +31,19 @@ namespace Controle_De_Estoque
         {
             try
             {
-                AtribuiAoProdutoTapecaria();
-
-                ValidacaoProdutoTapecaria validacaoProdutoTapecaria = new ValidacaoProdutoTapecaria(_novoProdutoTapecaria);
-                var mensagemErro = String.Join(Environment.NewLine, validacaoProdutoTapecaria.ValidarProduto());
-
-                if (mensagemErro == string.Empty)
+                ValidacaoProdutoTapecaria produtoAValidar = new ValidacaoProdutoTapecaria()
                 {
-                    _novoProdutoTapecaria.Id = ObterProximoId();
+                    Tipo = comboBoxTipo.SelectedIndex.ToString(),
+                    DataEntrada = dateTimePickerDataEntrada.Value.ToString(),
+                    Area = textBoxArea.Text,
+                    PrecoMetroQuadrado = textBoxPrecoMetroQuadrado.Text
+                };
+
+                var listaDeErros = produtoAValidar.ValidarProduto();
+
+                if (!listaDeErros.Any())
+                {
+                    AtribuiAoProdutoTapecaria();
 
                     DialogResult = DialogResult.OK;
 
@@ -45,7 +51,7 @@ namespace Controle_De_Estoque
                 }
                 else
                 {
-                    MessageBox.Show(mensagemErro, "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(string.Join("\r", listaDeErros), "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -56,6 +62,7 @@ namespace Controle_De_Estoque
 
         private void AtribuiAoProdutoTapecaria()
         {
+            _novoProdutoTapecaria.Id = ObterProximoId();
             _novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex; ;
             _novoProdutoTapecaria.DataEntrada = dateTimePickerDataEntrada.Value;
             _novoProdutoTapecaria.Area = Convert.ToDouble(textBoxArea.Text);
@@ -85,9 +92,8 @@ namespace Controle_De_Estoque
         private void textBoxPrecoMetroQuadrado_KeyPress(object sender, KeyPressEventArgs e)
         {
             string tecla = e.KeyChar.ToString();
-            var ehValido = Regex.IsMatch(tecla, "[0-9]|[\b]|[.,]");
-            var ehPontoOuVirgula = Regex.IsMatch(tecla, "[.,]");
-            var posicaoDoPonto = textBoxPrecoMetroQuadrado.Text.IndexOf('.');
+            var ehValido = Regex.IsMatch(tecla, "[0-9]|[\b]|[,]");
+            var ehVirgula = Regex.IsMatch(tecla, ",");
             var posicaoDaVirgula = textBoxPrecoMetroQuadrado.Text.IndexOf(',');
             var naoExisteOcorrencia = -1;
 
@@ -96,7 +102,7 @@ namespace Controle_De_Estoque
                 e.Handled = true;
             }
 
-            if (ehPontoOuVirgula && (posicaoDoPonto != naoExisteOcorrencia || posicaoDaVirgula != naoExisteOcorrencia))
+            if (ehVirgula && posicaoDaVirgula != naoExisteOcorrencia)
             {
                 e.Handled = true;
             }
@@ -105,9 +111,8 @@ namespace Controle_De_Estoque
         private void textBoxArea_KeyPress(object sender, KeyPressEventArgs e)
         {
             string tecla = e.KeyChar.ToString();
-            var ehValido = Regex.IsMatch(tecla, "[0-9]|[\b]|[.,]");
-            var ehPontoOuVirgula = Regex.IsMatch(tecla, "[.,]");
-            var posicaoDoPonto = textBoxArea.Text.IndexOf('.');
+            var ehValido = Regex.IsMatch(tecla, "[0-9]|[\b]|[,]");
+            var ehVirgula = Regex.IsMatch(tecla, ",");
             var posicaoDaVirgula = textBoxArea.Text.IndexOf(',');
             var naoExisteOcorrencia = -1;
 
@@ -116,7 +121,7 @@ namespace Controle_De_Estoque
                 e.Handled = true;
             }
 
-            if (ehPontoOuVirgula && (posicaoDoPonto != naoExisteOcorrencia || posicaoDaVirgula != naoExisteOcorrencia))
+            if (ehVirgula && posicaoDaVirgula != naoExisteOcorrencia)
             {
                 e.Handled = true;
             }

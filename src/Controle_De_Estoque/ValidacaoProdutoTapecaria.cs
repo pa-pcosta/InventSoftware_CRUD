@@ -10,20 +10,17 @@ namespace Controle_De_Estoque
 {
     public class ValidacaoProdutoTapecaria
     {
-        ProdutoTapecaria _produtoTapecaria;
+        public string Tipo { get; set; }
+        public string DataEntrada { get; set; }
+        public string Area { get; set; }
+        public string PrecoMetroQuadrado { get; set; }
 
         public List<string> _listaDeErros = new List<string>();
-        
-        public ValidacaoProdutoTapecaria(ProdutoTapecaria produtoTapecaria) 
-        {
-            _produtoTapecaria = produtoTapecaria;
-        }
 
         public List<string> ValidarProduto()
         {
-            var tipoSelecionado = Convert.ToInt32(_produtoTapecaria.Tipo);
-            var tamanhoEnum = Enum.GetValues(typeof(TipoTapecaria)).Length;
-            var ehTipoValido = (tipoSelecionado >= 0) && (tipoSelecionado < tamanhoEnum);
+            var valorTipoInvalido = -1;
+            var ehTipoValido = Tipo != valorTipoInvalido.ToString();
             
             if (!ehTipoValido)
             {
@@ -31,7 +28,7 @@ namespace Controle_De_Estoque
                 _listaDeErros.Add(erro);
             }
 
-            var dataEntrada = _produtoTapecaria.DataEntrada;
+            DateTime.TryParse(DataEntrada, out var dataEntrada);
             var ehDataValida = dataEntrada <= DateTime.Now;
 
             if (!ehDataValida)
@@ -40,8 +37,7 @@ namespace Controle_De_Estoque
                 _listaDeErros.Add(erro);
             }
 
-            var precoMetroQuadrado = _produtoTapecaria.PrecoMetroQuadrado.ToString();
-            var precoEhNumero = Regex.IsMatch(precoMetroQuadrado, "^[0-9]+([,.][0-9]+)?$");
+            var precoEhNumero = Regex.IsMatch(PrecoMetroQuadrado, "^[0-9]+([,][0-9]+)?$");
 
             if (!precoEhNumero)
             {
@@ -50,7 +46,8 @@ namespace Controle_De_Estoque
             }
             else
             {
-                var ehPrecoValido =  _produtoTapecaria.PrecoMetroQuadrado >= 0;
+                var precoMetroQuadrado = Decimal.Parse(PrecoMetroQuadrado);
+                var ehPrecoValido =  precoMetroQuadrado >= 0;
 
                 if (!ehPrecoValido)
                 {
@@ -59,8 +56,7 @@ namespace Controle_De_Estoque
                 }
             }
 
-            var  area = _produtoTapecaria.PrecoMetroQuadrado.ToString();
-            var areaEhNumero = Regex.IsMatch(area, "^[0-9]+([,.][0-9]+)?$");
+            var areaEhNumero = Regex.IsMatch(Area, "^[0-9]+([,][0-9]+)?$");
 
             if (!areaEhNumero)
             {
@@ -69,7 +65,8 @@ namespace Controle_De_Estoque
             }
             else
             {
-                var ehAreaValida = _produtoTapecaria.Area > 0.0;
+                var area = Double.Parse(Area);
+                var ehAreaValida = area > 0;
 
                 if (!ehAreaValida)
                 {
