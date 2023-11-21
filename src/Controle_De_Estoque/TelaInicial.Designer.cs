@@ -61,7 +61,7 @@
             this.BotaoCadastrarProdutoTapecaria.TabIndex = 1;
             this.BotaoCadastrarProdutoTapecaria.Text = "Cadastrar";
             this.BotaoCadastrarProdutoTapecaria.UseVisualStyleBackColor = true;
-            this.BotaoCadastrarProdutoTapecaria.Click += new System.EventHandler(this.aoClicarEmCadastrar);
+            this.BotaoCadastrarProdutoTapecaria.Click += new System.EventHandler(this.AoClicarEmCadastrar);
             // 
             // BotaoRemoverProdutoTapecaria
             // 

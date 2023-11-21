@@ -13,17 +13,26 @@ namespace Controle_De_Estoque
             InitializeComponent();
         }
 
-        private void aoClicarEmCadastrar(object sender, EventArgs e)
+        private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
-            ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria();
-            TelaCadastroDeProduto newForm = new TelaCadastroDeProduto(novoProdutoTapecaria);
-            newForm.ShowDialog();
+            try
+                {
+                ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria();
+                TelaCadastroDeProduto newForm = new TelaCadastroDeProduto(novoProdutoTapecaria);
+                newForm.ShowDialog();
 
-            if(newForm.DialogResult.Equals(DialogResult.OK))
+                if(newForm.DialogResult.Equals(DialogResult.OK))
+                {
+                    listaProdutoTapecaria.Add(novoProdutoTapecaria);
+                    atualizaDataGridView();
+                    MessageBox.Show("Novo produto cadastrado com sucesso");
+                }
+
+            }
+            catch (Exception ex)
             {
-                listaProdutoTapecaria.Add(novoProdutoTapecaria);
-                atualizaDataGridView();
-                MessageBox.Show("Novo produto cadastrado com sucesso");
+
+                MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

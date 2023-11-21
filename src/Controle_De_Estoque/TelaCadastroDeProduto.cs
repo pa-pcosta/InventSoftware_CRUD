@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Controle_De_Estoque
 {
@@ -25,9 +25,6 @@ namespace Controle_De_Estoque
             dateTimePickerDataEntrada.Value = DateTime.Today;
 
             comboBoxTipo.Items.AddRange(Enum.GetNames(typeof(TipoTapecaria)));
-
-            AplicarEventos(textBoxPrecoMetroQuadrado);
-            AplicarEventos(textBoxArea);
         }
 
         public void AoClicarEmSalvar(object sender, EventArgs e)
@@ -92,24 +89,22 @@ namespace Controle_De_Estoque
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "ERRO!", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
         }
 
         private void textBoxPrecoMetroQuadrado_KeyPress(object sender, KeyPressEventArgs e)
         {
+            textBoxPrecoMetroQuadrado.Leave += AplicarMascaraPontoFlutuante;
+            
             string tecla = e.KeyChar.ToString();
             var ehValido = Regex.IsMatch(tecla, "[0-9]|[\b]|[,]");
             var ehVirgula = Regex.IsMatch(tecla, ",");
             var posicaoDaVirgula = textBoxPrecoMetroQuadrado.Text.IndexOf(',');
             var naoExisteOcorrencia = -1;
 
-            if (!ehValido)
-            {
-                e.Handled = true;
-            }
 
-            if (ehVirgula && posicaoDaVirgula != naoExisteOcorrencia)
+            if (!ehValido || (ehVirgula && posicaoDaVirgula != naoExisteOcorrencia))
             {
                 e.Handled = true;
             }
@@ -117,43 +112,28 @@ namespace Controle_De_Estoque
 
         private void textBoxArea_KeyPress(object sender, KeyPressEventArgs e)
         {
+            textBoxArea.Leave += AplicarMascaraPontoFlutuante;
+
             string tecla = e.KeyChar.ToString();
             var ehValido = Regex.IsMatch(tecla, "[0-9]|[\b]|[,]");
             var ehVirgula = Regex.IsMatch(tecla, ",");
             var posicaoDaVirgula = textBoxArea.Text.IndexOf(',');
             var naoExisteOcorrencia = -1;
 
-            if (!ehValido)
-            {
-                e.Handled = true;
-            }
-
-            if (ehVirgula && posicaoDaVirgula != naoExisteOcorrencia)
+            if (!ehValido || (ehVirgula && posicaoDaVirgula != naoExisteOcorrencia))
             {
                 e.Handled = true;
             }
         }
 
-        private void RetornarMascara(object sender, EventArgs e)
+        private void AplicarMascaraPontoFlutuante(object sender, EventArgs e)
         {
-            System.Windows.Forms.TextBox txt = (System.Windows.Forms.TextBox)sender;
+            TextBox txt = (TextBox)sender;
+
             if (!String.IsNullOrEmpty(txt.Text))
             {
                 txt.Text = decimal.Parse(txt.Text).ToString("N2");
             }
-        }
-
-        private void TirarMascara(object sender, EventArgs e)
-        {
-            System.Windows.Forms.TextBox txt = (System.Windows.Forms.TextBox)sender;
-            txt.Text = txt.Text.Trim();
-        }
-
-        private void AplicarEventos(System.Windows.Forms.TextBox txt)
-        {
-            txt.Enter += TirarMascara;
-            txt.Leave += RetornarMascara;
-            //txt.KeyPress += ApenasValorNumerico;
         }
     }
 }
