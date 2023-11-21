@@ -83,8 +83,12 @@ namespace Controle_De_Estoque
         {
             try
             {
-                DialogResult = DialogResult.Cancel;
-                Close();
+                DialogResult dialogResult = MessageBox.Show("Ao cancelar a operação não os dados que já preencheu serão perdidos.\nDeseja continuar?", "Cancelar cadastro", MessageBoxButtons.YesNo);
+
+                if (dialogResult == DialogResult.Yes)
+                {
+                    this.DialogResult = DialogResult.Cancel;
+                }
             }
             catch (Exception ex)
             {
