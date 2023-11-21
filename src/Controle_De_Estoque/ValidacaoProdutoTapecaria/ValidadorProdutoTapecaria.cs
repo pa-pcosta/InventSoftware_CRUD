@@ -1,26 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using Controle_De_Estoque.ValidacaoProdutoTapecaria;
 
 namespace Controle_De_Estoque
 {
-    public class ValidacaoProdutoTapecaria
+    public class ValidadorProdutoTapecaria
     {
-        public string Tipo { get; set; }
-        public string DataEntrada { get; set; }
-        public string Area { get; set; }
-        public string PrecoMetroQuadrado { get; set; }
-
         public List<string> _listaDeErros = new List<string>();
 
-        public List<string> ValidarProduto()
+        public List<string> ValidarProduto(ProdutoAValidar produtoAValidar)
         {
             var valorTipoInvalido = -1;
-            var ehTipoValido = Tipo != valorTipoInvalido.ToString();
+            var ehTipoValido = produtoAValidar.Tipo != valorTipoInvalido.ToString();
             
             if (!ehTipoValido)
             {
@@ -28,7 +20,7 @@ namespace Controle_De_Estoque
                 _listaDeErros.Add(erro);
             }
 
-            DateTime.TryParse(DataEntrada, out var dataEntrada);
+            DateTime.TryParse(produtoAValidar.DataEntrada, out var dataEntrada);
             var ehDataValida = dataEntrada <= DateTime.Now;
 
             if (!ehDataValida)
@@ -37,7 +29,7 @@ namespace Controle_De_Estoque
                 _listaDeErros.Add(erro);
             }
 
-            var precoEhNumero = Regex.IsMatch(PrecoMetroQuadrado, "^[0-9]+([,][0-9]+)?$");
+            var precoEhNumero = Regex.IsMatch(produtoAValidar.PrecoMetroQuadrado, "^[0-9]+([,][0-9]+)?$");
 
             if (!precoEhNumero)
             {
@@ -46,7 +38,7 @@ namespace Controle_De_Estoque
             }
             else
             {
-                var precoMetroQuadrado = Decimal.Parse(PrecoMetroQuadrado);
+                var precoMetroQuadrado = Decimal.Parse(produtoAValidar.PrecoMetroQuadrado);
                 var ehPrecoValido =  precoMetroQuadrado >= 0;
 
                 if (!ehPrecoValido)
@@ -56,7 +48,7 @@ namespace Controle_De_Estoque
                 }
             }
 
-            var areaEhNumero = Regex.IsMatch(Area, "^[0-9]+([,][0-9]+)?$");
+            var areaEhNumero = Regex.IsMatch(produtoAValidar.Area, "^[0-9]+([,][0-9]+)?$");
 
             if (!areaEhNumero)
             {
@@ -65,7 +57,7 @@ namespace Controle_De_Estoque
             }
             else
             {
-                var area = Double.Parse(Area);
+                var area = Double.Parse(produtoAValidar.Area);
                 var ehAreaValida = area > 0;
 
                 if (!ehAreaValida)

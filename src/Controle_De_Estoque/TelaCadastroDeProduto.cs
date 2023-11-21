@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using static System.Net.Mime.MediaTypeNames;
+using Controle_De_Estoque.ValidacaoProdutoTapecaria;
 
 namespace Controle_De_Estoque
 {
@@ -31,7 +31,7 @@ namespace Controle_De_Estoque
         {
             try
             {
-                ValidacaoProdutoTapecaria produtoAValidar = new ValidacaoProdutoTapecaria()
+               ProdutoAValidar produtoAValidar = new ProdutoAValidar()
                 {
                     Tipo = comboBoxTipo.SelectedIndex.ToString(),
                     DataEntrada = dateTimePickerDataEntrada.Value.ToString(),
@@ -39,7 +39,7 @@ namespace Controle_De_Estoque
                     PrecoMetroQuadrado = textBoxPrecoMetroQuadrado.Text
                 };
 
-                var listaDeErros = produtoAValidar.ValidarProduto();
+                var listaDeErros = new ValidadorProdutoTapecaria().ValidarProduto(produtoAValidar);
 
                 if (!listaDeErros.Any())
                 {
