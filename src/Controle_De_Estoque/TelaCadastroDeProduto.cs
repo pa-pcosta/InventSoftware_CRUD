@@ -25,6 +25,9 @@ namespace Controle_De_Estoque
             dateTimePickerDataEntrada.Value = DateTime.Today;
 
             comboBoxTipo.Items.AddRange(Enum.GetNames(typeof(TipoTapecaria)));
+
+            AplicarEventos(textBoxPrecoMetroQuadrado);
+            AplicarEventos(textBoxArea);
         }
 
         public void AoClicarEmSalvar(object sender, EventArgs e)
@@ -61,7 +64,7 @@ namespace Controle_De_Estoque
         }
 
         private void AtribuiAoProdutoTapecaria()
-        {
+        { 
             _novoProdutoTapecaria.Id = ObterProximoId();
             _novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex; ;
             _novoProdutoTapecaria.DataEntrada = dateTimePickerDataEntrada.Value;
@@ -125,6 +128,28 @@ namespace Controle_De_Estoque
             {
                 e.Handled = true;
             }
+        }
+
+        private void RetornarMascara(object sender, EventArgs e)
+        {
+            System.Windows.Forms.TextBox txt = (System.Windows.Forms.TextBox)sender;
+            if (!String.IsNullOrEmpty(txt.Text))
+            {
+                txt.Text = decimal.Parse(txt.Text).ToString("N2");
+            }
+        }
+
+        private void TirarMascara(object sender, EventArgs e)
+        {
+            System.Windows.Forms.TextBox txt = (System.Windows.Forms.TextBox)sender;
+            txt.Text = txt.Text.Trim();
+        }
+
+        private void AplicarEventos(System.Windows.Forms.TextBox txt)
+        {
+            txt.Enter += TirarMascara;
+            txt.Leave += RetornarMascara;
+            //txt.KeyPress += ApenasValorNumerico;
         }
     }
 }
