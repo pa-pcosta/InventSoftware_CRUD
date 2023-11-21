@@ -54,7 +54,7 @@ namespace Controle_De_Estoque
             this.botaoCancelar.TabIndex = 0;
             this.botaoCancelar.Text = "Cancelar";
             this.botaoCancelar.UseVisualStyleBackColor = true;
-            this.botaoCancelar.Click += new System.EventHandler(this.aoClicarEmCancelar);
+            this.botaoCancelar.Click += new System.EventHandler(this.AoClicarEmCancelar);
             // 
             // botaoSalvar
             // 
@@ -65,7 +65,7 @@ namespace Controle_De_Estoque
             this.botaoSalvar.TabIndex = 1;
             this.botaoSalvar.Text = "Salvar";
             this.botaoSalvar.UseVisualStyleBackColor = true;
-            this.botaoSalvar.Click += new System.EventHandler(this.aoClicarEmSalvar);
+            this.botaoSalvar.Click += new System.EventHandler(this.AoClicarEmSalvar);
             // 
             // labelTipo
             // 
@@ -125,6 +125,7 @@ namespace Controle_De_Estoque
             this.textBoxPrecoMetroQuadrado.Name = "textBoxPrecoMetroQuadrado";
             this.textBoxPrecoMetroQuadrado.Size = new System.Drawing.Size(66, 20);
             this.textBoxPrecoMetroQuadrado.TabIndex = 9;
+            this.textBoxPrecoMetroQuadrado.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxPrecoMetroQuadrado_KeyPress);
             // 
             // comboBoxTipo
             // 
@@ -176,6 +177,7 @@ namespace Controle_De_Estoque
             this.textBoxArea.Name = "textBoxArea";
             this.textBoxArea.Size = new System.Drawing.Size(66, 20);
             this.textBoxArea.TabIndex = 19;
+            this.textBoxArea.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxArea_KeyPress);
             // 
             // TelaCadastroDeProduto
             // 
@@ -211,11 +213,11 @@ namespace Controle_De_Estoque
         private System.Windows.Forms.Label labelArea;
         private System.Windows.Forms.Label labelPrecoMetroQuadrado;
         private System.Windows.Forms.Label labelDetalhes;
-        private System.Windows.Forms.TextBox textBoxPrecoMetroQuadrado;
-        private System.Windows.Forms.ComboBox comboBoxTipo;
+        public System.Windows.Forms.TextBox textBoxPrecoMetroQuadrado;
+        public System.Windows.Forms.ComboBox comboBoxTipo;
         private System.Windows.Forms.CheckBox checkBoxEntregarAposServico;
         private System.Windows.Forms.TextBox textBoxDetalhes;
-        private System.Windows.Forms.DateTimePicker dateTimePickerDataEntrada;
-        private System.Windows.Forms.TextBox textBoxArea;
+        public System.Windows.Forms.DateTimePicker dateTimePickerDataEntrada;
+        public System.Windows.Forms.TextBox textBoxArea;
     }
 }
