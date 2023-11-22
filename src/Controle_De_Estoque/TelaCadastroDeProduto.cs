@@ -46,8 +46,6 @@ namespace Controle_De_Estoque
                     AtribuiAoProdutoTapecaria();
 
                     DialogResult = DialogResult.OK;
-
-                    Close();
                 }
                 else
                 {
@@ -80,7 +78,7 @@ namespace Controle_De_Estoque
         {
             try
             {
-                DialogResult dialogResult = MessageBox.Show("Ao cancelar a operação não os dados que já preencheu serão perdidos.\nDeseja continuar?", "Cancelar cadastro", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show("Ao cancelar a operação os dados que já preencheu serão perdidos.\nDeseja continuar?", "Cancelar cadastro", MessageBoxButtons.YesNo);
 
                 if (dialogResult == DialogResult.Yes)
                 {

@@ -11,6 +11,13 @@ namespace Controle_De_Estoque
         public TelaInicial()
         {
             InitializeComponent();
+            InicializaCampos();
+        }
+
+        private void InicializaCampos()
+        {
+            dataGridViewListaProdutoTapecaria.MultiSelect = false;
+            dataGridViewListaProdutoTapecaria.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         private void AoClicarEmCadastrar(object sender, EventArgs e)

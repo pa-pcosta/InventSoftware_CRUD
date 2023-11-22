@@ -7,10 +7,10 @@ namespace Controle_De_Estoque
 {
     public class ValidadorProdutoTapecaria
     {
-        public List<string> _listaDeErros = new List<string>();
-
         public List<string> ValidarProduto(ProdutoAValidar produtoAValidar)
         {
+            List<string> _listaDeErros = new List<string>();
+
             var valorTipoInvalido = -1;
             var ehTipoValido = produtoAValidar.Tipo != valorTipoInvalido.ToString();
             
