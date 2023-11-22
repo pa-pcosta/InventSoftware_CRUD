@@ -82,6 +82,7 @@
             this.BotaoEditarProdutoTapecaria.TabIndex = 3;
             this.BotaoEditarProdutoTapecaria.Text = "Editar";
             this.BotaoEditarProdutoTapecaria.UseVisualStyleBackColor = true;
+            this.BotaoEditarProdutoTapecaria.Click += new System.EventHandler(this.AoClicarEmEditar);
             // 
             // telaInicialBindingSource
             // 

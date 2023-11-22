@@ -25,6 +25,13 @@ namespace Controle_De_Estoque
             dateTimePickerDataEntrada.Value = DateTime.Today;
 
             comboBoxTipo.Items.AddRange(Enum.GetNames(typeof(TipoTapecaria)));
+
+             //comboBoxTipo.SelectedIndex = Convert.ToInt32(_novoProdutoTapecaria.Tipo);
+             //dateTimePickerDataEntrada.Value = _novoProdutoTapecaria.DataEntrada;
+             //textBoxArea.Text = _novoProdutoTapecaria.Area.ToString();
+             //textBoxPrecoMetroQuadrado.Text =_novoProdutoTapecaria.PrecoMetroQuadrado.ToString();
+             //checkBoxEntregarAposServico.Checked = _novoProdutoTapecaria.EhEntrega;
+             textBoxDetalhes.Text = _novoProdutoTapecaria.Detalhes;
         }
 
         public void AoClicarEmSalvar(object sender, EventArgs e)
@@ -61,7 +68,7 @@ namespace Controle_De_Estoque
         private void AtribuiAoProdutoTapecaria()
         { 
             _novoProdutoTapecaria.Id = ObterProximoId();
-            _novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex; ;
+            _novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex;
             _novoProdutoTapecaria.DataEntrada = dateTimePickerDataEntrada.Value;
             _novoProdutoTapecaria.Area = Convert.ToDouble(textBoxArea.Text);
             _novoProdutoTapecaria.PrecoMetroQuadrado = Convert.ToDecimal(textBoxPrecoMetroQuadrado.Text);
