@@ -50,9 +50,9 @@ namespace Controle_De_Estoque
 
                 if (qtdLinhasSelecionadas == 1)
                 {
-                    var linhaSelecionada = dataGridViewListaProdutoTapecaria.CurrentRow;
+                    var idObjetoSelecionado = Convert.ToInt32(dataGridViewListaProdutoTapecaria.CurrentRow.Cells["Id"].Value);
 
-                    ProdutoTapecaria produtoEditado = (ProdutoTapecaria)linhaSelecionada.DataBoundItem;
+                    ProdutoTapecaria produtoEditado = ObterObjetoPorId(idObjetoSelecionado);
                     
                     TelaCadastroDeProduto infoProdutoTapecaria = new TelaCadastroDeProduto(produtoEditado);
                     infoProdutoTapecaria.ShowDialog();
@@ -61,7 +61,6 @@ namespace Controle_De_Estoque
                     {
                         atualizaDataGridView();
                     }
-
                 }
                 else if (qtdLinhasSelecionadas == 0)
                 {
@@ -76,6 +75,11 @@ namespace Controle_De_Estoque
             {
                 MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private ProdutoTapecaria ObterObjetoPorId(int Id)
+        {
+            return _listaProdutoTapecaria.Find(x => x.Id == Id);
         }
     }
 }
