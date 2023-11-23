@@ -60,6 +60,7 @@ namespace Controle_De_Estoque
                     if (infoProdutoTapecaria.DialogResult.Equals(DialogResult.OK))
                     {
                         atualizaDataGridView();
+                        MessageBox.Show("Registro editado com sucesso","SUCESSSO!", MessageBoxButtons.OK, MessageBoxIcon.ok);
                     }
                 }
                 else if (qtdLinhasSelecionadas == 0)
