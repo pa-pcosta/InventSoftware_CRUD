@@ -26,7 +26,7 @@ namespace Controle_De_Estoque
                 if(infoProdutoTapecaria.DialogResult.Equals(DialogResult.OK))
                 {
                     _listaProdutoTapecaria.Add(novoProdutoTapecaria);
-                    atualizaDataGridView();
+                    AtualizaDataGridView();
                     MessageBox.Show("Novo produto cadastrado com sucesso");
                 }
             }
@@ -36,7 +36,7 @@ namespace Controle_De_Estoque
             }
         }
 
-        public void atualizaDataGridView()
+        public void AtualizaDataGridView()
         {
             dataGridViewListaProdutoTapecaria.DataSource = null;
             dataGridViewListaProdutoTapecaria.DataSource = _listaProdutoTapecaria;
@@ -59,7 +59,7 @@ namespace Controle_De_Estoque
                     
                     if (infoProdutoTapecaria.DialogResult.Equals(DialogResult.OK))
                     {
-                        atualizaDataGridView();
+                        AtualizaDataGridView();
                         MessageBox.Show("Registro editado com sucesso","SUCESSSO!");
                     }
                 }
