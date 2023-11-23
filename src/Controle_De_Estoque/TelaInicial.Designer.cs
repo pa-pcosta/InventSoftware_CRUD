@@ -47,8 +47,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridViewListaProdutoTapecaria.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewListaProdutoTapecaria.Location = new System.Drawing.Point(12, 12);
+            this.dataGridViewListaProdutoTapecaria.MultiSelect = false;
             this.dataGridViewListaProdutoTapecaria.Name = "dataGridViewListaProdutoTapecaria";
             this.dataGridViewListaProdutoTapecaria.ReadOnly = true;
+            this.dataGridViewListaProdutoTapecaria.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewListaProdutoTapecaria.Size = new System.Drawing.Size(734, 406);
             this.dataGridViewListaProdutoTapecaria.TabIndex = 0;
             // 

@@ -12,26 +12,39 @@ namespace Controle_De_Estoque
 
         private static int _ultimoIdUtilizado = 0;
 
+        const int ehNovoProduto = -1;
+
         public TelaCadastroDeProduto(ProdutoTapecaria novoProdutoTapecaria)
         {
             InitializeComponent();
-            InicializaCampos();
 
             _novoProdutoTapecaria = novoProdutoTapecaria;
+
+            InicializaCampos();
         }
 
         private void InicializaCampos()
         {
-            dateTimePickerDataEntrada.Value = DateTime.Today;
-
             comboBoxTipo.Items.AddRange(Enum.GetNames(typeof(TipoTapecaria)));
 
-             //comboBoxTipo.SelectedIndex = Convert.ToInt32(_novoProdutoTapecaria.Tipo);
-             //dateTimePickerDataEntrada.Value = _novoProdutoTapecaria.DataEntrada;
-             //textBoxArea.Text = _novoProdutoTapecaria.Area.ToString();
-             //textBoxPrecoMetroQuadrado.Text =_novoProdutoTapecaria.PrecoMetroQuadrado.ToString();
-             //checkBoxEntregarAposServico.Checked = _novoProdutoTapecaria.EhEntrega;
-             textBoxDetalhes.Text = _novoProdutoTapecaria.Detalhes;
+            if (_novoProdutoTapecaria.Id == ehNovoProduto)
+            {
+                comboBoxTipo.SelectedIndex = -1;
+                dateTimePickerDataEntrada.Value = DateTime.Today;
+                textBoxArea.Text = "";
+                textBoxPrecoMetroQuadrado.Text = "";
+                checkBoxEntregarAposServico.Checked = false;
+                textBoxDetalhes.Text = "";
+            }
+            else
+            {
+                comboBoxTipo.SelectedIndex = Convert.ToInt32(_novoProdutoTapecaria.Tipo);
+                dateTimePickerDataEntrada.Value = _novoProdutoTapecaria.DataEntrada;
+                textBoxArea.Text = _novoProdutoTapecaria.Area.ToString();
+                textBoxPrecoMetroQuadrado.Text = _novoProdutoTapecaria.PrecoMetroQuadrado.ToString();
+                checkBoxEntregarAposServico.Checked = _novoProdutoTapecaria.EhEntrega;
+                textBoxDetalhes.Text = _novoProdutoTapecaria.Detalhes;
+            }
         }
 
         public void AoClicarEmSalvar(object sender, EventArgs e)
@@ -67,7 +80,8 @@ namespace Controle_De_Estoque
 
         private void AtribuiAoProdutoTapecaria()
         { 
-            _novoProdutoTapecaria.Id = ObterProximoId();
+            if (_novoProdutoTapecaria.Id == ehNovoProduto)
+                _novoProdutoTapecaria.Id = ObterProximoId();
             _novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex;
             _novoProdutoTapecaria.DataEntrada = dateTimePickerDataEntrada.Value;
             _novoProdutoTapecaria.Area = Convert.ToDouble(textBoxArea.Text);

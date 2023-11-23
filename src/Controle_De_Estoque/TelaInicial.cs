@@ -8,29 +8,18 @@ namespace Controle_De_Estoque
     {
         public List<ProdutoTapecaria> _listaProdutoTapecaria = new List<ProdutoTapecaria>();
 
+        const int ehNovoProduto = -1;
+
         public TelaInicial()
         {
             InitializeComponent();
-            InicializaCampos();
-        }
-
-        private void InicializaCampos()
-        {
-            //dataGridViewListaProdutoTapecaria.MultiSelect = false;
-            dataGridViewListaProdutoTapecaria.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-            //Teste
-            _listaProdutoTapecaria.Add(new ProdutoTapecaria() { Tipo = (TipoTapecaria)1, DataEntrada = new DateTime(2000,01,19), Area = 23.00, PrecoMetroQuadrado = 20, Detalhes = "TESTE"});
-            _listaProdutoTapecaria.Add(new ProdutoTapecaria() { });
-            _listaProdutoTapecaria.Add(new ProdutoTapecaria() { });
-            atualizaDataGridView();
         }
 
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
             try
             {
-                ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria();
+                ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria() { Id = ehNovoProduto};
                 TelaCadastroDeProduto infoProdutoTapecaria = new TelaCadastroDeProduto(novoProdutoTapecaria);
                 infoProdutoTapecaria.ShowDialog();
 
@@ -68,10 +57,19 @@ namespace Controle_De_Estoque
                     TelaCadastroDeProduto infoProdutoTapecaria = new TelaCadastroDeProduto(produtoEditado);
                     infoProdutoTapecaria.ShowDialog();
                     
+                    if (infoProdutoTapecaria.DialogResult.Equals(DialogResult.OK))
+                    {
+                        atualizaDataGridView();
+                    }
+
+                }
+                else if (qtdLinhasSelecionadas == 0)
+                {
+                    MessageBox.Show("Selecione um registro", "Não há linha selecionada", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show("Selecione apenas 1 linha", "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Selecione apenas 1 linha", "OPERAÇÃO INVÁLIDA!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
