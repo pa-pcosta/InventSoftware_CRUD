@@ -12,13 +12,14 @@ namespace Controle_De_Estoque
 
         private static int _ultimoIdUtilizado = 0;
 
-        const int ehNovoProduto = -1;
+        private readonly bool _ehNovoProduto;
 
-        public TelaCadastroDeProduto(ProdutoTapecaria novoProdutoTapecaria)
+        public TelaCadastroDeProduto(ProdutoTapecaria novoProdutoTapecaria, bool ehNovoProduto)
         {
             InitializeComponent();
 
             _novoProdutoTapecaria = novoProdutoTapecaria;
+            _ehNovoProduto = ehNovoProduto;
 
             InicializaCampos();
         }
@@ -27,7 +28,7 @@ namespace Controle_De_Estoque
         {
             comboBoxTipo.Items.AddRange(Enum.GetNames(typeof(TipoTapecaria)));
 
-            if (_novoProdutoTapecaria.Id == ehNovoProduto)
+            if (_ehNovoProduto)
             {
                 comboBoxTipo.SelectedIndex = -1;
                 dateTimePickerDataEntrada.Value = DateTime.Today;
@@ -80,7 +81,7 @@ namespace Controle_De_Estoque
 
         private void AtribuiAoProdutoTapecaria()
         { 
-            if (_novoProdutoTapecaria.Id == ehNovoProduto)
+            if (_ehNovoProduto)
                 _novoProdutoTapecaria.Id = ObterProximoId();
             _novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex;
             _novoProdutoTapecaria.DataEntrada = dateTimePickerDataEntrada.Value;

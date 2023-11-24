@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Controle_De_Estoque
@@ -8,7 +9,7 @@ namespace Controle_De_Estoque
     {
         public List<ProdutoTapecaria> _listaProdutoTapecaria = new List<ProdutoTapecaria>();
 
-        const int ehNovoProduto = -1;
+        private readonly bool _ehNovoProduto = true;
 
         public TelaInicial()
         {
@@ -19,8 +20,8 @@ namespace Controle_De_Estoque
         {
             try
             {
-                ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria() { Id = ehNovoProduto};
-                TelaCadastroDeProduto infoProdutoTapecaria = new TelaCadastroDeProduto(novoProdutoTapecaria);
+                ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria();
+                TelaCadastroDeProduto infoProdutoTapecaria = new TelaCadastroDeProduto(novoProdutoTapecaria, _ehNovoProduto);
                 infoProdutoTapecaria.ShowDialog();
 
                 if(infoProdutoTapecaria.DialogResult.Equals(DialogResult.OK))
@@ -46,15 +47,16 @@ namespace Controle_De_Estoque
         {
             try
             {
+                var limiteLinhasSelecionadas = 1;
                 var qtdLinhasSelecionadas = dataGridViewListaProdutoTapecaria.SelectedRows.Count;
 
-                if (qtdLinhasSelecionadas == 1)
+                if (qtdLinhasSelecionadas == limiteLinhasSelecionadas)
                 {
                     var idObjetoSelecionado = Convert.ToInt32(dataGridViewListaProdutoTapecaria.CurrentRow.Cells["Id"].Value);
 
                     ProdutoTapecaria produtoEditado = ObterObjetoPorId(idObjetoSelecionado);
                     
-                    TelaCadastroDeProduto infoProdutoTapecaria = new TelaCadastroDeProduto(produtoEditado);
+                    TelaCadastroDeProduto infoProdutoTapecaria = new TelaCadastroDeProduto(produtoEditado, !_ehNovoProduto);
                     infoProdutoTapecaria.ShowDialog();
                     
                     if (infoProdutoTapecaria.DialogResult.Equals(DialogResult.OK))
@@ -63,7 +65,7 @@ namespace Controle_De_Estoque
                         MessageBox.Show("Registro editado com sucesso","SUCESSSO!");
                     }
                 }
-                else if (qtdLinhasSelecionadas == 0)
+                else if (qtdLinhasSelecionadas < limiteLinhasSelecionadas)
                 {
                     MessageBox.Show("Selecione um registro", "Não há linha selecionada", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -80,7 +82,7 @@ namespace Controle_De_Estoque
 
         private ProdutoTapecaria ObterObjetoPorId(int Id)
         {
-            return _listaProdutoTapecaria.Find(x => x.Id == Id);
+            return _listaProdutoTapecaria.FirstOrDefault(item => item.Id == Id);
         }
     }
 }
