@@ -44,13 +44,7 @@ namespace Controle_De_Estoque
         {
             try
             {
-                ProdutoAValidar produtoAValidar = new ProdutoAValidar()
-                {
-                    Tipo = comboBoxTipo.SelectedIndex.ToString(),
-                    DataEntrada = dateTimePickerDataEntrada.Value.ToString(),
-                    Area = textBoxArea.Text,
-                    PrecoMetroQuadrado = textBoxPrecoMetroQuadrado.Text
-                };
+                var produtoAValidar = GerarProdutoaValidar();
 
                 var listaDeErros = new ValidadorProdutoTapecaria().ValidarProduto(produtoAValidar);
 
@@ -86,6 +80,19 @@ namespace Controle_De_Estoque
             {
                 MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
+        }
+
+        private ProdutoAValidar GerarProdutoaValidar()
+        {
+            ProdutoAValidar produtoAValidar = new ProdutoAValidar()
+            {
+                Tipo = comboBoxTipo.SelectedIndex.ToString(),
+                DataEntrada = dateTimePickerDataEntrada.Value.ToString(),
+                Area = textBoxArea.Text,
+                PrecoMetroQuadrado = textBoxPrecoMetroQuadrado.Text
+            };
+
+            return produtoAValidar;
         }
 
         private void AtribuiAoProdutoTapecaria()
