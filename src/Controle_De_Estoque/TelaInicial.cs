@@ -21,7 +21,7 @@ namespace Controle_De_Estoque
                 TelaCadastroDeProduto infoProdutoTapecaria = new TelaCadastroDeProduto(null);
                 infoProdutoTapecaria.ShowDialog();
 
-                if(infoProdutoTapecaria.DialogResult.Equals(DialogResult.OK))
+                if(infoProdutoTapecaria.DialogResult == DialogResult.OK)
                 {
                     _listaProdutoTapecaria.Add(infoProdutoTapecaria._novoProdutoTapecaria);
                     AtualizaDataGridView();
@@ -45,13 +45,14 @@ namespace Controle_De_Estoque
                 {
                     var idObjetoSelecionado = Convert.ToInt32(dataGridViewListaProdutoTapecaria.CurrentRow.Cells["Id"].Value);
 
-                    ProdutoTapecaria produtoEditado = ObterObjetoPorId(idObjetoSelecionado);
+                    ProdutoTapecaria produtoASerEditado = ObterObjetoPorId(idObjetoSelecionado);
                     
-                    TelaCadastroDeProduto infoProdutoTapecaria = new TelaCadastroDeProduto(produtoEditado);
+                    TelaCadastroDeProduto infoProdutoTapecaria = new TelaCadastroDeProduto(produtoASerEditado);
                     infoProdutoTapecaria.ShowDialog();
                     
-                    if (infoProdutoTapecaria.DialogResult.Equals(DialogResult.OK))
+                    if (infoProdutoTapecaria.DialogResult == DialogResult.OK)
                     {
+                        SubstituiObjetoNaLista(produtoASerEditado, infoProdutoTapecaria);
                         AtualizaDataGridView();
                         MessageBox.Show("Registro editado com sucesso","SUCESSSO!");
                     }
@@ -71,15 +72,25 @@ namespace Controle_De_Estoque
             }
         }
 
+        private ProdutoTapecaria ObterObjetoPorId(int Id)
+        {
+            return _listaProdutoTapecaria.FirstOrDefault(item => item.Id == Id);
+        }
+
+        private void SubstituiObjetoNaLista(ProdutoTapecaria produtoASerEditado, TelaCadastroDeProduto infoProdutoTapecaria)
+        {
+            var indexProdutoEditado = _listaProdutoTapecaria.IndexOf(produtoASerEditado);
+
+            if (indexProdutoEditado != -1)
+            {
+                _listaProdutoTapecaria[indexProdutoEditado] = infoProdutoTapecaria._novoProdutoTapecaria;
+            }
+        }
+
         public void AtualizaDataGridView()
         {
             dataGridViewListaProdutoTapecaria.DataSource = null;
             dataGridViewListaProdutoTapecaria.DataSource = _listaProdutoTapecaria;
-        }
-
-        private ProdutoTapecaria ObterObjetoPorId(int Id)
-        {
-            return _listaProdutoTapecaria.FirstOrDefault(item => item.Id == Id);
         }
     }
 }
