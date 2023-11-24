@@ -17,7 +17,7 @@ namespace Controle_De_Estoque
             InitializeComponent();
             InicializaCampos();
 
-            if (!(produtoTapecaria is null))
+            if (produtoTapecaria != null)
             {
                 comboBoxTipo.SelectedIndex = Convert.ToInt32(produtoTapecaria.Tipo);
                 dateTimePickerDataEntrada.Value = produtoTapecaria.DataEntrada;
@@ -44,14 +44,17 @@ namespace Controle_De_Estoque
         {
             try
             {
-                var produtoAValidar = GerarProdutoaValidar();
+                var produtoAValidar = ObterProdutoaValidar();
+                var validador = new ValidadorProdutoTapecaria();
 
-                var listaDeErros = new ValidadorProdutoTapecaria().ValidarProduto(produtoAValidar);
+                var listaDeErros = validador.ValidarProduto(produtoAValidar);
 
                 if (!listaDeErros.Any())
                 {
-                    AtribuiAoProdutoTapecaria();
+                    if (_novoProdutoTapecaria.Id == 0)
+                        _novoProdutoTapecaria.Id = ObterProximoId();
 
+                    AtribuiAoProdutoTapecaria();
                     DialogResult = DialogResult.OK;
                 }
                 else
@@ -82,7 +85,7 @@ namespace Controle_De_Estoque
             }
         }
 
-        private ProdutoAValidar GerarProdutoaValidar()
+        private ProdutoAValidar ObterProdutoaValidar()
         {
             ProdutoAValidar produtoAValidar = new ProdutoAValidar()
             {
@@ -97,8 +100,6 @@ namespace Controle_De_Estoque
 
         private void AtribuiAoProdutoTapecaria()
         {
-            if (_novoProdutoTapecaria.Id == 0)
-                _novoProdutoTapecaria.Id = ObterProximoId();
             _novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex;
             _novoProdutoTapecaria.DataEntrada = dateTimePickerDataEntrada.Value;
             _novoProdutoTapecaria.Area = Convert.ToDouble(textBoxArea.Text);

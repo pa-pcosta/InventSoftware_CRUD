@@ -18,12 +18,12 @@ namespace Controle_De_Estoque
         {
             try
             {
-                TelaCadastroDeProduto infoProdutoTapecaria = new TelaCadastroDeProduto(null);
-                infoProdutoTapecaria.ShowDialog();
+                TelaCadastroDeProduto formCadastroProduto = new TelaCadastroDeProduto(null);
+                formCadastroProduto.ShowDialog();
 
-                if(infoProdutoTapecaria.DialogResult == DialogResult.OK)
+                if(formCadastroProduto.DialogResult == DialogResult.OK)
                 {
-                    _listaProdutoTapecaria.Add(infoProdutoTapecaria._novoProdutoTapecaria);
+                    _listaProdutoTapecaria.Add(formCadastroProduto._novoProdutoTapecaria);
                     AtualizaDataGridView();
                     MessageBox.Show("Novo produto cadastrado com sucesso");
                 }
@@ -46,15 +46,22 @@ namespace Controle_De_Estoque
                     var idObjetoSelecionado = Convert.ToInt32(dataGridViewListaProdutoTapecaria.CurrentRow.Cells["Id"].Value);
 
                     ProdutoTapecaria produtoASerEditado = ObterObjetoPorId(idObjetoSelecionado);
-                    
-                    TelaCadastroDeProduto infoProdutoTapecaria = new TelaCadastroDeProduto(produtoASerEditado);
-                    infoProdutoTapecaria.ShowDialog();
-                    
-                    if (infoProdutoTapecaria.DialogResult == DialogResult.OK)
+
+                    if (produtoASerEditado != null)
                     {
-                        SubstituiObjetoNaLista(produtoASerEditado, infoProdutoTapecaria);
-                        AtualizaDataGridView();
-                        MessageBox.Show("Registro editado com sucesso","SUCESSSO!");
+                        TelaCadastroDeProduto formCadastroProduto = new TelaCadastroDeProduto(produtoASerEditado);
+                        formCadastroProduto.ShowDialog();
+                    
+                        if (formCadastroProduto.DialogResult == DialogResult.OK)
+                        {
+                            SubstituiObjetoNaLista(produtoASerEditado, formCadastroProduto);
+                            AtualizaDataGridView();
+                            MessageBox.Show("Registro editado com sucesso","SUCESSSO!");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Registro não encontrado na base de dados");
                     }
                 }
                 else if (qtdLinhasSelecionadas < limiteLinhasSelecionadas)
@@ -79,11 +86,11 @@ namespace Controle_De_Estoque
 
         private void SubstituiObjetoNaLista(ProdutoTapecaria produtoASerEditado, TelaCadastroDeProduto infoProdutoTapecaria)
         {
-            var indexProdutoEditado = _listaProdutoTapecaria.IndexOf(produtoASerEditado);
+            var indexProdutoASerEditado = _listaProdutoTapecaria.IndexOf(produtoASerEditado);
 
-            if (indexProdutoEditado != -1)
+            if (indexProdutoASerEditado != -1)
             {
-                _listaProdutoTapecaria[indexProdutoEditado] = infoProdutoTapecaria._novoProdutoTapecaria;
+                _listaProdutoTapecaria[indexProdutoASerEditado] = infoProdutoTapecaria._novoProdutoTapecaria;
             }
         }
 
