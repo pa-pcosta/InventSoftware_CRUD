@@ -9,8 +9,6 @@ namespace Controle_De_Estoque
     {
         public List<ProdutoTapecaria> _listaProdutoTapecaria = new List<ProdutoTapecaria>();
 
-        private readonly bool _ehNovoProduto = true;
-
         public TelaInicial()
         {
             InitializeComponent();
@@ -20,13 +18,12 @@ namespace Controle_De_Estoque
         {
             try
             {
-                ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria();
-                TelaCadastroDeProduto infoProdutoTapecaria = new TelaCadastroDeProduto(novoProdutoTapecaria, _ehNovoProduto);
+                TelaCadastroDeProduto infoProdutoTapecaria = new TelaCadastroDeProduto(null);
                 infoProdutoTapecaria.ShowDialog();
 
                 if(infoProdutoTapecaria.DialogResult.Equals(DialogResult.OK))
                 {
-                    _listaProdutoTapecaria.Add(novoProdutoTapecaria);
+                    _listaProdutoTapecaria.Add(infoProdutoTapecaria._novoProdutoTapecaria);
                     AtualizaDataGridView();
                     MessageBox.Show("Novo produto cadastrado com sucesso");
                 }
@@ -35,12 +32,6 @@ namespace Controle_De_Estoque
             {
                 MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        public void AtualizaDataGridView()
-        {
-            dataGridViewListaProdutoTapecaria.DataSource = null;
-            dataGridViewListaProdutoTapecaria.DataSource = _listaProdutoTapecaria;
         }
 
         private void AoClicarEmEditar(object sender, EventArgs e)
@@ -56,7 +47,7 @@ namespace Controle_De_Estoque
 
                     ProdutoTapecaria produtoEditado = ObterObjetoPorId(idObjetoSelecionado);
                     
-                    TelaCadastroDeProduto infoProdutoTapecaria = new TelaCadastroDeProduto(produtoEditado, !_ehNovoProduto);
+                    TelaCadastroDeProduto infoProdutoTapecaria = new TelaCadastroDeProduto(produtoEditado);
                     infoProdutoTapecaria.ShowDialog();
                     
                     if (infoProdutoTapecaria.DialogResult.Equals(DialogResult.OK))
@@ -78,6 +69,12 @@ namespace Controle_De_Estoque
             {
                 MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public void AtualizaDataGridView()
+        {
+            dataGridViewListaProdutoTapecaria.DataSource = null;
+            dataGridViewListaProdutoTapecaria.DataSource = _listaProdutoTapecaria;
         }
 
         private ProdutoTapecaria ObterObjetoPorId(int Id)

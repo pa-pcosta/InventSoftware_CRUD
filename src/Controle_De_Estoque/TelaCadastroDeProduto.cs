@@ -8,51 +8,43 @@ namespace Controle_De_Estoque
 {
     public partial class TelaCadastroDeProduto : Form
     {
-        ProdutoTapecaria _novoProdutoTapecaria;
+        public ProdutoTapecaria _novoProdutoTapecaria;
 
         private static int _ultimoIdUtilizado = 0;
 
-        private readonly bool _ehNovoProduto;
-
-        public TelaCadastroDeProduto(ProdutoTapecaria novoProdutoTapecaria, bool ehNovoProduto)
+        public TelaCadastroDeProduto(ProdutoTapecaria produtoTapecaria)
         {
             InitializeComponent();
-
-            _novoProdutoTapecaria = novoProdutoTapecaria;
-            _ehNovoProduto = ehNovoProduto;
-
             InicializaCampos();
+
+            if (!(produtoTapecaria is null))
+            {
+                comboBoxTipo.SelectedIndex = Convert.ToInt32(produtoTapecaria.Tipo);
+                dateTimePickerDataEntrada.Value = produtoTapecaria.DataEntrada;
+                textBoxArea.Text = produtoTapecaria.Area.ToString();
+                textBoxPrecoMetroQuadrado.Text = produtoTapecaria.PrecoMetroQuadrado.ToString();
+                checkBoxEntregarAposServico.Checked = produtoTapecaria.EhEntrega;
+                textBoxDetalhes.Text = produtoTapecaria.Detalhes;
+
+                _novoProdutoTapecaria = produtoTapecaria;
+            }
+            else
+            {
+                _novoProdutoTapecaria = new ProdutoTapecaria();
+            }
         }
 
         private void InicializaCampos()
         {
             comboBoxTipo.Items.AddRange(Enum.GetNames(typeof(TipoTapecaria)));
-
-            if (_ehNovoProduto)
-            {
-                comboBoxTipo.SelectedIndex = -1;
-                dateTimePickerDataEntrada.Value = DateTime.Today;
-                textBoxArea.Text = "";
-                textBoxPrecoMetroQuadrado.Text = "";
-                checkBoxEntregarAposServico.Checked = false;
-                textBoxDetalhes.Text = "";
-            }
-            else
-            {
-                comboBoxTipo.SelectedIndex = Convert.ToInt32(_novoProdutoTapecaria.Tipo);
-                dateTimePickerDataEntrada.Value = _novoProdutoTapecaria.DataEntrada;
-                textBoxArea.Text = _novoProdutoTapecaria.Area.ToString();
-                textBoxPrecoMetroQuadrado.Text = _novoProdutoTapecaria.PrecoMetroQuadrado.ToString();
-                checkBoxEntregarAposServico.Checked = _novoProdutoTapecaria.EhEntrega;
-                textBoxDetalhes.Text = _novoProdutoTapecaria.Detalhes;
-            }
+            dateTimePickerDataEntrada.Value = DateTime.Today;
         }
 
         public void AoClicarEmSalvar(object sender, EventArgs e)
         {
             try
             {
-               ProdutoAValidar produtoAValidar = new ProdutoAValidar()
+                ProdutoAValidar produtoAValidar = new ProdutoAValidar()
                 {
                     Tipo = comboBoxTipo.SelectedIndex.ToString(),
                     DataEntrada = dateTimePickerDataEntrada.Value.ToString(),
@@ -79,23 +71,6 @@ namespace Controle_De_Estoque
             }
         }
 
-        private void AtribuiAoProdutoTapecaria()
-        { 
-            if (_ehNovoProduto)
-                _novoProdutoTapecaria.Id = ObterProximoId();
-            _novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex;
-            _novoProdutoTapecaria.DataEntrada = dateTimePickerDataEntrada.Value;
-            _novoProdutoTapecaria.Area = Convert.ToDouble(textBoxArea.Text);
-            _novoProdutoTapecaria.PrecoMetroQuadrado = Convert.ToDecimal(textBoxPrecoMetroQuadrado.Text);
-            _novoProdutoTapecaria.EhEntrega = checkBoxEntregarAposServico.Checked;
-            _novoProdutoTapecaria.Detalhes = textBoxDetalhes.Text;
-        }
-
-        private int ObterProximoId()
-        {
-            return ++_ultimoIdUtilizado;
-        }
-
         private void AoClicarEmCancelar(object sender, EventArgs e)
         {
             try
@@ -111,6 +86,23 @@ namespace Controle_De_Estoque
             {
                 MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK,MessageBoxIcon.Error);
             }
+        }
+
+        private void AtribuiAoProdutoTapecaria()
+        {
+            if (_novoProdutoTapecaria.Id == 0)
+                _novoProdutoTapecaria.Id = ObterProximoId();
+            _novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex;
+            _novoProdutoTapecaria.DataEntrada = dateTimePickerDataEntrada.Value;
+            _novoProdutoTapecaria.Area = Convert.ToDouble(textBoxArea.Text);
+            _novoProdutoTapecaria.PrecoMetroQuadrado = Convert.ToDecimal(textBoxPrecoMetroQuadrado.Text);
+            _novoProdutoTapecaria.EhEntrega = checkBoxEntregarAposServico.Checked;
+            _novoProdutoTapecaria.Detalhes = textBoxDetalhes.Text;
+        }
+
+        private int ObterProximoId()
+        {
+            return ++_ultimoIdUtilizado;
         }
 
         private void textBoxPrecoMetroQuadrado_KeyPress(object sender, KeyPressEventArgs e)
