@@ -74,6 +74,7 @@
             this.BotaoRemoverProdutoTapecaria.TabIndex = 2;
             this.BotaoRemoverProdutoTapecaria.Text = "Remover";
             this.BotaoRemoverProdutoTapecaria.UseVisualStyleBackColor = true;
+            this.BotaoRemoverProdutoTapecaria.Click += new System.EventHandler(this.AoClicarEmRemover);
             // 
             // BotaoEditarProdutoTapecaria
             // 

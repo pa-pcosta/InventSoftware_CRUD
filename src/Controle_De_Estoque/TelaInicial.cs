@@ -78,6 +78,60 @@ namespace Controle_De_Estoque
                 MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void AoClicarEmRemover(object sender, EventArgs e)
+        {
+            try
+            {
+                var limiteLinhasSelecionadas = 1;
+                var qtdLinhasSelecionadas = dataGridViewListaProdutoTapecaria.SelectedRows.Count;
+
+                if (qtdLinhasSelecionadas == limiteLinhasSelecionadas)
+                {
+                    var idObjetoSelecionado = Convert.ToInt32(dataGridViewListaProdutoTapecaria.CurrentRow.Cells["Id"].Value);
+
+                    ProdutoTapecaria produtoASerRemovido = ObterObjetoPorId(idObjetoSelecionado);
+
+                    if (produtoASerRemovido != null)
+                    {
+                        string msgCorfirmaExclusao = $"Ao remover, o seguinte registro será deletado e não poderá ser recuperado:\n\n" +
+                            $"Id: {produtoASerRemovido.Id}\n" +
+                            $"Tipo: {produtoASerRemovido.Tipo}\n" +
+                            $"Data de entrada: {produtoASerRemovido.DataEntrada}\n" +
+                            $"Tamanho: {produtoASerRemovido.Area} m²\n" +
+                            $"Preço: {produtoASerRemovido.PrecoMetroQuadrado}\n" +
+                            $"Entrega: {produtoASerRemovido.EhEntrega}\n" +
+                            $"Detalhes: {produtoASerRemovido.Detalhes}\n\n" +
+                            $"Deseja continuar?";
+
+                        DialogResult confirmaExclusao = MessageBox.Show(msgCorfirmaExclusao, "REMOVER CADASTRO", MessageBoxButtons.YesNo);
+
+                        if (confirmaExclusao == DialogResult.Yes)
+                        {
+                            _listaProdutoTapecaria.Remove(produtoASerRemovido);
+                            AtualizaDataGridView();
+                            MessageBox.Show("Registro excluído com sucesso.", "REGISTRO REMOVIDO");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Registro não encontrado na base de dados");
+                    }
+                }
+                else if (qtdLinhasSelecionadas < limiteLinhasSelecionadas)
+                {
+                    MessageBox.Show("Selecione um registro", "Não há linha selecionada", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Selecione apenas 1 linha", "OPERAÇÃO INVÁLIDA!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
 
         private ProdutoTapecaria ObterObjetoPorId(int Id)
         {
@@ -99,5 +153,6 @@ namespace Controle_De_Estoque
             dataGridViewListaProdutoTapecaria.DataSource = null;
             dataGridViewListaProdutoTapecaria.DataSource = _listaProdutoTapecaria;
         }
+
     }
 }
