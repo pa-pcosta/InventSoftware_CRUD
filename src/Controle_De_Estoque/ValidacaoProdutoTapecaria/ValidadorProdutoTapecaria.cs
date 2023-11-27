@@ -7,17 +7,17 @@ namespace Controle_De_Estoque
 {
     public class ValidadorProdutoTapecaria
     {
-        public List<string> _listaDeErros = new List<string>();
-
         public List<string> ValidarProduto(ProdutoAValidar produtoAValidar)
         {
+            List<string> listaDeErros = new List<string>();
+
             var valorTipoInvalido = -1;
             var ehTipoValido = produtoAValidar.Tipo != valorTipoInvalido.ToString();
             
             if (!ehTipoValido)
             {
                 var erro = "TIPO inválido.";
-                _listaDeErros.Add(erro);
+                listaDeErros.Add(erro);
             }
 
             DateTime.TryParse(produtoAValidar.DataEntrada, out var dataEntrada);
@@ -26,7 +26,7 @@ namespace Controle_De_Estoque
             if (!ehDataValida)
             {
                 var erro = "DATA DE ENTRADA não pode ser maior que a data atual.";
-                _listaDeErros.Add(erro);
+                listaDeErros.Add(erro);
             }
 
             var precoEhNumero = Regex.IsMatch(produtoAValidar.PrecoMetroQuadrado, "^[0-9]+([,][0-9]+)?$");
@@ -34,7 +34,7 @@ namespace Controle_De_Estoque
             if (!precoEhNumero)
             {
                 var erro = "PREÇO deve ser um número.";
-                _listaDeErros.Add(erro);
+                listaDeErros.Add(erro);
             }
             else
             {
@@ -44,7 +44,7 @@ namespace Controle_De_Estoque
                 if (!ehPrecoValido)
                 {
                     var erro = "PREÇO inválido.";
-                    _listaDeErros.Add(erro);
+                    listaDeErros.Add(erro);
                 }
             }
 
@@ -53,7 +53,7 @@ namespace Controle_De_Estoque
             if (!areaEhNumero)
             {
                 var erro = "TAMANHO deve ser um número.";
-                _listaDeErros.Add(erro);
+                listaDeErros.Add(erro);
             }
             else
             {
@@ -63,11 +63,11 @@ namespace Controle_De_Estoque
                 if (!ehAreaValida)
                 {
                     var erro = "TAMANHO do produto inválido.";
-                    _listaDeErros.Add(erro);
+                    listaDeErros.Add(erro);
                 }
             }
 
-            return _listaDeErros;
+            return listaDeErros;
         }
     }
 }

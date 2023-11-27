@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Controle_De_Estoque
 {
     public partial class TelaInicial : Form
     {
-        public List<ProdutoTapecaria> listaProdutoTapecaria = new List<ProdutoTapecaria>();
+        public List<ProdutoTapecaria> _listaProdutoTapecaria = new List<ProdutoTapecaria>();
 
         public TelaInicial()
         {
@@ -16,31 +17,87 @@ namespace Controle_De_Estoque
         private void AoClicarEmCadastrar(object sender, EventArgs e)
         {
             try
-                {
-                ProdutoTapecaria novoProdutoTapecaria = new ProdutoTapecaria();
-                TelaCadastroDeProduto newForm = new TelaCadastroDeProduto(novoProdutoTapecaria);
-                newForm.ShowDialog();
+            {
+                TelaCadastroDeProduto formCadastroProduto = new TelaCadastroDeProduto(null);
+                formCadastroProduto.ShowDialog();
 
-                if(newForm.DialogResult.Equals(DialogResult.OK))
+                if(formCadastroProduto.DialogResult == DialogResult.OK)
                 {
-                    listaProdutoTapecaria.Add(novoProdutoTapecaria);
-                    atualizaDataGridView();
-                    MessageBox.Show("Novo produto cadastrado com sucesso");
+                    _listaProdutoTapecaria.Add(formCadastroProduto._novoProdutoTapecaria);
+                    AtualizaDataGridView();
+                    MessageBox.Show("Novo produto cadastrado com sucesso", "SUCESSO!");
                 }
-
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        public void atualizaDataGridView()
+        private void AoClicarEmEditar(object sender, EventArgs e)
         {
-            dataGridViewListaProdutoTapecaria.DataSource = null;
-            dataGridViewListaProdutoTapecaria.DataSource = listaProdutoTapecaria;
+            try
+            {
+                var limiteLinhasSelecionadas = 1;
+                var qtdLinhasSelecionadas = dataGridViewListaProdutoTapecaria.SelectedRows.Count;
+
+                if (qtdLinhasSelecionadas == limiteLinhasSelecionadas)
+                {
+                    var idObjetoSelecionado = Convert.ToInt32(dataGridViewListaProdutoTapecaria.CurrentRow.Cells["Id"].Value);
+
+                    ProdutoTapecaria produtoASerEditado = ObterObjetoPorId(idObjetoSelecionado);
+
+                    if (produtoASerEditado != null)
+                    {
+                        TelaCadastroDeProduto formCadastroProduto = new TelaCadastroDeProduto(produtoASerEditado);
+                        formCadastroProduto.ShowDialog();
+                    
+                        if (formCadastroProduto.DialogResult == DialogResult.OK)
+                        {
+                            SubstituiObjetoNaLista(produtoASerEditado, formCadastroProduto);
+                            AtualizaDataGridView();
+                            MessageBox.Show("Registro editado com sucesso","SUCESSSO!");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Registro não encontrado na base de dados");
+                    }
+                }
+                else if (qtdLinhasSelecionadas < limiteLinhasSelecionadas)
+                {
+                    MessageBox.Show("Selecione um registro", "Não há linha selecionada", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Selecione apenas 1 linha", "OPERAÇÃO INVÁLIDA!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
+        private ProdutoTapecaria ObterObjetoPorId(int Id)
+        {
+            return _listaProdutoTapecaria.FirstOrDefault(item => item.Id == Id);
+        }
+
+        private void SubstituiObjetoNaLista(ProdutoTapecaria produtoASerEditado, TelaCadastroDeProduto formCadastroProduto)
+        {
+            var indexProdutoASerEditado = _listaProdutoTapecaria.IndexOf(produtoASerEditado);
+
+            if (indexProdutoASerEditado != -1)
+            {
+                _listaProdutoTapecaria[indexProdutoASerEditado] = formCadastroProduto._novoProdutoTapecaria;
+            }
+        }
+
+        public void AtualizaDataGridView()
+        {
+            dataGridViewListaProdutoTapecaria.DataSource = null;
+            dataGridViewListaProdutoTapecaria.DataSource = _listaProdutoTapecaria;
+        }
     }
 }

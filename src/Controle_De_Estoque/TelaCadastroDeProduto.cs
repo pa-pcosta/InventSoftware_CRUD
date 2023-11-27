@@ -8,46 +8,58 @@ namespace Controle_De_Estoque
 {
     public partial class TelaCadastroDeProduto : Form
     {
-        ProdutoTapecaria _novoProdutoTapecaria;
+        public ProdutoTapecaria _novoProdutoTapecaria;
 
         private static int _ultimoIdUtilizado = 0;
 
-        public TelaCadastroDeProduto(ProdutoTapecaria novoProdutoTapecaria)
+        public TelaCadastroDeProduto(ProdutoTapecaria produtoTapecaria)
         {
             InitializeComponent();
             InicializaCampos();
 
-            _novoProdutoTapecaria = novoProdutoTapecaria;
+            if (produtoTapecaria != null)
+            {
+                PreencherCampos(produtoTapecaria);
+                _novoProdutoTapecaria = produtoTapecaria;
+            }
+            else
+            {
+                _novoProdutoTapecaria = new ProdutoTapecaria();
+            }
+        }
+
+        private void PreencherCampos(ProdutoTapecaria produtoTapecaria)
+        {
+            comboBoxTipo.SelectedIndex = Convert.ToInt32(produtoTapecaria.Tipo);
+            dateTimePickerDataEntrada.Value = produtoTapecaria.DataEntrada;
+            textBoxArea.Text = produtoTapecaria.Area.ToString();
+            textBoxPrecoMetroQuadrado.Text = produtoTapecaria.PrecoMetroQuadrado.ToString();
+            checkBoxEntregarAposServico.Checked = produtoTapecaria.EhEntrega;
+            textBoxDetalhes.Text = produtoTapecaria.Detalhes;
         }
 
         private void InicializaCampos()
         {
-            dateTimePickerDataEntrada.Value = DateTime.Today;
-
             comboBoxTipo.Items.AddRange(Enum.GetNames(typeof(TipoTapecaria)));
+            dateTimePickerDataEntrada.Value = DateTime.Today;
         }
 
         public void AoClicarEmSalvar(object sender, EventArgs e)
         {
             try
             {
-               ProdutoAValidar produtoAValidar = new ProdutoAValidar()
-                {
-                    Tipo = comboBoxTipo.SelectedIndex.ToString(),
-                    DataEntrada = dateTimePickerDataEntrada.Value.ToString(),
-                    Area = textBoxArea.Text,
-                    PrecoMetroQuadrado = textBoxPrecoMetroQuadrado.Text
-                };
+                var produtoAValidar = ObterProdutoaValidar();
+                var validador = new ValidadorProdutoTapecaria();
 
-                var listaDeErros = new ValidadorProdutoTapecaria().ValidarProduto(produtoAValidar);
+                var listaDeErros = validador.ValidarProduto(produtoAValidar);
 
                 if (!listaDeErros.Any())
                 {
+                    if (_novoProdutoTapecaria.Id == 0)
+                        _novoProdutoTapecaria.Id = ObterProximoId();
+
                     AtribuiAoProdutoTapecaria();
-
                     DialogResult = DialogResult.OK;
-
-                    Close();
                 }
                 else
                 {
@@ -60,10 +72,41 @@ namespace Controle_De_Estoque
             }
         }
 
+        private void AoClicarEmCancelar(object sender, EventArgs e)
+        {
+            try
+            {
+                string msgCancelar = "Ao cancelar a operação os dados que já preencheu serão perdidos.\nDeseja continuar?";
+                
+                DialogResult confirmaCancelar = MessageBox.Show(msgCancelar, "Cancelar cadastro", MessageBoxButtons.YesNo);
+
+                if (confirmaCancelar == DialogResult.Yes)
+                {
+                    this.DialogResult = DialogResult.Cancel;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+        }
+
+        private ProdutoAValidar ObterProdutoaValidar()
+        {
+            ProdutoAValidar produtoAValidar = new ProdutoAValidar()
+            {
+                Tipo = comboBoxTipo.SelectedIndex.ToString(),
+                DataEntrada = dateTimePickerDataEntrada.Value.ToString(),
+                Area = textBoxArea.Text,
+                PrecoMetroQuadrado = textBoxPrecoMetroQuadrado.Text
+            };
+
+            return produtoAValidar;
+        }
+
         private void AtribuiAoProdutoTapecaria()
-        { 
-            _novoProdutoTapecaria.Id = ObterProximoId();
-            _novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex; ;
+        {
+            _novoProdutoTapecaria.Tipo = (TipoTapecaria)comboBoxTipo.SelectedIndex;
             _novoProdutoTapecaria.DataEntrada = dateTimePickerDataEntrada.Value;
             _novoProdutoTapecaria.Area = Convert.ToDouble(textBoxArea.Text);
             _novoProdutoTapecaria.PrecoMetroQuadrado = Convert.ToDecimal(textBoxPrecoMetroQuadrado.Text);
@@ -74,23 +117,6 @@ namespace Controle_De_Estoque
         private int ObterProximoId()
         {
             return ++_ultimoIdUtilizado;
-        }
-
-        private void AoClicarEmCancelar(object sender, EventArgs e)
-        {
-            try
-            {
-                DialogResult dialogResult = MessageBox.Show("Ao cancelar a operação não os dados que já preencheu serão perdidos.\nDeseja continuar?", "Cancelar cadastro", MessageBoxButtons.YesNo);
-
-                if (dialogResult == DialogResult.Yes)
-                {
-                    this.DialogResult = DialogResult.Cancel;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK,MessageBoxIcon.Error);
-            }
         }
 
         private void textBoxPrecoMetroQuadrado_KeyPress(object sender, KeyPressEventArgs e)
