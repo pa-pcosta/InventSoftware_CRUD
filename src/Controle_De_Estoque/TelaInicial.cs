@@ -25,7 +25,7 @@ namespace Controle_De_Estoque
                 {
                     _listaProdutoTapecaria.Add(formCadastroProduto._novoProdutoTapecaria);
                     AtualizaDataGridView();
-                    MessageBox.Show("Novo produto cadastrado com sucesso");
+                    MessageBox.Show("Novo produto cadastrado com sucesso", "SUCESSO!");
                 }
             }
             catch (Exception ex)
@@ -84,13 +84,13 @@ namespace Controle_De_Estoque
             return _listaProdutoTapecaria.FirstOrDefault(item => item.Id == Id);
         }
 
-        private void SubstituiObjetoNaLista(ProdutoTapecaria produtoASerEditado, TelaCadastroDeProduto infoProdutoTapecaria)
+        private void SubstituiObjetoNaLista(ProdutoTapecaria produtoASerEditado, TelaCadastroDeProduto formCadastroProduto)
         {
             var indexProdutoASerEditado = _listaProdutoTapecaria.IndexOf(produtoASerEditado);
 
             if (indexProdutoASerEditado != -1)
             {
-                _listaProdutoTapecaria[indexProdutoASerEditado] = infoProdutoTapecaria._novoProdutoTapecaria;
+                _listaProdutoTapecaria[indexProdutoASerEditado] = formCadastroProduto._novoProdutoTapecaria;
             }
         }
 

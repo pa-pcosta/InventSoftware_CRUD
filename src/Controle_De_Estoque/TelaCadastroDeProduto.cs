@@ -19,19 +19,23 @@ namespace Controle_De_Estoque
 
             if (produtoTapecaria != null)
             {
-                comboBoxTipo.SelectedIndex = Convert.ToInt32(produtoTapecaria.Tipo);
-                dateTimePickerDataEntrada.Value = produtoTapecaria.DataEntrada;
-                textBoxArea.Text = produtoTapecaria.Area.ToString();
-                textBoxPrecoMetroQuadrado.Text = produtoTapecaria.PrecoMetroQuadrado.ToString();
-                checkBoxEntregarAposServico.Checked = produtoTapecaria.EhEntrega;
-                textBoxDetalhes.Text = produtoTapecaria.Detalhes;
-
+                PreencherCampos(produtoTapecaria);
                 _novoProdutoTapecaria = produtoTapecaria;
             }
             else
             {
                 _novoProdutoTapecaria = new ProdutoTapecaria();
             }
+        }
+
+        private void PreencherCampos(ProdutoTapecaria produtoTapecaria)
+        {
+            comboBoxTipo.SelectedIndex = Convert.ToInt32(produtoTapecaria.Tipo);
+            dateTimePickerDataEntrada.Value = produtoTapecaria.DataEntrada;
+            textBoxArea.Text = produtoTapecaria.Area.ToString();
+            textBoxPrecoMetroQuadrado.Text = produtoTapecaria.PrecoMetroQuadrado.ToString();
+            checkBoxEntregarAposServico.Checked = produtoTapecaria.EhEntrega;
+            textBoxDetalhes.Text = produtoTapecaria.Detalhes;
         }
 
         private void InicializaCampos()
@@ -72,9 +76,11 @@ namespace Controle_De_Estoque
         {
             try
             {
-                DialogResult dialogResult = MessageBox.Show("Ao cancelar a operação os dados que já preencheu serão perdidos.\nDeseja continuar?", "Cancelar cadastro", MessageBoxButtons.YesNo);
+                string msgCancelar = "Ao cancelar a operação os dados que já preencheu serão perdidos.\nDeseja continuar?";
+                
+                DialogResult confirmaCancelar = MessageBox.Show(msgCancelar, "Cancelar cadastro", MessageBoxButtons.YesNo);
 
-                if (dialogResult == DialogResult.Yes)
+                if (confirmaCancelar == DialogResult.Yes)
                 {
                     this.DialogResult = DialogResult.Cancel;
                 }
