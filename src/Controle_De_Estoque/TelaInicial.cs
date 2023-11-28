@@ -8,6 +8,7 @@ namespace Controle_De_Estoque
     public partial class TelaInicial : Form
     {
         private readonly ListaTapecaria listaTapecaria = ListaTapecaria.Instancia;
+
         public TelaInicial()
         {
             InitializeComponent();
@@ -105,7 +106,7 @@ namespace Controle_De_Estoque
 
                         if (confirmaExclusao == DialogResult.Yes)
                         {
-                            ListaTapecaria._lista.Remove(produtoASerRemovido);
+                            listaTapecaria.Remove(produtoASerRemovido);
                             AtualizaDataGridView();
                             MessageBox.Show("Registro excluído com sucesso.", "REGISTRO REMOVIDO");
                         }
@@ -137,17 +138,17 @@ namespace Controle_De_Estoque
 
         private ProdutoTapecaria ObterPorId(int Id)
         {
-            return ListaTapecaria._lista.FirstOrDefault(item => item.Id == Id);
+            return listaTapecaria.FirstOrDefault(item => item.Id == Id);
         }
 
         private void SubstituiObjetoNaLista(ProdutoTapecaria produtoASerEditado, TelaCadastroDeProduto formCadastroProduto)
         {
-            var indexProdutoASerEditado = ListaTapecaria._lista.IndexOf(produtoASerEditado);
+            var indexProdutoASerEditado = listaTapecaria.IndexOf(produtoASerEditado);
             const int itemNaoEncontrado = -1;
 
             if (indexProdutoASerEditado != itemNaoEncontrado)
             {
-                ListaTapecaria._lista[indexProdutoASerEditado] = formCadastroProduto._novoProdutoTapecaria;
+                listaTapecaria[indexProdutoASerEditado] = formCadastroProduto._novoProdutoTapecaria;
             }
         }
 
@@ -156,7 +157,7 @@ namespace Controle_De_Estoque
             dataGridViewListaProdutoTapecaria.DataSource = new List<ProdutoTapecaria>();
             var valorMinimo = 1;
 
-            if (ListaTapecaria._lista.Count >= valorMinimo)
+            if (listaTapecaria.Count >= valorMinimo)
                 dataGridViewListaProdutoTapecaria.DataSource = listaTapecaria;
         }
     }
