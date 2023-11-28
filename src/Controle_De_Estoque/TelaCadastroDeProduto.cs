@@ -10,8 +10,6 @@ namespace Controle_De_Estoque
     {
         public ProdutoTapecaria _novoProdutoTapecaria;
 
-        private static int _ultimoIdUtilizado = 0;
-
         public TelaCadastroDeProduto(ProdutoTapecaria produtoTapecaria)
         {
             InitializeComponent();
@@ -56,7 +54,7 @@ namespace Controle_De_Estoque
                 if (!listaDeErros.Any())
                 {
                     if (_novoProdutoTapecaria.Id == 0)
-                        _novoProdutoTapecaria.Id = ObterProximoId();
+                        _novoProdutoTapecaria.Id = ListaTapecaria.ObterProximoId();
 
                     AtribuiAoProdutoTapecaria();
                     DialogResult = DialogResult.OK;
@@ -112,11 +110,6 @@ namespace Controle_De_Estoque
             _novoProdutoTapecaria.PrecoMetroQuadrado = Convert.ToDecimal(textBoxPrecoMetroQuadrado.Text);
             _novoProdutoTapecaria.EhEntrega = checkBoxEntregarAposServico.Checked;
             _novoProdutoTapecaria.Detalhes = textBoxDetalhes.Text;
-        }
-
-        private int ObterProximoId()
-        {
-            return ++_ultimoIdUtilizado;
         }
 
         private void textBoxPrecoMetroQuadrado_KeyPress(object sender, KeyPressEventArgs e)
