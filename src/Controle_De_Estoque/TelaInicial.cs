@@ -43,8 +43,7 @@ namespace Controle_De_Estoque
 
                 if (qtdLinhasSelecionadas == limiteLinhasSelecionadas)
                 {
-                    var idObjetoSelecionado = Convert.ToInt32(dataGridViewListaProdutoTapecaria.CurrentRow.Cells["Id"].Value);
-
+                    var idObjetoSelecionado = ObterIdObjetoSelecionadoNaDataGrid();
                     ProdutoTapecaria produtoASerEditado = ObterObjetoPorId(idObjetoSelecionado);
 
                     if (produtoASerEditado != null)
@@ -78,6 +77,7 @@ namespace Controle_De_Estoque
                 MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void AoClicarEmRemover(object sender, EventArgs e)
         {
             try
@@ -87,8 +87,7 @@ namespace Controle_De_Estoque
 
                 if (qtdLinhasSelecionadas == limiteLinhasSelecionadas)
                 {
-                    var idObjetoSelecionado = Convert.ToInt32(dataGridViewListaProdutoTapecaria.CurrentRow.Cells["Id"].Value);
-
+                    var idObjetoSelecionado = ObterIdObjetoSelecionadoNaDataGrid();
                     ProdutoTapecaria produtoASerRemovido = ObterObjetoPorId(idObjetoSelecionado);
 
                     if (produtoASerRemovido != null)
@@ -130,7 +129,11 @@ namespace Controle_De_Estoque
             {
                 MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
 
+        private int ObterIdObjetoSelecionadoNaDataGrid()
+        {
+            return Convert.ToInt32(dataGridViewListaProdutoTapecaria.CurrentRow.Cells["Id"].Value);
         }
 
         private ProdutoTapecaria ObterObjetoPorId(int Id)
