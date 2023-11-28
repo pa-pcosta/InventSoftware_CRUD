@@ -43,9 +43,8 @@ namespace Controle_De_Estoque
 
                 if (qtdLinhasSelecionadas == limiteLinhasSelecionadas)
                 {
-                    var idObjetoSelecionado = Convert.ToInt32(dataGridViewListaProdutoTapecaria.CurrentRow.Cells["Id"].Value);
-
-                    ProdutoTapecaria produtoASerEditado = ObterObjetoPorId(idObjetoSelecionado);
+                    var idItemSelecionado = ObterIdItemSelecionado();
+                    ProdutoTapecaria produtoASerEditado = ObterPorId(idItemSelecionado);
 
                     if (produtoASerEditado != null)
                     {
@@ -79,7 +78,65 @@ namespace Controle_De_Estoque
             }
         }
 
-        private ProdutoTapecaria ObterObjetoPorId(int Id)
+        private void AoClicarEmRemover(object sender, EventArgs e)
+        {
+            try
+            {
+                var limiteLinhasSelecionadas = 1;
+                var qtdLinhasSelecionadas = dataGridViewListaProdutoTapecaria.SelectedRows.Count;
+
+                if (qtdLinhasSelecionadas == limiteLinhasSelecionadas)
+                {
+                    var idItemSelecionado = ObterIdItemSelecionado();
+                    ProdutoTapecaria produtoASerRemovido = ObterPorId(idItemSelecionado);
+
+                    if (produtoASerRemovido != null)
+                    {
+                        string msgCorfirmaExclusao = $"Ao remover, o seguinte registro será deletado e não poderá ser recuperado:\n\n" +
+                            $"Id: {produtoASerRemovido.Id}\n" +
+                            $"Tipo: {produtoASerRemovido.Tipo}\n" +
+                            $"Data de entrada: {produtoASerRemovido.DataEntrada}\n" +
+                            $"Tamanho: {produtoASerRemovido.Area} m²\n" +
+                            $"Preço: {produtoASerRemovido.PrecoMetroQuadrado}\n" +
+                            $"Entrega: {produtoASerRemovido.EhEntrega}\n" +
+                            $"Detalhes: {produtoASerRemovido.Detalhes}\n\n" +
+                            $"Deseja continuar?";
+
+                        var confirmaExclusao = MessageBox.Show(msgCorfirmaExclusao, "REMOVER CADASTRO", MessageBoxButtons.YesNo);
+
+                        if (confirmaExclusao == DialogResult.Yes)
+                        {
+                            _listaProdutoTapecaria.Remove(produtoASerRemovido);
+                            AtualizaDataGridView();
+                            MessageBox.Show("Registro excluído com sucesso.", "REGISTRO REMOVIDO");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Registro não encontrado na base de dados");
+                    }
+                }
+                else if (qtdLinhasSelecionadas < limiteLinhasSelecionadas)
+                {
+                    MessageBox.Show("Selecione um registro", "Não há linha selecionada", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Selecione apenas 1 linha", "OPERAÇÃO INVÁLIDA!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private int ObterIdItemSelecionado()
+        {
+            return Convert.ToInt32(dataGridViewListaProdutoTapecaria.CurrentRow.Cells["Id"].Value);
+        }
+
+        private ProdutoTapecaria ObterPorId(int Id)
         {
             return _listaProdutoTapecaria.FirstOrDefault(item => item.Id == Id);
         }
@@ -87,8 +144,9 @@ namespace Controle_De_Estoque
         private void SubstituiObjetoNaLista(ProdutoTapecaria produtoASerEditado, TelaCadastroDeProduto formCadastroProduto)
         {
             var indexProdutoASerEditado = _listaProdutoTapecaria.IndexOf(produtoASerEditado);
+            const int itemNaoEncontrado = -1;
 
-            if (indexProdutoASerEditado != -1)
+            if (indexProdutoASerEditado != itemNaoEncontrado)
             {
                 _listaProdutoTapecaria[indexProdutoASerEditado] = formCadastroProduto._novoProdutoTapecaria;
             }
@@ -96,8 +154,11 @@ namespace Controle_De_Estoque
 
         public void AtualizaDataGridView()
         {
-            dataGridViewListaProdutoTapecaria.DataSource = null;
-            dataGridViewListaProdutoTapecaria.DataSource = _listaProdutoTapecaria;
+            dataGridViewListaProdutoTapecaria.DataSource = new List<ProdutoTapecaria>();
+            var valorMinimo = 1;
+
+            if (_listaProdutoTapecaria.Count >= valorMinimo)
+                dataGridViewListaProdutoTapecaria.DataSource = _listaProdutoTapecaria;
         }
     }
 }

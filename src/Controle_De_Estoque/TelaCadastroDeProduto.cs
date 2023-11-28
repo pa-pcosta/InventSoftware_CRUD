@@ -78,7 +78,7 @@ namespace Controle_De_Estoque
             {
                 string msgCancelar = "Ao cancelar a operação os dados que já preencheu serão perdidos.\nDeseja continuar?";
                 
-                DialogResult confirmaCancelar = MessageBox.Show(msgCancelar, "Cancelar cadastro", MessageBoxButtons.YesNo);
+                var confirmaCancelar = MessageBox.Show(msgCancelar, "Cancelar cadastro", MessageBoxButtons.YesNo);
 
                 if (confirmaCancelar == DialogResult.Yes)
                 {
