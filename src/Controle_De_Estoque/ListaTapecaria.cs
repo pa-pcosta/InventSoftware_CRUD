@@ -5,7 +5,9 @@ namespace Controle_De_Estoque
     public class ListaTapecaria
     {
         public List<ProdutoTapecaria> _produtos;
-        
+
+        private static int _ultimoIdUtilizado = 0;
+
         private static readonly object _lock = new object();
 
         public List<ProdutoTapecaria> ObterInstancia()
@@ -18,8 +20,6 @@ namespace Controle_De_Estoque
 
             return _produtos;
         }
-
-        private static int _ultimoIdUtilizado = 0;
 
         public static int ObterProximoId()
         {
