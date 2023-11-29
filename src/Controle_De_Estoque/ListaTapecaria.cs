@@ -1,21 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Controle_De_Estoque
 {
-    public class ListaTapecaria : List<ProdutoTapecaria>
+    public class ListaTapecaria
     {
-        private static readonly Lazy<ListaTapecaria> _instancia = new Lazy<ListaTapecaria> (() => new ListaTapecaria());
-
-        private ListaTapecaria() { }
+        public List<ProdutoTapecaria> _produtos;
         
-        public static ListaTapecaria  Instancia => _instancia.Value;
+        private static readonly object _lock = new object();
+
+        public List<ProdutoTapecaria> ObterInstancia()
+        {
+            lock (_lock) 
+            {
+                if (_produtos == null)
+                    _produtos = new List<ProdutoTapecaria>();
+            }
+
+            return _produtos;
+        }
 
         private static int _ultimoIdUtilizado = 0;
+
         public static int ObterProximoId()
         {
             return ++_ultimoIdUtilizado;

@@ -7,11 +7,14 @@ namespace Controle_De_Estoque
 {
     public partial class TelaInicial : Form
     {
-        private readonly ListaTapecaria listaTapecaria = ListaTapecaria.Instancia;
+        private readonly ListaTapecaria singleton = new ListaTapecaria();
+        private readonly List<ProdutoTapecaria> _listaTapecaria;
 
         public TelaInicial()
         {
             InitializeComponent();
+            _listaTapecaria = singleton.ObterInstancia();
+            
         }
 
         private void AoClicarEmCadastrar(object sender, EventArgs e)
@@ -23,7 +26,7 @@ namespace Controle_De_Estoque
 
                 if(formCadastroProduto.DialogResult == DialogResult.OK)
                 {
-                    listaTapecaria.Add(formCadastroProduto._novoProdutoTapecaria);
+                    _listaTapecaria.Add(formCadastroProduto._novoProdutoTapecaria);
                     AtualizaDataGridView();
                     MessageBox.Show("Novo produto cadastrado com sucesso", "SUCESSO!");
                 }
@@ -106,7 +109,7 @@ namespace Controle_De_Estoque
 
                         if (confirmaExclusao == DialogResult.Yes)
                         {
-                            listaTapecaria.Remove(produtoASerRemovido);
+                            _listaTapecaria.Remove(produtoASerRemovido);
                             AtualizaDataGridView();
                             MessageBox.Show("Registro excluído com sucesso.", "REGISTRO REMOVIDO");
                         }
@@ -138,17 +141,17 @@ namespace Controle_De_Estoque
 
         private ProdutoTapecaria ObterPorId(int Id)
         {
-            return listaTapecaria.FirstOrDefault(item => item.Id == Id);
+            return _listaTapecaria.FirstOrDefault(item => item.Id == Id);
         }
 
         private void SubstituiObjetoNaLista(ProdutoTapecaria produtoASerEditado, TelaCadastroDeProduto formCadastroProduto)
         {
-            var indexProdutoASerEditado = listaTapecaria.IndexOf(produtoASerEditado);
+            var indexProdutoASerEditado = _listaTapecaria.IndexOf(produtoASerEditado);
             const int itemNaoEncontrado = -1;
 
             if (indexProdutoASerEditado != itemNaoEncontrado)
             {
-                listaTapecaria[indexProdutoASerEditado] = formCadastroProduto._novoProdutoTapecaria;
+                _listaTapecaria[indexProdutoASerEditado] = formCadastroProduto._novoProdutoTapecaria;
             }
         }
 
@@ -157,8 +160,8 @@ namespace Controle_De_Estoque
             dataGridViewListaProdutoTapecaria.DataSource = new List<ProdutoTapecaria>();
             var valorMinimo = 1;
 
-            if (listaTapecaria.Count >= valorMinimo)
-                dataGridViewListaProdutoTapecaria.DataSource = listaTapecaria;
+            if (_listaTapecaria.Count >= valorMinimo)
+                dataGridViewListaProdutoTapecaria.DataSource = _listaTapecaria;
         }
     }
 }
