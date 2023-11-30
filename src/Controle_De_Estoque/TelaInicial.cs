@@ -1,19 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-
 namespace Controle_De_Estoque
 {
     public partial class TelaInicial : Form
     {
-        private readonly ListaTapecaria singleton = new ListaTapecaria();
-        private readonly List<ProdutoTapecaria> _listaTapecaria;
+        private readonly ListaTapecaria singleton;
+        private readonly ListaTapecaria singleton2;
+
+        private List<ProdutoTapecaria> _listaTapecaria;
+        private List<ProdutoTapecaria> teste;
 
         public TelaInicial()
         {
             InitializeComponent();
-            _listaTapecaria = singleton.ObterInstancia();
+            singleton = ListaTapecaria.ObterInstancia();
+            _listaTapecaria = singleton._produtos;
+
+            singleton2 = ListaTapecaria.ObterInstancia();
+            teste = singleton2._produtos;
         }
 
         private void AoClicarEmCadastrar(object sender, EventArgs e)
@@ -160,7 +162,7 @@ namespace Controle_De_Estoque
             var valorMinimo = 1;
 
             if (_listaTapecaria.Count >= valorMinimo)
-                dataGridViewListaProdutoTapecaria.DataSource = _listaTapecaria;
+                dataGridViewListaProdutoTapecaria.DataSource = teste;
         }
     }
 }
