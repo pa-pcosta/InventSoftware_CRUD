@@ -4,25 +4,21 @@ namespace Controle_De_Estoque
 {
     public class ListaTapecaria
     {
-        private ListaTapecaria() { }
-
-        private static ListaTapecaria _instancia;
-
-        public List<ProdutoTapecaria> _produtos = new List<ProdutoTapecaria>();
+        public static List<ProdutoTapecaria> _produtos;
 
         private static int _ultimoIdUtilizado = 0;
 
         private static readonly object _lock = new object();
 
-        public static ListaTapecaria ObterInstancia()
+        public static List<ProdutoTapecaria> ObterInstancia()
         {
             lock (_lock)
             {
-                if (_instancia == null)
-                    _instancia = new ListaTapecaria();
+                if (_produtos == null)
+                    _produtos = new List<ProdutoTapecaria>();
             }
 
-            return _instancia;
+            return _produtos;
         }
 
         public static int ObterProximoId()
