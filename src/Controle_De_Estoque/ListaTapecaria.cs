@@ -4,13 +4,13 @@ namespace Controle_De_Estoque
 {
     public class ListaTapecaria
     {
-        public List<ProdutoTapecaria> _produtos;
+        public static List<ProdutoTapecaria> _produtos;
 
         private static int _ultimoIdUtilizado = 0;
 
         private static readonly object _lock = new object();
 
-        public List<ProdutoTapecaria> ObterInstancia()
+        public static List<ProdutoTapecaria> ObterInstancia()
         {
             lock (_lock)
             {

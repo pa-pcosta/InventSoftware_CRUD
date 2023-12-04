@@ -1,8 +1,5 @@
 ﻿using Controle_De_Estoque.ValidacaoProdutoTapecaria;
-using System;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 
 namespace Controle_De_Estoque
 {
