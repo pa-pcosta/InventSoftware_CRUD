@@ -24,16 +24,12 @@ namespace Controle_De_Estoque.Repositorio
         {
             var produtoASerEditado = ObterPorId(idProdutoASerEditado);
             var indexProdutoASerEditado = _listaTapecaria.IndexOf(produtoASerEditado);
-            const int itemNaoEncontrado = -1;
-
-            if (indexProdutoASerEditado != itemNaoEncontrado)
-            {
-                _listaTapecaria[indexProdutoASerEditado] = novoProdutoTapecaria;
-            }
+            _listaTapecaria[indexProdutoASerEditado] = novoProdutoTapecaria;
         }
 
-        public void Remover(ProdutoTapecaria produtoASerRemovido)
+        public void Remover(int id)
         {
+            var produtoASerRemovido = ObterPorId(id);
             _listaTapecaria.Remove(produtoASerRemovido);
         }
     }

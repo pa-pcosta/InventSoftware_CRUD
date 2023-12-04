@@ -12,6 +12,6 @@ namespace Controle_De_Estoque.Repositorio
 
         public void Atualizar(int idProdutoASerEditado, ProdutoTapecaria novoProdutoTapecaria);
 
-        public void Remover(ProdutoTapecaria produtoASerRemovido);
+        public void Remover(int id);
     }
 }

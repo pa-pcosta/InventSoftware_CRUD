@@ -108,7 +108,7 @@ namespace Controle_De_Estoque
 
                         if (confirmaExclusao == DialogResult.Yes)
                         {
-                            _repositorio.Remover(produtoASerRemovido);
+                            _repositorio.Remover(idItemSelecionado);
                             AtualizaDataGridView();
                             MessageBox.Show("Registro excluído com sucesso.", "REGISTRO REMOVIDO");
                         }
