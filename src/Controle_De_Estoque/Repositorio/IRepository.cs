@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Controle_De_Estoque.Repositorio
+﻿namespace Controle_De_Estoque.Repositorio
 {
     public interface IRepository
     {

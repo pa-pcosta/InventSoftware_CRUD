@@ -1,15 +1,10 @@
 using Controle_De_Estoque.Repositorio;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace Controle_De_Estoque
 {
     public partial class TelaInicial : Form
     {
         private RepositorioSingleton _repositorio = new RepositorioSingleton();
-        //private readonly List<ProdutoTapecaria> _listaTapecaria = ListaTapecaria.ObterInstancia();
 
         public TelaInicial()
         {

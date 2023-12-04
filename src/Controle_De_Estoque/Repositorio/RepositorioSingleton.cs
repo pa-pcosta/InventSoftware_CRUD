@@ -5,7 +5,7 @@ namespace Controle_De_Estoque.Repositorio
     {
         static readonly List<ProdutoTapecaria> _listaTapecaria = ListaTapecaria.ObterInstancia();
 
-        public ProdutoTapecaria ObterPorId(int id)
+        public ProdutoTapecaria? ObterPorId(int id)
         {
             return _listaTapecaria.FirstOrDefault(item => item.Id == id);
         }
