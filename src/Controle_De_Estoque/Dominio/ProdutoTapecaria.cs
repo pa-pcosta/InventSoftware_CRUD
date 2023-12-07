@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Controle_De_Estoque
+﻿namespace Controle_De_Estoque.Dominio
 {
     public class ProdutoTapecaria
     {

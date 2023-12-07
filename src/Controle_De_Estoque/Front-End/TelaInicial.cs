@@ -1,3 +1,4 @@
+using Controle_De_Estoque.Dominio;
 using Controle_De_Estoque.Repositorio;
 
 namespace Controle_De_Estoque

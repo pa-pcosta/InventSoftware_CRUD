@@ -1,4 +1,7 @@
-﻿namespace Controle_De_Estoque.Repositorio
+﻿using Controle_De_Estoque.Dominio;
+
+namespace Controle_De_Estoque.Repositorio
+
 {
     public interface IRepository
     {

@@ -1,9 +1,8 @@
-﻿using Controle_De_Estoque.ValidacaoProdutoTapecaria;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Controle_De_Estoque
+namespace Controle_De_Estoque.ValidacaoProdutoTapecaria
 {
     public class ValidadorProdutoTapecaria
     {
@@ -38,7 +37,7 @@ namespace Controle_De_Estoque
             }
             else
             {
-                var precoMetroQuadrado = Decimal.Parse(produtoAValidar.PrecoMetroQuadrado);
+                var precoMetroQuadrado = decimal.Parse(produtoAValidar.PrecoMetroQuadrado);
                 var ehPrecoValido = precoMetroQuadrado >= 0;
 
                 if (!ehPrecoValido)
@@ -57,7 +56,7 @@ namespace Controle_De_Estoque
             }
             else
             {
-                var area = Double.Parse(produtoAValidar.Area);
+                var area = double.Parse(produtoAValidar.Area);
                 var ehAreaValida = area > 0;
 
                 if (!ehAreaValida)

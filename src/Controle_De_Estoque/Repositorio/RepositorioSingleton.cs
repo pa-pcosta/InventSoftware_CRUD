@@ -1,4 +1,5 @@
-﻿
+﻿using Controle_De_Estoque.Dominio;
+
 namespace Controle_De_Estoque.Repositorio
 {
     internal class RepositorioSingleton : IRepository
