@@ -13,11 +13,6 @@ namespace Controle_De_Estoque
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
-            Application.Run(new TelaInicial());
-
             //FluentMigrator
             using (var serviceProvider = CreateServices())
             using (var scope = serviceProvider.CreateScope())
@@ -26,6 +21,11 @@ namespace Controle_De_Estoque
                 // that all resources will be disposed.
                 UpdateDatabase(scope.ServiceProvider);
             }
+
+            // To customize application configuration such as set high DPI settings or default font,
+            // see https://aka.ms/applicationconfiguration.
+            ApplicationConfiguration.Initialize();
+            Application.Run(new TelaInicial());
         }
 
         /// <summary>
@@ -37,8 +37,8 @@ namespace Controle_De_Estoque
                 // Add common FluentMigrator services
                 .AddFluentMigratorCore()
                 .ConfigureRunner(rb => rb
-                    // Add SQLite support to FluentMigrator
-                    .AddMySql4()
+                    // Add SQL Server support to FluentMigrator
+                    .AddSqlServer()
                     // Set the connection string
                     .WithGlobalConnectionString(ConfigurationManager.ConnectionStrings["SQL_Server_Controle_De_Estoque"].ConnectionString)
                     // Define the assembly containing the migrations
