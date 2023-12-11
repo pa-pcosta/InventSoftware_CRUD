@@ -2,18 +2,18 @@
 
 namespace Controle_De_Estoque.Repositorio
 {
-    internal class RepositorioSingleton : IRepository
+    internal class Repositorio_Singleton : IRepository
     {
-        static readonly List<ProdutoTapecaria> _listaTapecaria = ListaTapecaria.ObterInstancia();
-
-        public ProdutoTapecaria? ObterPorId(int id)
-        {
-            return _listaTapecaria.FirstOrDefault(item => item.Id == id);
-        }
+        static readonly List<ProdutoTapecaria> _listaTapecaria = ListaTapecaria_Singleton.ObterInstancia();
 
         public List<ProdutoTapecaria> ObterTodos()
         {
             return _listaTapecaria;
+        }
+
+        public ProdutoTapecaria? ObterPorId(int id)
+        {
+            return _listaTapecaria.FirstOrDefault(item => item.Id == id);
         }
 
         public void Criar(ProdutoTapecaria produtoTapecaria)

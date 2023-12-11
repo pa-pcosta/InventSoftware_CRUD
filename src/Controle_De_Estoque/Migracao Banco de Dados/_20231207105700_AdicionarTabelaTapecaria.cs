@@ -1,5 +1,5 @@
-﻿using Controle_De_Estoque.Dominio;
-using FluentMigrator;
+﻿using FluentMigrator;
+using FluentMigrator.SqlServer;
 
 namespace Controle_De_Estoque.Migracao_Banco_de_Dados
 {
@@ -9,10 +9,10 @@ namespace Controle_De_Estoque.Migracao_Banco_de_Dados
     {
         public override void Up()
         {
-            Create.Table("Tapecaria")
-                .WithColumn("Id").AsInt64().PrimaryKey().Identity()
+            Create.Table("tb_Tapecaria")
+                .WithColumn("Id").AsInt64().PrimaryKey().Identity(1,1)
                 .WithColumn("Tipo").AsInt32()
-                .WithColumn("DataEntrada").AsDateTime()
+                .WithColumn("DataEntrada").AsDate()
                 .WithColumn("Area").AsDouble()
                 .WithColumn("PrecoMetroQuadrado").AsDecimal()
                 .WithColumn("EhEntrega").AsBoolean()

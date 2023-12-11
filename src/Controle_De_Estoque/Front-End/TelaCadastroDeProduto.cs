@@ -52,7 +52,7 @@ namespace Controle_De_Estoque
                 if (!listaDeErros.Any())
                 {
                     if (_novoProdutoTapecaria.Id == 0)
-                        _novoProdutoTapecaria.Id = ListaTapecaria.ObterProximoId();
+                        _novoProdutoTapecaria.Id = ListaTapecaria_Singleton.ObterProximoId();
 
                     AtribuiAoProdutoTapecaria();
                     DialogResult = DialogResult.OK;
