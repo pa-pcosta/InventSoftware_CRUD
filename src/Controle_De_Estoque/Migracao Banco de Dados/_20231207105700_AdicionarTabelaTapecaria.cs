@@ -9,8 +9,8 @@ namespace Controle_De_Estoque.Migracao_Banco_de_Dados
     {
         public override void Up()
         {
-            Create.Table("tb_Tapecaria")
-                .WithColumn("Id").AsInt64().PrimaryKey().Identity(1,1)
+            Create.Table("Tapecaria")
+                .WithColumn("Id").AsInt32().PrimaryKey().Identity(1,1)
                 .WithColumn("Tipo").AsInt32()
                 .WithColumn("DataEntrada").AsDate()
                 .WithColumn("Area").AsDouble()

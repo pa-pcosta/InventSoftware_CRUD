@@ -19,7 +19,7 @@ namespace Controle_De_Estoque.Repositorio
             List<ProdutoTapecaria> listaTapecaria = new List<ProdutoTapecaria>();
 
             var query = "SELECT * " +
-                        "FROM tb_Tapecaria " +
+                        "FROM Tapecaria " +
                         "ORDER BY Id";
 
             SqlCommand comandoSql = new SqlCommand(query,_conexaoSql);
@@ -38,7 +38,7 @@ namespace Controle_De_Estoque.Repositorio
         public ProdutoTapecaria ObterPorId(int id)
         {
             var query = $@"SELECT * 
-                        FROM tb_Tapecaria 
+                        FROM Tapecaria 
                         WHERE Id = {id}";
 
             SqlCommand comandoSql = new SqlCommand(query, _conexaoSql);
@@ -56,12 +56,20 @@ namespace Controle_De_Estoque.Repositorio
 
         public void Criar(ProdutoTapecaria produtoTapecaria)
         {
-            string data = produtoTapecaria.DataEntrada.ToString();
+            DateOnly dataEntrada = new(produtoTapecaria.DataEntrada.Year,produtoTapecaria.DataEntrada.Month, produtoTapecaria.DataEntrada.Day);
+            var ehEntrega = produtoTapecaria.EhEntrega == true ? 1 : 0;
 
-            var query = $@"INSERT INTO tb_Tapecaria (Tipo, Area, PrecoMetroQuadrado, EhEntrega, Detalhes) 
-                        VALUES ({(int)produtoTapecaria.Tipo}, {produtoTapecaria.Area}, {produtoTapecaria.PrecoMetroQuadrado}, {produtoTapecaria.EhEntrega}, {produtoTapecaria.Detalhes})";
-            
+            var query = $@"INSERT INTO Tapecaria (Tipo, DataEntrada, Area, PrecoMetroQuadrado, EhEntrega, Detalhes) 
+                        VALUES (@Tipo, @DataEntrada, @Area, @PrecoMetroQuadrado, @EhEntrega, @Detalhes)";
+
             SqlCommand comandoSql = new SqlCommand(query, _conexaoSql);
+            
+            comandoSql.Parameters.AddWithValue("@Tipo",produtoTapecaria.Tipo);
+            comandoSql.Parameters.AddWithValue("@DataEntrada", produtoTapecaria.DataEntrada);
+            comandoSql.Parameters.AddWithValue("@Area", produtoTapecaria.Area);
+            comandoSql.Parameters.AddWithValue("@PrecoMetroQuadrado", produtoTapecaria.PrecoMetroQuadrado);
+            comandoSql.Parameters.AddWithValue("@EhEntrega", (produtoTapecaria.EhEntrega == true ? 1:0));
+            comandoSql.Parameters.AddWithValue("@Detalhes", produtoTapecaria.Detalhes);
 
             _conexaoSql.Open();
 
@@ -71,8 +79,26 @@ namespace Controle_De_Estoque.Repositorio
         }
 
         public void Atualizar(int idProdutoASerEditado, ProdutoTapecaria novoProdutoTapecaria)
-        {
-            throw new NotImplementedException();
+        { 
+            var query = @"UPDATE Tapecaria
+                        SET 
+                            Tipo = @Tipo, 
+                            DataEntrada = @DataEntrada, 
+                            Area = @Area, 
+                            PrecoMetroQuadrado = @PrecoMetroQuadrado, 
+                            EhEntrega = @EhEntrega, 
+                            Detalhes = @Detalhes
+                        WHERE  Id = @Id";
+
+            SqlCommand comandoSql = new(query,_conexaoSql);
+
+            comandoSql.Parameters.AddWithValue("@Tipo", novoProdutoTapecaria.Tipo);
+            comandoSql.Parameters.AddWithValue("@DataEntrada",novoProdutoTapecaria.DataEntrada);
+            comandoSql.Parameters.AddWithValue("@Area", novoProdutoTapecaria.Area);
+            comandoSql.Parameters.AddWithValue("@PrecoMetroQuadrado", novoProdutoTapecaria.PrecoMetroQuadrado);
+            comandoSql.Parameters.AddWithValue("@EhEntrega", (novoProdutoTapecaria.EhEntrega == true ? 1 : 0));
+            comandoSql.Parameters.AddWithValue("@Detalhes", novoProdutoTapecaria.Detalhes);
+            comandoSql.Parameters.AddWithValue("@Id", idProdutoASerEditado);
         }
 
         public void Remover(int id)

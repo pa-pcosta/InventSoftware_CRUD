@@ -10,6 +10,7 @@ namespace Controle_De_Estoque
         public TelaInicial()
         {
             InitializeComponent();
+            AtualizaDataGridView();
         }
 
         private void AoClicarEmCadastrar(object sender, EventArgs e)
