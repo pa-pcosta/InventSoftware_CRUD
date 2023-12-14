@@ -9,7 +9,7 @@ namespace Controle_De_Estoque.Migracao_Banco_de_Dados
     {
         public override void Up()
         {
-            Create.Table("Tapecaria")
+            Create.Table("tb_Tapecaria")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity(1,1)
                 .WithColumn("Tipo").AsInt32()
                 .WithColumn("DataEntrada").AsDate()
@@ -21,7 +21,7 @@ namespace Controle_De_Estoque.Migracao_Banco_de_Dados
 
         public override void Down()
         {
-            Delete.Table("Tapecaria");
+            Delete.Table("tb_Tapecaria");
         }
     }
 }
