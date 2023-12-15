@@ -1,4 +1,4 @@
-using Controle_De_Estoque;
+using ControleDeEstoque;
 using ControleDeEstoque.MigracaoBancoDeDados;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;

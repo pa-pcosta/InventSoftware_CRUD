@@ -2,7 +2,7 @@
 using ControleDeEstoque.ValidacaoProdutoTapecaria;
 using System.Text.RegularExpressions;
 
-namespace Controle_De_Estoque
+namespace ControleDeEstoque
 {
     public partial class TelaCadastroDeProduto : Form
     {

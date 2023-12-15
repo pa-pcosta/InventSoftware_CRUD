@@ -2,15 +2,15 @@
 using Microsoft.Data.SqlClient;
 using System.Configuration;
 
-namespace ControleDeEstoque.Repositorio
+namespace ControleDeEstoque.Repositorios
 {
     internal class RepositorioBancoDeDados : IRepository
     {
         private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["SQL_Server_Controle_De_Estoque"].ConnectionString;
-        private SqlConnection _conexaoSql = new SqlConnection(_connectionString);
 
         public List<ProdutoTapecaria> ObterTodos()
         {
+            SqlConnection _conexaoSql = new SqlConnection(_connectionString);
             List<ProdutoTapecaria> listaTapecaria = new List<ProdutoTapecaria>();
 
             var query = "SELECT * " +
@@ -23,7 +23,7 @@ namespace ControleDeEstoque.Repositorio
 
             SqlDataReader reader = comandoSql.ExecuteReader();
 
-            listaTapecaria = GeraLista(reader);
+            listaTapecaria = ConverterDataReaderParaLista(reader);
 
             _conexaoSql.Close();
 
@@ -32,6 +32,7 @@ namespace ControleDeEstoque.Repositorio
 
         public ProdutoTapecaria ObterPorId(int id)
         {
+            SqlConnection _conexaoSql = new SqlConnection(_connectionString);
             var query = $@"SELECT * 
                         FROM tb_Tapecaria 
                         WHERE Id = {id}";
@@ -45,7 +46,7 @@ namespace ControleDeEstoque.Repositorio
             ProdutoTapecaria produtoTapecaria = new();
 
             if (reader.Read())
-                produtoTapecaria = ConverterDataReaderParaLista(reader);
+                produtoTapecaria = GerarProdutoTapecaria(reader);
 
             _conexaoSql.Close();
 
@@ -54,7 +55,7 @@ namespace ControleDeEstoque.Repositorio
 
         public void Criar(ProdutoTapecaria produtoTapecaria)
         {
-            var ehEntrega = produtoTapecaria.EhEntrega == true ? 1 : 0;
+            SqlConnection _conexaoSql = new SqlConnection(_connectionString);
 
             var query = $@"INSERT INTO tb_Tapecaria (Tipo, DataEntrada, Area, PrecoMetroQuadrado, EhEntrega, Detalhes) 
                         VALUES (@Tipo, 
@@ -70,7 +71,7 @@ namespace ControleDeEstoque.Repositorio
             comandoSql.Parameters.AddWithValue("@DataEntrada", produtoTapecaria.DataEntrada);
             comandoSql.Parameters.AddWithValue("@Area", produtoTapecaria.Area);
             comandoSql.Parameters.AddWithValue("@PrecoMetroQuadrado", produtoTapecaria.PrecoMetroQuadrado);
-            comandoSql.Parameters.AddWithValue("@EhEntrega", produtoTapecaria.EhEntrega == true ? 1 : 0);
+            comandoSql.Parameters.AddWithValue("@EhEntrega", produtoTapecaria.EhEntrega);
             comandoSql.Parameters.AddWithValue("@Detalhes", produtoTapecaria.Detalhes);
 
             _conexaoSql.Open();
@@ -80,6 +81,7 @@ namespace ControleDeEstoque.Repositorio
 
         public void Atualizar(int idProdutoASerEditado, ProdutoTapecaria novoProdutoTapecaria)
         {
+            SqlConnection _conexaoSql = new SqlConnection(_connectionString);
             var query = @"UPDATE tb_Tapecaria
                         SET Tipo = @Tipo, 
                             DataEntrada = @DataEntrada, 
@@ -106,6 +108,7 @@ namespace ControleDeEstoque.Repositorio
 
         public void Remover(int id)
         {
+            SqlConnection _conexaoSql = new SqlConnection(_connectionString);
             var query = @"DELETE FROM tb_Tapecaria
                           WHERE Id = @Id";
 
@@ -118,29 +121,29 @@ namespace ControleDeEstoque.Repositorio
             _conexaoSql.Close();
         }
 
-        private ProdutoTapecaria ConverterDataReaderParaLista(SqlDataReader reader)
+        private ProdutoTapecaria GerarProdutoTapecaria(SqlDataReader reader)
         {
             ProdutoTapecaria produtoTapecaria = new ProdutoTapecaria();
 
-            produtoTapecaria.Id = (int)reader["Id"];
+            produtoTapecaria.Id = Convert.ToInt32(reader["Id"]);
             produtoTapecaria.Tipo = (TipoTapecaria)reader["Tipo"];
             produtoTapecaria.DataEntrada = (DateTime)reader["DataEntrada"];
             produtoTapecaria.Area = Convert.ToDouble(reader["Area"]);
             produtoTapecaria.PrecoMetroQuadrado = Convert.ToDecimal(reader["PrecoMetroQuadrado"]);
-            produtoTapecaria.EhEntrega = (bool)reader["EhEntrega"];
+            produtoTapecaria.EhEntrega = Convert.ToBoolean(reader["EhEntrega"]);
             produtoTapecaria.Detalhes = reader["Detalhes"].ToString();
 
             return produtoTapecaria;
         }
 
-        private List<ProdutoTapecaria> GeraLista(SqlDataReader reader)
+        private List<ProdutoTapecaria> ConverterDataReaderParaLista(SqlDataReader reader)
         {
             ProdutoTapecaria produtoTapecaria = new ProdutoTapecaria();
             List<ProdutoTapecaria> listaTapecaria = new List<ProdutoTapecaria>();
 
             while (reader.Read())
             {
-                produtoTapecaria = ConverterDataReaderParaLista(reader);
+                produtoTapecaria = GerarProdutoTapecaria(reader);
                 listaTapecaria.Add(produtoTapecaria);
             }
 

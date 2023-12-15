@@ -1,7 +1,7 @@
 using ControleDeEstoque.Dominio;
-using ControleDeEstoque.Repositorio;
+using ControleDeEstoque.Repositorios;
 
-namespace Controle_De_Estoque
+namespace ControleDeEstoque
 {
     public partial class TelaInicial : Form
     {
