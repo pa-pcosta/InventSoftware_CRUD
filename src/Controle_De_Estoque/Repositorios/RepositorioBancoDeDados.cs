@@ -10,36 +10,36 @@ namespace ControleDeEstoque.Repositorios
 
         public List<ProdutoTapecaria> ObterTodos()
         {
-            SqlConnection _conexaoSql = new SqlConnection(_connectionString);
-            List<ProdutoTapecaria> listaTapecaria = new List<ProdutoTapecaria>();
+            SqlConnection conexaoSql = new(_connectionString);
+            List<ProdutoTapecaria> listaTapecaria = new();
 
             var query = "SELECT * " +
                         "FROM tb_Tapecaria " +
                         "ORDER BY Id";
 
-            SqlCommand comandoSql = new SqlCommand(query, _conexaoSql);
+            SqlCommand comandoSql = new(query, conexaoSql);
 
-            _conexaoSql.Open();
+            conexaoSql.Open();
 
             SqlDataReader reader = comandoSql.ExecuteReader();
 
             listaTapecaria = ConverterDataReaderParaLista(reader);
 
-            _conexaoSql.Close();
+            conexaoSql.Close();
 
             return listaTapecaria;
         }
 
         public ProdutoTapecaria ObterPorId(int id)
         {
-            SqlConnection _conexaoSql = new SqlConnection(_connectionString);
+            SqlConnection conexaoSql = new(_connectionString);
             var query = $@"SELECT * 
                         FROM tb_Tapecaria 
                         WHERE Id = {id}";
 
-            SqlCommand comandoSql = new SqlCommand(query, _conexaoSql);
+            SqlCommand comandoSql = new(query, conexaoSql);
 
-            _conexaoSql.Open();
+            conexaoSql.Open();
 
             SqlDataReader reader = comandoSql.ExecuteReader();
 
@@ -48,14 +48,14 @@ namespace ControleDeEstoque.Repositorios
             if (reader.Read())
                 produtoTapecaria = GerarProdutoTapecaria(reader);
 
-            _conexaoSql.Close();
+            conexaoSql.Close();
 
             return produtoTapecaria;
         }
 
         public void Criar(ProdutoTapecaria produtoTapecaria)
         {
-            SqlConnection _conexaoSql = new SqlConnection(_connectionString);
+            SqlConnection conexaoSql = new(_connectionString);
 
             var query = $@"INSERT INTO tb_Tapecaria (Tipo, DataEntrada, Area, PrecoMetroQuadrado, EhEntrega, Detalhes) 
                         VALUES (@Tipo, 
@@ -65,7 +65,7 @@ namespace ControleDeEstoque.Repositorios
                                 @EhEntrega, 
                                 @Detalhes)";
 
-            SqlCommand comandoSql = new SqlCommand(query, _conexaoSql);
+            SqlCommand comandoSql = new(query, conexaoSql);
 
             comandoSql.Parameters.AddWithValue("@Tipo", produtoTapecaria.Tipo);
             comandoSql.Parameters.AddWithValue("@DataEntrada", produtoTapecaria.DataEntrada);
@@ -74,14 +74,14 @@ namespace ControleDeEstoque.Repositorios
             comandoSql.Parameters.AddWithValue("@EhEntrega", produtoTapecaria.EhEntrega);
             comandoSql.Parameters.AddWithValue("@Detalhes", produtoTapecaria.Detalhes);
 
-            _conexaoSql.Open();
+            conexaoSql.Open();
             comandoSql.ExecuteNonQuery();
-            _conexaoSql.Close();
+            conexaoSql.Close();
         }
 
         public void Atualizar(int idProdutoASerEditado, ProdutoTapecaria novoProdutoTapecaria)
         {
-            SqlConnection _conexaoSql = new SqlConnection(_connectionString);
+            SqlConnection _conexaoSql = new(_connectionString);
             var query = @"UPDATE tb_Tapecaria
                         SET Tipo = @Tipo, 
                             DataEntrada = @DataEntrada, 
@@ -121,25 +121,26 @@ namespace ControleDeEstoque.Repositorios
             _conexaoSql.Close();
         }
 
-        private ProdutoTapecaria GerarProdutoTapecaria(SqlDataReader reader)
+        private static ProdutoTapecaria GerarProdutoTapecaria(SqlDataReader reader)
         {
-            ProdutoTapecaria produtoTapecaria = new ProdutoTapecaria();
-
-            produtoTapecaria.Id = Convert.ToInt32(reader["Id"]);
-            produtoTapecaria.Tipo = (TipoTapecaria)reader["Tipo"];
-            produtoTapecaria.DataEntrada = (DateTime)reader["DataEntrada"];
-            produtoTapecaria.Area = Convert.ToDouble(reader["Area"]);
-            produtoTapecaria.PrecoMetroQuadrado = Convert.ToDecimal(reader["PrecoMetroQuadrado"]);
-            produtoTapecaria.EhEntrega = Convert.ToBoolean(reader["EhEntrega"]);
-            produtoTapecaria.Detalhes = reader["Detalhes"].ToString();
+            ProdutoTapecaria produtoTapecaria = new()
+            {
+                Id = Convert.ToInt32(reader["Id"]),
+                Tipo = (TipoTapecaria)reader["Tipo"],
+                DataEntrada = (DateTime)reader["DataEntrada"],
+                Area = Convert.ToDouble(reader["Area"]),
+                PrecoMetroQuadrado = Convert.ToDecimal(reader["PrecoMetroQuadrado"]),
+                EhEntrega = Convert.ToBoolean(reader["EhEntrega"]),
+                Detalhes = reader["Detalhes"].ToString()
+            };
 
             return produtoTapecaria;
         }
 
-        private List<ProdutoTapecaria> ConverterDataReaderParaLista(SqlDataReader reader)
+        private static List<ProdutoTapecaria> ConverterDataReaderParaLista(SqlDataReader reader)
         {
-            ProdutoTapecaria produtoTapecaria = new ProdutoTapecaria();
-            List<ProdutoTapecaria> listaTapecaria = new List<ProdutoTapecaria>();
+            ProdutoTapecaria produtoTapecaria = new();
+            List<ProdutoTapecaria> listaTapecaria = new();
 
             while (reader.Read())
             {
