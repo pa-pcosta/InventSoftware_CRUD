@@ -1,4 +1,4 @@
-﻿namespace Controle_De_Estoque.ValidacaoProdutoTapecaria
+﻿namespace ControleDeEstoque.ValidacaoProdutoTapecaria
 {
     public class ProdutoAValidar
     {

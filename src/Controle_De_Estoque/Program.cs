@@ -1,9 +1,10 @@
-using Controle_De_Estoque.Migracao_Banco_de_Dados;
+using Controle_De_Estoque;
+using ControleDeEstoque.MigracaoBancoDeDados;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
 using System.Configuration;
 
-namespace Controle_De_Estoque
+namespace ControleDeEstoque
 {
     internal static class Program
     {

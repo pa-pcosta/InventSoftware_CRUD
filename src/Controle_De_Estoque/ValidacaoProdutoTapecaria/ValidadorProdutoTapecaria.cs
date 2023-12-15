@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-namespace Controle_De_Estoque.ValidacaoProdutoTapecaria
+namespace ControleDeEstoque.ValidacaoProdutoTapecaria
 {
     public class ValidadorProdutoTapecaria
     {

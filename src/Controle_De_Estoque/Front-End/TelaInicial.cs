@@ -1,11 +1,11 @@
-using Controle_De_Estoque.Dominio;
-using Controle_De_Estoque.Repositorio;
+using ControleDeEstoque.Dominio;
+using ControleDeEstoque.Repositorio;
 
 namespace Controle_De_Estoque
 {
     public partial class TelaInicial : Form
     {
-        private Repositorio_BancoDeDados _repositorio = new Repositorio_BancoDeDados();
+        private RepositorioBancoDeDados _repositorio = new RepositorioBancoDeDados();
 
         public TelaInicial()
         {

@@ -1,6 +1,6 @@
-﻿namespace Controle_De_Estoque.Dominio
+﻿namespace ControleDeEstoque.Dominio
 {
-    public class ListaTapecaria_Singleton
+    public class ListaTapecariaSingleton
     {
         public static List<ProdutoTapecaria> _produtos;
 

@@ -1,4 +1,4 @@
-﻿namespace Controle_De_Estoque.Dominio
+﻿namespace ControleDeEstoque.Dominio
 {
     public class ProdutoTapecaria
     {

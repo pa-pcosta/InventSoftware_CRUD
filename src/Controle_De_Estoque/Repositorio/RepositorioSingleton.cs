@@ -1,10 +1,10 @@
-﻿using Controle_De_Estoque.Dominio;
+﻿using ControleDeEstoque.Dominio;
 
-namespace Controle_De_Estoque.Repositorio
+namespace ControleDeEstoque.Repositorio
 {
-    internal class Repositorio_Singleton : IRepository
+    internal class RepositorioSingleton : IRepository
     {
-        static readonly List<ProdutoTapecaria> _listaTapecaria = ListaTapecaria_Singleton.ObterInstancia();
+        static readonly List<ProdutoTapecaria> _listaTapecaria = ListaTapecariaSingleton.ObterInstancia();
 
         public List<ProdutoTapecaria> ObterTodos()
         {
