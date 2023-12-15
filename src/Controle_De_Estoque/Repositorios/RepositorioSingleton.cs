@@ -1,6 +1,7 @@
 ﻿using ControleDeEstoque.Dominio;
+using System.Diagnostics.CodeAnalysis;
 
-namespace ControleDeEstoque.Repositorio
+namespace ControleDeEstoque.Repositorios
 {
     internal class RepositorioSingleton : IRepository
     {
@@ -31,7 +32,8 @@ namespace ControleDeEstoque.Repositorio
         public void Remover(int id)
         {
             var produtoASerRemovido = ObterPorId(id);
-            _listaTapecaria.Remove(produtoASerRemovido);
+            if(produtoASerRemovido is not null)
+                _listaTapecaria.Remove(produtoASerRemovido);
         }
     }
 }
