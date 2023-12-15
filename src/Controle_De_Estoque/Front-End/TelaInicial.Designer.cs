@@ -1,4 +1,4 @@
-﻿namespace Controle_De_Estoque
+﻿namespace ControleDeEstoque
 {
     partial class TelaInicial
     {
@@ -89,7 +89,7 @@
             // 
             // telaInicialBindingSource
             // 
-            this.telaInicialBindingSource.DataSource = typeof(Controle_De_Estoque.TelaInicial);
+            this.telaInicialBindingSource.DataSource = typeof(ControleDeEstoque.TelaInicial);
             // 
             // TelaInicial
             // 

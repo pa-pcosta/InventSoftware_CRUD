@@ -1,7 +1,8 @@
-﻿using Controle_De_Estoque.ValidacaoProdutoTapecaria;
+﻿using ControleDeEstoque.Dominio;
+using ControleDeEstoque.ValidacaoProdutoTapecaria;
 using System.Text.RegularExpressions;
 
-namespace Controle_De_Estoque
+namespace ControleDeEstoque
 {
     public partial class TelaCadastroDeProduto : Form
     {
@@ -51,7 +52,7 @@ namespace Controle_De_Estoque
                 if (!listaDeErros.Any())
                 {
                     if (_novoProdutoTapecaria.Id == 0)
-                        _novoProdutoTapecaria.Id = ListaTapecaria.ObterProximoId();
+                        _novoProdutoTapecaria.Id = ListaTapecariaSingleton.ObterProximoId();
 
                     AtribuiAoProdutoTapecaria();
                     DialogResult = DialogResult.OK;

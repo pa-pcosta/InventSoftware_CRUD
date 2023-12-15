@@ -1,10 +1,13 @@
-﻿namespace Controle_De_Estoque.Repositorio
+﻿using ControleDeEstoque.Dominio;
+
+namespace ControleDeEstoque.Repositorios
+
 {
     public interface IRepository
     {
         public List<ProdutoTapecaria> ObterTodos();
 
-        public ProdutoTapecaria ObterPorId(int id);
+        public ProdutoTapecaria? ObterPorId(int id);
 
         public void Criar(ProdutoTapecaria produtoTapecaria);
 

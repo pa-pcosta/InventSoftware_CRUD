@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Controle_De_Estoque
+namespace ControleDeEstoque
 {
     partial class TelaCadastroDeProduto
     {

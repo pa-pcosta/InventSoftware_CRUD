@@ -1,18 +1,20 @@
-﻿
-namespace Controle_De_Estoque.Repositorio
+﻿using ControleDeEstoque.Dominio;
+using System.Diagnostics.CodeAnalysis;
+
+namespace ControleDeEstoque.Repositorios
 {
     internal class RepositorioSingleton : IRepository
     {
-        static readonly List<ProdutoTapecaria> _listaTapecaria = ListaTapecaria.ObterInstancia();
-
-        public ProdutoTapecaria? ObterPorId(int id)
-        {
-            return _listaTapecaria.FirstOrDefault(item => item.Id == id);
-        }
+        static readonly List<ProdutoTapecaria> _listaTapecaria = ListaTapecariaSingleton.ObterInstancia();
 
         public List<ProdutoTapecaria> ObterTodos()
         {
             return _listaTapecaria;
+        }
+
+        public ProdutoTapecaria? ObterPorId(int id)
+        {
+            return _listaTapecaria.FirstOrDefault(item => item.Id == id);
         }
 
         public void Criar(ProdutoTapecaria produtoTapecaria)
@@ -30,7 +32,9 @@ namespace Controle_De_Estoque.Repositorio
         public void Remover(int id)
         {
             var produtoASerRemovido = ObterPorId(id);
-            _listaTapecaria.Remove(produtoASerRemovido);
+
+            if(produtoASerRemovido is not null)
+                _listaTapecaria.Remove(produtoASerRemovido);
         }
     }
 }

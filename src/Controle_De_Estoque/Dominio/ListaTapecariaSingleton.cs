@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace Controle_De_Estoque
+﻿namespace ControleDeEstoque.Dominio
 {
-    public class ListaTapecaria
+    public class ListaTapecariaSingleton
     {
         public static List<ProdutoTapecaria> _produtos;
 

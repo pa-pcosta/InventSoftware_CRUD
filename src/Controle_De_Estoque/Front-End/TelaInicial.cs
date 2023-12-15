@@ -1,14 +1,16 @@
-using Controle_De_Estoque.Repositorio;
+using ControleDeEstoque.Dominio;
+using ControleDeEstoque.Repositorios;
 
-namespace Controle_De_Estoque
+namespace ControleDeEstoque
 {
     public partial class TelaInicial : Form
     {
-        private RepositorioSingleton _repositorio = new RepositorioSingleton();
+        private RepositorioBancoDeDados _repositorio = new RepositorioBancoDeDados();
 
         public TelaInicial()
         {
             InitializeComponent();
+            AtualizaDataGridView();
         }
 
         private void AoClicarEmCadastrar(object sender, EventArgs e)
@@ -27,7 +29,7 @@ namespace Controle_De_Estoque
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Erro inesperado \n[Ao Clicar Em Cadastrar]", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -71,7 +73,7 @@ namespace Controle_De_Estoque
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Erro inesperado\n[Ao Clicar Em Editar]", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -124,7 +126,7 @@ namespace Controle_De_Estoque
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Erro inesperado", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Erro inesperado\n[Ao Clicar Em Remover]", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
