@@ -32,6 +32,7 @@ namespace ControleDeEstoque.Repositorios
         public void Remover(int id)
         {
             var produtoASerRemovido = ObterPorId(id);
+
             if(produtoASerRemovido is not null)
                 _listaTapecaria.Remove(produtoASerRemovido);
         }

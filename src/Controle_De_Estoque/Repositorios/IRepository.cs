@@ -7,7 +7,7 @@ namespace ControleDeEstoque.Repositorios
     {
         public List<ProdutoTapecaria> ObterTodos();
 
-        public ProdutoTapecaria ObterPorId(int id);
+        public ProdutoTapecaria? ObterPorId(int id);
 
         public void Criar(ProdutoTapecaria produtoTapecaria);
 
