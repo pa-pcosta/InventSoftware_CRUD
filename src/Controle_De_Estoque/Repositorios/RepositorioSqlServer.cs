@@ -4,7 +4,7 @@ using System.Configuration;
 
 namespace ControleDeEstoque.Repositorios
 {
-    internal class RepositorioBancoDeDados : IRepository
+    internal class RepositorioSqlServer : IRepositorio
     {
         private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["SQL_Server_Controle_De_Estoque"].ConnectionString;
 

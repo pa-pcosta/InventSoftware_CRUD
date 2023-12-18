@@ -1,7 +1,8 @@
-using ControleDeEstoque;
 using ControleDeEstoque.MigracaoBancoDeDados;
+using ControleDeEstoque.Repositorios;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System.Configuration;
 
 namespace ControleDeEstoque
@@ -17,8 +18,20 @@ namespace ControleDeEstoque
                 UpdateDatabase(scope.ServiceProvider);
             }
 
+            var builder = CriaHostBuilder();
+            var servicesProvider = builder.Build().Services;
+            var repositorio = servicesProvider.GetService<IRepositorio>();
+
             ApplicationConfiguration.Initialize();
-            Application.Run(new TelaInicial());
+            Application.Run(new TelaInicial(repositorio));
+        }
+
+        static IHostBuilder CriaHostBuilder()
+        {
+            return Host.CreateDefaultBuilder()
+            .ConfigureServices((context, services) => {
+                services.AddScoped<IRepositorio, RepositorioSqlServer>();
+            });
         }
 
         private static ServiceProvider CreateServices()

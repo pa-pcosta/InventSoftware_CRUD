@@ -3,7 +3,7 @@
 namespace ControleDeEstoque.Repositorios
 
 {
-    public interface IRepository
+    public interface IRepositorio
     {
         public List<ProdutoTapecaria> ObterTodos();
 
