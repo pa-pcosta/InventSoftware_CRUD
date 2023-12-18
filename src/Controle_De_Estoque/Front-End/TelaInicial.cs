@@ -5,10 +5,12 @@ namespace ControleDeEstoque
 {
     public partial class TelaInicial : Form
     {
-        private RepositorioBancoDeDados _repositorio = new RepositorioBancoDeDados();
+        private IRepositorio _repositorio;
 
-        public TelaInicial()
+        public TelaInicial(IRepositorio repositorio)
         {
+            _repositorio = repositorio;
+
             InitializeComponent();
             AtualizaDataGridView();
         }

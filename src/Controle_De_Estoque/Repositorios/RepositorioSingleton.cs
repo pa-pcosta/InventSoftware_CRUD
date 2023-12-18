@@ -3,7 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace ControleDeEstoque.Repositorios
 {
-    internal class RepositorioSingleton : IRepository
+    internal class RepositorioSingleton : IRepositorio
     {
         static readonly List<ProdutoTapecaria> _listaTapecaria = ListaTapecariaSingleton.ObterInstancia();
 
