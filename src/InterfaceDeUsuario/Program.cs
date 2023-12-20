@@ -1,11 +1,12 @@
-using ControleDeEstoque.MigracaoBancoDeDados;
-using ControleDeEstoque.Repositorios;
+using ControleDeEstoque;
 using FluentMigrator.Runner;
+using InfraestruturaDeDados.MigracaoBancoDeDados;
+using InfraestruturaDeDados.Repositorios;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Configuration;
 
-namespace ControleDeEstoque
+namespace InterfaceDeUsuario
 {
     internal static class Program
     {
@@ -23,13 +24,14 @@ namespace ControleDeEstoque
             var repositorio = servicesProvider.GetService<IRepositorio>();
 
             ApplicationConfiguration.Initialize();
-            Application.Run(new TelaInicial(repositorio));
+            Application.Run(new TelaListagem(repositorio));
         }
 
         static IHostBuilder CriaHostBuilder()
         {
             return Host.CreateDefaultBuilder()
-            .ConfigureServices((context, services) => {
+            .ConfigureServices((context, services) =>
+            {
                 services.AddScoped<IRepositorio, RepositorioSqlServer>();
             });
         }

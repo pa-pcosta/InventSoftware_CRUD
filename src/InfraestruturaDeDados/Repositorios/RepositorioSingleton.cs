@@ -1,9 +1,8 @@
-﻿using ControleDeEstoque.Dominio;
-using System.Diagnostics.CodeAnalysis;
+﻿using Dominio;
 
-namespace ControleDeEstoque.Repositorios
+namespace InfraestruturaDeDados.Repositorios
 {
-    internal class RepositorioSingleton : IRepositorio
+    public class RepositorioSingleton : IRepositorio
     {
         static readonly List<ProdutoTapecaria> _listaTapecaria = ListaTapecariaSingleton.ObterInstancia();
 
@@ -33,7 +32,7 @@ namespace ControleDeEstoque.Repositorios
         {
             var produtoASerRemovido = ObterPorId(id);
 
-            if(produtoASerRemovido is not null)
+            if (produtoASerRemovido is not null)
                 _listaTapecaria.Remove(produtoASerRemovido);
         }
     }

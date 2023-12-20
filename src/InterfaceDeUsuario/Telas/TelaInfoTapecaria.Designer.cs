@@ -2,7 +2,7 @@
 
 namespace ControleDeEstoque
 {
-    partial class TelaCadastroDeProduto
+    partial class TelaInfoTapecaria
     {
         /// <summary>
         /// Required designer variable.

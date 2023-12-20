@@ -1,6 +1,6 @@
-﻿using ControleDeEstoque.Dominio;
+﻿using Dominio;
 
-namespace ControleDeEstoque.Repositorios
+namespace InfraestruturaDeDados.Repositorios
 
 {
     public interface IRepositorio

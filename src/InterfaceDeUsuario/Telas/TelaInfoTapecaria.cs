@@ -1,14 +1,14 @@
-﻿using ControleDeEstoque.Dominio;
-using ControleDeEstoque.ValidacaoProdutoTapecaria;
+﻿using Dominio;
+using Dominio.ValidacaoProdutoTapecaria;
 using System.Text.RegularExpressions;
 
 namespace ControleDeEstoque
 {
-    public partial class TelaCadastroDeProduto : Form
+    public partial class TelaInfoTapecaria : Form
     {
         public ProdutoTapecaria _novoProdutoTapecaria;
 
-        public TelaCadastroDeProduto(ProdutoTapecaria produtoTapecaria)
+        public TelaInfoTapecaria(ProdutoTapecaria produtoTapecaria)
         {
             InitializeComponent();
             InicializaCampos();

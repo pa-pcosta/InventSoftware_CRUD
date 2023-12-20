@@ -14,4 +14,18 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Dominio\Dominio.csproj" />
+    <ProjectReference Include="..\InfraestruturaDeDados\InfraestruturaDeDados.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Telas\TelaInfoTapecaria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Telas\TelaListagem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

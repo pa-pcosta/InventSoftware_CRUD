@@ -1,6 +1,6 @@
 ﻿namespace ControleDeEstoque
 {
-    partial class TelaInicial
+    partial class TelaListagem
     {
         /// <summary>
         /// Variável de designer necessária.
@@ -89,7 +89,7 @@
             // 
             // telaInicialBindingSource
             // 
-            this.telaInicialBindingSource.DataSource = typeof(ControleDeEstoque.TelaInicial);
+            this.telaInicialBindingSource.DataSource = typeof(ControleDeEstoque.TelaListagem);
             // 
             // TelaInicial
             // 
