@@ -1,5 +1,6 @@
-﻿using Dominio;
-using Dominio.ValidacaoProdutoTapecaria;
+﻿using ControleDeEstoque.Dominio;
+using ControleDeEstoque.Dominio.ValidacaoProdutoTapecaria;
+using ControleDeEstoque.InfraestruturaDeDados;
 using System.Text.RegularExpressions;
 
 namespace ControleDeEstoque

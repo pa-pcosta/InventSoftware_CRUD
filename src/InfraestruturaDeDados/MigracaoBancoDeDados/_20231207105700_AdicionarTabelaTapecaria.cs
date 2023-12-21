@@ -1,7 +1,7 @@
 ﻿using FluentMigrator;
 using FluentMigrator.SqlServer;
 
-namespace InfraestruturaDeDados.MigracaoBancoDeDados
+namespace ControleDeEstoque.InfraestruturaDeDados.MigracaoBancoDeDados
 {
     [Migration(20231207105700)]
 

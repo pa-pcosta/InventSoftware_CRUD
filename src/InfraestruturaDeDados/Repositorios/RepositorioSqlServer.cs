@@ -1,8 +1,8 @@
-﻿using Dominio;
+﻿using ControleDeEstoque.Dominio;
 using Microsoft.Data.SqlClient;
 using System.Configuration;
 
-namespace InfraestruturaDeDados.Repositorios
+namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
 {
     public class RepositorioSqlServer : IRepositorio
     {

@@ -1,5 +1,5 @@
-using Dominio;
-using InfraestruturaDeDados.Repositorios;
+using ControleDeEstoque.Dominio;
+using ControleDeEstoque.InfraestruturaDeDados.Repositorios;
 
 namespace ControleDeEstoque
 {

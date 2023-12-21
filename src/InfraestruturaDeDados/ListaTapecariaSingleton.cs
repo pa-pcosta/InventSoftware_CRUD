@@ -1,4 +1,6 @@
-﻿namespace Dominio
+﻿using ControleDeEstoque.Dominio;
+
+namespace ControleDeEstoque.InfraestruturaDeDados
 {
     public class ListaTapecariaSingleton
     {
