@@ -1,11 +1,10 @@
 using ControleDeEstoque.Dominio;
-using ControleDeEstoque.InfraestruturaDeDados.Repositorios;
 
-namespace ControleDeEstoque
+namespace ControleDeEstoque.InterfaceDeUsuario
 {
     public partial class TelaListagem : Form
     {
-        private IRepositorio _repositorio;
+        private readonly IRepositorio _repositorio;
 
         public TelaListagem(IRepositorio repositorio)
         {

@@ -1,4 +1,4 @@
-﻿namespace ControleDeEstoque
+﻿namespace ControleDeEstoque.InterfaceDeUsuario
 {
     partial class TelaListagem
     {
@@ -33,9 +33,9 @@
             this.BotaoCadastrarProdutoTapecaria = new System.Windows.Forms.Button();
             this.BotaoRemoverProdutoTapecaria = new System.Windows.Forms.Button();
             this.BotaoEditarProdutoTapecaria = new System.Windows.Forms.Button();
-            this.telaInicialBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.telaListagemBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListaProdutoTapecaria)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.telaInicialBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.telaListagemBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewListaProdutoTapecaria
@@ -87,11 +87,11 @@
             this.BotaoEditarProdutoTapecaria.UseVisualStyleBackColor = true;
             this.BotaoEditarProdutoTapecaria.Click += new System.EventHandler(this.AoClicarEmEditar);
             // 
-            // telaInicialBindingSource
+            // telaListagemBindingSource
             // 
-            this.telaInicialBindingSource.DataSource = typeof(ControleDeEstoque.TelaListagem);
+            this.telaListagemBindingSource.DataSource = typeof(ControleDeEstoque.InterfaceDeUsuario.TelaListagem);
             // 
-            // TelaInicial
+            // TelaListagem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -100,10 +100,10 @@
             this.Controls.Add(this.BotaoRemoverProdutoTapecaria);
             this.Controls.Add(this.BotaoCadastrarProdutoTapecaria);
             this.Controls.Add(this.dataGridViewListaProdutoTapecaria);
-            this.Name = "TelaInicial";
+            this.Name = "TelaListagem";
             this.Text = "Produtos de Tapeçaria";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewListaProdutoTapecaria)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.telaInicialBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.telaListagemBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -114,7 +114,7 @@
         private System.Windows.Forms.Button BotaoCadastrarProdutoTapecaria;
         private System.Windows.Forms.Button BotaoRemoverProdutoTapecaria;
         private System.Windows.Forms.Button BotaoEditarProdutoTapecaria;
-        private System.Windows.Forms.BindingSource telaInicialBindingSource;
+        private System.Windows.Forms.BindingSource telaListagemBindingSource;
     }
 }
 

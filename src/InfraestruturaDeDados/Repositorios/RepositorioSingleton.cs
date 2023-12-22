@@ -1,4 +1,5 @@
 ﻿using ControleDeEstoque.Dominio;
+
 namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
 {
     public class RepositorioSingleton : IRepositorio

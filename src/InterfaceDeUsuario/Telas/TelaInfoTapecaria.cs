@@ -3,7 +3,7 @@ using ControleDeEstoque.Dominio.ValidacaoProdutoTapecaria;
 using ControleDeEstoque.InfraestruturaDeDados;
 using System.Text.RegularExpressions;
 
-namespace ControleDeEstoque
+namespace ControleDeEstoque.InterfaceDeUsuario
 {
     public partial class TelaInfoTapecaria : Form
     {

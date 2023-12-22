@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ControleDeEstoque
+﻿namespace ControleDeEstoque.InterfaceDeUsuario
 {
     partial class TelaInfoTapecaria
     {
