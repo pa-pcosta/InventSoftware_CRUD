@@ -1,13 +1,12 @@
 using ControleDeEstoque.Dominio;
-using ControleDeEstoque.Repositorios;
 
-namespace ControleDeEstoque
+namespace ControleDeEstoque.InterfaceDeUsuario
 {
-    public partial class TelaInicial : Form
+    public partial class TelaListagem : Form
     {
-        private IRepositorio _repositorio;
+        private readonly IRepositorio _repositorio;
 
-        public TelaInicial(IRepositorio repositorio)
+        public TelaListagem(IRepositorio repositorio)
         {
             _repositorio = repositorio;
 
@@ -19,7 +18,7 @@ namespace ControleDeEstoque
         {
             try
             {
-                TelaCadastroDeProduto formCadastroProduto = new TelaCadastroDeProduto(null);
+                TelaInfoTapecaria formCadastroProduto = new TelaInfoTapecaria(null);
                 formCadastroProduto.ShowDialog();
 
                 if (formCadastroProduto.DialogResult == DialogResult.OK)
@@ -49,7 +48,7 @@ namespace ControleDeEstoque
 
                     if (produtoASerEditado != null)
                     {
-                        TelaCadastroDeProduto formCadastroProduto = new TelaCadastroDeProduto(produtoASerEditado);
+                        TelaInfoTapecaria formCadastroProduto = new TelaInfoTapecaria(produtoASerEditado);
                         formCadastroProduto.ShowDialog();
 
                         if (formCadastroProduto.DialogResult == DialogResult.OK)

@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace ControleDeEstoque.ValidacaoProdutoTapecaria
+namespace ControleDeEstoque.Dominio.ValidacaoProdutoTapecaria
 {
     public class ValidadorProdutoTapecaria
     {

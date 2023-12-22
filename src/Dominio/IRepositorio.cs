@@ -1,7 +1,4 @@
-﻿using ControleDeEstoque.Dominio;
-
-namespace ControleDeEstoque.Repositorios
-
+﻿namespace ControleDeEstoque.Dominio
 {
     public interface IRepositorio
     {

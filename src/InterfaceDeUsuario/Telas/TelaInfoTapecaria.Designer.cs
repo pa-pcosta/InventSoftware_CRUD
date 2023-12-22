@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace ControleDeEstoque
+﻿namespace ControleDeEstoque.InterfaceDeUsuario
 {
-    partial class TelaCadastroDeProduto
+    partial class TelaInfoTapecaria
     {
         /// <summary>
         /// Required designer variable.
