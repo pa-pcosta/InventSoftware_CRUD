@@ -1,12 +1,11 @@
 ﻿using ControleDeEstoque.Dominio;
 using Microsoft.Data.SqlClient;
-using System.Configuration;
 
 namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
 {
     public class RepositorioSqlServer : IRepositorio
     {
-        private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["SQL_Server_Controle_De_Estoque"].ConnectionString;
+        private static readonly string _connectionString = ConstantesGlobais.sqlServerConnectionString;
 
         public List<ProdutoTapecaria> ObterTodos()
         {
@@ -35,7 +34,6 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
                         WHERE Id = {id}";
 
             var comandoSql = new SqlCommand(query, conexaoSql);
-
             conexaoSql.Open();
 
             SqlDataReader reader = comandoSql.ExecuteReader();
