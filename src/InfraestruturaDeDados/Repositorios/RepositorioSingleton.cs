@@ -4,6 +4,10 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
 {
     public class RepositorioSingleton : IRepositorio
     {
+        public void Criar(ProdutoTapecaria produtoTapecaria)
+        {
+            _listaTapecaria.Add(produtoTapecaria);
+        }
         static readonly List<ProdutoTapecaria> _listaTapecaria = ListaTapecariaSingleton.ObterInstancia();
 
         public List<ProdutoTapecaria> ObterTodos()
@@ -16,15 +20,12 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
             return _listaTapecaria.FirstOrDefault(item => item.Id == id);
         }
 
-        public void Criar(ProdutoTapecaria produtoTapecaria)
-        {
-            _listaTapecaria.Add(produtoTapecaria);
-        }
 
-        public void Atualizar(int idProdutoASerEditado, ProdutoTapecaria novoProdutoTapecaria)
+        public void Atualizar(ProdutoTapecaria novoProdutoTapecaria)
         {
-            var produtoASerEditado = ObterPorId(idProdutoASerEditado);
+            var produtoASerEditado = ObterPorId(novoProdutoTapecaria.Id);
             var indexProdutoASerEditado = _listaTapecaria.IndexOf(produtoASerEditado);
+
             _listaTapecaria[indexProdutoASerEditado] = novoProdutoTapecaria;
         }
 

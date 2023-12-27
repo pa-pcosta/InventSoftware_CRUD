@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ControleDeEstoque.Dominio
+﻿namespace ControleDeEstoque.Dominio
 {
     public static class ConstantesGlobais
     {

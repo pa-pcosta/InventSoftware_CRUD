@@ -32,7 +32,7 @@ namespace ControleDeEstoque.InterfaceDeUsuario
             return Host.CreateDefaultBuilder()
             .ConfigureServices((context, services) =>
             {
-                services.AddScoped<IRepositorio, RepositorioSqlServer>();
+                services.AddScoped<IRepositorio, RepositorioLinq2DB>();
             });
         }
 

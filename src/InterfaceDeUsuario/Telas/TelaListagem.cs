@@ -48,12 +48,12 @@ namespace ControleDeEstoque.InterfaceDeUsuario
 
                     if (produtoASerEditado != null)
                     {
-                        TelaInfoTapecaria formCadastroProduto = new TelaInfoTapecaria(produtoASerEditado);
-                        formCadastroProduto.ShowDialog();
+                        TelaInfoTapecaria formInfoTapecaria = new TelaInfoTapecaria(produtoASerEditado);
+                        formInfoTapecaria.ShowDialog();
 
-                        if (formCadastroProduto.DialogResult == DialogResult.OK)
+                        if (formInfoTapecaria.DialogResult == DialogResult.OK)
                         {
-                            _repositorio.Atualizar(idItemSelecionado, formCadastroProduto._novoProdutoTapecaria);
+                            _repositorio.Atualizar(formInfoTapecaria._novoProdutoTapecaria);
                             AtualizaDataGridView();
                             MessageBox.Show("Registro editado com sucesso", "SUCESSSO!");
                         }

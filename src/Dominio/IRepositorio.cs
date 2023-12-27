@@ -2,13 +2,13 @@
 {
     public interface IRepositorio
     {
+        public void Criar(ProdutoTapecaria produtoTapecaria);
+
         public List<ProdutoTapecaria> ObterTodos();
 
         public ProdutoTapecaria? ObterPorId(int id);
 
-        public void Criar(ProdutoTapecaria produtoTapecaria);
-
-        public void Atualizar(int idProdutoASerEditado, ProdutoTapecaria novoProdutoTapecaria);
+        public void Atualizar(ProdutoTapecaria novoProdutoTapecaria);
 
         public void Remover(int id);
     }
