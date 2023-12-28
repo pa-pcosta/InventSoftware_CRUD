@@ -1,6 +1,7 @@
 ﻿using ControleDeEstoque.Dominio;
 using LinqToDB.Data;
 using LinqToDB;
+using System.Configuration;
 
 namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
 {
@@ -31,13 +32,11 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
 
                 using (conexaoSql)
                 {
-                    var tb_Tapecaria = conexaoSql.GetTable<ProdutoTapecaria>();
+                    var produtoTapecaria = conexaoSql
+                                                .GetTable<ProdutoTapecaria>()
+                                                .FirstOrDefault(x => x.Id == id);
 
-                    var query = from produtoTapecaria in tb_Tapecaria
-                                where produtoTapecaria.Id == id
-                                select produtoTapecaria;
-
-                    return query.FirstOrDefault();
+                    return produtoTapecaria;
                 }
             }
             catch (Exception)
@@ -54,7 +53,9 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
 
                 using (conexaoSql)
                 {
-                    return conexaoSql.GetTable<ProdutoTapecaria>().ToList();
+                    return conexaoSql
+                                .GetTable<ProdutoTapecaria>()
+                                .ToList();
                 }
             }
             catch (Exception)
@@ -88,13 +89,10 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
 
                 using (conexaoSql)
                 {
-                    var tb_Tapecaria = conexaoSql.GetTable<ProdutoTapecaria>();
-
-                    var query = from produtoTapecaria in tb_Tapecaria
-                                where produtoTapecaria.Id == id
-                                select produtoTapecaria;
-
-                    query.Delete();
+                    conexaoSql
+                        .GetTable<ProdutoTapecaria>()
+                              .Where(p => p.Id == id)
+                              .Delete();
                 }
             }
             catch (Exception)
@@ -107,7 +105,9 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
         {
             try
             {
-                return new DataConnection(new DataOptions().UseSqlServer(ConstantesGlobais.sqlServerConnectionString));
+                var connectionString = ConfigurationManager.ConnectionStrings["SQL_Server_Controle_De_Estoque"].ConnectionString;
+
+                return new DataConnection(new DataOptions().UseSqlServer(connectionString));
             }
             catch (Exception)
             {

@@ -1,5 +1,6 @@
 ﻿using ControleDeEstoque.Dominio;
 using Microsoft.Data.SqlClient;
+using System.Configuration;
 
 namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
 {
@@ -30,7 +31,7 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
             comandoSql.ExecuteNonQuery();
             conexaoSql.Close();
         }
-        private static readonly string _connectionString = ConstantesGlobais.sqlServerConnectionString;
+        private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["SQL_Server_Controle_De_Estoque"].ConnectionString;
 
         public List<ProdutoTapecaria> ObterTodos()
         {
