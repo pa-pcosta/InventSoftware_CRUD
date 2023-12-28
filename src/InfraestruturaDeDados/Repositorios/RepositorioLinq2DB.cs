@@ -1,0 +1,118 @@
+﻿using ControleDeEstoque.Dominio;
+using LinqToDB.Data;
+using LinqToDB;
+using System.Configuration;
+
+namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
+{
+    public class RepositorioLinq2DB : IRepositorio
+    {
+        public void Criar(ProdutoTapecaria produtoTapecaria)
+        {
+            try
+             {
+                var conexaoSql = CriarConexao();
+
+                using (conexaoSql)
+                {
+                    conexaoSql.Insert(produtoTapecaria);
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Erro na implentação de [void Criar( )] no RepositorioLinq2DB");
+            }
+        }
+
+        public ProdutoTapecaria? ObterPorId(int id)
+        {
+            try
+            {
+                var conexaoSql = CriarConexao();
+
+                using (conexaoSql)
+                {
+                    var produtoTapecaria = conexaoSql
+                                                .GetTable<ProdutoTapecaria>()
+                                                .FirstOrDefault(x => x.Id == id);
+
+                    return produtoTapecaria;
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Erro na implentação de [ObterPorId( )] no RepositorioLinq2DB");
+            }
+        }
+
+        public List<ProdutoTapecaria> ObterTodos()
+        {
+            try
+            {
+                var conexaoSql = CriarConexao();
+
+                using (conexaoSql)
+                {
+                    return conexaoSql
+                                .GetTable<ProdutoTapecaria>()
+                                .ToList();
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Erro na implentação de [ObterTodos( )] no RepositorioLinq2DB");
+            }
+        }
+
+        public void Atualizar(ProdutoTapecaria novoProdutoTapecaria)
+        {
+            try
+            {
+                var conexaoSql = CriarConexao();
+
+                using (conexaoSql)
+                {
+                    conexaoSql.Update(novoProdutoTapecaria);
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Erro na implentação de [Atualizar( )] no RepositorioLinq2DB");
+            }
+        }
+
+        public void Remover(int id)
+        {
+            try
+            {
+                var conexaoSql = CriarConexao();
+
+                using (conexaoSql)
+                {
+                    conexaoSql
+                        .GetTable<ProdutoTapecaria>()
+                              .Where(p => p.Id == id)
+                              .Delete();
+                }
+            }
+            catch (Exception)
+            {
+                throw new Exception("Erro na implentação de [Remover( )] no RepositorioLinq2DB");
+            }
+        }
+
+        private DataConnection CriarConexao()
+        {
+            try
+            {
+                var connectionString = ConfigurationManager.ConnectionStrings["SQL_Server_Controle_De_Estoque"].ConnectionString;
+
+                return new DataConnection(new DataOptions().UseSqlServer(connectionString));
+            }
+            catch (Exception)
+            {
+                throw new Exception("Erro de conexão ao banco de dados no RepositorioLinq2DB");
+            }
+        }
+    }
+}
