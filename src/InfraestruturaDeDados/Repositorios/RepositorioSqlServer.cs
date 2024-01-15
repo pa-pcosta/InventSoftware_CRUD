@@ -6,6 +6,8 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
 {
     public class RepositorioSqlServer : IRepositorio
     {
+        private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["SQL_Server_Controle_De_Estoque"].ConnectionString;
+
         public void Criar(ProdutoTapecaria produtoTapecaria)
         {
             var conexaoSql = new SqlConnection(_connectionString);
@@ -31,7 +33,6 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
             comandoSql.ExecuteNonQuery();
             conexaoSql.Close();
         }
-        private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["SQL_Server_Controle_De_Estoque"].ConnectionString;
 
         public List<ProdutoTapecaria> ObterTodos()
         {
