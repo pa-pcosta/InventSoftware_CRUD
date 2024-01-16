@@ -1,4 +1,4 @@
-using ControleDeEstoque.Dominio;
+using Dominio;
 
 namespace ControleDeEstoque.InterfaceDeUsuario
 {

@@ -17,6 +17,20 @@ namespace InterfaceSAPUI5.Controllers
             _repositorio = repositorio;
         }
 
+        [HttpPost]
+        public IActionResult Criar(ProdutoTapecaria produtoTapecaria)
+        {
+            try
+            {
+                _repositorio.Criar(produtoTapecaria);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+        }
+
         [HttpGet]
         public IActionResult ObterTodos()
         {
@@ -36,13 +50,15 @@ namespace InterfaceSAPUI5.Controllers
         {
             try
             {
-                var produtoTapecaria = _repositorio.ObterTodos();
+                var produtoTapecaria = _repositorio.ObterPorId(id);
                 return Ok(produtoTapecaria);
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError);
+                return StatusCode(StatusCodes.Status404NotFound);
             }
         }
+
+
     }
 }
