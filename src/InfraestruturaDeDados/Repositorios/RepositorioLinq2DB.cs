@@ -1,16 +1,16 @@
-﻿using ControleDeEstoque.Dominio;
-using LinqToDB.Data;
+﻿using LinqToDB.Data;
 using LinqToDB;
 using System.Configuration;
+using Dominio;
 
-namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
+namespace InfraestruturaDeDados.Repositorios
 {
     public class RepositorioLinq2DB : IRepositorio
     {
         public void Criar(ProdutoTapecaria produtoTapecaria)
         {
             try
-             {
+            {
                 var conexaoSql = CriarConexao();
 
                 using (conexaoSql)

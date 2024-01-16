@@ -1,12 +1,13 @@
-using ControleDeEstoque.Dominio;
-using ControleDeEstoque.InfraestruturaDeDados.MigracaoBancoDeDados;
-using ControleDeEstoque.InfraestruturaDeDados.Repositorios;
+using ControleDeEstoque.InterfaceDeUsuario;
+using Dominio;
 using FluentMigrator.Runner;
+using InfraestruturaDeDados.MigracaoBancoDeDados;
+using InfraestruturaDeDados.Repositorios;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Configuration;
 
-namespace ControleDeEstoque.InterfaceDeUsuario
+namespace InterfaceWindowsForms
 {
     internal static class Program
     {

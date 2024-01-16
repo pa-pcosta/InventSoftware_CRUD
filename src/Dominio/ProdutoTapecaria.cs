@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using ColumnAttribute = LinqToDB.Mapping.ColumnAttribute;
 using TableAttribute = LinqToDB.Mapping.TableAttribute;
 
-namespace ControleDeEstoque.Dominio
+namespace Dominio
 {
     [Table(Name = "tb_Tapecaria")]
     public class ProdutoTapecaria

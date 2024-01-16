@@ -1,6 +1,7 @@
-﻿using ControleDeEstoque.Dominio;
+﻿using Dominio;
+using InfraestruturaDeDados;
 
-namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
+namespace InfraestruturaDeDados.Repositorios
 {
     public class RepositorioSingleton : IRepositorio
     {
