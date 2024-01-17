@@ -11,11 +11,11 @@ namespace InterfaceSAPUI5.Controllers
 
     public class TapecariaController : ControllerBase 
     {
-        private readonly IRepositorio _repositorio = new RepositorioSqlServer();
+        private readonly IRepositorio _repositorio;
 
-        public TapecariaController(/*IRepositorio repositorio*/)
+        public TapecariaController(IRepositorio repositorio)
         {
-            //_repositorio = repositorio;
+            _repositorio = repositorio;
         }
 
         [HttpPost]

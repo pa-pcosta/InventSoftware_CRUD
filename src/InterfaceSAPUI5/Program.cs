@@ -1,13 +1,20 @@
+using Dominio;
+using InfraestruturaDeDados.MigracaoBancoDeDados;
+using InfraestruturaDeDados.Repositorios;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.FileProviders;
 
+using (var serviceProvider = MigracaoConfig.CreateServices())
+using (var scope = serviceProvider.CreateScope())
+{
+    MigracaoConfig.UpdateDatabase(scope.ServiceProvider);
+}
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddScoped<IRepositorio, RepositorioSqlServer>();
 
 var app = builder.Build();
 

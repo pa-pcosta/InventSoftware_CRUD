@@ -1,4 +1,4 @@
-﻿namespace ControleDeEstoque.InterfaceDeUsuario
+﻿namespace ControleDeEstoque.InterfaceWindowsForms
 {
     partial class TelaInfoTapecaria
     {
