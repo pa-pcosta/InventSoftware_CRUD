@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using InfraestruturaDeDados.Repositorios;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -10,55 +11,46 @@ namespace InterfaceSAPUI5.Controllers
 
     public class TapecariaController : ControllerBase 
     {
-        private readonly IRepositorio _repositorio;
+        private readonly IRepositorio _repositorio = new RepositorioSqlServer();
 
-        public TapecariaController(IRepositorio repositorio)
+        public TapecariaController(/*IRepositorio repositorio*/)
         {
-            _repositorio = repositorio;
+            //_repositorio = repositorio;
         }
 
         [HttpPost]
         public IActionResult Criar(ProdutoTapecaria produtoTapecaria)
         {
-            try
-            {
                 _repositorio.Criar(produtoTapecaria);
-                return Ok();
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
+                return Created($"produtoTapecaria/{produtoTapecaria.Id}", produtoTapecaria);
         }
 
         [HttpGet]
         public IActionResult ObterTodos()
         {
-            try
-            {
                 var listaTapecaria = _repositorio.ObterTodos();
                 return Ok(listaTapecaria);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError);
-            }
         }
 
-        [HttpGet]
-        public IActionResult ObterPorId(int id)
+        [HttpGet("{id}")]
+        public IActionResult ObterPorId([FromRoute] int id)
         {
-            try
-            {
-                var produtoTapecaria = _repositorio.ObterPorId(id);
-                return Ok(produtoTapecaria);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status404NotFound);
-            }
+            var produtoTapecaria = _repositorio.ObterPorId(id);
+            return Ok(produtoTapecaria);
         }
 
+        [HttpPut]
+        public IActionResult Atualizar(ProdutoTapecaria novoProdutoTapecaria)
+        {
+            _repositorio.Atualizar(novoProdutoTapecaria);
+            return Ok(novoProdutoTapecaria);
+        }
 
+        [HttpDelete]
+        public IActionResult Remover(int id)
+        {
+            _repositorio.Remover(id);
+            return Ok();
+        }
     }
 }
