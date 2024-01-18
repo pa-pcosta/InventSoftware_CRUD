@@ -7,7 +7,7 @@ namespace InfraestruturaDeDados.Repositorios
 {
     public class RepositorioLinq2DB : IRepositorio
     {
-        public void Criar(ProdutoTapecaria produtoTapecaria)
+        public int Criar(ProdutoTapecaria produtoTapecaria)
         {
             try
             {
@@ -17,6 +17,8 @@ namespace InfraestruturaDeDados.Repositorios
                 {
                     conexaoSql.Insert(produtoTapecaria);
                 }
+
+                return produtoTapecaria.Id;
             }
             catch (Exception)
             {
@@ -64,7 +66,7 @@ namespace InfraestruturaDeDados.Repositorios
             }
         }
 
-        public void Atualizar(ProdutoTapecaria novoProdutoTapecaria)
+        public int Atualizar(ProdutoTapecaria novoProdutoTapecaria)
         {
             try
             {
@@ -74,6 +76,8 @@ namespace InfraestruturaDeDados.Repositorios
                 {
                     conexaoSql.Update(novoProdutoTapecaria);
                 }
+
+                return novoProdutoTapecaria.Id;
             }
             catch (Exception)
             {

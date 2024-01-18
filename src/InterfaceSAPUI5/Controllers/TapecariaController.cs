@@ -1,6 +1,7 @@
 ﻿using Dominio;
 using Dominio.ValidacaoProdutoTapecaria;
 using InfraestruturaDeDados.Repositorios;
+using LinqToDB.Common;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -20,21 +21,21 @@ namespace InterfaceSAPUI5.Controllers
         }
 
         [HttpPost]
-        public IActionResult Criar(ProdutoTapecaria produtoTapecaria)
+        public IActionResult Criar([FromBody]ProdutoTapecaria produtoTapecaria)
         {
             if (produtoTapecaria is not null)
             {
                 var validacao = new ValidadorProdutoTapecaria();
                 var listaDeErros = validacao.ValidarProduto(produtoTapecaria);
 
-                if (listaDeErros is null)
+                if (!listaDeErros.Any())
                 {
                     _repositorio.Criar(produtoTapecaria);
                     return Created($"produtoTapecaria/{produtoTapecaria.Id}", produtoTapecaria);
                 }
                 else { return BadRequest(listaDeErros);}
             }
-            else{ return BadRequest();}
+            else{ return BadRequest("É NULO");}
         }
 
         [HttpGet]
@@ -52,14 +53,14 @@ namespace InterfaceSAPUI5.Controllers
         }
 
         [HttpPut]
-        public IActionResult Atualizar(ProdutoTapecaria novoProdutoTapecaria)
+        public IActionResult Atualizar([FromBody]ProdutoTapecaria novoProdutoTapecaria)
         {
             if (novoProdutoTapecaria is not null)
             {
                 var validacao = new ValidadorProdutoTapecaria();
                 var listaDeErros = validacao.ValidarProduto(novoProdutoTapecaria);
 
-                if (listaDeErros is null)
+                if (!listaDeErros.Any())
                 {
                     _repositorio.Atualizar(novoProdutoTapecaria);
                     return Ok(novoProdutoTapecaria);

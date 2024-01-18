@@ -8,7 +8,7 @@ namespace InfraestruturaDeDados.Repositorios
     {
         private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["SQL_Server_Controle_De_Estoque"].ConnectionString;
 
-        public void Criar(ProdutoTapecaria produtoTapecaria)
+        public int Criar(ProdutoTapecaria produtoTapecaria)
         {
             var conexaoSql = new SqlConnection(_connectionString);
 
@@ -30,8 +30,13 @@ namespace InfraestruturaDeDados.Repositorios
             comandoSql.Parameters.AddWithValue("@Detalhes", produtoTapecaria.Detalhes);
 
             conexaoSql.Open();
-            comandoSql.ExecuteNonQuery();
+            
+            produtoTapecaria.Id = Convert.ToInt32(comandoSql.ExecuteScalar());
+            var Id = produtoTapecaria.Id;
+
             conexaoSql.Close();
+
+            return Id;
         }
 
         public List<ProdutoTapecaria> ObterTodos()
@@ -75,7 +80,7 @@ namespace InfraestruturaDeDados.Repositorios
             return produtoTapecaria;
         }
 
-        public void Atualizar(ProdutoTapecaria novoProdutoTapecaria)
+        public int Atualizar(ProdutoTapecaria novoProdutoTapecaria)
         {
             var conexaoSql = new SqlConnection(_connectionString);
             var query = @"UPDATE tb_Tapecaria
@@ -97,9 +102,11 @@ namespace InfraestruturaDeDados.Repositorios
             comandoSql.Parameters.AddWithValue("@EhEntrega", novoProdutoTapecaria.EhEntrega);
             comandoSql.Parameters.AddWithValue("@Detalhes", novoProdutoTapecaria.Detalhes);
 
-            conexaoSql.Open();
-            comandoSql.ExecuteNonQuery();
-            conexaoSql.Close();
+            using (conexaoSql)
+            {
+                comandoSql.ExecuteNonQuery();
+                return novoProdutoTapecaria.Id;
+            }
         }
 
         public void Remover(int id)
