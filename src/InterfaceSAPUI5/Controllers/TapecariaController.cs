@@ -1,4 +1,5 @@
 ﻿using Dominio;
+using Dominio.ValidacaoProdutoTapecaria;
 using InfraestruturaDeDados.Repositorios;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
@@ -21,8 +22,19 @@ namespace InterfaceSAPUI5.Controllers
         [HttpPost]
         public IActionResult Criar(ProdutoTapecaria produtoTapecaria)
         {
-                _repositorio.Criar(produtoTapecaria);
-                return Created($"produtoTapecaria/{produtoTapecaria.Id}", produtoTapecaria);
+            if (produtoTapecaria is not null)
+            {
+                var validacao = new ValidadorProdutoTapecaria();
+                var listaDeErros = validacao.ValidarProduto(produtoTapecaria);
+
+                if (listaDeErros is null)
+                {
+                    _repositorio.Criar(produtoTapecaria);
+                    return Created($"produtoTapecaria/{produtoTapecaria.Id}", produtoTapecaria);
+                }
+                else { return BadRequest(listaDeErros);}
+            }
+            else{ return BadRequest();}
         }
 
         [HttpGet]
@@ -42,12 +54,23 @@ namespace InterfaceSAPUI5.Controllers
         [HttpPut]
         public IActionResult Atualizar(ProdutoTapecaria novoProdutoTapecaria)
         {
-            _repositorio.Atualizar(novoProdutoTapecaria);
-            return Ok(novoProdutoTapecaria);
+            if (novoProdutoTapecaria is not null)
+            {
+                var validacao = new ValidadorProdutoTapecaria();
+                var listaDeErros = validacao.ValidarProduto(novoProdutoTapecaria);
+
+                if (listaDeErros is null)
+                {
+                    _repositorio.Atualizar(novoProdutoTapecaria);
+                    return Ok(novoProdutoTapecaria);
+                }
+                else { return BadRequest(listaDeErros); }
+            }
+            else { return BadRequest(); }
         }
 
-        [HttpDelete]
-        public IActionResult Remover(int id)
+        [HttpDelete("{id}")]
+        public IActionResult Remover([FromRoute] int id)
         {
             _repositorio.Remover(id);
             return Ok();
