@@ -13,9 +13,9 @@ namespace InfraestruturaDeDados.Repositorios
             {
                 var conexaoSql = CriarConexao();
 
-                using (conexaoSql)
+                using(conexaoSql)
                 {
-                    conexaoSql.InsertWithInt32Identity(produtoTapecaria);
+                    produtoTapecaria.Id = conexaoSql.InsertWithInt32Identity(produtoTapecaria);
                 }
 
                 return produtoTapecaria.Id;

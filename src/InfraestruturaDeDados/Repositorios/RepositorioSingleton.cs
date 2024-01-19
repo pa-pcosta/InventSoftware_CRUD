@@ -7,6 +7,7 @@ namespace InfraestruturaDeDados.Repositorios
     {
         public int Criar(ProdutoTapecaria produtoTapecaria)
         {
+            produtoTapecaria.Id = ListaTapecariaSingleton.ObterProximoId();
             _listaTapecaria.Add(produtoTapecaria);
 
             return produtoTapecaria.Id;

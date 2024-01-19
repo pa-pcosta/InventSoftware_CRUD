@@ -88,8 +88,7 @@ namespace InfraestruturaDeDados.Repositorios
                             PrecoMetroQuadrado = @PrecoMetroQuadrado, 
                             EhEntrega = @EhEntrega, 
                             Detalhes = @Detalhes
-                        WHERE Id = @Id
-                        SELECT SCOPE_IDENTITY();";
+                        WHERE Id = @Id";
 
             var comandoSql = new SqlCommand(query, conexaoSql);
 
@@ -102,7 +101,7 @@ namespace InfraestruturaDeDados.Repositorios
             comandoSql.Parameters.AddWithValue("@Detalhes", novoProdutoTapecaria.Detalhes);
 
             conexaoSql.Open();
-            novoProdutoTapecaria.Id = Convert.ToInt32(comandoSql.ExecuteScalar());
+            comandoSql.ExecuteNonQuery();
             conexaoSql.Close();
 
             return novoProdutoTapecaria.Id;
