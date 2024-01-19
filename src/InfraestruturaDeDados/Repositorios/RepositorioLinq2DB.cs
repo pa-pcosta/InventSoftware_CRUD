@@ -15,7 +15,7 @@ namespace InfraestruturaDeDados.Repositorios
 
                 using (conexaoSql)
                 {
-                    conexaoSql.Insert(produtoTapecaria);
+                    conexaoSql.InsertWithInt32Identity(produtoTapecaria);
                 }
 
                 return produtoTapecaria.Id;

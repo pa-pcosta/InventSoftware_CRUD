@@ -18,7 +18,8 @@ namespace InfraestruturaDeDados.Repositorios
                                 @Area, 
                                 @PrecoMetroQuadrado, 
                                 @EhEntrega, 
-                                @Detalhes)";
+                                @Detalhes);
+                        SELECT SCOPE_IDENTITY();";
 
             var comandoSql = new SqlCommand(query, conexaoSql);
 
@@ -30,13 +31,10 @@ namespace InfraestruturaDeDados.Repositorios
             comandoSql.Parameters.AddWithValue("@Detalhes", produtoTapecaria.Detalhes);
 
             conexaoSql.Open();
-            
             produtoTapecaria.Id = Convert.ToInt32(comandoSql.ExecuteScalar());
-            var Id = produtoTapecaria.Id;
-
             conexaoSql.Close();
 
-            return Id;
+            return produtoTapecaria.Id;
         }
 
         public List<ProdutoTapecaria> ObterTodos()
@@ -90,7 +88,8 @@ namespace InfraestruturaDeDados.Repositorios
                             PrecoMetroQuadrado = @PrecoMetroQuadrado, 
                             EhEntrega = @EhEntrega, 
                             Detalhes = @Detalhes
-                        WHERE Id = @Id";
+                        WHERE Id = @Id
+                        SELECT SCOPE_IDENTITY();";
 
             var comandoSql = new SqlCommand(query, conexaoSql);
 
@@ -102,11 +101,11 @@ namespace InfraestruturaDeDados.Repositorios
             comandoSql.Parameters.AddWithValue("@EhEntrega", novoProdutoTapecaria.EhEntrega);
             comandoSql.Parameters.AddWithValue("@Detalhes", novoProdutoTapecaria.Detalhes);
 
-            using (conexaoSql)
-            {
-                comandoSql.ExecuteNonQuery();
-                return novoProdutoTapecaria.Id;
-            }
+            conexaoSql.Open();
+            novoProdutoTapecaria.Id = Convert.ToInt32(comandoSql.ExecuteScalar());
+            conexaoSql.Close();
+
+            return novoProdutoTapecaria.Id;
         }
 
         public void Remover(int id)
