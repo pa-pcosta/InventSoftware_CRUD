@@ -1,12 +1,16 @@
-﻿using ControleDeEstoque.Dominio;
+﻿using Dominio;
+using InfraestruturaDeDados;
 
-namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
+namespace InfraestruturaDeDados.Repositorios
 {
     public class RepositorioSingleton : IRepositorio
     {
-        public void Criar(ProdutoTapecaria produtoTapecaria)
+        public int Criar(ProdutoTapecaria produtoTapecaria)
         {
+            produtoTapecaria.Id = ListaTapecariaSingleton.ObterProximoId();
             _listaTapecaria.Add(produtoTapecaria);
+
+            return produtoTapecaria.Id;
         }
         static readonly List<ProdutoTapecaria> _listaTapecaria = ListaTapecariaSingleton.ObterInstancia();
 
@@ -21,12 +25,14 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
         }
 
 
-        public void Atualizar(ProdutoTapecaria novoProdutoTapecaria)
+        public int Atualizar(ProdutoTapecaria novoProdutoTapecaria)
         {
             var produtoASerEditado = ObterPorId(novoProdutoTapecaria.Id);
             var indexProdutoASerEditado = _listaTapecaria.IndexOf(produtoASerEditado);
 
             _listaTapecaria[indexProdutoASerEditado] = novoProdutoTapecaria;
+
+            return novoProdutoTapecaria.Id;
         }
 
         public void Remover(int id)

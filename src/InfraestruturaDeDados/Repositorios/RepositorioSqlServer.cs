@@ -1,14 +1,14 @@
-﻿using ControleDeEstoque.Dominio;
+﻿using Dominio;
 using Microsoft.Data.SqlClient;
 using System.Configuration;
 
-namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
+namespace InfraestruturaDeDados.Repositorios
 {
     public class RepositorioSqlServer : IRepositorio
     {
         private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["SQL_Server_Controle_De_Estoque"].ConnectionString;
 
-        public void Criar(ProdutoTapecaria produtoTapecaria)
+        public int Criar(ProdutoTapecaria produtoTapecaria)
         {
             var conexaoSql = new SqlConnection(_connectionString);
 
@@ -18,7 +18,8 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
                                 @Area, 
                                 @PrecoMetroQuadrado, 
                                 @EhEntrega, 
-                                @Detalhes)";
+                                @Detalhes);
+                        SELECT SCOPE_IDENTITY();";
 
             var comandoSql = new SqlCommand(query, conexaoSql);
 
@@ -30,8 +31,10 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
             comandoSql.Parameters.AddWithValue("@Detalhes", produtoTapecaria.Detalhes);
 
             conexaoSql.Open();
-            comandoSql.ExecuteNonQuery();
+            produtoTapecaria.Id = Convert.ToInt32(comandoSql.ExecuteScalar());
             conexaoSql.Close();
+
+            return produtoTapecaria.Id;
         }
 
         public List<ProdutoTapecaria> ObterTodos()
@@ -75,7 +78,7 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
             return produtoTapecaria;
         }
 
-        public void Atualizar(ProdutoTapecaria novoProdutoTapecaria)
+        public int Atualizar(ProdutoTapecaria novoProdutoTapecaria)
         {
             var conexaoSql = new SqlConnection(_connectionString);
             var query = @"UPDATE tb_Tapecaria
@@ -100,6 +103,8 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
             conexaoSql.Open();
             comandoSql.ExecuteNonQuery();
             conexaoSql.Close();
+
+            return novoProdutoTapecaria.Id;
         }
 
         public void Remover(int id)

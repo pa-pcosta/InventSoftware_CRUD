@@ -1,20 +1,35 @@
+using Dominio;
+using InfraestruturaDeDados.MigracaoBancoDeDados;
+using InfraestruturaDeDados.Repositorios;
+using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.Extensions.FileProviders;
+
+using (var serviceProvider = MigracaoConfig.CreateServices())
+using (var scope = serviceProvider.CreateScope())
+{
+    MigracaoConfig.UpdateDatabase(scope.ServiceProvider);
+}
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddScoped<IRepositorio, RepositorioSingleton>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseDefaultFiles();
+app.UseStaticFiles(new StaticFileOptions
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    FileProvider = new PhysicalFileProvider(
+Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")
+),
+
+    ContentTypeProvider = new FileExtensionContentTypeProvider
+    {
+        Mappings = { [".properties"] = "application/x-msdownload" }
+    }
+});
 
 app.UseHttpsRedirection();
 

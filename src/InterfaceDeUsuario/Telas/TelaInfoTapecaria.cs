@@ -1,9 +1,9 @@
-﻿using ControleDeEstoque.Dominio;
-using ControleDeEstoque.Dominio.ValidacaoProdutoTapecaria;
-using ControleDeEstoque.InfraestruturaDeDados;
+﻿using Dominio;
+using Dominio.ValidacaoProdutoTapecaria;
+using InfraestruturaDeDados;
 using System.Text.RegularExpressions;
 
-namespace ControleDeEstoque.InterfaceDeUsuario
+namespace ControleDeEstoque.InterfaceWindowsForms
 {
     public partial class TelaInfoTapecaria : Form
     {

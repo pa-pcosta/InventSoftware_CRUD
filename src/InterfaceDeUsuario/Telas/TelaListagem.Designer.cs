@@ -1,4 +1,4 @@
-﻿namespace ControleDeEstoque.InterfaceDeUsuario
+﻿namespace ControleDeEstoque.InterfaceWindowsForms
 {
     partial class TelaListagem
     {
@@ -89,7 +89,7 @@
             // 
             // telaListagemBindingSource
             // 
-            this.telaListagemBindingSource.DataSource = typeof(ControleDeEstoque.InterfaceDeUsuario.TelaListagem);
+            this.telaListagemBindingSource.DataSource = typeof(ControleDeEstoque.InterfaceWindowsForms.TelaListagem);
             // 
             // TelaListagem
             // 
