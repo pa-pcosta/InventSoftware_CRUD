@@ -14,15 +14,6 @@ sap.ui.define([
 			// call the init function of the parent
 			UIComponent.prototype.init.apply(this, arguments);
 
-			// set data model on view
-			const oData = {
-				recipient: {
-					name: "World"
-				}
-			};
-			const oModel = new JSONModel(oData);
-			this.setModel(oModel);
-
 			// create the views based on the url/hash
 			this.getRouter().initialize();
 		}

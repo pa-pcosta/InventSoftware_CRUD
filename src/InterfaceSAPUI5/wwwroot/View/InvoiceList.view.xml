@@ -1,24 +1,19 @@
 <mvc:View
 	controllerName="ui5.walkthrough.controller.InvoiceList"
-	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
->
+	xmlns="sap.m">
 	<List
 		id="invoiceList"
-		headerText="{i18n>invoiceListTitle}"
+		headerText="{i18n>tituloListagem}"
 		class="sapUiResponsiveMargin"
 		width="auto"
 		items="{
-			path : 'invoice>/Invoices',
-			sorter : {
-				path : 'ShipperName',
-				group : true
-			}
-		}"
-	>
+			path : 'produtoTapecaria>/'
+		}">
 		<headerToolbar>
 			<Toolbar>
-				<Title text="{i18n>invoiceListTitle}" />
+				<Title text="{i18n>tituloListagem}" />
 				<ToolbarSpacer />
 				<SearchField
 					width="50%"
@@ -27,32 +22,51 @@
 			</Toolbar>
 		</headerToolbar>
 		<items>
-			<ObjectListItem
-				title="{invoice>Quantity} x {invoice>ProductName}"
-				number="{
-					parts: [
-						'invoice>ExtendedPrice',
-						'view>/currency'
-					],
-					type: 'sap.ui.model.type.Currency',
-					formatOptions: {
-						showMeasure: false
-					}
-				}"
-				numberUnit="{view>/currency}"
-				numberState="{= ${invoice>ExtendedPrice} > 50 ? 'Error' : 'Success' }"
-				type="Navigation"
-				press=".onPress"
-			>
-				<firstStatus>
-					<ObjectStatus
-						text="{
-							path: 'invoice>Status',
-							formatter: '.formatter.statusText'
-						}"
-					/>
-				</firstStatus>
-			</ObjectListItem>
+			<CustomListItem>
+			<HBox>
+				<VBox
+					width= "10%"
+					alignItems="Center"
+					justifyContent="Center">
+					<core:Icon size="2rem" src="sap-icon://attachment-photo" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />
+				</VBox>
+				
+				<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" 
+					width= "10%"
+					alignItems="Center"
+					justifyContent="Center">
+					<ObjectIdentifier title="{produtoTapecaria>Id}" />
+					<Label text="{
+                            path: 'produtoTapecaria>Tipo',
+                            formatter: '.formatter.statusText'
+                        }"/>
+				</VBox>
+
+				<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom"
+					width= "30%" 
+					alignItems="Center"
+					justifyContent="Center">
+					<Text text="{path:'produtoTapecaria>DataEntrada',
+                    	type: 'sap.ui.model.type.Date',
+                        formatOptions: {
+                        	style: 'short',
+                        	source: {
+								pattern: 'yyyy-MM-ddTHH:mm:ss.SSS'
+							}
+						}
+					}"/>
+				</VBox>
+
+				<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom"
+					width= "25%"
+					alignItems="Center"
+					justifyContent="Center">
+					<ObjectNumber
+						number="{produtoTapecaria>PrecoMetroQuadrado}"
+							unit= "{moeda>/simbolo}"/>
+				</VBox>
+			</HBox>
+		</CustomListItem>
 		</items>
 	</List>
 </mvc:View>

@@ -51,9 +51,6 @@
 					],
 					"fallbackLocale": ""
 				}
-			},
-			"invoice": {
-				"dataSource": "invoiceRemote"
 			}
 		},
 		"rootView": {
