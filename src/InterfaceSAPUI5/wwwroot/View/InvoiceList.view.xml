@@ -1,6 +1,7 @@
 <mvc:View
     controllerName="ui5.walkthrough.controller.InvoiceList"
     xmlns="sap.m"
+    xmlns:core="sap.ui.core"
     xmlns:mvc="sap.ui.core.mvc">
 	<Panel accessibleRole="Region">
 		<headerToolbar>
@@ -12,74 +13,57 @@
 					search=".onFilterInvoices"/>
 			</Toolbar>
 		</headerToolbar>
-        <Table
-			id="invoiceList"
-			class="sapUiResponsiveMargin"
-			width="auto"
-			items="{
-				path : 'invoice>/'
-			}">
-			<columns>
-				<Column
-					hAlign="End"
-					minScreenWidth="Small"
-					demandPopin="true"
-					width="5em">
-					<Text text="{i18n>columnQuantity}" />
-				</Column>
-				<Column>
-					<Text text="{i18n>columnName}" />
-				</Column>
-				<Column
-					minScreenWidth="Small"
-					demandPopin="true">
-					<Text text="{i18n>columnStatus}" />
-				</Column>
-				<Column
-					minScreenWidth="Tablet"
-					demandPopin="false">
-					<Text text="{i18n>columnSupplier}" />
-				</Column>
-				<Column hAlign="End">
-					<Text text="{i18n>columnPrice}" />
-				</Column>
-			</columns>
-			<items>
-				<ColumnListItem
-					type="Navigation"
-					press=".onPress">
-					<cells>
+        <List headerText="Custom Content" mode="Delete" items="{path : 'invoice>/Invoices'}" >
+		    <CustomListItem>
+				<HBox>
+					<FlexBox
+						alignItems="Center"
+						justifyContent="Center"
+						width ="10%">
+						<core:Icon size="2rem" src="sap-icon://attachment-photo" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />
+					</FlexBox>
+                    
+					<FlexBox
+						alignItems="Center"
+						justifyContent="Center"
+						width ="20%">
+						<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" alignItems="Center"
+						justifyContent="Center">
+							<ObjectNumber
+								number="{invoice>Quantity}"
+								emphasized="false"/>
+							<ObjectIdentifier title="{invoice>ProductName}" />
+						</VBox>
+					</FlexBox>
+                    
+					<FlexBox
+						alignItems="Center"
+						justifyContent="Center"
+						width ="50%">
+							<Text text="{invoice>ShipperName}" />
+					</FlexBox>
+
+					<FlexBox
+						alignItems="Center"
+						justifyContent="Center"
+						width ="20%">
 						<ObjectNumber
-							number="{invoice>/Quantity}"
-							emphasized="false"/>
-						<ObjectIdentifier title="{invoice>/ProductName}" />
-						<Text
-							text="{
-									parts: [
-										'invoice>Status',
-										'i18n>invoiceStatusA',
-										'i18n>invoiceStatusB',
-										'i18n>invoiceStatusC'
-									],
-									formatter: '.formatter.statusText'
-								}"/>
-						<Text text="{invoice>/ShipperName}" />
-						<ObjectNumber
-							number="{
-									parts: [
-										'invoice>/ExtendedPrice',
-										'view>/currency'
-									],
-									type: 'sap.ui.model.type.Currency',
-									formatOptions: {
-										showMeasure: false
-									}
-								}"
-							unit="{view>/currency}"
-							state="{= ${invoice>/ExtendedPrice} > 50 ? 'Error' : 'Success' }"/>
-					</cells>
-				</ColumnListItem>
-			</items>
-		</Table>
+						number="{
+								parts: [
+									'invoice>ExtendedPrice',
+									'view>/currency'
+								],
+								type: 'sap.ui.model.type.Currency',
+								formatOptions: {
+									showMeasure: false
+								}
+							}"
+						unit="{view>/currency}"
+						state="{= ${invoice>ExtendedPrice} &lt; 10 ? 'Error' : 'Success' }"/>
+					</FlexBox>
+					
+		    	</HBox>
+			</CustomListItem>
+	    </List>
 	</Panel>
 </mvc:View>

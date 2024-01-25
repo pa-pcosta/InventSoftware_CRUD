@@ -15,7 +15,7 @@ sap.ui.define([
 				currency: "EUR"
 			});
 			this.getView().setModel(oViewModel, "view");
-			this.objeto();
+			//this.objeto();
 		},
 
 		onFilterInvoices(oEvent) {
@@ -41,15 +41,15 @@ sap.ui.define([
 		},
 
 		objeto() {
-			let objeto = {"ProductName": "fulano",
-            "Quantity": 44444,
-            "ExtendedPrice": 66.8,
-            "ShipperName": "blabla",
-            "ShippedDate": "2015-04-01T00:00:00",
-            "Status": "C"};
+			// let objeto = {"ProductName": "fulano",
+            // "Quantity": 44444,
+            // "ExtendedPrice": 66.8,
+            // "ShipperName": "blabla",
+            // "ShippedDate": "",
+            // "Status": ""};
 
-			let modelo = new JSONModel(objeto);
-			this.getView().setModel(modelo, "invoice");
+			// let modelo = new JSONModel(objeto);
+			// this.getView().setModel(modelo, "invoice");
 		}
 	});
 });
