@@ -8,14 +8,13 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("ui5.walkthrough.controller.InvoiceList", {
-		formatter: formatter, 
+		formatter: formatter,
 
 		onInit() {
 			const oViewModel = new JSONModel({
 				currency: "EUR"
 			});
 			this.getView().setModel(oViewModel, "view");
-			//this.objeto();
 		},
 
 		onFilterInvoices(oEvent) {
@@ -38,18 +37,6 @@ sap.ui.define([
 			oRouter.navTo("detail", {
 				invoicePath: window.encodeURIComponent(oItem.getBindingContext("invoice").getPath().substr(1))
 			});
-		},
-
-		objeto() {
-			// let objeto = {"ProductName": "fulano",
-            // "Quantity": 44444,
-            // "ExtendedPrice": 66.8,
-            // "ShipperName": "blabla",
-            // "ShippedDate": "",
-            // "Status": ""};
-
-			// let modelo = new JSONModel(objeto);
-			// this.getView().setModel(modelo, "invoice");
 		}
 	});
 });

@@ -1,69 +1,58 @@
 <mvc:View
-    controllerName="ui5.walkthrough.controller.InvoiceList"
-    xmlns="sap.m"
-    xmlns:core="sap.ui.core"
-    xmlns:mvc="sap.ui.core.mvc">
-	<Panel accessibleRole="Region">
+	controllerName="ui5.walkthrough.controller.InvoiceList"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+>
+	<List
+		id="invoiceList"
+		headerText="{i18n>invoiceListTitle}"
+		class="sapUiResponsiveMargin"
+		width="auto"
+		items="{
+			path : 'invoice>/Invoices',
+			sorter : {
+				path : 'ShipperName',
+				group : true
+			}
+		}"
+	>
 		<headerToolbar>
 			<Toolbar>
-				<Title text="{i18n>invoiceListTitle}"/>
-				<ToolbarSpacer/>
+				<Title text="{i18n>invoiceListTitle}" />
+				<ToolbarSpacer />
 				<SearchField
 					width="50%"
-					search=".onFilterInvoices"/>
+					search=".onFilterInvoices"
+				/>
 			</Toolbar>
 		</headerToolbar>
-        <List headerText="Custom Content" mode="Delete" items="{path : 'invoice>/Invoices'}" >
-		    <CustomListItem>
-				<HBox>
-					<FlexBox
-						alignItems="Center"
-						justifyContent="Center"
-						width ="10%">
-						<core:Icon size="2rem" src="sap-icon://attachment-photo" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />
-					</FlexBox>
-                    
-					<FlexBox
-						alignItems="Center"
-						justifyContent="Center"
-						width ="20%">
-						<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" alignItems="Center"
-						justifyContent="Center">
-							<ObjectNumber
-								number="{invoice>Quantity}"
-								emphasized="false"/>
-							<ObjectIdentifier title="{invoice>ProductName}" />
-						</VBox>
-					</FlexBox>
-                    
-					<FlexBox
-						alignItems="Center"
-						justifyContent="Center"
-						width ="50%">
-							<Text text="{invoice>ShipperName}" />
-					</FlexBox>
-
-					<FlexBox
-						alignItems="Center"
-						justifyContent="Center"
-						width ="20%">
-						<ObjectNumber
-						number="{
-								parts: [
-									'invoice>ExtendedPrice',
-									'view>/currency'
-								],
-								type: 'sap.ui.model.type.Currency',
-								formatOptions: {
-									showMeasure: false
-								}
-							}"
-						unit="{view>/currency}"
-						state="{= ${invoice>ExtendedPrice} &lt; 10 ? 'Error' : 'Success' }"/>
-					</FlexBox>
-					
-		    	</HBox>
-			</CustomListItem>
-	    </List>
-	</Panel>
+		<items>
+			<ObjectListItem
+				title="{invoice>Quantity} x {invoice>ProductName}"
+				number="{
+					parts: [
+						'invoice>ExtendedPrice',
+						'view>/currency'
+					],
+					type: 'sap.ui.model.type.Currency',
+					formatOptions: {
+						showMeasure: false
+					}
+				}"
+				numberUnit="{view>/currency}"
+				numberState="{= ${invoice>ExtendedPrice} > 50 ? 'Error' : 'Success' }"
+				type="Navigation"
+				press=".onPress"
+			>
+				<firstStatus>
+					<ObjectStatus
+						text="{
+							path: 'invoice>Status',
+							formatter: '.formatter.statusText'
+						}"
+					/>
+				</firstStatus>
+			</ObjectListItem>
+		</items>
+	</List>
 </mvc:View>
