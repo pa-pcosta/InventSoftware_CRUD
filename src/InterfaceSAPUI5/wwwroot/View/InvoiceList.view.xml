@@ -35,9 +35,9 @@
 					width= "10%"
 					alignItems="Center"
 					justifyContent="Center">
-					<ObjectIdentifier title="{produtoTapecaria>Id}" />
+					<ObjectIdentifier title="{produtoTapecaria>id}" id="id"/>
 					<Label text="{
-                            path: 'produtoTapecaria>Tipo',
+                            path: 'produtoTapecaria>tipo',
                             formatter: '.formatter.enumTipoTapecaria'
                         }"/>
 				</VBox>
@@ -46,7 +46,7 @@
 					width= "30%" 
 					alignItems="Center"
 					justifyContent="Center">
-					<Text text="{path:'produtoTapecaria>DataEntrada',
+					<Text text="{path:'produtoTapecaria>dataEntrada',
                     	type: 'sap.ui.model.type.Date',
                         formatOptions: {
                         	style: 'short',
@@ -64,8 +64,8 @@
 					justifyContent="Center">
 					<Text text="{
 							parts: [
-								'produtoTapecaria>PrecoMetroQuadrado',
-								'produtoTapecaria>Area'
+								'produtoTapecaria>precoMetroQuadrado',
+								'produtoTapecaria>area'
 							],
 							formatter: '.formatter.precoTotal'
 						}"/>

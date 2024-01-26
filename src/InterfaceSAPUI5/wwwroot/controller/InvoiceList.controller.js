@@ -21,7 +21,7 @@ sap.ui.define([
 			const aFilter = [];
 			const sQuery = oEvent.getParameter("query");
 			if (sQuery) {
-				aFilter.push(new Filter("ProductName", FilterOperator.Contains, sQuery));
+				aFilter.push(new Filter("id", FilterOperator.Contains, sQuery));
 			}
 
 			// filter binding
@@ -38,50 +38,22 @@ sap.ui.define([
 			});
 		},
 
-		setarModeloTapecaria(){
-			let produtoTapecaria = [
-				{
-					"Id": 1,
-					"Tipo": 2,
-					"DataEntrada": "2024-01-19T12:12:00",
-					"Area": 2,
-					"PrecoMetroQuadrado": 35.0000000,
-					"EhEntrega": true,
-					"Detalhes": "Campo Detalhes"
-				},
-				{
-					"Id": 52,
-					"Tipo": 3,
-					"DataEntrada": "2023-12-22T00:00:00",
-					"Area": 4,
-					"PrecoMetroQuadrado": 100.00000,
-					"EhEntrega": true,
-					"Detalhes": "TESTE PUT API [retornar Id] #5 REPO SQLSERVER)"
-				},
-				{
-					"Id": 6,
-					"Tipo": 0,
-					"DataEntrada": "2023-12-22T00:00:00",
-					"Area": 8,
-					"PrecoMetroQuadrado": 20.00000,
-					"EhEntrega": true,
-					"Detalhes": "TESTE POST API [retornar Id] AAA"
-				},
-				{
-					"Id": 25,
-					"Tipo": 1,
-					"DataEntrada": "2023-12-22T00:00:00",
-					"Area": 8,
-					"PrecoMetroQuadrado": 10.00000,
-					"EhEntrega": true,
-					"Detalhes": "TESTE POST API [retornar Id] AAA"
-				}
-			];
+		async setarModeloTapecaria() {
 
-			let modelo = new JSONModel(produtoTapecaria);
-			this.getView().setModel(modelo,"produtoTapecaria");
+			const url = 'api/Tapecaria';
+			let resposta = await fetch(url);
+			if (resposta.ok){
+				let modeloTapecaria= await resposta.json()
+				modeloTapecaria = this.getView().setModel(new JSONModel(modeloTapecaria), "produtoTapecaria")
+				
+			}	 
+			// fetch(url)
+			// 	.then(data => {
+			// 		data.json();
+			// 	})
+			// 	.then(modelo => { this.getView().setModel(new JSONModel(modelo), "produtoTapecaria"); });
 
-			//return modelo;
+			
 		},
 
 		setarModeloMoeda(){
