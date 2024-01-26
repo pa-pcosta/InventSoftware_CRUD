@@ -25,7 +25,7 @@
 			<CustomListItem>
 			<HBox>
 				<VBox
-					width= "10%"
+					width= "20%"
 					alignItems="Center"
 					justifyContent="Center">
 					<core:Icon size="2rem" src="sap-icon://attachment-photo" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />
@@ -38,7 +38,7 @@
 					<ObjectIdentifier title="{produtoTapecaria>Id}" />
 					<Label text="{
                             path: 'produtoTapecaria>Tipo',
-                            formatter: '.formatter.statusText'
+                            formatter: '.formatter.enumTipoTapecaria'
                         }"/>
 				</VBox>
 
@@ -58,12 +58,17 @@
 				</VBox>
 
 				<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom"
-					width= "25%"
+					width="30%"
+					direction="Row"
 					alignItems="Center"
 					justifyContent="Center">
-					<ObjectNumber
-						number="{produtoTapecaria>PrecoMetroQuadrado}"
-							unit= "{moeda>/simbolo}"/>
+					<Text text="{
+							parts: [
+								'produtoTapecaria>PrecoMetroQuadrado',
+								'produtoTapecaria>Area'
+							],
+							formatter: '.formatter.precoTotal'
+						}"/>
 				</VBox>
 			</HBox>
 		</CustomListItem>

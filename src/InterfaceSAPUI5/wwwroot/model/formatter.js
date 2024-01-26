@@ -2,10 +2,10 @@ sap.ui.define([], () => {
 	"use strict";
 
 	return {
-		statusText(sStatus) {
+		enumTipoTapecaria(indice) {
 			const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 
-			switch (sStatus) {
+			switch (indice) {
 				case 0:
 					return oResourceBundle.getText("tipoTapecaria0");
 				case 1:
@@ -15,8 +15,18 @@ sap.ui.define([], () => {
 				case 3:
 					return oResourceBundle.getText("tipoTapecaria3");
 				default:
-					return sStatus;
+					return indice;
 			}
+		},
+
+		precoTotal(precoMetroQuadrado, area) {
+
+			let precoTotal = precoMetroQuadrado * area;
+			
+			const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+
+			return oResourceBundle.getText("simboloMoeda") + " " + parseFloat(precoTotal).toFixed(2);
 		}
+
 	};
 });
