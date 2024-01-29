@@ -37,13 +37,17 @@ namespace InfraestruturaDeDados.Repositorios
             return produtoTapecaria.Id;
         }
 
-        public List<ProdutoTapecaria> ObterTodos()
+        public List<ProdutoTapecaria> ObterTodos(int? id)
         {
             var conexaoSql = new SqlConnection(_connectionString);
 
             var query = @"SELECT * 
-                        FROM tb_Tapecaria 
-                        ORDER BY Id";
+                        FROM tb_Tapecaria ";
+
+            if (id is not null) 
+            {
+                query += $"WHERE Id = {id}";
+            }
 
             var comandoSql = new SqlCommand(query, conexaoSql);
             conexaoSql.Open();
