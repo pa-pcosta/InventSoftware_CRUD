@@ -77,8 +77,8 @@
 			"routes": [
 				{
 					"pattern": "",
-					"name": "overview",
-					"target": "overview"
+					"name": "invoiceList",
+					"target": "invoiceList"
 				},
 				{
 					"pattern": "detail/{invoicePath}",
@@ -87,9 +87,9 @@
 				}
 			],
 			"targets": {
-				"overview": {
-					"id": "overview",
-					"name": "Overview"
+				"invoiceList": {
+					"id": "invoiceList",
+					"name": "InvoiceList"
 				},
 				"detail": {
 					"id": "detail",

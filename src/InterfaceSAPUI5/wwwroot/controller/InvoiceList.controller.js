@@ -15,9 +15,9 @@ sap.ui.define([
 			this.setarModeloTapecaria();
 		},
 
-		async onFilterInvoices(oEvent) {
+		async AoClicarEmFiltrar(oEvent) {
 			const sQuery = oEvent.getParameter("query");
-			const url = 'api/Tapecaria' + '?id=' + sQuery;
+			const url = 'api/Tapecaria' + '?tipo=' + sQuery;
 
 			let resposta = await fetch(url);
 
@@ -38,17 +38,12 @@ sap.ui.define([
 		async setarModeloTapecaria() {
 
 			const url = 'api/Tapecaria';
-			let resposta = await fetch(url);
-
-			if (resposta.ok){
-				let modeloTapecaria= await resposta.json();
-				this.getView().setModel(new JSONModel(modeloTapecaria), "produtoTapecaria");
-			}	 
-			// fetch(url)
-			// 	.then(data => {
-			// 		data.json();
-			// 	})
-			// 	.then(modelo => { this.getView().setModel(new JSONModel(modelo), "produtoTapecaria"); });
+			
+			return fetch(url)
+				.then(data => {
+					return data.json();
+				})
+				.then(modelo => { this.getView().setModel(new JSONModel(modelo), "produtoTapecaria"); });
 		}
 	});
 });

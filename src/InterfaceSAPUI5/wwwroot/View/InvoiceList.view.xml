@@ -3,75 +3,131 @@
 	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m">
-	<List
-		id="invoiceList"
-		headerText="{i18n>tituloListagem}"
-		class="sapUiResponsiveMargin"
-		width="auto"
-		items="{
-			path : 'produtoTapecaria>/'
-		}">
-		<headerToolbar>
-			<Toolbar>
+
+	<Page>
+
+		<headerContent
+			alignItems="Center"
+			justifyContent="Center"
+			height="5rem">
+			<Toolbar width='100%'>
 				<Title text="{i18n>tituloListagem}" />
-				<ToolbarSpacer />
+				<ToolbarSpacer/>
 				<SearchField
 					width="50%"
-					search=".onFilterInvoices"
+					search=".AoClicarEmFiltrar"
+					placeholder="Que tipo de produto você está procurando?"
 				/>
+				<ToolbarSpacer/>
+				<Button text="Adicionar novo produto"
+						type="Default"
+						icon="sap-icon://add"
+						press="onPress"
+						ariaDescribedBy="defaultButtonDescription genericButtonDescription">
+				</Button>
 			</Toolbar>
-		</headerToolbar>
-		<items>
-			<CustomListItem>
-			<HBox>
-				<VBox
-					width= "20%"
-					alignItems="Center"
-					justifyContent="Center">
-					<core:Icon size="2rem" src="sap-icon://attachment-photo" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />
-				</VBox>
-				
-				<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" 
-					width= "10%"
-					alignItems="Center"
-					justifyContent="Center">
-					<ObjectIdentifier title="{produtoTapecaria>id}" id="id"/>
-					<Label text="{
-                            path: 'produtoTapecaria>tipo',
-                            formatter: '.formatter.enumTipoTapecaria'
-                        }"/>
-				</VBox>
+		</headerContent>
 
-				<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom"
-					width= "30%" 
-					alignItems="Center"
-					justifyContent="Center">
-					<Text text="{path:'produtoTapecaria>dataEntrada',
-                    	type: 'sap.ui.model.type.Date',
-                        formatOptions: {
-                        	style: 'short',
-                        	source: {
-								pattern: 'yyyy-MM-ddTHH:mm:ss.SSS'
+		<HBox
+			backgroundDesign="Solid"
+			class="sapUiResponsiveMargin"
+			width="auto"
+			height="3rem"
+			alignItems="Center"
+			justifyContent="Center">
+			<VBox width='10%' alignItems="Center" justifyContent="Center"></VBox>
+			<VBox 
+				width='10%'
+				alignItems="Center"
+				justifyContent="Center">
+				<Label text="ID" design="Bold"/>
+			</VBox>
+			<VBox 
+				width='30%'
+				alignItems="Center"
+				justifyContent="Center">
+				<Label text="Produto" design="Bold"/>
+			</VBox>
+			<VBox 
+				width='25%'
+				alignItems="Center"
+				justifyContent="Center">
+				<Label text="Data de entrada" design="Bold"/>
+			</VBox>
+			<VBox 
+				width='25%'
+				alignItems="Center"
+				justifyContent="Center">
+				<Label text="Preço total" design="Bold"/>
+			</VBox>
+		</HBox>
+		
+		<List
+			id="invoiceList"
+			class="sapUiResponsiveMargin"
+			width="auto"
+			items="{
+				path : 'produtoTapecaria>/'
+			}">
+			<items>
+				<CustomListItem>
+				<HBox>
+					<VBox
+						width= "10%"
+						alignItems="Center"
+						justifyContent="Center">
+						<core:Icon size="2rem" src="sap-icon://attachment-photo" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />
+					</VBox>
+					
+					<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" 
+						width= "10%"
+						alignItems="Center"
+						justifyContent="Center">
+						<ObjectIdentifier title="{produtoTapecaria>id}" id="id"/>
+					</VBox>
+
+					<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom"
+						width= "30%" 
+						alignItems="Center"
+						justifyContent="Center">
+						<Label text="{
+								path: 'produtoTapecaria>tipo',
+								formatter: '.formatter.enumTipoTapecaria'
+							}"/>
+						<Text text="{produtoTapecaria>detalhes}"/>
+					</VBox>
+
+					<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom"
+						width= "25%" 
+						alignItems="Center"
+						justifyContent="Center">
+						<Text text="{path:'produtoTapecaria>dataEntrada',
+							type: 'sap.ui.model.type.Date',
+							formatOptions: {
+								style: 'short',
+								source: {
+									pattern: 'yyyy-MM-ddTHH:mm:ss.SSS'
+								}
 							}
-						}
-					}"/>
-				</VBox>
-
-				<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom"
-					width="30%"
-					direction="Row"
-					alignItems="Center"
-					justifyContent="Center">
-					<Text text="{
-							parts: [
-								'produtoTapecaria>precoMetroQuadrado',
-								'produtoTapecaria>area'
-							],
-							formatter: '.formatter.precoTotal'
 						}"/>
-				</VBox>
-			</HBox>
-		</CustomListItem>
-		</items>
-	</List>
+					</VBox>
+
+					<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom"
+						width="25%"
+						direction="Row"
+						alignItems="Center"
+						justifyContent="Center">
+						<Text text="{
+								parts: [
+									'produtoTapecaria>precoMetroQuadrado',
+									'produtoTapecaria>area'
+								],
+								formatter: '.formatter.precoTotal'
+							}"/>
+					</VBox>
+				</HBox>
+			</CustomListItem>
+			</items>
+		</List>
+	</Page>
 </mvc:View>
