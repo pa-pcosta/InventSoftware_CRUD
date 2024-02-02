@@ -10,9 +10,12 @@ sap.ui.define([
 	return Controller.extend("ui5.walkthrough.controller.InvoiceList", {
 		formatter: formatter,
 
+		let valorSelecionadoComboBox ="",
+
 		onInit() {
 			//console.log(this.setarModeloTapecaria().oData);
 			this.setarModeloTapecaria();
+			this.setarModeloEnumTipoTapecaria();
 		},
 
 		async AoClicarEmFiltrar(oEvent) {
@@ -27,13 +30,18 @@ sap.ui.define([
 			}
 		},
 
-		onPress(oEvent) {
-			const oItem = oEvent.getSource();
-			const oRouter = this.getOwnerComponent().getRouter();
-			oRouter.navTo("detail", {
-				invoicePath: window.encodeURIComponent(oItem.getBindingContext("invoice").getPath().substr(1))
-			});
-		},
+		aoMudarValorComboBox (evento) {
+
+
+		}
+
+		// onPress(oEvent) {
+		// 	const oItem = oEvent.getSource();
+		// 	const oRouter = this.getOwnerComponent().getRouter();
+		// 	oRouter.navTo("detail", {
+		// 		invoicePath: window.encodeURIComponent(oItem.getBindingContext("invoice").getPath().substr(1))
+		// 	});
+		// },
 
 		async setarModeloTapecaria() {
 
@@ -44,6 +52,31 @@ sap.ui.define([
 					return data.json();
 				})
 				.then(modelo => { this.getView().setModel(new JSONModel(modelo), "produtoTapecaria"); });
+		},
+
+		setarModeloEnumTipoTapecaria() {
+
+			const enumTipoTapecaria = [
+				{
+					"key":0,
+					"text":"Tapete"
+				},
+				{
+					"key":1,
+					"text":"Cortina"
+				},
+				{
+					"key":2,
+					"text":"Estofado"
+				},
+				{
+					"key":3,
+					"text":"Outros"
+				}
+			]
+
+			let modeloEnumTipoTapecaria = new JSONModel(enumTipoTapecaria);
+			this.getView().setModel(modeloEnumTipoTapecaria, "enumTipoTapecaria");
 		}
 	});
 });

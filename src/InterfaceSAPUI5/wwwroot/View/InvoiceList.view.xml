@@ -13,10 +13,17 @@
 			<Toolbar width='100%'>
 				<Title text="{i18n>tituloListagem}" />
 				<ToolbarSpacer/>
+				<ComboBox
+					width="9rem"
+					items="{enumTipoTapecaria>/}"
+					placeholder="Selecionar tipo"
+					change=".">
+					<core:Item key="{enumTipoTapecaria>key}" text="{enumTipoTapecaria>text}" />
+				</ComboBox>
 				<SearchField
-					width="50%"
+					width="25%"
 					search=".AoClicarEmFiltrar"
-					placeholder="Que tipo de produto você está procurando?"
+					placeholder="Qual produto você está procurando?"
 				/>
 				<ToolbarSpacer/>
 				<Button text="Adicionar novo produto"
