@@ -4,7 +4,7 @@
     {
         public int Criar(ProdutoTapecaria produtoTapecaria);
 
-        public List<ProdutoTapecaria> ObterTodos(int? id);
+        public List<ProdutoTapecaria> ObterTodos(string? tipo, string? detalhes);
 
         public ProdutoTapecaria? ObterPorId(int id);
 

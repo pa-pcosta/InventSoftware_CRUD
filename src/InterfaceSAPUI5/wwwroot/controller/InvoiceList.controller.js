@@ -10,7 +10,7 @@ sap.ui.define([
 	return Controller.extend("ui5.walkthrough.controller.InvoiceList", {
 		formatter: formatter,
 
-		valorSelecionadoComboBox ="",
+		_valorSelecionadoComboBox :"",
 
 		onInit() {
 			//console.log(this.setarModeloTapecaria().oData);
@@ -20,7 +20,7 @@ sap.ui.define([
 
 		async AoClicarEmFiltrar(oEvent) {
 			const sQuery = oEvent.getParameter("query");
-			const url = 'api/Tapecaria' + '?tipo=' + sQuery;
+			const url = 'api/Tapecaria' + '?tipo=' + this._valorSelecionadoComboBox + '&detalhes=' + sQuery;
 
 			let resposta = await fetch(url);
 
@@ -31,9 +31,11 @@ sap.ui.define([
 		},
 
 		aoMudarValorComboBox (evento) {
-			
 
-		}
+			let comboBox = evento.getSource();
+			this._valorSelecionadoComboBox = comboBox.getProperty("selectedKey");
+		},
+
 
 		// onPress(oEvent) {
 		// 	const oItem = oEvent.getSource();
@@ -58,19 +60,19 @@ sap.ui.define([
 
 			const enumTipoTapecaria = [
 				{
-					"key":0,
+					"key":"0",
 					"text":"Tapete"
 				},
 				{
-					"key":1,
+					"key":"1",
 					"text":"Cortina"
 				},
 				{
-					"key":2,
+					"key":"2",
 					"text":"Estofado"
 				},
 				{
-					"key":3,
+					"key":"3",
 					"text":"Outros"
 				}
 			]

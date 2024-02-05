@@ -17,7 +17,7 @@
 					width="9rem"
 					items="{enumTipoTapecaria>/}"
 					placeholder="Selecionar tipo"
-					change=".">
+					change=".aoMudarValorComboBox">
 					<core:Item key="{enumTipoTapecaria>key}" text="{enumTipoTapecaria>text}" />
 				</ComboBox>
 				<SearchField

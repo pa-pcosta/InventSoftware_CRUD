@@ -1,6 +1,7 @@
 ﻿using Dominio;
 using Microsoft.Data.SqlClient;
 using System.Configuration;
+using System.Text.RegularExpressions;
 
 namespace InfraestruturaDeDados.Repositorios
 {
@@ -37,16 +38,28 @@ namespace InfraestruturaDeDados.Repositorios
             return produtoTapecaria.Id;
         }
 
-        public List<ProdutoTapecaria> ObterTodos(int? id)
+        public List<ProdutoTapecaria> ObterTodos(string? tipo, string? detalhes)
         {
             var conexaoSql = new SqlConnection(_connectionString);
 
             var query = @"SELECT * 
                         FROM tb_Tapecaria ";
 
-            if (id is not null) 
+            if (tipo is not null) 
             {
-                query += $"WHERE Id = {id}";
+                query += $"WHERE Tipo = {tipo} ";
+
+                if (detalhes is not null)
+                {
+                    query += $"AND LOWER(Detalhes) LIKE LOWER('%{detalhes}%') ";
+                }
+            }
+            else
+                {
+                if (detalhes is not null)
+                {
+                    query += $"WHERE LOWER(Detalhes) LIKE LOWER('%{detalhes}%') ";
+                }
             }
 
             var comandoSql = new SqlCommand(query, conexaoSql);
@@ -153,6 +166,36 @@ namespace InfraestruturaDeDados.Repositorios
             }
 
             return listaTapecaria;
+        }
+
+        private int InterpretaStringTipoParaIndiceEnum(string tipo)
+        {
+            int enumTipo = -1;
+
+            if ("TAPETE".Contains(tipo.ToUpper()))
+            {
+                enumTipo = 0;
+            }
+            else
+            {
+                if ("CORTINA".Contains(tipo.ToUpper()))
+                {
+                    enumTipo = 1;
+                }
+                else
+                {
+                    if ("ESTOFADO".Contains(tipo.ToUpper()))
+                    {
+                        enumTipo = 2;
+                    }
+                    else
+                    {
+                        if ("OUTROS".Contains(tipo.ToUpper())) enumTipo = 3;
+                    }
+                }
+            }
+
+            return enumTipo;
         }
     }
 }

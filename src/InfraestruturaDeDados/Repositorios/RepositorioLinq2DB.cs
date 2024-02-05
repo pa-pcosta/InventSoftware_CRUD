@@ -47,7 +47,7 @@ namespace InfraestruturaDeDados.Repositorios
             }
         }
 
-        public List<ProdutoTapecaria> ObterTodos(int? id)
+        public List<ProdutoTapecaria> ObterTodos(string? tipo, string? detalhes)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace InfraestruturaDeDados.Repositorios
 
                 using (conexaoSql)
                 {
-                    if (id is null)
+                    if (tipo is null)
                     {
                         return conexaoSql
                                 .GetTable<ProdutoTapecaria>()
@@ -65,7 +65,7 @@ namespace InfraestruturaDeDados.Repositorios
                     {
                         return conexaoSql
                                .GetTable<ProdutoTapecaria>()
-                                   .Where(x => x.Id == id)
+                                   //.Where(x => x.Tipo == tipo)
                                .ToList();
                     }
                 }

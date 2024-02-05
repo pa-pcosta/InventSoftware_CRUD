@@ -14,14 +14,14 @@ namespace InfraestruturaDeDados.Repositorios
         }
         static readonly List<ProdutoTapecaria> _listaTapecaria = ListaTapecariaSingleton.ObterInstancia();
 
-        public List<ProdutoTapecaria> ObterTodos(int? id)
+        public List<ProdutoTapecaria> ObterTodos(string? tipo, string? detalhes)
         {
-            if (id is null) 
+            if (tipo is null) 
             { return _listaTapecaria; }
             else
             {
                 return _listaTapecaria
-                            .Where(x => x.Id == id)
+                            //.Where(x => x.Id == id)
                         .ToList();
             }
             
