@@ -10,7 +10,7 @@ sap.ui.define([
 	return Controller.extend("ui5.walkthrough.controller.InvoiceList", {
 		formatter: formatter,
 
-		let valorSelecionadoComboBox ="",
+		valorSelecionadoComboBox ="",
 
 		onInit() {
 			//console.log(this.setarModeloTapecaria().oData);
@@ -31,7 +31,7 @@ sap.ui.define([
 		},
 
 		aoMudarValorComboBox (evento) {
-
+			
 
 		}
 
