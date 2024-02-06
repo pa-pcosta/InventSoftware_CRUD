@@ -45,18 +45,24 @@ namespace InfraestruturaDeDados.Repositorios
             var query = @"SELECT * 
                         FROM tb_Tapecaria ";
 
-            if (tipo is not null) 
+            if (tipo is not null || detalhes is not null) 
             {
-                query += $"WHERE Tipo = {tipo} ";
+                query += $"WHERE ";
+
+                if (tipo is not null)
+                {
+                    query += $"Tipo = {tipo} ";
+                }
+
+                if (tipo is not null & detalhes is not null)
+                {
+                    query += $"AND ";
+                }
 
                 if (detalhes is not null)
                 {
-                    query += $"AND LOWER(Detalhes) LIKE LOWER('%{detalhes}%') ";
+                    query += $"LOWER(Detalhes) LIKE LOWER('%{detalhes}%') ";
                 }
-            }
-            else if (detalhes is not null)
-            {
-                query += $"WHERE LOWER(Detalhes) LIKE LOWER('%{detalhes}%') ";
             }
 
             var comandoSql = new SqlCommand(query, conexaoSql);
@@ -163,36 +169,6 @@ namespace InfraestruturaDeDados.Repositorios
             }
 
             return listaTapecaria;
-        }
-
-        private int InterpretaStringTipoParaIndiceEnum(string tipo)
-        {
-            int enumTipo = -1;
-
-            if ("TAPETE".Contains(tipo.ToUpper()))
-            {
-                enumTipo = 0;
-            }
-            else
-            {
-                if ("CORTINA".Contains(tipo.ToUpper()))
-                {
-                    enumTipo = 1;
-                }
-                else
-                {
-                    if ("ESTOFADO".Contains(tipo.ToUpper()))
-                    {
-                        enumTipo = 2;
-                    }
-                    else
-                    {
-                        if ("OUTROS".Contains(tipo.ToUpper())) enumTipo = 3;
-                    }
-                }
-            }
-
-            return enumTipo;
         }
     }
 }

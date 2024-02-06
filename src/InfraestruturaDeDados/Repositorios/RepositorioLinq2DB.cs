@@ -55,19 +55,25 @@ namespace InfraestruturaDeDados.Repositorios
 
                 using (conexaoSql)
                 {
-                    if (tipo is null)
+                    var listaProdutosTapecaria = conexaoSql
+                                                    .GetTable<ProdutoTapecaria>()
+                                                    .ToList();
+
+                    if (tipo is not null)
                     {
-                        return conexaoSql
-                                .GetTable<ProdutoTapecaria>()
-                                .ToList();
+                        listaProdutosTapecaria = listaProdutosTapecaria
+                                                    .Where(x => Convert.ToInt32(x.Tipo) == Convert.ToInt32(tipo))
+                                                    .ToList();
                     }
-                    else
+
+                    if (detalhes is not null)
                     {
-                        return conexaoSql
-                               .GetTable<ProdutoTapecaria>()
-                                   //.Where(x => x.Tipo == tipo)
-                               .ToList();
+                        listaProdutosTapecaria = listaProdutosTapecaria
+                                                    .Where(x => x.Detalhes.ToLower().Contains(detalhes.ToLower()))
+                                                    .ToList();
                     }
+
+                    return listaProdutosTapecaria;
                 }
             }
             catch (Exception)
