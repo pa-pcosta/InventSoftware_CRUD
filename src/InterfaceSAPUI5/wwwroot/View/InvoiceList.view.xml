@@ -83,7 +83,13 @@
 						width= "10%"
 						alignItems="Center"
 						justifyContent="Center">
-						<core:Icon size="2rem" src="sap-icon://attachment-photo" class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />
+						<Image
+							width="2rem"
+							src="{
+								path: 'produtoTapecaria>tipo',
+								formatter: '.formatter.exibirIconeReferenteAoTipo'
+							}"  
+							class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" />
 					</VBox>
 					
 					<VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom" 
