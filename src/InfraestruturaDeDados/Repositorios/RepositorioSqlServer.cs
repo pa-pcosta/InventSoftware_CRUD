@@ -54,12 +54,9 @@ namespace InfraestruturaDeDados.Repositorios
                     query += $"AND LOWER(Detalhes) LIKE LOWER('%{detalhes}%') ";
                 }
             }
-            else
-                {
-                if (detalhes is not null)
-                {
-                    query += $"WHERE LOWER(Detalhes) LIKE LOWER('%{detalhes}%') ";
-                }
+            else if (detalhes is not null)
+            {
+                query += $"WHERE LOWER(Detalhes) LIKE LOWER('%{detalhes}%') ";
             }
 
             var comandoSql = new SqlCommand(query, conexaoSql);
