@@ -15,18 +15,18 @@
 				<ToolbarSpacer/>
 				<ComboBox
 					width="9rem"
-					items="{enumTipoTapecaria>/}"
-					placeholder="Selecionar tipo"
+					items="{enums>/TipoTapecaria}"
+					placeholder="{i18n>comboBoxPlaceholder}"
 					change=".aoMudarValorComboBox">
-					<core:Item key="{enumTipoTapecaria>key}" text="{enumTipoTapecaria>text}" />
+					<core:Item key="{enums>key}" text="{enums>text}" />
 				</ComboBox>
 				<SearchField
 					width="25%"
 					search=".AoClicarEmFiltrar"
-					placeholder="Qual produto você está procurando?"
+					placeholder="{i18n>searchFieldPlaceholder}"
 				/>
 				<ToolbarSpacer/>
-				<Button text="Adicionar novo produto"
+				<Button text="{i18n>addNewProductButtonText}"
 						type="Default"
 						icon="sap-icon://add"
 						press="onPress"
@@ -47,25 +47,25 @@
 				width='10%'
 				alignItems="Center"
 				justifyContent="Center">
-				<Label text="ID" design="Bold"/>
+				<Label text="{i18n>columnNameID}" design="Bold"/>
 			</VBox>
 			<VBox 
 				width='30%'
 				alignItems="Center"
 				justifyContent="Center">
-				<Label text="Produto" design="Bold"/>
+				<Label text="{i18n>columnNameProduct}" design="Bold"/>
 			</VBox>
 			<VBox 
 				width='25%'
 				alignItems="Center"
 				justifyContent="Center">
-				<Label text="Data de entrada" design="Bold"/>
+				<Label text="{i18n>columnNameDate}" design="Bold"/>
 			</VBox>
 			<VBox 
 				width='25%'
 				alignItems="Center"
 				justifyContent="Center">
-				<Label text="Preço total" design="Bold"/>
+				<Label text="{i18n>columnNameTotalPrice}" design="Bold"/>
 			</VBox>
 		</HBox>
 		
