@@ -7,7 +7,7 @@ sap.ui.define([
 ], (Controller, JSONModel, formatter, Filter, FilterOperator) => {
 	"use strict";
 
-	return Controller.extend("ui5.walkthrough.controller.InvoiceList", {
+	return Controller.extend("ui5.Controle_De_Estoque.controller.InvoiceList", {
 		formatter: formatter,
 
 		_valorSelecionadoComboBox :"",

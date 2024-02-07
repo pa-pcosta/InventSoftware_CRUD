@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="ui5.walkthrough.controller.InvoiceList"
+	controllerName="ui5.Controle_De_Estoque.controller.InvoiceList"
 	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m">

@@ -1,7 +1,7 @@
 {
 	"_version": "1.58.0",
 	"sap.app": {
-		"id": "ui5.walkthrough",
+		"id": "ui5.Controle_De_Estoque",
 		"i18n": {
 			"bundleUrl": "i18n/i18n.properties",
 			"supportedLocales": [
@@ -45,7 +45,7 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
-					"bundleName": "ui5.walkthrough.i18n.i18n",
+					"bundleName": "ui5.Controle_De_Estoque.i18n.i18n",
 					"supportedLocales": [
 						""
 					],
@@ -58,7 +58,7 @@
 			}
 		},
 		"rootView": {
-			"viewName": "ui5.walkthrough.view.App",
+			"viewName": "ui5.Controle_De_Estoque.view.App",
 			"type": "XML",
 			"id": "app"
 		},
@@ -74,7 +74,7 @@
 				"routerClass": "sap.m.routing.Router",
 				"type": "View",
 				"viewType": "XML",
-				"path": "ui5.walkthrough.view",
+				"path": "ui5.Controle_De_Estoque.view",
 				"controlId": "app",
 				"controlAggregation": "pages"
 			},
@@ -83,21 +83,12 @@
 					"pattern": "",
 					"name": "invoiceList",
 					"target": "invoiceList"
-				},
-				{
-					"pattern": "detail/{invoicePath}",
-					"name": "detail",
-					"target": "detail"
 				}
 			],
 			"targets": {
 				"invoiceList": {
 					"id": "invoiceList",
 					"name": "InvoiceList"
-				},
-				"detail": {
-					"id": "detail",
-					"name": "Detail"
 				}
 			}
 		}
