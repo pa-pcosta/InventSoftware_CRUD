@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="ui5.Controle_De_Estoque.controller.InvoiceList"
+	controllerName="ui5.Controle_De_Estoque.controller.TelaListagem"
 	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m">
@@ -13,17 +13,19 @@
 			<Toolbar width='100%'>
 				<Title text="{i18n>tituloListagem}" />
 				<ToolbarSpacer/>
-				<ComboBox
+				<ComboBox id="listagemComboBox"
 					width="9rem"
 					items="{enums>/TipoTapecaria}"
 					placeholder="{i18n>comboBoxPlaceholder}"
-					change=".aoMudarValorComboBox">
+					change=".aoMudarValorComboBox"
+					selectedKey = "{filtro>/tipo}">
 					<core:Item key="{enums>key}" text="{enums>text}" />
 				</ComboBox>
-				<SearchField
+				<SearchField id="listagemSearchField"
 					width="25%"
 					search=".AoClicarEmFiltrar"
 					placeholder="{i18n>searchFieldPlaceholder}"
+					value="{filtro>/detalhes}"
 				/>
 				<ToolbarSpacer/>
 				<Button text="{i18n>addNewProductButtonText}"

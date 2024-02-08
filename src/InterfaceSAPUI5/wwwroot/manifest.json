@@ -81,14 +81,14 @@
 			"routes": [
 				{
 					"pattern": "",
-					"name": "invoiceList",
-					"target": "invoiceList"
+					"name": "telaListagem",
+					"target": "telaListagem"
 				}
 			],
 			"targets": {
-				"invoiceList": {
-					"id": "invoiceList",
-					"name": "InvoiceList"
+				"telaListagem": {
+					"id": "telaListagem",
+					"name": "TelaListagem"
 				}
 			}
 		}
