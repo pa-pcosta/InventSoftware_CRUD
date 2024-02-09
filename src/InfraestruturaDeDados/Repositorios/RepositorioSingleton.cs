@@ -5,6 +5,8 @@ namespace InfraestruturaDeDados.Repositorios
 {
     public class RepositorioSingleton : IRepositorio
     {
+        static readonly List<ProdutoTapecaria> _listaTapecaria = ListaTapecariaSingleton.ObterInstancia();
+
         public int Criar(ProdutoTapecaria produtoTapecaria)
         {
             produtoTapecaria.Id = ListaTapecariaSingleton.ObterProximoId();
@@ -12,19 +14,26 @@ namespace InfraestruturaDeDados.Repositorios
 
             return produtoTapecaria.Id;
         }
-        static readonly List<ProdutoTapecaria> _listaTapecaria = ListaTapecariaSingleton.ObterInstancia();
 
         public List<ProdutoTapecaria> ObterTodos(string? tipo, string? detalhes)
         {
-            if (tipo is null) 
-            { return _listaTapecaria; }
-            else
+            var listaProdutosTapecaria = _listaTapecaria;
+
+            if (tipo is not null)
             {
-                return _listaTapecaria
-                            //.Where(x => x.Id == id)
-                        .ToList();
+                listaProdutosTapecaria = listaProdutosTapecaria
+                                            .Where(x => Convert.ToInt32(x.Tipo) == Convert.ToInt32(tipo))
+                                            .ToList();
             }
-            
+
+            if (detalhes is not null)
+            {
+                listaProdutosTapecaria = listaProdutosTapecaria
+                                            .Where(x => x.Detalhes.ToLower().Contains(detalhes.ToLower()))
+                                            .ToList();
+            }
+
+            return listaProdutosTapecaria;
         }
 
         public ProdutoTapecaria? ObterPorId(int id)

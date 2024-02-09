@@ -18,7 +18,7 @@ sap.ui.define([
 
 		aoCoincidirRotaListagem (){
 
-			this.setarModeloTapecaria();
+			this.setarModeloTapecaria('api/Tapecaria');
 			this.setarModeloFiltro();
 		},
 
@@ -46,17 +46,10 @@ sap.ui.define([
 				}
 			}
 
-			let resposta = await fetch(url);
-
-			if (resposta.ok){
-				let modeloTapecaria= await resposta.json();
-				this.getView().setModel(new JSONModel(modeloTapecaria), "produtoTapecaria");
-			}
+			this.setarModeloTapecaria(url);
 		},
 
-		async setarModeloTapecaria() {
-
-			const url = 'api/Tapecaria';
+		async setarModeloTapecaria (url) {
 			
 			return fetch(url)
 				.then(data => {
