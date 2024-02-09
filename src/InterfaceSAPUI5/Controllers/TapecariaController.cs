@@ -39,9 +39,9 @@ namespace InterfaceSAPUI5.Controllers
         }
 
         [HttpGet]
-        public IActionResult ObterTodos()
+        public IActionResult ObterTodos(string? tipo, string? detalhes)
         {
-                var listaTapecaria = _repositorio.ObterTodos();
+                var listaTapecaria = _repositorio.ObterTodos(tipo, detalhes);
                 return Ok(listaTapecaria);
         }
 

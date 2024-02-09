@@ -1,10 +1,13 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<mvc:View
+	controllerName="ui5.Controle_De_Estoque.controller.App"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+>
+	<Shell>
+		<App
+			class="myAppDemoWT"
+			id="app"
+		/>
+	</Shell>
+</mvc:View>

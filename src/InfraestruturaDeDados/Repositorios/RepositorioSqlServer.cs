@@ -1,6 +1,7 @@
 ﻿using Dominio;
 using Microsoft.Data.SqlClient;
 using System.Configuration;
+using System.Text.RegularExpressions;
 
 namespace InfraestruturaDeDados.Repositorios
 {
@@ -37,13 +38,32 @@ namespace InfraestruturaDeDados.Repositorios
             return produtoTapecaria.Id;
         }
 
-        public List<ProdutoTapecaria> ObterTodos()
+        public List<ProdutoTapecaria> ObterTodos(string? tipo, string? detalhes)
         {
             var conexaoSql = new SqlConnection(_connectionString);
 
             var query = @"SELECT * 
-                        FROM tb_Tapecaria 
-                        ORDER BY Id";
+                        FROM tb_Tapecaria ";
+
+            if (tipo is not null || detalhes is not null) 
+            {
+                query += $"WHERE ";
+
+                if (tipo is not null)
+                {
+                    query += $"Tipo = {tipo} ";
+                }
+
+                if (tipo is not null & detalhes is not null)
+                {
+                    query += $"AND ";
+                }
+
+                if (detalhes is not null)
+                {
+                    query += $"LOWER(Detalhes) LIKE LOWER('%{detalhes}%') ";
+                }
+            }
 
             var comandoSql = new SqlCommand(query, conexaoSql);
             conexaoSql.Open();

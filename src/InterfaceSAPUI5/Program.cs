@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddScoped<IRepositorio, RepositorioSingleton>();
+builder.Services.AddScoped<IRepositorio, RepositorioLinq2DB>();
 
 var app = builder.Build();
 

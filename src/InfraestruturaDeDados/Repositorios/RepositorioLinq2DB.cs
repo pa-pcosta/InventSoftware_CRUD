@@ -47,7 +47,7 @@ namespace InfraestruturaDeDados.Repositorios
             }
         }
 
-        public List<ProdutoTapecaria> ObterTodos()
+        public List<ProdutoTapecaria> ObterTodos(string? tipo, string? detalhes)
         {
             try
             {
@@ -55,9 +55,25 @@ namespace InfraestruturaDeDados.Repositorios
 
                 using (conexaoSql)
                 {
-                    return conexaoSql
-                                .GetTable<ProdutoTapecaria>()
-                                .ToList();
+                    var listaProdutosTapecaria = conexaoSql
+                                                    .GetTable<ProdutoTapecaria>()
+                                                    .ToList();
+
+                    if (tipo is not null)
+                    {
+                        listaProdutosTapecaria = listaProdutosTapecaria
+                                                    .Where(x => Convert.ToInt32(x.Tipo) == Convert.ToInt32(tipo))
+                                                    .ToList();
+                    }
+
+                    if (detalhes is not null)
+                    {
+                        listaProdutosTapecaria = listaProdutosTapecaria
+                                                    .Where(x => x.Detalhes.ToLower().Contains(detalhes.ToLower()))
+                                                    .ToList();
+                    }
+
+                    return listaProdutosTapecaria;
                 }
             }
             catch (Exception)
