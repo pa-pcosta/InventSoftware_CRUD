@@ -49,6 +49,11 @@ sap.ui.define([
 			this.setarModeloTapecaria(url);
 		},
 
+		aoClicarEmProduto (){
+			const roteador = this.getOwnerComponent().getRouter();
+			roteador.navTo("detalhes");
+		},
+
 		async setarModeloTapecaria (url) {
 			
 			return fetch(url)

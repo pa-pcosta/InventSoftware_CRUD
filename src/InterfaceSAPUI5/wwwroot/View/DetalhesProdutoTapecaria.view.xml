@@ -1,0 +1,29 @@
+<mvc:View
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page
+		title="{i18n>tituloTelaDetalhes}"
+		showNavButton="true"
+		navButtonPress="">
+        
+        <headerContent
+			alignItems="SpaceBetween"
+			justifyContent="SpaceBetween"
+			height="5rem">
+            
+            <Title alignItems="SpaceBetween"
+                text ="ID 0001"/>
+
+            <Button alignItems="SpaceBetween"
+                type="Reject"
+                text="{i18n>botaoDeletar}"
+                icon="sap-icon://delete"
+                press="onPress"/>
+            <Button alignItems="SpaceBetween" 
+                type="Default"
+                text="{i18n>botaoEditar}"
+                icon="sap-icon://edit"
+                press="onPress"/>
+		</headerContent>
+	</Page>
+</mvc:View>

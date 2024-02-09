@@ -83,12 +83,21 @@
 					"pattern": "",
 					"name": "telaListagem",
 					"target": "telaListagem"
+				},
+				{
+					"pattern": "detalhes",
+					"name": "detalhes",
+					"target": "detalhes"
 				}
 			],
 			"targets": {
 				"telaListagem": {
 					"id": "telaListagem",
 					"name": "TelaListagem"
+				},
+				"detalhes": {
+					"id": "detalhes",
+					"name": "DetalhesProdutoTapecaria"
 				}
 			}
 		}

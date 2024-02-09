@@ -29,7 +29,7 @@
 				/>
 				<ToolbarSpacer/>
 				<Button text="{i18n>addNewProductButtonText}"
-						type="Default"
+						type="Emphasized"
 						icon="sap-icon://add"
 						press="onPress"
 						ariaDescribedBy="defaultButtonDescription genericButtonDescription">
@@ -78,8 +78,7 @@
 			items="{
 				path : 'produtoTapecaria>/'
 			}">
-			<items>
-				<CustomListItem>
+				<CustomListItem type="Navigation" press=".aoClicarEmProduto">
 				<HBox>
 					<VBox
 						width= "10%"
@@ -142,7 +141,6 @@
 					</VBox>
 				</HBox>
 			</CustomListItem>
-			</items>
 		</List>
 	</Page>
 </mvc:View>
