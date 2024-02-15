@@ -1,41 +1,60 @@
 <mvc:View
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc">
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
 	<Page
 		title="{i18n>tituloTelaDetalhes}"
 		showNavButton="true"
 		navButtonPress="">
 
-            <HBox width="100%"
-                height="5rem">
+            <Panel backgroundDesign="Solid">
 
-                <HBox width="100%"
-                    alignItems="Center"
-                    justifyContent="Center">
-                    <Title titleStyle="H2" 
-                        text ="ID 0001"/>
-                </HBox>
-
-                <HBox width="15%" 
-                    alignItems="Center"
-                    justifyContent="SpaceAround">
-                    <Button type="Reject"
-                        text="{i18n>botaoDeletar}"
-                        icon="sap-icon://delete"
-                        press="onPress"/>
-
-                    <Button type="Default"
-                        text="{i18n>botaoEditar}"
-                        icon="sap-icon://edit"
-                        press="onPress"/>
-                </HBox>
-            </HBox>
-
-            <Panel backgroundDesign="Solid"
-                height="20rem">
-
-                <FlexBox>
-                </FlexBox>
+                	<VBox class="sapUiSmallMargin">
+                        <f:SimpleForm id="SimpleFormDisplay354"
+                            editable="false"
+                            layout="ResponsiveGridLayout"
+                            labelSpanXL="3"
+                            labelSpanL="3"
+                            labelSpanM="3"
+                            labelSpanS="12"
+                            adjustLabelSpan="false"
+                            emptySpanXL="4"
+                            emptySpanL="4"
+                            emptySpanM="4"
+                            emptySpanS="0"
+                            columnsXL="1"
+                            columnsL="1"
+                            columnsM="1"
+                            singleContainerFullSize="false" >
+                            <f:toolbar>
+                                <Toolbar>
+                                    <Title id="Title1" text="ID 0000" titleStyle="H3"/>
+                                    <ToolbarSpacer />
+                                    <Button type="Reject"
+                                        text="{i18n>botaoDeletar}"
+                                        icon="sap-icon://delete"
+                                        press="onPress"/>
+                                    <Button type="Default"
+                                        text="{i18n>botaoEditar}"
+                                        icon="sap-icon://edit"
+                                        press="onPress"/>
+                                </Toolbar>
+                            </f:toolbar>
+                            <f:content>
+                                <Label text="{i18n>labelTipo}" design="Bold"/>
+                                <Text text="Teste"/>
+                                <Label text="{i18n>labelDataEntrada}" design="Bold"/>
+                                <Text text="Teste"/>
+                                <Label text="{i18n>labelTamanho}" design="Bold"/>
+                                <Text text="Teste"/>
+                                <Label text="{i18n>labelPrecoMetroQuadrado}" design="Bold"/>
+                                <Text text="Teste"/>
+                                <Label text="{i18n>labelEhEntrega}" design="Bold"/>
+                                <Text text="Teste"/>
+                            </f:content>
+                        </f:SimpleForm>
+                    </VBox>
             </Panel>
 	</Page>
 </mvc:View>
