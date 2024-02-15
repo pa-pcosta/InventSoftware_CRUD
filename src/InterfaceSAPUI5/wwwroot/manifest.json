@@ -85,7 +85,7 @@
 					"target": "telaListagem"
 				},
 				{
-					"pattern": "detalhes",
+					"pattern": "detalhes/{Id}",
 					"name": "detalhes",
 					"target": "detalhes"
 				}
@@ -97,7 +97,8 @@
 				},
 				"detalhes": {
 					"id": "detalhes",
-					"name": "DetalhesProdutoTapecaria"
+					"name": "DetalhesProdutoTapecaria",
+					"level":3
 				}
 			}
 		}

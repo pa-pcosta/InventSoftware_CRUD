@@ -78,7 +78,10 @@
 			items="{
 				path : 'produtoTapecaria>/'
 			}">
-				<CustomListItem type="Navigation" press=".aoClicarEmProduto">
+			<CustomListItem 
+				type="Navigation"
+				press=".aoClicarEmProduto">
+				
 				<HBox>
 					<VBox
 						width= "10%"
