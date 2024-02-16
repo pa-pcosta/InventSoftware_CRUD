@@ -1,0 +1,72 @@
+<mvc:View
+    controllerName="ui5.Controle_De_Estoque.controller.DetalhesProdutoTapecaria"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m">
+	<Page
+		title="{i18n>tituloTelaDetalhes}"
+		showNavButton="true"
+		navButtonPress=".aoClicarEmVoltar">
+
+            <Panel backgroundDesign="Solid">
+
+                	<VBox class="sapUiSmallMargin">
+                        <f:SimpleForm
+                            minWidth="1024"
+                            editable="false"
+                            layout="ResponsiveGridLayout"
+                            labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4"
+                            columnsL="1" columnsM="1">
+                            <f:toolbar>
+                                <Toolbar>
+                                    <Title id="Title1" text="ID {produtoTapecaria>/id}" titleStyle="H3"/>
+                                    <ToolbarSpacer />
+                                    <Button type="Reject"
+                                        text="{i18n>botaoDeletar}"
+                                        icon="sap-icon://delete"
+                                        press="onPress"/>
+                                    <Button type="Default"
+                                        text="{i18n>botaoEditar}"
+                                        icon="sap-icon://edit"
+                                        press="onPress"/>
+                                </Toolbar>
+                            </f:toolbar>
+                            <f:content>
+
+                                <Label text="{i18n>labelTipo}" design="Bold"/>
+                                <Text text="{
+                                    path: 'produtoTapecaria>/tipo',
+                                    formatter: '.formatter.enumTipoTapecaria'
+                                }"/>
+
+                                <Label text="{i18n>labelDataEntrada}" design="Bold"/>
+                                <Text text="{
+                                    path:'produtoTapecaria>/dataEntrada',
+                                    type: 'sap.ui.model.type.Date',
+                                    formatOptions: {
+                                        style: 'short',
+                                        source: {
+                                            pattern: 'yyyy-MM-ddTHH:mm:ss.SSS'
+                                        }
+                                    }
+                                }"/>
+
+                                <Label text="{i18n>labelTamanho}" design="Bold"/>
+                                <Text text="{produtoTapecaria>/area}"/>
+
+                                <Label text="{i18n>labelPrecoMetroQuadrado}" design="Bold"/>
+                                <Text text="{produtoTapecaria>/precoMetroQuadrado}"/>
+
+                                <Label text="{i18n>labelEhEntrega}" design="Bold"/>
+                                <Text text="{
+                                    path: 'produtoTapecaria>/ehEntrega',
+                                    formatter: '.formatter.converteBooleanParaSimOuNao'
+                                }"/>
+                                
+                            </f:content>
+                        </f:SimpleForm>
+                    </VBox>
+            </Panel>
+	</Page>
+</mvc:View>

@@ -1,10 +1,8 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
-	"../model/formatter",
-	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
-], (Controller, JSONModel, formatter, Filter, FilterOperator) => {
+	"../model/formatter"
+], (Controller, JSONModel, formatter) => {
 	"use strict";
 
 	return Controller.extend("ui5.Controle_De_Estoque.controller.TelaListagem", {
@@ -47,6 +45,17 @@ sap.ui.define([
 			}
 
 			this.setarModeloTapecaria(url);
+		},
+
+		aoClicarEmProduto (evento){
+
+			var produtoTapecaria = evento.getSource();
+			const roteador = this.getOwnerComponent().getRouter();
+			var contexto = produtoTapecaria.getBindingContext("produtoTapecaria");
+
+			roteador.navTo("detalhes",{
+				id: contexto.getProperty("id")
+			});
 		},
 
 		async setarModeloTapecaria (url) {

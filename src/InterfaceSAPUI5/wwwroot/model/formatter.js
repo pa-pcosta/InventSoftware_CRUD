@@ -23,9 +23,9 @@ sap.ui.define([], () => {
 
 			let precoTotal = precoMetroQuadrado * area;
 			
-			const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			const variaveisDeTexto = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 
-			return oResourceBundle.getText("simboloMoeda") + " " + parseFloat(precoTotal).toFixed(2);
+			return variaveisDeTexto.getText("simboloMoeda") + " " + parseFloat(precoTotal).toFixed(2);
 		},
 
 		exibirIconeReferenteAoTipo (indice){
@@ -41,6 +41,20 @@ sap.ui.define([], () => {
 					return "../assets/icons/others.png";
 				default:
 					return "../assets/icons/broken-image.png";
+			}
+		},
+
+		converteBooleanParaSimOuNao (boolean){
+
+			const variaveisDeTexto = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+
+			if (boolean == true)
+			{
+				return variaveisDeTexto.getText("sim");
+			}
+			else
+			{
+				return variaveisDeTexto.getText("nao");
 			}
 		}
 	};
