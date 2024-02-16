@@ -16,13 +16,9 @@ sap.ui.define([
 
 		aoCoincidirRota(evento) {
             
-            this.vinculaProdutoTapecariaNaView(evento);
-		},
-
-        vinculaProdutoTapecariaNaView(oEvent) {
-
-            var id = oEvent.getParameter("arguments").id
+            var id = evento.getParameter("arguments").id
             var url = 'api/Tapecaria/' + id;
+
             this.setarModeloTapecaria(url);
 		},
 
