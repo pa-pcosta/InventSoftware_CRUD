@@ -118,7 +118,8 @@
 						width= "25%" 
 						alignItems="Center"
 						justifyContent="Center">
-						<Text text="{path:'produtoTapecaria>dataEntrada',
+						<Text text="{
+							path:'produtoTapecaria>dataEntrada',
 							type: 'sap.ui.model.type.Date',
 							formatOptions: {
 								style: 'short',

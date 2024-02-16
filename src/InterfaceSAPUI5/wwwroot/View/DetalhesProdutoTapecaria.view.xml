@@ -7,7 +7,7 @@
 	<Page
 		title="{i18n>tituloTelaDetalhes}"
 		showNavButton="true"
-		navButtonPress="">
+		navButtonPress=".aoClicarEmVoltar">
 
             <Panel backgroundDesign="Solid">
 
@@ -20,7 +20,7 @@
                             columnsL="1" columnsM="1">
                             <f:toolbar>
                                 <Toolbar>
-                                    <Title id="Title1" text="ID {id}" titleStyle="H3"/>
+                                    <Title id="Title1" text="ID {produtoTapecaria>/id}" titleStyle="H3"/>
                                     <ToolbarSpacer />
                                     <Button type="Reject"
                                         text="{i18n>botaoDeletar}"
@@ -33,16 +33,37 @@
                                 </Toolbar>
                             </f:toolbar>
                             <f:content>
+
                                 <Label text="{i18n>labelTipo}" design="Bold"/>
-                                <Text text="Teste"/>
+                                <Text text="{
+                                    path: 'produtoTapecaria>/tipo',
+                                    formatter: '.formatter.enumTipoTapecaria'
+                                }"/>
+
                                 <Label text="{i18n>labelDataEntrada}" design="Bold"/>
-                                <Text text="{dataEntrada}"/>
+                                <Text text="{
+                                    path:'produtoTapecaria>/dataEntrada',
+                                    type: 'sap.ui.model.type.Date',
+                                    formatOptions: {
+                                        style: 'short',
+                                        source: {
+                                            pattern: 'yyyy-MM-ddTHH:mm:ss.SSS'
+                                        }
+                                    }
+                                }"/>
+
                                 <Label text="{i18n>labelTamanho}" design="Bold"/>
-                                <Text text="{tamanho}"/>
+                                <Text text="{produtoTapecaria>/area}"/>
+
                                 <Label text="{i18n>labelPrecoMetroQuadrado}" design="Bold"/>
-                                <Text text="{precoMetroQuadrado}"/>
+                                <Text text="{produtoTapecaria>/precoMetroQuadrado}"/>
+
                                 <Label text="{i18n>labelEhEntrega}" design="Bold"/>
-                                <Text text="Teste"/>
+                                <Text text="{
+                                    path: 'produtoTapecaria>/ehEntrega',
+                                    formatter: '.formatter.converteBooleanParaSimOuNao'
+                                }"/>
+                                
                             </f:content>
                         </f:SimpleForm>
                     </VBox>

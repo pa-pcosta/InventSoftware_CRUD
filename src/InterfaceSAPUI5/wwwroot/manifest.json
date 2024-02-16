@@ -85,7 +85,7 @@
 					"target": "telaListagem"
 				},
 				{
-					"pattern": "detalhes/{Id}",
+					"pattern": "detalhes/{id}",
 					"name": "detalhes",
 					"target": "detalhes"
 				}

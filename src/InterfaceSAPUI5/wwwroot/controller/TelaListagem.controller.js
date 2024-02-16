@@ -49,12 +49,12 @@ sap.ui.define([
 
 		aoClicarEmProduto (evento){
 
-			const roteador = this.getOwnerComponent().getRouter();
 			var produtoTapecaria = evento.getSource();
+			const roteador = this.getOwnerComponent().getRouter();
 			var contexto = produtoTapecaria.getBindingContext("produtoTapecaria");
 
 			roteador.navTo("detalhes",{
-				Id: contexto.getProperty("id")
+				id: contexto.getProperty("id")
 			});
 		},
 
