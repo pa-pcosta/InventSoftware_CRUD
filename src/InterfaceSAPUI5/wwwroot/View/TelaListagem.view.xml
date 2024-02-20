@@ -31,7 +31,9 @@
 				<Button text="{i18n>addNewProductButtonText}"
 						type="Emphasized"
 						icon="sap-icon://add"
-						press="onPress"
+
+						
+						press="aoClicarEmAdicionar"
 						ariaDescribedBy="defaultButtonDescription genericButtonDescription">
 				</Button>
 			</Toolbar>

@@ -50,12 +50,19 @@ sap.ui.define([
 		aoClicarEmProduto (evento){
 
 			var produtoTapecaria = evento.getSource();
-			const roteador = this.getOwnerComponent().getRouter();
 			var contexto = produtoTapecaria.getBindingContext("produtoTapecaria");
+			const roteador = this.getOwnerComponent().getRouter();
 
 			roteador.navTo("detalhes",{
 				id: contexto.getProperty("id")
 			});
+		},
+
+		aoClicarEmAdicionar (){
+
+			const roteador = this.getOwnerComponent().getRouter();
+
+			roteador.navTo("cadastro");
 		},
 
 		async setarModeloTapecaria (url) {

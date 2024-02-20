@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="ui5.Controle_De_Estoque.controller.DetalhesProdutoTapecaria"
+    controllerName="ui5.Controle_De_Estoque.controller.CadastroProdutoTapecaria"
 	xmlns:f="sap.ui.layout.form"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"
@@ -12,6 +12,7 @@
             <Panel backgroundDesign="Solid">
 
                 	<VBox class="sapUiSmallMargin">
+                        
                         <f:SimpleForm
                             minWidth="1024"
                             editable="false"
@@ -20,12 +21,11 @@
                             columnsL="1" columnsM="1">
                             <f:toolbar>
                                 <Toolbar>
-                                    <Title id="Title1" text="ID {produtoTapecaria>/id}" titleStyle="H3"/>
                                     <ToolbarSpacer />
                                     <Button type="Reject"
                                         text="{i18n>botaoCancelar}"
                                         icon="sap-icon://cancel"
-                                        press="onPress"/>
+                                        press=".aoClicarEmVoltar"/>
                                     <Button type="Default"
                                         text="{i18n>botaoSalvar}"
                                         icon="sap-icon://save"
@@ -33,10 +33,9 @@
                                 </Toolbar>
                             </f:toolbar>
                             <f:content>
-
                                 <Label text="{i18n>labelTipo}" design="Bold"/>
-                                <ComboBox id="listagemComboBox"
-                                    width="9rem"
+                                <ComboBox
+                                    width="9.5rem"
                                     items="{enums>/TipoTapecaria}"
                                     placeholder="{i18n>comboBoxPlaceholder}"
                                     change=".aoMudarValorComboBox"
@@ -46,39 +45,29 @@
 
                                 <Label text="{i18n>labelDataEntrada}" design="Bold"/>
                                 <DatePicker
+                                    width="13rem"
+                                    change="handleChange"
                                     class="sapUiSmallMarginBottom"
-                                    value="{
-                                        'path': '/valueDP6',
-                                        'type': 'sap.ui.model.type.Date',
-                                        'formatOptions': {
-                                            'pattern': 'dd/MM/y'
-                                        }
-                                    }"
                                 />
 
                                 <Label text="{i18n>labelTamanho}" design="Bold"/>
                                 <Input
                                     description="{i18n>descricaoInputTamanho}"
-                                    width="100px"
-                                    fieldWidth="60%"
+                                    fieldWidth="9.5rem"
 			                        showClearIcon="true"
                                     class="sapUiSmallMarginBottom"
                                 />
 
                                 <Label text="{i18n>labelPrecoMetroQuadrado}" design="Bold"/>
                                 <Input
-                                    description="EUR / 5 pieces"
-                                    width="200px"
-                                    fieldWidth="60px"
+                                    description="{i18n>descricaoInputPrecoMetroQuadrado}"
+                                    fieldWidth="9.5rem"
 			                        showClearIcon="true"
                                     class="sapUiSmallMarginBottom"
                                 />
 
                                 <Label text="{i18n>labelEhEntrega}" design="Bold"/>
-                                <Text text="{
-                                    path: 'produtoTapecaria>/ehEntrega',
-                                    formatter: '.formatter.converteBooleanParaSimOuNao'
-                                }"/>
+                                <CheckBox selected="false" />
                                 
                             </f:content>
                         </f:SimpleForm>

@@ -3,21 +3,21 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/routing/History",
 	"../model/formatter"
-], (Controller, JSONModel, History,formatter) => {
+], (Controller, JSONModel, History, formatter) => {
 	"use strict";
 
-	return Controller.extend("ui5.Controle_De_Estoque.controller.DetalhesProdutoTapecaria", {
+	return Controller.extend("ui5.Controle_De_Estoque.controller.CadastroProdutoTapecaria", {
 		formatter: formatter,
-		
-        onInit() {
-		    var roteador = this.getOwnerComponent().getRouter();
-		    roteador.getRoute("detalhes").attachMatched(this.aoCoincidirRota, this);
+
+		onInit() {
+			
+			let roteador = this.getOwnerComponent().getRouter();
+			roteador.getRoute("cadastro").attachPatternMatched(this.aoCoincidirRota, this);
 		},
 
-		aoCoincidirRota(evento) {
-            
-            var id = evento.getParameter("arguments").id
-            var url = 'api/Tapecaria/' + id;
+		aoCoincidirRota() {
+        
+            var url = 'api/Tapecaria/';
 
             this.setarModeloTapecaria(url);
 		},
@@ -42,6 +42,10 @@ sap.ui.define([
 				const roteador = this.getOwnerComponent().getRouter();
 				roteador.navTo("telaListagem");
 			}
+        },
+
+        aoClicarEmSalvar (){
+            
         }
 	});
 });
