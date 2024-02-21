@@ -16,8 +16,7 @@
 				<ComboBox id="listagemComboBox"
 					width="9rem"
 					items="{enums>/TipoTapecaria}"
-					placeholder="{i18n>comboBoxPlaceholder}"
-					change=".aoMudarValorComboBox"
+					placeholder="{i18n>comboBoxPlaceholder}" 
 					selectedKey = "{filtro>/tipo}">
 					<core:Item key="{enums>key}" text="{enums>text}" />
 				</ComboBox>

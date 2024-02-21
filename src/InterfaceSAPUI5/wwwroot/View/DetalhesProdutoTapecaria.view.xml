@@ -63,6 +63,9 @@
                                     path: 'produtoTapecaria>/ehEntrega',
                                     formatter: '.formatter.converteBooleanParaSimOuNao'
                                 }"/>
+
+                                <Label text="{i18n>labelDetalhes}" design="Bold"/>
+                                <Text text="{produtoTapecaria>/detalhes}"/>
                                 
                             </f:content>
                         </f:SimpleForm>

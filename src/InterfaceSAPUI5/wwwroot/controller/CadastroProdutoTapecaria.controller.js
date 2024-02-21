@@ -23,12 +23,7 @@ sap.ui.define([
 		},
 
         async setarModeloTapecaria (url) {
-			
-			return fetch(url)
-				.then(data => {
-					return data.json();
-				})
-				.then(modelo => { this.getView().setModel(new JSONModel(modelo), "produtoTapecaria"); });
+			this.getView().setModel(new JSONModel({}), "produtoTapecaria");
 		},
 
         aoClicarEmVoltar (){
@@ -44,8 +39,9 @@ sap.ui.define([
 			}
         },
 
-        aoClicarEmSalvar (){
+        aoClicarEmSalvar (evento){
             
+			var form = evento.getSource();
         }
 	});
 });
