@@ -22,7 +22,7 @@ sap.ui.define([
             this.setarModeloTapecaria(url);
 		},
 
-        async setarModeloTapecaria (url) {
+        setarModeloTapecaria (url) {
 			
 			return fetch(url)
 				.then(data => {

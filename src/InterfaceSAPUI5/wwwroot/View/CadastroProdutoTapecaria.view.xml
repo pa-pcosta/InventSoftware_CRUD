@@ -39,20 +39,20 @@
                                     items="{enums>/TipoTapecaria}"
                                     placeholder="{i18n>comboBoxPlaceholder}"
                                     change=".aoMudarValorComboBoxTipo"
-                                    selectedKey="{produtoTapecaria>Tipo}">
+                                    selectedKey="{produtoTapecaria>/Tipo}">
                                     <core:Item key="{enums>key}" text="{enums>text}" />
                                 </ComboBox>
 
                                 <Label text="{i18n>labelDataEntrada}" design="Bold"/>
                                 <DatePicker id="cadastroDatePicker"
-                                    value="{produtoTapecaria>DataEntrada}"
+                                    value="{produtoTapecaria>/DataEntrada}"
                                     width="13rem"
                                     change="handleChange"
                                 />
 
                                 <Label text="{i18n>labelTamanho}" design="Bold"/>
                                 <Input
-                                    value="{produtoTapecaria>Area}"
+                                    value="{produtoTapecaria>/Area}"
                                     description="{i18n>descricaoInputTamanho}"
                                     fieldWidth="9.5rem"
 			                        showClearIcon="true"
@@ -60,18 +60,18 @@
 
                                 <Label text="{i18n>labelPrecoMetroQuadrado}" design="Bold"/>
                                 <Input
-                                    value="{produtoTapecaria>Preco}"
+                                    value="{produtoTapecaria>/Preco}"
                                     description="{i18n>descricaoInputPrecoMetroQuadrado}"
                                     fieldWidth="9.5rem"
 			                        showClearIcon="true"
                                 />
 
                                 <Label text="{i18n>labelEhEntrega}" design="Bold"/>
-                                <CheckBox selected="{produtoTapecaria>EhEntrega}" />
+                                <CheckBox selected="{produtoTapecaria>/EhEntrega}" />
                                 
                                 <Label text="{i18n>labelDetalhes}" design="Bold"/>
                                 <TextArea
-                                    value="{produtoTapecaria>Detalhes}"
+                                    value="{produtoTapecaria>/Detalhes}"
                                     width="13rem"
 			                        showClearIcon="true"
                                 />

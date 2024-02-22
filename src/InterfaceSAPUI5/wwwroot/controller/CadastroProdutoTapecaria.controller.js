@@ -2,27 +2,25 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/routing/History",
-	"../model/formatter"
-], (Controller, JSONModel, History, formatter) => {
+	"../model/formatter",
+	"sap/m/MessageBox"
+], (Controller, JSONModel, History, formatter, MessageBox) => {
 	"use strict";
 
 	return Controller.extend("ui5.Controle_De_Estoque.controller.CadastroProdutoTapecaria", {
 		formatter: formatter,
 
 		onInit() {
-			
 			let roteador = this.getOwnerComponent().getRouter();
 			roteador.getRoute("cadastro").attachPatternMatched(this.aoCoincidirRota, this);
 		},
 
 		aoCoincidirRota() {
-        
-            var url = 'api/Tapecaria/';
 
-            this.setarModeloTapecaria(url);
+            this.setarModeloTapecaria();
 		},
 
-        async setarModeloTapecaria (url) {
+        setarModeloTapecaria () {
 			this.getView().setModel(new JSONModel({}), "produtoTapecaria");
 		},
 
@@ -39,9 +37,17 @@ sap.ui.define([
 			}
         },
 
-        aoClicarEmSalvar (evento){
+        aoClicarEmSalvar (){
             
-			var form = evento.getSource();
+			var novoProdutoTapecaria = this.getView().getModel("produtoTapecaria").getData();
+			var fetchPostBody = JSON.stringify(novoProdutoTapecaria);
+
+			fetch('api/Tapecaria', {
+				method: 'POST',
+				body: fetchPostBody
+			})
+			.then(resposta => resposta.json())
+			.then(json => console.log(json));
         }
 	});
 });
