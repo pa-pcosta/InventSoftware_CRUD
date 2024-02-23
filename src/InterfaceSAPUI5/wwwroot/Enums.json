@@ -1,19 +1,19 @@
 {
     "TipoTapecaria": [
         {
-            "key":"0",
+            "key":0,
             "text":"Tapete"
         },
         {
-            "key":"1",
+            "key":1,
             "text":"Cortina"
         },
         {
-            "key":"2",
+            "key":2,
             "text":"Estofado"
         },
         {
-            "key":"3",
+            "key":3,
             "text":"Outros"
         }
     ]

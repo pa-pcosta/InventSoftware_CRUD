@@ -40,11 +40,24 @@ sap.ui.define([
         aoClicarEmSalvar (){
             
 			var novoProdutoTapecaria = this.getView().getModel("produtoTapecaria").getData();
-			var fetchPostBody = JSON.stringify(novoProdutoTapecaria);
+			
+			var teste = novoProdutoTapecaria.DataEntrada;
+			var fetchPostBody = 
+			`{ 
+				"Tipo":${novoProdutoTapecaria.Tipo},
+				"DataEntrada":${novoProdutoTapecaria.DataEntrada},
+				"Area":${novoProdutoTapecaria.Area},
+				"Preco":${novoProdutoTapecaria.Preco},
+				"EhEntrega":${novoProdutoTapecaria.EhEntrega},
+				"Detalhes":"${novoProdutoTapecaria.Detalhes}"
+			}`;
 
 			fetch('api/Tapecaria', {
 				method: 'POST',
-				body: fetchPostBody
+				body: fetchPostBody,
+				headers: {
+					"Content-type": "application/json; charset=UTF-8"
+				}
 			})
 			.then(resposta => resposta.json())
 			.then(json => console.log(json));
