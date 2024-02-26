@@ -8,6 +8,7 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("ui5.Controle_De_Estoque.controller.CadastroProdutoTapecaria", {
+		
 		formatter: formatter,
 
 		onInit() {
@@ -51,7 +52,12 @@ sap.ui.define([
 				}
 			})
 			.then(resposta => resposta.json())
-			.then(json => console.log(json));
+			.then(
+				produtoCadastrado =>
+					this.getOwnerComponent().getRouter().navTo("detalhes",{
+						id: produtoCadastrado.id
+					})
+			);
         }
 	});
 });
