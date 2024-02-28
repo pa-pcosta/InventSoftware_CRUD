@@ -30,16 +30,15 @@
                             <Label text="{i18n>labelTipo}" design="Bold"/>
                             <ComboBox id="cadastroComboBox"
                                 width="9.5rem"
-                                items="{enums>/TipoTapecaria}"
+                                items="{enums>/tipoTapecaria}"
                                 placeholder="{i18n>comboBoxPlaceholder}"
-                                change=".aoMudarValorComboBoxTipo"
-                                selectedKey="{produtoTapecaria>/Tipo}">
+                                selectedKey="{produtoTapecaria>/tipo}">
                                 <core:Item key="{enums>key}" text="{enums>text}" />
                             </ComboBox>
                         </VBox>
                         <HBox width="100%" alignItems="Center" justifyContent="End">
                             <Label text="{i18n>labelEhEntrega}" design="Bold"/>
-                            <CheckBox selected="{produtoTapecaria>/EhEntrega}" />
+                            <CheckBox selected="{produtoTapecaria>/ehEntrega}" />
                         </HBox>
                     </HBox>
                     <VBox class="sapUiSmallMarginTop" width="100%">
@@ -47,11 +46,11 @@
                         <DatePicker id="cadastroDatePicker"
                             width="100%"
                             value="{
-                                path:'produtoTapecaria>/DataEntrada',
+                                path:'produtoTapecaria>/dataEntrada',
                                 type: 'sap.ui.model.type.Date',
                                 formatOptions: {
                                         style: 'short',
-                                        pattern: 'yyyy-MM-ddTHH:mm:ss'
+                                        pattern: 'dd-MM-yyyy'
                                 }
                             }"
                         />
@@ -60,7 +59,7 @@
                         <VBox>
                             <Label text="{i18n>labelTamanho}" design="Bold"/>
                             <Input
-                                value="{produtoTapecaria>/Area}"
+                                value="{produtoTapecaria>/area}"
                                 description="{i18n>descricaoInputTamanho}"
                                 fieldWidth="6rem"
                                 showClearIcon="true"
@@ -69,7 +68,7 @@
                         <VBox>
                             <Label text="{i18n>labelPrecoMetroQuadrado}" design="Bold"/>
                             <Input
-                                value="{produtoTapecaria>/Preco}"
+                                value="{produtoTapecaria>/precoMetroQuadrado}"
                                 description="{i18n>descricaoInputPrecoMetroQuadrado}"
                                 fieldWidth="6rem"
                                 showClearIcon="true"
@@ -79,7 +78,7 @@
                     <VBox class="sapUiSmallMarginTop" width="100%">
                         <Label text="{i18n>labelDetalhes}" design="Bold"/>
                         <TextArea
-                            value="{produtoTapecaria>/Detalhes}"
+                            value="{produtoTapecaria>/detalhes}"
                             width="100%"
                             showClearIcon="true"
                         />

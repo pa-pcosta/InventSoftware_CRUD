@@ -42,7 +42,7 @@ sap.ui.define([
             
 			var novoProdutoTapecaria = this.getView().getModel("produtoTapecaria").getData();
 			
-			novoProdutoTapecaria.Tipo = parseInt(novoProdutoTapecaria.Tipo);
+			novoProdutoTapecaria.tipo = parseInt(novoProdutoTapecaria.tipo);
 
 			fetch('api/Tapecaria', {
 				method: 'POST',
