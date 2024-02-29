@@ -1,11 +1,11 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
+	"./Base.controller",
 	"sap/ui/model/json/JSONModel",
 	"../model/formatter"
-], (Controller, JSONModel, formatter) => {
+], (BaseController, JSONModel, formatter) => {
 	"use strict";
 
-	return Controller.extend("ui5.Controle_De_Estoque.controller.TelaListagem", {
+	return BaseController.extend("ui5.Controle_De_Estoque.controller.TelaListagem", {
 		formatter: formatter,
 
 		onInit() {
@@ -67,11 +67,10 @@ sap.ui.define([
 
 		async setarModeloTapecaria (url) {
 			
-			return fetch(url)
-				.then(data => {
-					return data.json();
-				})
-				.then(modelo => { this.getView().setModel(new JSONModel(modelo), "produtoTapecaria"); });
+			var resposta = await fetch(url);
+			var listaProdutosTapecaria = await resposta.json();
+			
+			this.definirModelo(listaProdutosTapecaria, "produtoTapecaria");
 		},
 
 		setarModeloFiltro (){
