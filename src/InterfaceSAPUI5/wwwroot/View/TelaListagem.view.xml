@@ -30,8 +30,6 @@
 				<Button text="{i18n>addNewProductButtonText}"
 						type="Emphasized"
 						icon="sap-icon://add"
-
-						
 						press="aoClicarEmAdicionar"
 						ariaDescribedBy="defaultButtonDescription genericButtonDescription">
 				</Button>
