@@ -31,11 +31,11 @@
 		</headerContent>
 
         <Panel backgroundDesign="Solid">
-            <VBox width="30%">
+            <VBox width="40%">
                 <VBox class="sapUiSmallMarginTop">
                     <Label text="{i18n>labelTipo}" design="Bold"/>
                     <ComboBox id="cadastroComboBox"
-                        width="9.5rem"
+                        width="100%"
                         items="{enums>/tipoTapecaria}"
                         placeholder="{i18n>comboBoxPlaceholder}"
                         selectedKey="{produtoTapecaria>/tipo}">
@@ -45,7 +45,7 @@
                 <VBox class="sapUiSmallMarginTop" width="100%">
                     <Label text="{i18n>labelDataEntrada}" design="Bold"/>
                     <DatePicker id="cadastroDatePicker"
-                        width="9.5rem"
+                        width="100%"
                         placeholder="{i18n>placeholderDataEntrada}"
                         value="{
                             path:'produtoTapecaria>/dataEntrada',
@@ -62,7 +62,7 @@
                     <Input
                         value="{produtoTapecaria>/area}"
                         description="{i18n>descricaoInputTamanho}"
-                        fieldWidth="6rem"
+                        fieldWidth="95%"
                         showClearIcon="true"
                     />
                 </VBox>
@@ -71,7 +71,7 @@
                     <Input
                         value="{produtoTapecaria>/precoMetroQuadrado}"
                         description="{i18n>descricaoInputPrecoMetroQuadrado}"
-                        fieldWidth="6rem"
+                        fieldWidth="90%"
                         showClearIcon="true"
                     />
                 </VBox>
@@ -83,7 +83,7 @@
                     <Label text="{i18n>labelDetalhes}" design="Bold"/>
                     <TextArea
                         value="{produtoTapecaria>/detalhes}"
-                        width="12rem"
+                        width="100%"
                         showClearIcon="true"
                     />
                 </VBox>    
