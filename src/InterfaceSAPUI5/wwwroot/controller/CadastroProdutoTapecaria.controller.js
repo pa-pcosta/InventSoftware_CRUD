@@ -1,9 +1,7 @@
 sap.ui.define([
 	"./Base.controller",
-	"sap/ui/core/routing/History",
-	"../model/formatter",
-	"sap/m/MessageBox"
-], (BaseController, History, formatter) => {
+	"../model/formatter"
+], (BaseController, formatter) => {
 	"use strict";
 
 	return BaseController.extend("ui5.Controle_De_Estoque.controller.CadastroProdutoTapecaria", {
@@ -19,16 +17,7 @@ sap.ui.define([
 		},
 
         aoClicarEmVoltar (){
-            
-            const historico = History.getInstance();
-			const paginaAnterior = historico.getPreviousHash();
-
-			if (paginaAnterior !== undefined) {
-				window.history.go(-1);
-			} else {
-				const roteador = this.getOwnerComponent().getRouter();
-				roteador.navTo("telaListagem");
-			}
+            this.retornarParaPaginaAnterior();
         },
 
         aoClicarEmSalvar (){

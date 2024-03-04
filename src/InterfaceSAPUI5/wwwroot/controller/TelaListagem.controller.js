@@ -1,8 +1,7 @@
 sap.ui.define([
 	"./Base.controller",
-	"sap/ui/model/json/JSONModel",
 	"../model/formatter"
-], (BaseController, JSONModel, formatter) => {
+], (BaseController, formatter) => {
 	"use strict";
 
 	return BaseController.extend("ui5.Controle_De_Estoque.controller.TelaListagem", {
@@ -10,11 +9,10 @@ sap.ui.define([
 
 		onInit() {
 			
-			let roteador = this.getOwnerComponent().getRouter();
-			roteador.getRoute("telaListagem").attachPatternMatched(this.aoCoincidirRotaListagem, this);
+			this.vincularRota("telaListagem");
 		},
 
-		async aoCoincidirRotaListagem (){
+		async aoCoincidirRota (){
 			var resposta = await fetch("api/Tapecaria");
 			var listaProdutosTapecaria = await resposta.json();
 			
