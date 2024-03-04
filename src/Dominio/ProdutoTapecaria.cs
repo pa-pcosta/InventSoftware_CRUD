@@ -15,7 +15,7 @@ namespace Dominio
         public TipoTapecaria Tipo { get; set; }
 
         [Column("DataEntrada")]
-        public DateTime DataEntrada { get; set; }
+        public DateTime? DataEntrada { get; set; }
 
         [Column("Area")]
         public double Area { get; set; }

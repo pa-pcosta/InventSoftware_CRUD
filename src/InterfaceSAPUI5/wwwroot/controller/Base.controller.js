@@ -10,8 +10,15 @@ sap.ui.define([
 			this.getOwnerComponent().getRouter().getRoute(nomeRota).attachPatternMatched(this.aoCoincidirRota, this);
         },
 
-        definirModelo(dados, nomeModelo){
-            this.getView().setModel(new JSONModel(dados), nomeModelo);
+        definirModelo(nomeModelo, dados= null){
+			if (dados == null)
+			{
+				this.getView().setModel(new JSONModel({}), nomeModelo);
+			}
+			else
+			{
+            	this.getView().setModel(new JSONModel(dados), nomeModelo);
+			}
         }
 	});
 });

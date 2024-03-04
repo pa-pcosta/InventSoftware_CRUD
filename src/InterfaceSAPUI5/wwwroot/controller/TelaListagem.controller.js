@@ -14,10 +14,12 @@ sap.ui.define([
 			roteador.getRoute("telaListagem").attachPatternMatched(this.aoCoincidirRotaListagem, this);
 		},
 
-		aoCoincidirRotaListagem (){
-
-			this.setarModeloTapecaria('api/Tapecaria');
-			this.setarModeloFiltro();
+		async aoCoincidirRotaListagem (){
+			var resposta = await fetch("api/Tapecaria");
+			var listaProdutosTapecaria = await resposta.json();
+			
+			this.definirModelo("produtoTapecaria", listaProdutosTapecaria);
+			this.definirModelo("filtro");
 		},
 
 		async AoClicarEmFiltrar() {
@@ -44,7 +46,10 @@ sap.ui.define([
 				}
 			}
 
-			this.setarModeloTapecaria(url);
+			var resposta = await fetch(url);
+			var listaProdutosTapecaria = await resposta.json();
+			
+			this.definirModelo("produtoTapecaria", listaProdutosTapecaria);
 		},
 
 		aoClicarEmProduto (evento){
@@ -63,19 +68,6 @@ sap.ui.define([
 			const roteador = this.getOwnerComponent().getRouter();
 
 			roteador.navTo("cadastro");
-		},
-
-		async setarModeloTapecaria (url) {
-			
-			var resposta = await fetch(url);
-			var listaProdutosTapecaria = await resposta.json();
-			
-			this.definirModelo(listaProdutosTapecaria, "produtoTapecaria");
-		},
-
-		setarModeloFiltro (){
-
-			this.getView().setModel(new JSONModel({}), "filtro");
 		}
 	});
 });

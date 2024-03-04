@@ -22,13 +22,11 @@ sap.ui.define([
             this.setarModeloTapecaria(url);
 		},
 
-        setarModeloTapecaria (url) {
+        async setarModeloTapecaria (url) {
 			
-			return fetch(url)
-				.then(data => {
-					return data.json();
-				})
-				.then(modelo => { this.getView().setModel(new JSONModel(modelo), "produtoTapecaria"); });
+			const resposta = await fetch(url);
+			const modelo = await resposta.json();
+			this.getView().setModel(new JSONModel(modelo), "produtoTapecaria");
 		},
 
         aoClicarEmVoltar (){

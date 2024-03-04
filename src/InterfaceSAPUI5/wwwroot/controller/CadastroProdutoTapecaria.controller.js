@@ -1,11 +1,9 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
-	"sap/ui/model/json/JSONModel",
+	"./Base.controller",
 	"sap/ui/core/routing/History",
 	"../model/formatter",
-	"sap/m/MessageBox",
-	"./Base.controller"
-], (Controller, JSONModel, History, formatter, MessageBox, BaseController) => {
+	"sap/m/MessageBox"
+], (BaseController, History, formatter) => {
 	"use strict";
 
 	return BaseController.extend("ui5.Controle_De_Estoque.controller.CadastroProdutoTapecaria", {
@@ -13,15 +11,11 @@ sap.ui.define([
 		formatter: formatter,
 
 		onInit() {
-			vincularRota("cadastro");
+			this.vincularRota("cadastro");
 		},
 
 		aoCoincidirRota() {
-            this.setarModeloTapecaria();
-		},
-
-        setarModeloTapecaria () {
-			this.getView().setModel(new JSONModel({}), "produtoTapecaria");
+            this.definirModelo("produtoTapecaria");
 		},
 
         aoClicarEmVoltar (){
