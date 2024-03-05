@@ -15,7 +15,7 @@
 				<ToolbarSpacer/>
 				<ComboBox id="listagemComboBox"
 					width="9rem"
-					items="{enums>/TipoTapecaria}"
+					items="{enums>/tipoTapecaria}"
 					placeholder="{i18n>comboBoxPlaceholder}"
 					selectedKey = "{filtro>/tipo}">
 					<core:Item key="{enums>key}" text="{enums>text}" />

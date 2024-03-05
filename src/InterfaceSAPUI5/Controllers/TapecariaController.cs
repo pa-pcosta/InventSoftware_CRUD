@@ -5,6 +5,7 @@ using LinqToDB.Common;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using static Dominio.EnumTipoTapecaria;
 
 namespace InterfaceSAPUI5.Controllers
 {
@@ -50,6 +51,23 @@ namespace InterfaceSAPUI5.Controllers
         {
             var produtoTapecaria = _repositorio.ObterPorId(id);
             return Ok(produtoTapecaria);
+        }
+
+        [HttpGet("enumTipoTapecaria")]
+        public IActionResult ObterTiposTapecaria()
+        {
+            var tiposTapecaria = new List<object>();
+
+            foreach (var tipo in Enum.GetValues(typeof(TipoTapecaria)))
+            {
+                tiposTapecaria.Add(new
+                {
+                    chave = (int)tipo,
+                    descricao = tipo.ToString()
+                });
+            }
+
+            return Ok(tiposTapecaria);
         }
 
         [HttpPut]

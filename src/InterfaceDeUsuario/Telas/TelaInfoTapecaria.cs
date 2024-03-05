@@ -2,6 +2,7 @@
 using Dominio.ValidacaoProdutoTapecaria;
 using InfraestruturaDeDados;
 using System.Text.RegularExpressions;
+using static Dominio.EnumTipoTapecaria;
 
 namespace ControleDeEstoque.InterfaceWindowsForms
 {
@@ -28,7 +29,7 @@ namespace ControleDeEstoque.InterfaceWindowsForms
         private void PreencherCampos(ProdutoTapecaria produtoTapecaria)
         {
             comboBoxTipo.SelectedIndex = Convert.ToInt32(produtoTapecaria.Tipo);
-            dateTimePickerDataEntrada.Value = produtoTapecaria.DataEntrada;
+            dateTimePickerDataEntrada.Value = (DateTime)produtoTapecaria.DataEntrada;
             textBoxArea.Text = produtoTapecaria.Area.ToString();
             textBoxPrecoMetroQuadrado.Text = produtoTapecaria.PrecoMetroQuadrado.ToString();
             checkBoxEntregarAposServico.Checked = produtoTapecaria.EhEntrega;

@@ -12,8 +12,12 @@ sap.ui.define([
 			this.vincularRota("cadastro");
 		},
 
-		aoCoincidirRota() {
+		async aoCoincidirRota() {
             this.definirModelo("produtoTapecaria");
+
+			var resposta = await fetch("api/Tapecaria/enumTipoTapecaria");
+			var tiposTapecaria = await resposta.json();
+			this.definirModelo("enumTipoTapecaria", tiposTapecaria);
 		},
 
         aoClicarEmVoltar (){

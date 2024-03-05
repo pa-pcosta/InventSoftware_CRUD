@@ -36,10 +36,10 @@
                     <Label text="{i18n>labelTipo}" design="Bold"/>
                     <ComboBox id="cadastroComboBox"
                         width="100%"
-                        items="{enums>/tipoTapecaria}"
+                        items="{enumTipoTapecaria>/}"
                         placeholder="{i18n>comboBoxPlaceholder}"
                         selectedKey="{produtoTapecaria>/tipo}">
-                        <core:Item key="{enums>key}" text="{enums>text}" />
+                        <core:Item key="{enumTipoTapecaria>chave}" text="{enumTipoTapecaria>descricao}" />
                     </ComboBox>
                 </VBox>
                 <VBox class="sapUiSmallMarginTop" width="100%">

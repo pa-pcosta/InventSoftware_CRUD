@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using System.Configuration;
 using System.Text.RegularExpressions;
+using static Dominio.EnumTipoTapecaria;
 
 namespace InfraestruturaDeDados.Repositorios
 {
