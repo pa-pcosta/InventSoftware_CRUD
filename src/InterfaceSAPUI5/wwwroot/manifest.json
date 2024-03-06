@@ -88,6 +88,11 @@
 					"pattern": "detalhes/{id}",
 					"name": "detalhes",
 					"target": "detalhes"
+				},
+				{
+					"pattern": "cadastro",
+					"name": "cadastro",
+					"target": "cadastro"
 				}
 			],
 			"targets": {
@@ -97,8 +102,11 @@
 				},
 				"detalhes": {
 					"id": "detalhes",
-					"name": "DetalhesProdutoTapecaria",
-					"level":3
+					"name": "DetalhesProdutoTapecaria"
+				},
+				"cadastro": {
+					"id": "cadastro",
+					"name": "CadastroProdutoTapecaria"
 				}
 			}
 		}

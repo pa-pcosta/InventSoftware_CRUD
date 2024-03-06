@@ -1,23 +1,23 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
-	"sap/ui/model/json/JSONModel",
+	"./Base.controller",
 	"../model/formatter"
-], (Controller, JSONModel, formatter) => {
+], (BaseController, formatter) => {
 	"use strict";
 
-	return Controller.extend("ui5.Controle_De_Estoque.controller.TelaListagem", {
+	return BaseController.extend("ui5.Controle_De_Estoque.controller.TelaListagem", {
 		formatter: formatter,
 
 		onInit() {
 			
-			let roteador = this.getOwnerComponent().getRouter();
-			roteador.getRoute("telaListagem").attachPatternMatched(this.aoCoincidirRotaListagem, this);
+			this.vincularRota("telaListagem");
 		},
 
-		aoCoincidirRotaListagem (){
-
-			this.setarModeloTapecaria('api/Tapecaria');
-			this.setarModeloFiltro();
+		async aoCoincidirRota (){
+			var resposta = await fetch("api/Tapecaria");
+			var listaProdutosTapecaria = await resposta.json();
+			
+			this.definirModelo("produtoTapecaria", listaProdutosTapecaria);
+			this.definirModelo("filtro");
 		},
 
 		async AoClicarEmFiltrar() {
@@ -44,32 +44,28 @@ sap.ui.define([
 				}
 			}
 
-			this.setarModeloTapecaria(url);
+			var resposta = await fetch(url);
+			var listaProdutosTapecaria = await resposta.json();
+			
+			this.definirModelo("produtoTapecaria", listaProdutosTapecaria);
 		},
 
 		aoClicarEmProduto (evento){
 
 			var produtoTapecaria = evento.getSource();
-			const roteador = this.getOwnerComponent().getRouter();
 			var contexto = produtoTapecaria.getBindingContext("produtoTapecaria");
+			const roteador = this.getOwnerComponent().getRouter();
 
 			roteador.navTo("detalhes",{
 				id: contexto.getProperty("id")
 			});
 		},
 
-		async setarModeloTapecaria (url) {
-			
-			return fetch(url)
-				.then(data => {
-					return data.json();
-				})
-				.then(modelo => { this.getView().setModel(new JSONModel(modelo), "produtoTapecaria"); });
-		},
+		aoClicarEmAdicionar (){
 
-		setarModeloFiltro (){
+			const roteador = this.getOwnerComponent().getRouter();
 
-			this.getView().setModel(new JSONModel({}), "filtro");
+			roteador.navTo("cadastro");
 		}
 	});
 });

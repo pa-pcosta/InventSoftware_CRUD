@@ -1,5 +1,5 @@
 ﻿using LinqToDB.Mapping;
-using System.ComponentModel.DataAnnotations.Schema;
+using static Dominio.EnumTipoTapecaria;
 using ColumnAttribute = LinqToDB.Mapping.ColumnAttribute;
 using TableAttribute = LinqToDB.Mapping.TableAttribute;
 
@@ -15,7 +15,7 @@ namespace Dominio
         public TipoTapecaria Tipo { get; set; }
 
         [Column("DataEntrada")]
-        public DateTime DataEntrada { get; set; }
+        public DateTime? DataEntrada { get; set; }
 
         [Column("Area")]
         public double Area { get; set; }
@@ -29,12 +29,4 @@ namespace Dominio
         [Column("Detalhes")]
         public string Detalhes { get; set; }
     }
-
-    public enum TipoTapecaria
-    {
-        Tapete,
-        Cortina,
-        Estofado,
-        Outros
-    };
 }

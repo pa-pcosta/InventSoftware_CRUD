@@ -1,0 +1,91 @@
+<mvc:View
+    controllerName="ui5.Controle_De_Estoque.controller.CadastroProdutoTapecaria"
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core">
+	<Page>
+
+        <headerContent alignItems="Center" justifyContent="Center">
+			<Toolbar width="100%">
+                <Button class="sapUiSmallMargin"
+                    type="Default"
+                    icon="sap-icon://nav-back"
+                    press=".aoClicarEmVoltar"/>
+                <ToolbarSpacer/>
+            	<Title text="{i18n>tituloTelaCadastro}"/>
+                <ToolbarSpacer/>
+                <HBox justifyContent="End">
+                    <Button class="sapUiSmallMarginBegin" 
+                        type="Reject"
+                        text="{i18n>botaoCancelar}"
+                        icon="sap-icon://cancel"
+                        press=".aoClicarEmVoltar"/>
+                    <Button class="sapUiSmallMarginBegin" 
+                        type="Default"
+                        text="{i18n>botaoSalvar}"
+                        icon="sap-icon://save"
+                        press=".aoClicarEmSalvar"/>
+                </HBox>
+            </Toolbar>
+		</headerContent>
+
+        <Panel backgroundDesign="Solid">
+            <VBox width="40%">
+                <VBox class="sapUiSmallMarginTop">
+                    <Label text="{i18n>labelTipo}" design="Bold"/>
+                    <ComboBox id="cadastroComboBox"
+                        width="100%"
+                        items="{enumTipoTapecaria>/}"
+                        placeholder="{i18n>comboBoxPlaceholder}"
+                        selectedKey="{produtoTapecaria>/tipo}">
+                        <core:Item key="{enumTipoTapecaria>chave}" text="{enumTipoTapecaria>descricao}" />
+                    </ComboBox>
+                </VBox>
+                <VBox class="sapUiSmallMarginTop" width="100%">
+                    <Label text="{i18n>labelDataEntrada}" design="Bold"/>
+                    <DatePicker id="cadastroDatePicker"
+                        width="100%"
+                        placeholder="{i18n>placeholderDataEntrada}"
+                        value="{
+                            path:'produtoTapecaria>/dataEntrada',
+                            type: 'sap.ui.model.type.Date',
+                            formatOptions: {
+                                    style: 'short',
+                                    pattern: 'dd-MM-yyyy'
+                            }
+                        }"
+                    />
+                </VBox>
+                <VBox class="sapUiSmallMarginTop">
+                    <Label text="{i18n>labelTamanho}" design="Bold"/>
+                    <Input
+                        value="{produtoTapecaria>/area}"
+                        fieldWidth="100%"
+                        showClearIcon="true"
+                    />
+                </VBox>
+                <VBox class="sapUiSmallMarginTop">
+                    <Label text="{i18n>labelPrecoMetroQuadrado}" design="Bold"/>
+                    <Input
+                        value="{produtoTapecaria>/precoMetroQuadrado}"
+                        fieldWidth="100%"
+                        showClearIcon="true"
+                    />
+                </VBox>
+                <VBox class="sapUiSmallMarginTop" width="100%">
+                    <Label text="{i18n>labelEhEntrega}" design="Bold"/>
+                    <CheckBox selected="{produtoTapecaria>/ehEntrega}" />
+                </VBox>
+                <VBox class="sapUiSmallMarginTop" width="100%">
+                    <Label text="{i18n>labelDetalhes}" design="Bold"/>
+                    <TextArea
+                        value="{produtoTapecaria>/detalhes}"
+                        width="100%"
+                        showClearIcon="true"
+                    />
+                </VBox>    
+            </VBox>
+        </Panel>
+	</Page>
+</mvc:View>
