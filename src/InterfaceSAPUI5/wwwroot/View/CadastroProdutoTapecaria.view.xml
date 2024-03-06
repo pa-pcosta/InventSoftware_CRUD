@@ -38,7 +38,8 @@
                         width="100%"
                         items="{enumTipoTapecaria>/}"
                         placeholder="{i18n>comboBoxPlaceholder}"
-                        selectedKey="{produtoTapecaria>/tipo}">
+                        selectedKey="{produtoTapecaria>/tipo}"
+                        change=".validador.validarTipo">
                         <core:Item key="{enumTipoTapecaria>chave}" text="{enumTipoTapecaria>descricao}" />
                     </ComboBox>
                 </VBox>
@@ -55,6 +56,7 @@
                                     pattern: 'dd-MM-yyyy'
                             }
                         }"
+                        change=".validador.validarDataEntrada"
                     />
                 </VBox>
                 <VBox class="sapUiSmallMarginTop">
@@ -63,6 +65,7 @@
                         value="{produtoTapecaria>/area}"
                         fieldWidth="100%"
                         showClearIcon="true"
+                        change=".validador.validarTamanho"
                     />
                 </VBox>
                 <VBox class="sapUiSmallMarginTop">
@@ -82,7 +85,6 @@
                     <TextArea
                         value="{produtoTapecaria>/detalhes}"
                         width="100%"
-                        showClearIcon="true"
                     />
                 </VBox>    
             </VBox>

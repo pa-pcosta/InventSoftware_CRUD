@@ -1,12 +1,14 @@
 sap.ui.define([
 	"./Base.controller",
-	"../model/formatter"
-], (BaseController, formatter) => {
+	"../model/formatter",
+	"../services/validacaoCadastro"
+], (BaseController, formatter, Validador) => {
 	"use strict";
 
 	return BaseController.extend("ui5.Controle_De_Estoque.controller.CadastroProdutoTapecaria", {
 		
 		formatter: formatter,
+		validador: Validador,
 
 		onInit() {
 			this.vincularRota("cadastro");
