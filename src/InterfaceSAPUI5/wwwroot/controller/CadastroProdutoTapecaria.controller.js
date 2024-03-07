@@ -20,6 +20,22 @@ sap.ui.define([
 			var resposta = await fetch("api/Tapecaria/enumTipoTapecaria");
 			var tiposTapecaria = await resposta.json();
 			this.definirModelo("enumTipoTapecaria", tiposTapecaria);
+
+			let view = this.getView();
+            var campos = ["cadastroComboBoxTipo",
+				"cadastroDatePickerDataEntrada",
+				"cadastroInputArea",
+				"cadastroInputPrecoMetroQuadrado",
+				"cadastroInputDetalhes"
+			];
+
+            campos.forEach(
+				function(idCampo) {
+                var campo = view.byId(idCampo);
+                if (campo) {
+                    campo.setValueState("None");
+                }
+            });
 		},
 
         aoClicarEmVoltar (){
