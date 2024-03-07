@@ -1,8 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
-	"sap/ui/core/routing/History"
-], (Controller, JSONModel, History) => {
+	"sap/ui/core/routing/History",
+	"sap/m/MessageBox"
+], (Controller, JSONModel, History, MessageBox) => {
 	"use strict";
 
 	return Controller.extend("ui5.Controle_De_Estoque.controller.Base", {
@@ -23,15 +24,16 @@ sap.ui.define([
         },
 
 		retornarParaPaginaAnterior(){
-			const historico = History.getInstance();
-			const paginaAnterior = historico.getPreviousHash();
-
-			if (paginaAnterior !== undefined) {
-				window.history.go(-1);
-			} else {
 				const roteador = this.getOwnerComponent().getRouter();
 				roteador.navTo("telaListagem");
-			}
+		},
+
+		mostrarMessageBoxSucesso (mensagem){
+			MessageBox.success(mensagem);
+		},
+
+		mostrarMessageBoxFalha (mensagem){
+			MessageBox.error(mensagem);
 		}
 	});
 });
