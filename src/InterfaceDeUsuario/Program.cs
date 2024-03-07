@@ -1,22 +1,21 @@
-using ControleDeEstoque.Dominio;
-using ControleDeEstoque.InfraestruturaDeDados.MigracaoBancoDeDados;
-using ControleDeEstoque.InfraestruturaDeDados.Repositorios;
-using FluentMigrator.Runner;
+using ControleDeEstoque.InterfaceWindowsForms;
+using Dominio;
+using InfraestruturaDeDados.MigracaoBancoDeDados;
+using InfraestruturaDeDados.Repositorios;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Configuration;
 
-namespace ControleDeEstoque.InterfaceDeUsuario
+namespace InterfaceWindowsForms
 {
     internal static class Program
     {
         [STAThread]
         static void Main()
         {
-            using (var serviceProvider = CreateServices())
+            using (var serviceProvider = MigracaoConfig.CreateServices())
             using (var scope = serviceProvider.CreateScope())
             {
-                UpdateDatabase(scope.ServiceProvider);
+                MigracaoConfig.UpdateDatabase(scope.ServiceProvider);
             }
 
             var builder = CriaHostBuilder();
@@ -34,25 +33,6 @@ namespace ControleDeEstoque.InterfaceDeUsuario
             {
                 services.AddScoped<IRepositorio, RepositorioLinq2DB>();
             });
-        }
-
-        private static ServiceProvider CreateServices()
-        {
-            return new ServiceCollection()
-                .AddFluentMigratorCore()
-                .ConfigureRunner(rb => rb
-                    .AddSqlServer()
-                    .WithGlobalConnectionString(ConfigurationManager.ConnectionStrings["SQL_Server_Controle_De_Estoque"].ConnectionString)
-                    .ScanIn(typeof(_20231207105700_AdicionarTabelaTapecaria).Assembly).For.Migrations())
-                .AddLogging(lb => lb.AddFluentMigratorConsole())
-                .BuildServiceProvider(false);
-        }
-
-        private static void UpdateDatabase(IServiceProvider serviceProvider)
-        {
-            var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
-
-            runner.MigrateUp();
         }
     }
 }

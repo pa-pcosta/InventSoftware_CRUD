@@ -1,6 +1,6 @@
-using ControleDeEstoque.Dominio;
+using Dominio;
 
-namespace ControleDeEstoque.InterfaceDeUsuario
+namespace ControleDeEstoque.InterfaceWindowsForms
 {
     public partial class TelaListagem : Form
     {
