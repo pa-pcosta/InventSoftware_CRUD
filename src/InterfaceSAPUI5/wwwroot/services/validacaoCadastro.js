@@ -9,7 +9,7 @@ sap.ui.define([], () => {
             let valorComboBox = comboBox.getSelectedKey();
 
             if(valorComboBox==""){
-                _listaDeErros.push("O produto precisa ter um tipo");
+                _listaDeErros.erroTipo = "O produto precisa ter um tipo";
                 comboBox.setValueState("Error");
                 comboBox.setValueStateText("O produto precisa ter um tipo");
             }
@@ -39,8 +39,32 @@ sap.ui.define([], () => {
                 campoInput.setValueState("Error");
                 campoInput.setValueStateText("Este campo aceita apenas números");
             }
+        },
 
-            console.log(_listaDeErros);
+        validarPreco(evento) {
+            let campoInput = evento.getSource();
+            let valorCampoInput = campoInput.getValue();
+            let possuiApenasNumeros = /^\d+$/.test(valorCampoInput);
+
+            if (!possuiApenasNumeros)
+            {
+                _listaDeErros.push("Este campo aceita apenas números");
+                campoInput.setValueState("Error");
+                campoInput.setValueStateText("Este campo aceita apenas números");
+            }
+        },
+
+        validarDetalhes(evento) {
+            let campoInput = evento.getSource();
+            let tamanhoCampoInput = campoInput.getValue().length;
+            let maximoDeCaracteres = 20;
+
+            if (tamanhoCampoInput > maximoDeCaracteres)
+            {
+                _listaDeErros.push(`Digite no máximo ${maximoDeCaracteres} caracteres`);
+                campoInput.setValueState("Error");
+                campoInput.setValueStateText(`Digite no máximo ${maximoDeCaracteres} caracteres`);
+            }
         }
 	};
 });

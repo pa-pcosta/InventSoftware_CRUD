@@ -74,6 +74,7 @@
                         value="{produtoTapecaria>/precoMetroQuadrado}"
                         fieldWidth="100%"
                         showClearIcon="true"
+                        change=".validador.validarPreco"
                     />
                 </VBox>
                 <VBox class="sapUiSmallMarginTop" width="100%">
@@ -85,6 +86,7 @@
                     <TextArea
                         value="{produtoTapecaria>/detalhes}"
                         width="100%"
+                        change=".validador.validarDetalhes"
                     />
                 </VBox>    
             </VBox>
