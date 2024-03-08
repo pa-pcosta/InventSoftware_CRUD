@@ -93,6 +93,11 @@
 					"pattern": "cadastro",
 					"name": "cadastro",
 					"target": "cadastro"
+				},
+				{
+					"pattern": "edicao/{id}",
+					"name": "edicao",
+					"target": "edicao"
 				}
 			],
 			"targets": {
@@ -106,6 +111,10 @@
 				},
 				"cadastro": {
 					"id": "cadastro",
+					"name": "CadastroProdutoTapecaria"
+				},
+				"edicao": {
+					"id": "edicao",
 					"name": "CadastroProdutoTapecaria"
 				}
 			}

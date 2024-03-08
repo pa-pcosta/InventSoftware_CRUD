@@ -12,6 +12,7 @@ sap.ui.define([
 
 		onInit() {
 			this.vincularRota("cadastro");
+			this.getOwnerComponent().getRouter().getRoute("edicao").attachPatternMatched(this.aoCoincidirRotaEdicao, this);
 		},
 
 		async aoCoincidirRota() {
@@ -36,6 +37,15 @@ sap.ui.define([
                     campo.setValueState("None");
                 }
             });
+		},
+
+		aoCoincidirRotaEdicao (evento) {
+			var id = evento.getParameter("arguments").id
+            var url = 'api/Tapecaria/' + id;
+			
+			fetch(url)
+			.then( resposta => resposta.json())
+			.then( modelo => this.definirModelo("produtoTapecaria", modelo));
 		},
 
         aoClicarEmVoltar (){

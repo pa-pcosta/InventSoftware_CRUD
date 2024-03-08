@@ -29,7 +29,7 @@
                                     <Button type="Default"
                                         text="{i18n>botaoEditar}"
                                         icon="sap-icon://edit"
-                                        press="onPress"/>
+                                        press="aoClicarEmEditar"/>
                                 </Toolbar>
                             </f:toolbar>
                             <f:content>
