@@ -1,8 +1,9 @@
 sap.ui.define([
 	"./Base.controller",
 	"../model/formatter",
-	"../services/validacaoCadastro"
-], (BaseController, formatter, Validador) => {
+	"../services/validacaoCadastro",
+	"sap/m/MessageBox"
+], (BaseController, formatter, Validador, MessageBox) => {
 	"use strict";
 
 	return BaseController.extend("ui5.Controle_De_Estoque.controller.CadastroProdutoTapecaria", {
@@ -44,37 +45,35 @@ sap.ui.define([
             var url = 'api/Tapecaria/' + id;
 			
 			fetch(url)
-			.then( resposta => resposta.json())
-			.then( modelo => this.definirModelo("produtoTapecaria", modelo));
+			.then(resposta => resposta.json())
+			.then(modelo => this.definirModelo("produtoTapecaria", modelo));
+			
+			fetch("api/Tapecaria/enumTipoTapecaria")
+			.then(resposta => resposta.json())
+			.then(modelo => this.definirModelo("enumTipoTapecaria", modelo));
 		},
 
         aoClicarEmVoltar (){
             this.retornarParaPaginaAnterior();
         },
 
-        aoClicarEmSalvar (){
+        async aoClicarEmSalvar (){
             let listaDeErrosValidacao = Validador.validarTodos(this.getView());
 			
 			if(listaDeErrosValidacao.length == 0){
 				let novoProdutoTapecaria = this.getView().getModel("produtoTapecaria").getData();
-				
 				novoProdutoTapecaria.tipo = parseInt(novoProdutoTapecaria.tipo);
-				
+				let metodoFetch = novoProdutoTapecaria.id == null ? 'POST' : 'PUT'; 
+
 				fetch('api/Tapecaria', {
-					method: 'POST',
+					method: metodoFetch,
 					body: JSON.stringify(novoProdutoTapecaria),
 					headers: {
 						"Content-type": "application/json; charset=UTF-8"
 					}
 				})
 				.then(resposta => resposta.json())
-				.then(this.mostrarMessageBoxSucesso("SUCESSO !"))
-				.then(
-					produtoCadastrado =>
-						this.getOwnerComponent().getRouter().navTo("detalhes",{
-							id: produtoCadastrado.id
-						})
-				);
+				.then(produtoCadastrado => this.aoEfetuarCadastroComSucesso(produtoCadastrado));
 			}
 			else
 			{
@@ -136,5 +135,19 @@ sap.ui.define([
                 campoInput.setValueStateText(mensagemErroValidacao);
 			}
 		},
+
+		aoEfetuarCadastroComSucesso(produtoCadastrado){
+			MessageBox.success("mensagemSucessoDeCadastro", {
+				actions: [MessageBox.Action.OK],
+				onClose: (clique) => {
+					if(clique == MessageBox.Action.OK)
+					{
+						this.getOwnerComponent().getRouter().navTo("detalhes", {
+							id: produtoCadastrado.id 
+						})
+					}
+				}
+			})
+		}
 	});
 });
