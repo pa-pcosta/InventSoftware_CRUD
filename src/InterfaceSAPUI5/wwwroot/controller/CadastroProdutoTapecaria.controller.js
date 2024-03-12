@@ -77,7 +77,7 @@ sap.ui.define([
 			}
 			else
 			{
-				this.mostrarMessageBoxFalha("Alguns campos não atendem os critérios de validação")
+				MessageBox.error(this.obterMensagemI18n("mensagemFalhaDeCadastro"))
 			}
         },
 
@@ -137,7 +137,7 @@ sap.ui.define([
 		},
 
 		aoEfetuarCadastroComSucesso(produtoCadastrado){
-			MessageBox.success("mensagemSucessoDeCadastro", {
+			MessageBox.success(this.obterMensagemI18n("mensagemSucessoDeCadastro"), {
 				actions: [MessageBox.Action.OK],
 				onClose: (clique) => {
 					if(clique == MessageBox.Action.OK)

@@ -28,12 +28,10 @@ sap.ui.define([
 				roteador.navTo("telaListagem");
 		},
 
-		mostrarMessageBoxSucesso (mensagem){
-			MessageBox.success(mensagem);
-		},
-
-		mostrarMessageBoxFalha (mensagem){
-			MessageBox.error(mensagem);
+		obterMensagemI18n (mensagem) {
+			const pacoteDeTexto = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			
+			return pacoteDeTexto.getText(mensagem);
 		}
 	});
 });
