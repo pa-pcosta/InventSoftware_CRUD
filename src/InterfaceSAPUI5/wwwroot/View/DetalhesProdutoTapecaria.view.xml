@@ -25,7 +25,7 @@
                                     <Button type="Reject"
                                         text="{i18n>botaoDeletar}"
                                         icon="sap-icon://delete"
-                                        press="onPress"/>
+                                        press="aoClicarEmRemover"/>
                                     <Button type="Default"
                                         text="{i18n>botaoEditar}"
                                         icon="sap-icon://edit"
