@@ -23,6 +23,14 @@ sap.ui.define([
 
         aoClicarEmVoltar (){
             this.retornarParaPaginaAnterior();
-        }
+        },
+
+		aoClicarEmEditar (){
+			let produtoTapecaria = this.getView().getModel("produtoTapecaria").getData();
+			let id = produtoTapecaria.id;
+
+			const roteador = this.getOwnerComponent().getRouter();
+			roteador.navTo("edicao", {id: id});
+		}
 	});
 });

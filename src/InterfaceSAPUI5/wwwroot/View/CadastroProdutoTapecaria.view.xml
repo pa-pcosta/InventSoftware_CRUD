@@ -52,8 +52,9 @@
                             path:'produtoTapecaria>/dataEntrada',
                             type: 'sap.ui.model.type.Date',
                             formatOptions: {
-                                    style: 'short',
-                                    pattern: 'dd-MM-yyyy'
+                                style: 'short',
+                                pattern: 'dd/MM/yyyy',
+                                source: {pattern: 'yyyy-MM-ddTHH:mm:ss'}
                             }
                         }"
                         change=".aoMudarValorDataEntrada"
