@@ -9,10 +9,10 @@ sap.ui.define([
 
 		onInit() {
 			
-			this.vincularRota("telaListagem");
+			this.vincularRota("telaListagem", this.aoCoincidirRotaListagem);
 		},
 
-		async aoCoincidirRota (){
+		async aoCoincidirRotaListagem (){
 			var resposta = await fetch("api/Tapecaria");
 			var listaProdutosTapecaria = await resposta.json();
 			
@@ -54,18 +54,14 @@ sap.ui.define([
 
 			var produtoTapecaria = evento.getSource();
 			var contexto = produtoTapecaria.getBindingContext("produtoTapecaria");
-			const roteador = this.getOwnerComponent().getRouter();
+			const parametro = {id: contexto.getProperty("id")};
 
-			roteador.navTo("detalhes",{
-				id: contexto.getProperty("id")
-			});
+			this.navegarPara("detalhes", parametro);
 		},
 
 		aoClicarEmAdicionar (){
-
-			const roteador = this.getOwnerComponent().getRouter();
-
-			roteador.navTo("cadastro");
+			
+			navegarPara("cadastro");
 		}
 	});
 });

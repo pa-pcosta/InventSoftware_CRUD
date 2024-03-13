@@ -12,11 +12,11 @@ sap.ui.define([
 		validador: Validador,
 
 		onInit() {
-			this.vincularRota("cadastro");
-			this.getOwnerComponent().getRouter().getRoute("edicao").attachPatternMatched(this.aoCoincidirRotaEdicao, this);
+			this.vincularRota("cadastro", this.aoCoincidirRotaCadastro);
+			this.vincularRota("edicao", this.aoCoincidirRotaEdicao);
 		},
 
-		async aoCoincidirRota() {
+		async aoCoincidirRotaCadastro() {
             this.definirModelo("produtoTapecaria");
 
 			var resposta = await fetch("api/Tapecaria/enumTipoTapecaria");
@@ -54,7 +54,14 @@ sap.ui.define([
 		},
 
         aoClicarEmVoltar (){
-            this.retornarParaPaginaAnterior();
+			let id = this.getView().getModel("produtoTapecaria").getData().id;
+
+			if (id != null){
+            	this.navegarPara("detalhes", id);
+			}
+			else{
+				this.navegarPara("telaListagem");
+			}
         },
 
         async aoClicarEmSalvar (){
@@ -142,9 +149,8 @@ sap.ui.define([
 				onClose: (clique) => {
 					if(clique == MessageBox.Action.OK)
 					{
-						this.getOwnerComponent().getRouter().navTo("detalhes", {
-							id: produtoCadastrado.id 
-						})
+						const parametro = {id: produtoCadastrado.id}
+						this.navegarPara("detalhes", parametro);
 					}
 				}
 			})

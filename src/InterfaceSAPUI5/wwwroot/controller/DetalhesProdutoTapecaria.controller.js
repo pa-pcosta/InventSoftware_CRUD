@@ -9,10 +9,10 @@ sap.ui.define([
 		formatter: formatter,
 		
         onInit() {
-		    this.vincularRota("detalhes");
+		    this.vincularRota("detalhes",this.aoCoincidirRotaDetalhes);
 		},
 
-		async aoCoincidirRota(evento) {
+		async aoCoincidirRotaDetalhes(evento) {
             
             var id = evento.getParameter("arguments").id
             var url = 'api/Tapecaria/' + id;
@@ -23,15 +23,14 @@ sap.ui.define([
 		},
 
         aoClicarEmVoltar (){
-            this.retornarParaPaginaAnterior();
+            this.navegarPara("telaListagem");
         },
 
 		aoClicarEmEditar (){
 			let produtoTapecaria = this.getView().getModel("produtoTapecaria").getData();
-			let id = produtoTapecaria.id;
+			let parametro = {id: produtoTapecaria.id};
 
-			const roteador = this.getOwnerComponent().getRouter();
-			roteador.navTo("edicao", {id: id});
+			this.navegarPara("edicao", parametro)
 		},
 
 		aoClicarEmRemover(){
@@ -50,7 +49,7 @@ sap.ui.define([
 								"Content-type": "application/json; charset=UTF-8"
 							}
 						})
-						.then(this.retornarParaPaginaAnterior());
+						.then(this.navegarPara("telaListagem"));
 					}
 				}
 			});

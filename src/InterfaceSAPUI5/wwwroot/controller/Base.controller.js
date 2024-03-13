@@ -8,11 +8,11 @@ sap.ui.define([
 
 	return Controller.extend("ui5.Controle_De_Estoque.controller.Base", {
 		
-        vincularRota(nomeRota){
-			this.getOwnerComponent().getRouter().getRoute(nomeRota).attachPatternMatched(this.aoCoincidirRota, this);
+        vincularRota(nomeRota, aoCoincidirRota){
+			this.getOwnerComponent().getRouter().getRoute(nomeRota).attachPatternMatched(aoCoincidirRota, this);
         },
 
-        definirModelo(nomeModelo, dados= null){
+        definirModelo(nomeModelo, dados = null){
 			if (dados == null)
 			{
 				this.getView().setModel(new JSONModel({}), nomeModelo);
@@ -23,9 +23,10 @@ sap.ui.define([
 			}
         },
 
-		retornarParaPaginaAnterior(){
-				const roteador = this.getOwnerComponent().getRouter();
-				roteador.navTo("telaListagem");
+		navegarPara (rota, parametro = null){
+			const roteador = this.getOwnerComponent().getRouter();
+
+			roteador.navTo(rota, parametro);
 		},
 
 		obterMensagemI18n (mensagem) {
