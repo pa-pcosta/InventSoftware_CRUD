@@ -105,6 +105,23 @@ sap.ui.define([], () => {
             {
                 inputDetalhes.setValueState("None");
             }
+        },
+
+        redefinirEstadoDosInputs(view){
+            var campos = ["cadastroComboBoxTipo",
+				"cadastroDatePickerDataEntrada",
+				"cadastroInputArea",
+				"cadastroInputPrecoMetroQuadrado",
+				"cadastroInputDetalhes"
+			];
+
+            campos.forEach(
+				function(idCampo) {
+                var campo = view.byId(idCampo);
+                if (campo) {
+                    campo.setValueState("None");
+                }
+            });
         }
 	};
 });

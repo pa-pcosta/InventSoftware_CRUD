@@ -54,14 +54,15 @@ sap.ui.define([
 
 			var produtoTapecaria = evento.getSource();
 			var contexto = produtoTapecaria.getBindingContext("produtoTapecaria");
-			const parametro = {id: contexto.getProperty("id")};
+			let id = contexto.getProperty("id"); 
+			const parametro = {id};
 
 			this.navegarPara("detalhes", parametro);
 		},
 
 		aoClicarEmAdicionar (){
 			
-			navegarPara("cadastro");
+			this.navegarPara("cadastro");
 		}
 	});
 });

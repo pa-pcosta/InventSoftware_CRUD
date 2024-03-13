@@ -27,15 +27,14 @@ sap.ui.define([
         },
 
 		aoClicarEmEditar (){
-			let produtoTapecaria = this.getView().getModel("produtoTapecaria").getData();
-			let parametro = {id: produtoTapecaria.id};
+			let id = this.getView().getModel("produtoTapecaria").getData().id;
+			let parametro = {id};
 
 			this.navegarPara("edicao", parametro)
 		},
 
 		aoClicarEmRemover(){
-			let produtoTapecaria = this.getView().getModel("produtoTapecaria").getData();
-			let id = produtoTapecaria.id;
+			let id = this.getView().getModel("produtoTapecaria").getData().id;
 			let url = 'api/Tapecaria/' + id;
 
 			MessageBox.confirm(this.obterMensagemI18n("confirmarRemocao"),{

@@ -23,21 +23,9 @@ sap.ui.define([
 			var tiposTapecaria = await resposta.json();
 			this.definirModelo("enumTipoTapecaria", tiposTapecaria);
 
-			let view = this.getView();
-            var campos = ["cadastroComboBoxTipo",
-				"cadastroDatePickerDataEntrada",
-				"cadastroInputArea",
-				"cadastroInputPrecoMetroQuadrado",
-				"cadastroInputDetalhes"
-			];
-
-            campos.forEach(
-				function(idCampo) {
-                var campo = view.byId(idCampo);
-                if (campo) {
-                    campo.setValueState("None");
-                }
-            });
+			
+            let view = this.getView();
+			Validador.redefinirEstadoDosInputs(view);
 		},
 
 		aoCoincidirRotaEdicao (evento) {
@@ -54,12 +42,15 @@ sap.ui.define([
 		},
 
         aoClicarEmVoltar (){
-			let id = this.getView().getModel("produtoTapecaria").getData().id;
-
-			if (id != null){
-            	this.navegarPara("detalhes", id);
+			const id = this.getView().getModel("produtoTapecaria").getData().id
+			
+			if (id != null)
+			{
+				let parametro = {id};
+            	this.navegarPara("detalhes", parametro);
 			}
-			else{
+			else
+			{
 				this.navegarPara("telaListagem");
 			}
         },
@@ -149,7 +140,8 @@ sap.ui.define([
 				onClose: (clique) => {
 					if(clique == MessageBox.Action.OK)
 					{
-						const parametro = {id: produtoCadastrado.id}
+						const id = produtoCadastrado.id;
+						const parametro = {id}
 						this.navegarPara("detalhes", parametro);
 					}
 				}
