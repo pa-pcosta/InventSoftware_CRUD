@@ -12,6 +12,7 @@ sap.ui.define([
 		validador: Validador,
 
 		onInit() {
+			Validador.inicializaValidador(this.getView().getController());
 			this.vincularRota("cadastro", this.aoCoincidirRotaCadastro);
 			this.vincularRota("edicao", this.aoCoincidirRotaEdicao);
 		},
@@ -56,27 +57,21 @@ sap.ui.define([
         },
 
         async aoClicarEmSalvar (){
-            let listaDeErrosValidacao = Validador.validarTodos(this.getView());
+            Validador.validarTodos(this.getView());
 			
-			if(listaDeErrosValidacao.length == 0){
-				let novoProdutoTapecaria = this.getView().getModel("produtoTapecaria").getData();
-				novoProdutoTapecaria.tipo = parseInt(novoProdutoTapecaria.tipo);
-				let metodoFetch = novoProdutoTapecaria.id == null ? 'POST' : 'PUT'; 
+			let novoProdutoTapecaria = this.getView().getModel("produtoTapecaria").getData();
+			novoProdutoTapecaria.tipo = parseInt(novoProdutoTapecaria.tipo);
+			let metodoFetch = novoProdutoTapecaria.id == null ? 'POST' : 'PUT'; 
 
-				fetch('api/Tapecaria', {
-					method: metodoFetch,
-					body: JSON.stringify(novoProdutoTapecaria),
-					headers: {
-						"Content-type": "application/json; charset=UTF-8"
-					}
-				})
-				.then(resposta => resposta.json())
-				.then(produtoCadastrado => this.aoEfetuarCadastroComSucesso(produtoCadastrado));
-			}
-			else
-			{
-				MessageBox.error(this.obterMensagemI18n("mensagemFalhaDeCadastro"))
-			}
+			fetch('api/Tapecaria', {
+				method: metodoFetch,
+				body: JSON.stringify(novoProdutoTapecaria),
+				headers: {
+					"Content-type": "application/json; charset=UTF-8"
+				}
+			})
+			.then(resposta => resposta.json())
+			.then(produtoCadastrado => this.aoEfetuarCadastroComSucesso(produtoCadastrado));
         },
 
 		aoMudarValorTipo (evento){

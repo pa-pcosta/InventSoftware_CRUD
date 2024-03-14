@@ -33,7 +33,7 @@
         <Panel backgroundDesign="Solid">
             <VBox width="40%">
                 <VBox class="sapUiSmallMarginTop">
-                    <Label text="{i18n>labelTipo}" design="Bold"/>
+                    <Label text="{i18n>labelTipo}" design="Bold" required="true"/>
                     <ComboBox id="cadastroComboBoxTipo"
                         width="100%"
                         items="{enumTipoTapecaria>/}"
@@ -44,7 +44,7 @@
                     </ComboBox>
                 </VBox>
                 <VBox class="sapUiSmallMarginTop" width="100%">
-                    <Label text="{i18n>labelDataEntrada}" design="Bold"/>
+                    <Label text="{i18n>labelDataEntrada}" design="Bold" required="true"/>
                     <DatePicker id="cadastroDatePickerDataEntrada"
                         width="100%"
                         placeholder="{i18n>placeholderDataEntrada}"
@@ -61,7 +61,7 @@
                     />
                 </VBox>
                 <VBox class="sapUiSmallMarginTop">
-                    <Label text="{i18n>labelTamanho}" design="Bold"/>
+                    <Label text="{i18n>labelTamanho}" design="Bold" required="true"/>
                     <Input id="cadastroInputArea"
                         value="{produtoTapecaria>/area}"
                         fieldWidth="100%"
@@ -70,7 +70,7 @@
                     />
                 </VBox>
                 <VBox class="sapUiSmallMarginTop">
-                    <Label text="{i18n>labelPrecoMetroQuadrado}" design="Bold"/>
+                    <Label text="{i18n>labelPrecoMetroQuadrado}" design="Bold" required="true"/>
                     <Input id="cadastroInputPrecoMetroQuadrado"
                         value="{produtoTapecaria>/precoMetroQuadrado}"
                         fieldWidth="100%"

@@ -29,10 +29,17 @@ sap.ui.define([
 			roteador.navTo(rota, parametro);
 		},
 
-		obterMensagemI18n (mensagem) {
+		obterMensagemI18n (mensagem, placeholders = null) {
 			const pacoteDeTexto = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			return pacoteDeTexto.getText(mensagem);
+			if (placeholders != null)
+			{
+			return pacoteDeTexto.getText(mensagem, placeholders);
+			}
+			else
+			{ 
+				return pacoteDeTexto.getText(mensagem);
+			}
 		}
 	});
 });

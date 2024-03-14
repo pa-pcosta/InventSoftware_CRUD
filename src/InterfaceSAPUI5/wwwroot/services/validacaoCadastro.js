@@ -1,8 +1,13 @@
-sap.ui.define([], () => {
+sap.ui.define(["sap/m/MessageBox"], (MessageBox) => {
 	"use strict";
+    let _baseController;
     let _listaDeErros = [];
 	
     return {
+
+        inicializaValidador(baseController){
+            _baseController = baseController;
+        },
 
         validarTodos (view){
             _listaDeErros = [];
@@ -19,7 +24,10 @@ sap.ui.define([], () => {
             this.validarPrecoMetroQuadrado(inputPreco);
             this.validarDetalhes(inputDetalhes);
 
-            return _listaDeErros;
+            if (_listaDeErros.length > 0)
+            {
+                throw (MessageBox.error(_baseController.obterMensagemI18n("mensagemFalhaDeCadastro")));
+            }
         },
 
         validarTipo(comboBox) {
@@ -27,9 +35,11 @@ sap.ui.define([], () => {
 
             if(valorComboBox=="")
             {
-                _listaDeErros.push("O produto precisa ter um tipo");
+                let mensagem = _baseController.obterMensagemI18n("erroValidacaoTipo");
+
+                _listaDeErros.push(mensagem);
                 comboBox.setValueState("Error");
-                comboBox.setValueStateText("O produto precisa ter um tipo");
+                comboBox.setValueStateText(mensagem);
             }
             else
             {
@@ -43,15 +53,19 @@ sap.ui.define([], () => {
             
             if (valorDatePicker == null)
             {
-                _listaDeErros.push("Insira uma data");
+                let mensagem = _baseController.obterMensagemI18n("erroValidacaoDataEntradaNula");
+
+                _listaDeErros.push(mensagem);
                 datePicker.setValueState("Error");
-                datePicker.setValueStateText("Insira uma data");
+                datePicker.setValueStateText(mensagem);
             }
             else if (valorDatePicker > hoje)
             {
-                _listaDeErros.push("A data de registro não pode ser maior do que a atual");
+                let mensagem = _baseController.obterMensagemI18n("erroValidacaoDataEntradaMaiorQueHoje");
+
+                _listaDeErros.push(mensagem);
                 datePicker.setValueState("Error");
-                datePicker.setValueStateText("A data de registro não pode ser maior do que a atual");
+                datePicker.setValueStateText(mensagem);
             }
             else
             {
@@ -65,9 +79,11 @@ sap.ui.define([], () => {
 
             if (!possuiApenasNumeros)
             {
-                _listaDeErros.push("Este campo aceita apenas números");
+                let mensagem = _baseController.obterMensagemI18n("erroValidacaoArea");
+
+                _listaDeErros.push(mensagem);
                 inputArea.setValueState("Error");
-                inputArea.setValueStateText("Este campo aceita apenas números");
+                inputArea.setValueStateText(mensagem);
             }
             else
             {
@@ -81,9 +97,11 @@ sap.ui.define([], () => {
 
             if (!possuiApenasNumeros)
             {
-                _listaDeErros.push("Este campo aceita apenas números");
+                let mensagem = _baseController.obterMensagemI18n("erroValidacaoPrecoMetroQuadrado");
+
+                _listaDeErros.push(mensagem);
                 inputPreco.setValueState("Error");
-                inputPreco.setValueStateText("Este campo aceita apenas números");
+                inputPreco.setValueStateText(mensagem);
             }
             else
             {
@@ -97,9 +115,11 @@ sap.ui.define([], () => {
 
             if (tamanhoInputDetalhes > maximoDeCaracteres)
             {
-                _listaDeErros.push(`Digite no máximo ${maximoDeCaracteres} caracteres`);
+                let mensagem = _baseController.obterMensagemI18n("erroValidacaoDetalhes", [maximoDeCaracteres]);
+                
+                _listaDeErros.push(mensagem);
                 inputDetalhes.setValueState("Error");
-                inputDetalhes.setValueStateText(`Digite no máximo ${maximoDeCaracteres} caracteres`);
+                inputDetalhes.setValueStateText(mensagem);
             }
             else
             {
