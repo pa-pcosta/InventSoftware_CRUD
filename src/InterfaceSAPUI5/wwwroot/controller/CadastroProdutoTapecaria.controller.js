@@ -2,8 +2,9 @@ sap.ui.define([
 	"./Base.controller",
 	"../model/formatter",
 	"../services/validacaoCadastro",
-	"sap/m/MessageBox"
-], (BaseController, formatter, Validador, MessageBox) => {
+	"sap/m/MessageBox",
+	"../Repositorio/RepositorioCRUD"
+], (BaseController, formatter, Validador, MessageBox, Repositorio) => {
 	"use strict";
 
 	return BaseController.extend("ui5.Controle_De_Estoque.controller.CadastroProdutoTapecaria", {
@@ -20,10 +21,8 @@ sap.ui.define([
 		async aoCoincidirRotaCadastro() {
             this.definirModelo("produtoTapecaria");
 
-			var resposta = await fetch("api/Tapecaria/enumTipoTapecaria");
-			var tiposTapecaria = await resposta.json();
+			let tiposTapecaria = await Repositorio.obterDadosDoServidor("api/Tapecaria/enumTipoTapecaria");
 			this.definirModelo("enumTipoTapecaria", tiposTapecaria);
-
 			
             let view = this.getView();
 			Validador.redefinirEstadoDosInputs(view);
@@ -33,9 +32,8 @@ sap.ui.define([
 			var id = evento.getParameter("arguments").id
             var url = 'api/Tapecaria/' + id;
 			
-			fetch(url)
-			.then(resposta => resposta.json())
-			.then(modelo => this.definirModelo("produtoTapecaria", modelo));
+			let produtoTapecaria = Repositorio.obterDadosDoServidor(url)
+			this.definirModelo("produtoTapecaria", produtoTapecaria);
 			
 			fetch("api/Tapecaria/enumTipoTapecaria")
 			.then(resposta => resposta.json())
