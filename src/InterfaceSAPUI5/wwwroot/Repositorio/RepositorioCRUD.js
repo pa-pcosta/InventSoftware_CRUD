@@ -3,25 +3,28 @@ sap.ui.define([], () => {
 	
     return {
 
-        async obterDadosDoServidor (url){
-            let resposta = await fetch(url);
-            let dados = await resposta.json();
-            
-            return dados;
+        obterDadosDoServidor: async function (url){
+            return fetch(url)
+            .then(resposta => this.lerResposta(resposta));
         },
 
-        async enviarDadosParaServidor (url, metodoHttp, objetoBody){
+        enviarDadosParaServidor (url, metodoHttp, objetoBody){
             
-            let resposta = 
-                await fetch(url, {
-                    method: metodoHttp,
-                    body: JSON.stringify(novoProdutoTapecaria),
-                    headers: {
-                        "Content-type": "application/json; charset=UTF-8"
-                    }
-                })
+            return fetch(url, {
+                method: metodoHttp,
+                body: JSON.stringify(objetoBody),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
+            })
+            .then(resposta => this.lerResposta(resposta));
+        },
 
-            
+        lerResposta(resposta){
+            if(resposta.status == 400) return Promise.reject("Erro na requisição");
+            if(resposta.status == 404) return Promise.reject("Recurso não encontrado");
+ 
+            return resposta.json();
         }
 	};
 });

@@ -18,127 +18,121 @@ sap.ui.define([
 			this.vincularRota("edicao", this.aoCoincidirRotaEdicao);
 		},
 
-		async aoCoincidirRotaCadastro() {
-            this.definirModelo("produtoTapecaria");
+		aoCoincidirRotaCadastro() 
+		{
+			this.exibirEspera(async() => {
+				this.definirModelo("produtoTapecaria");
 
-			let tiposTapecaria = await Repositorio.obterDadosDoServidor("api/Tapecaria/enumTipoTapecaria");
-			this.definirModelo("enumTipoTapecaria", tiposTapecaria);
-			
-            let view = this.getView();
-			Validador.redefinirEstadoDosInputs(view);
+				let tiposTapecaria = await Repositorio.obterDadosDoServidor("api/Tapecaria/enumTipoTapecaria");
+				this.definirModelo("enumTipoTapecaria", tiposTapecaria);
+				
+				let view = this.getView();
+				Validador.redefinirEstadoDosInputs(view);
+			});
 		},
 
-		aoCoincidirRotaEdicao (evento) {
-			var id = evento.getParameter("arguments").id
-            var url = 'api/Tapecaria/' + id;
-			
-			let produtoTapecaria = Repositorio.obterDadosDoServidor(url)
-			this.definirModelo("produtoTapecaria", produtoTapecaria);
-			
-			fetch("api/Tapecaria/enumTipoTapecaria")
-			.then(resposta => resposta.json())
-			.then(modelo => this.definirModelo("enumTipoTapecaria", modelo));
+		async aoCoincidirRotaEdicao (evento) 
+		{
+			this.exibirEspera(async() => {
+				var id = evento.getParameter("arguments").id
+				var url = 'api/Tapecaria/' + id;
+				
+				let produtoTapecaria = await Repositorio.obterDadosDoServidor(url)
+				this.definirModelo("produtoTapecaria", produtoTapecaria);
+				
+				let tiposTapecaria = await Repositorio.obterDadosDoServidor("api/Tapecaria/enumTipoTapecaria");
+				this.definirModelo("enumTipoTapecaria", tiposTapecaria);
+			});
 		},
 
-        aoClicarEmVoltar (){
-			const id = this.getView().getModel("produtoTapecaria").getData().id
-			
-			if (id != null)
-			{
-				let parametro = {id};
-            	this.navegarPara("detalhes", parametro);
-			}
-			else
-			{
-				this.navegarPara("telaListagem");
-			}
-        },
-
-        async aoClicarEmSalvar (){
-            Validador.validarTodos(this.getView());
-			
-			let novoProdutoTapecaria = this.getView().getModel("produtoTapecaria").getData();
-			novoProdutoTapecaria.tipo = parseInt(novoProdutoTapecaria.tipo);
-			let metodoFetch = novoProdutoTapecaria.id == null ? 'POST' : 'PUT'; 
-
-			fetch('api/Tapecaria', {
-				method: metodoFetch,
-				body: JSON.stringify(novoProdutoTapecaria),
-				headers: {
-					"Content-type": "application/json; charset=UTF-8"
+        aoClicarEmVoltar ()
+		{
+			this.exibirEspera(() => {
+				const id = this.getView().getModel("produtoTapecaria").getData().id
+				
+				if (id != null)
+				{
+					let parametro = {id};
+					this.navegarPara("detalhes", parametro);
 				}
-			})
-			.then(resposta => resposta.json())
-			.then(produtoCadastrado => this.aoEfetuarCadastroComSucesso(produtoCadastrado));
+				else
+				{
+					this.navegarPara("telaListagem");
+				}
+			});
         },
 
-		aoMudarValorTipo (evento){
-			let comboBox = evento.getSource();
-			let mensagemErroValidacao = Validador.validarTipo(comboBox);
+        aoClicarEmSalvar ()
+		{
+			this.exibirEspera(async() => {
+				Validador.validarTodos(this.getView());
+				
+				let url = 'api/Tapecaria';
+				let novoProdutoTapecaria = this.getView().getModel("produtoTapecaria").getData();
+				novoProdutoTapecaria.tipo = parseInt(novoProdutoTapecaria.tipo);
+				let metodoHttp = novoProdutoTapecaria.id == null ? 'POST' : 'PUT'; 
 
-			if (mensagemErroValidacao)
-			{
-				comboBox.setValueState("Error");
-                comboBox.setValueStateText(mensagemErroValidacao);
-			}
+				let produtoCadastrado = await Repositorio.enviarDadosParaServidor(url, metodoHttp, novoProdutoTapecaria);
+
+				this.aoEfetuarCadastroComSucesso(produtoCadastrado);
+			});
+        },
+
+		aoMudarValorTipo (evento)
+		{
+			this.exibirEspera(() => {
+				let comboBox = evento.getSource();
+				Validador.validarTipo(comboBox);
+			});
 		},
 
-		aoMudarValorDataEntrada (evento){
-			let datePicker = evento.getSource();
-			let mensagemErroValidacao = Validador.validarDataEntrada(datePicker);
-
-			if (mensagemErroValidacao)
-			{
-				datePicker.setValueState("Error");
-                datePicker.setValueStateText(mensagemErroValidacao);
-			}
+		aoMudarValorDataEntrada (evento)
+		{
+			this.exibirEspera(() => {
+				let datePicker = evento.getSource();
+				Validador.validarDataEntrada(datePicker);
+			});
 		},
 
-		aoMudarValorTamanho (evento){
-            let campoInput = evento.getSource();
-			let mensagemErroValidacao = Validador.validarTamanho(campoInput);
-
-			if (mensagemErroValidacao)
-			{
-				campoInput.setValueState("Error");
-                campoInput.setValueStateText(mensagemErroValidacao);
-			}
+		aoMudarValorTamanho (evento)
+		{
+			this.exibirEspera(() => {
+				let campoInput = evento.getSource();
+				Validador.validarTamanho(campoInput);
+			});
 		},
 
-		aoMudarValorPrecoMetroQuadrado (evento){
-            let campoInput = evento.getSource();
-			let mensagemErroValidacao = Validador.validarPrecoMetroQuadrado(campoInput);
-
-			if (mensagemErroValidacao)
-			{
-				campoInput.setValueState("Error");
-                campoInput.setValueStateText(mensagemErroValidacao);
-			}
+		aoMudarValorPrecoMetroQuadrado (evento)
+		{
+			this.exibirEspera(() => {
+				let campoInput = evento.getSource();
+				Validador.validarPrecoMetroQuadrado(campoInput);
+			});
 		},
 
-		aoMudarValorDetalhes (evento){
-            let campoInput = evento.getSource();
-			let mensagemErroValidacao = Validador.validarDetalhes(campoInput);
-
-			if (mensagemErroValidacao)
-			{
-				campoInput.setValueState("Error");
-                campoInput.setValueStateText(mensagemErroValidacao);
-			}
+		aoMudarValorDetalhes (evento)
+		{
+			this.exibirEspera(() => {
+				let campoInput = evento.getSource();
+				Validador.validarDetalhes(campoInput);
+			});
 		},
 
-		aoEfetuarCadastroComSucesso(produtoCadastrado){
-			MessageBox.success(this.obterMensagemI18n("mensagemSucessoDeCadastro"), {
-				actions: [MessageBox.Action.OK],
-				onClose: (clique) => {
-					if(clique == MessageBox.Action.OK)
-					{
-						const id = produtoCadastrado.id;
-						const parametro = {id}
-						this.navegarPara("detalhes", parametro);
+		aoEfetuarCadastroComSucesso(produtoCadastrado)
+		{
+			this.exibirEspera(() => {
+				MessageBox.success(this.obterMensagemI18n("mensagemSucessoDeCadastro"), {
+					actions: [MessageBox.Action.OK],
+					onClose: (clique) => {
+						if(clique == MessageBox.Action.OK)
+						{
+							const id = produtoCadastrado.id;
+							const parametro = {id}
+							this.navegarPara("detalhes", parametro);
+						}
 					}
-				}
-			})
+				})
+			});
 		}
 	});
 });

@@ -1,9 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
-	"sap/ui/core/routing/History",
-	"sap/m/MessageBox"
-], (Controller, JSONModel, History, MessageBox) => {
+	"sap/m/MessageBox",
+	"sap/ui/core/BusyIndicator"
+], (Controller, JSONModel, MessageBox, BusyIndicator) => {
 	"use strict";
 
 	return Controller.extend("ui5.Controle_De_Estoque.controller.Base", {
@@ -39,6 +39,21 @@ sap.ui.define([
 			else
 			{ 
 				return pacoteDeTexto.getText(mensagem);
+			}
+		},
+
+		exibirEspera (funcao){
+			try
+			{
+				BusyIndicator.show(0);
+
+				return funcao()
+					.catch(erro => MessageBox.error(erro))
+					.finally(() => BusyIndicator.hide());
+			}
+			catch (execao)
+			{
+				BusyIndicator.hide();
 			}
 		}
 	});

@@ -17,12 +17,14 @@
 					width="9rem"
 					items="{enums>/tipoTapecaria}"
 					placeholder="{i18n>comboBoxPlaceholder}"
-					selectedKey = "{filtro>/tipo}">
+					selectedKey = "{filtro>/tipo}"
+					change=".aoClicarEmFiltrar">
 					<core:Item key="{enums>key}" text="{enums>text}" />
 				</ComboBox>
 				<SearchField id="listagemSearchField"
 					width="25%"
-					search=".AoClicarEmFiltrar"
+					search=".aoClicarEmFiltrar"
+					liveChange=".aoClicarEmFiltrar"
 					placeholder="{i18n>searchFieldPlaceholder}"
 					value="{filtro>/detalhes}"
 				/>
