@@ -17,8 +17,11 @@ sap.ui.define([
 			this.exibirEspera(async () => {
 				let url = "api/Tapecaria";
 				let listaProdutosTapecaria = await Repositorio.obterDadosDoServidor(url);
-				
 				this.definirModelo("produtoTapecaria", listaProdutosTapecaria);
+
+				let tiposTapecaria = await Repositorio.obterDadosDoServidor("api/Tapecaria/enumTipoTapecaria");
+				this.definirModelo("enumTipoTapecaria", tiposTapecaria);
+
 				this.definirModelo("filtro");
 			})
 		},
