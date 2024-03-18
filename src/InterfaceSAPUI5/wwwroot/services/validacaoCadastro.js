@@ -1,4 +1,4 @@
-sap.ui.define(["sap/m/MessageBox"], (MessageBox) => {
+sap.ui.define([], () => {
 	"use strict";
     let _baseController;
     let _listaDeErros = [];
@@ -9,14 +9,8 @@ sap.ui.define(["sap/m/MessageBox"], (MessageBox) => {
             _baseController = baseController;
         },
 
-        validarTodos (view){
+        validarTodos (comboBox, datePicker, inputArea, inputPreco, inputDetalhes){
             _listaDeErros = [];
-
-            let comboBox = view.byId("cadastroComboBoxTipo");
-            let datePicker = view.byId("cadastroDatePickerDataEntrada");
-            let inputArea = view.byId("cadastroInputArea");
-            let inputPreco = view.byId("cadastroInputPrecoMetroQuadrado");
-            let inputDetalhes = view.byId("cadastroInputDetalhes");
 
             this.validarTipo(comboBox);
             this.validarDataEntrada(datePicker);
@@ -26,7 +20,7 @@ sap.ui.define(["sap/m/MessageBox"], (MessageBox) => {
 
             if (_listaDeErros.length > 0)
             {
-                throw (MessageBox.error(_baseController.obterMensagemI18n("mensagemFalhaDeCadastro")));
+                throw (_baseController.obterMensagemI18n("mensagemFalhaDeCadastro"));
             }
         },
 

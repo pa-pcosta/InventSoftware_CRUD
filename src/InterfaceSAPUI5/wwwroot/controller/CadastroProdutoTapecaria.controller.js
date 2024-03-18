@@ -65,8 +65,15 @@ sap.ui.define([
         aoClicarEmSalvar ()
 		{
 			this.exibirEspera(async() => {
-				Validador.validarTodos(this.getView());
-				
+
+				let comboBox = this.getView().byId("cadastroComboBoxTipo");
+				let datePicker = this.getView().byId("cadastroDatePickerDataEntrada");
+				let inputArea = this.getView().byId("cadastroInputArea");
+				let inputPreco = this.getView().byId("cadastroInputPrecoMetroQuadrado");
+				let inputDetalhes = this.getView().byId("cadastroInputDetalhes");
+
+				Validador.validarTodos(comboBox, datePicker, inputArea, inputPreco, inputDetalhes);
+
 				let url = 'api/Tapecaria';
 				let novoProdutoTapecaria = this.getView().getModel("produtoTapecaria").getData();
 				novoProdutoTapecaria.tipo = parseInt(novoProdutoTapecaria.tipo);

@@ -45,7 +45,8 @@ sap.ui.define([
 		exibirEspera (funcao){
 			try
 			{
-				BusyIndicator.show(0);
+				const delayBusyIndicator = 0;
+				BusyIndicator.show(delayBusyIndicator);
 
 				return funcao()
 					.catch(erro => MessageBox.error(erro))
