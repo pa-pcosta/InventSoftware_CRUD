@@ -28,7 +28,7 @@ sap.ui.define([
 			return this.getView().getModel(nomeModelo).getData();
 		},
 
-		navegarPara (rota, parametro = null){
+		navegarPara (rota, parametro){
 			const roteador = this.getOwnerComponent().getRouter();
 
 			roteador.navTo(rota, parametro);
@@ -47,7 +47,7 @@ sap.ui.define([
 			}
 		},
 
-		exibirEspera (funcao){
+		exibirEspera(funcao){
 			try
 			{
 				const delayBusyIndicator = 0;
@@ -61,6 +61,24 @@ sap.ui.define([
 			{
 				BusyIndicator.hide();
 			}
+		},
+
+		exibirMensagemDeConfirmacao(mensagem, funcao)
+		{
+			MessageBox.confirm (mensagem, {
+				onClose: (clique) => {
+					funcao(clique);
+				}
+			})
+		},
+
+		exibirMensagemDeSucesso(mensagem, funcao)
+		{
+			MessageBox.success(mensagem, {
+				onClose: (clique) => {
+					funcao(clique);
+				}
+			})
 		}
 	});
 });

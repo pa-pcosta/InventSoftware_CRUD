@@ -48,7 +48,7 @@ sap.ui.define([
         aoClicarEmVoltar ()
 		{
 			this.exibirEspera(() => {
-				const id = this.obtermodelo("produtoTapecaria").id;
+				const id = this.obterModelo("produtoTapecaria").id;
 				
 				if (id != null)
 				{
@@ -75,7 +75,7 @@ sap.ui.define([
 				Validador.validarTodos(comboBox, datePicker, inputArea, inputPreco, inputDetalhes);
 
 				let url = 'api/Tapecaria';
-				let novoProdutoTapecaria = this.obtermodelo("produtoTapecaria");
+				let novoProdutoTapecaria = this.obterModelo("produtoTapecaria");
 				novoProdutoTapecaria.tipo = parseInt(novoProdutoTapecaria.tipo);
 				let metodoHttp = novoProdutoTapecaria.id == null ? 'POST' : 'PUT'; 
 
@@ -128,9 +128,7 @@ sap.ui.define([
 		aoEfetuarCadastroComSucesso(produtoCadastrado)
 		{
 			this.exibirEspera(() => {
-				MessageBox.success(this.obterMensagemI18n("mensagemSucessoDeCadastro"), {
-					actions: [MessageBox.Action.OK],
-					onClose: (clique) => {
+				this.exibirMensagemDeSucesso(this.obterMensagemI18n("mensagemSucessoDeCadastro"),(clique) => {
 						if(clique == MessageBox.Action.OK)
 						{
 							const id = produtoCadastrado.id;
@@ -138,7 +136,7 @@ sap.ui.define([
 							this.navegarPara("detalhes", parametro);
 						}
 					}
-				})
+				)
 			});
 		}
 	});

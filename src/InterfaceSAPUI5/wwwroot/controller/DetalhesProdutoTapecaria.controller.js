@@ -44,19 +44,25 @@ sap.ui.define([
 		aoClicarEmRemover()
 		{
 			this.exibirEspera(async() => {
-				let id = this.obtermodelo("produtoTapecaria").id;
+				let id = this.obterModelo("produtoTapecaria").id;
 				let url = 'api/Tapecaria/' + id;
 				let produtoARemover = await Repositorio.obterDadosDoServidor(url);
+				let mensagemConfirmarRemocao = this.obterMensagemI18n("confirmarRemocao");
 	
-				MessageBox.confirm(this.obterMensagemI18n("confirmarRemocao"),{
-					onClose: (clique) => {
-						if(clique == MessageBox.Action.OK)
-						{
-							Repositorio.enviarDadosParaServidor(url, 'DELETE', produtoARemover)
-							.then(this.navegarPara("telaListagem"));
-						}
+				this.exibirMensagemDeConfirmacao(mensagemConfirmarRemocao, (clique)=> {
+					if(clique == MessageBox.Action.OK)
+					{
+						Repositorio.enviarDadosParaServidor(url, 'DELETE', produtoARemover)
+						.then( 
+							this.exibirMensagemDeSucesso(this.obterMensagemI18n("mensagemSucessoRemocao"), (clique) => {
+								if(clique == MessageBox.Action.OK)
+								{
+									this.navegarPara("telaListagem")
+								}
+							})
+						);
 					}
-				});
+				})
 			});
 		}
 	});
