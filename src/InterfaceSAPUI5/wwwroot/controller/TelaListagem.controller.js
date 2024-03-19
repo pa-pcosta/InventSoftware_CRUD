@@ -29,33 +29,32 @@ sap.ui.define([
 		async aoClicarEmFiltrar()
 		{
 			this.exibirEspera(async() => {
-				const modeloFiltro = this.getView().getModel("filtro").getData();
-			const valorSelecionadoComboBox = modeloFiltro.tipo;
-			const valorSearchField = modeloFiltro.detalhes;
+				const modeloFiltro = this.obterModelo("filtro");
+				const valorSelecionadoComboBox = modeloFiltro.tipo;
+				const valorSearchField = modeloFiltro.detalhes;
 
-			var url = 'api/Tapecaria';
+				var url = 'api/Tapecaria';
 
-			if (valorSelecionadoComboBox || valorSearchField){
-				url += '?';
+				if (valorSelecionadoComboBox || valorSearchField){
+					url += '?';
 
-				if (valorSelecionadoComboBox){
-					url += "tipo="+valorSelecionadoComboBox;
+					if (valorSelecionadoComboBox){
+						url += "tipo="+valorSelecionadoComboBox;
+					}
+
+					if (valorSelecionadoComboBox && valorSearchField){
+						url += '&';
+					}
+
+					if (valorSearchField){
+						url +='detalhes='+valorSearchField;
+					}
 				}
 
-				if (valorSelecionadoComboBox && valorSearchField){
-					url += '&';
-				}
-
-				if (valorSearchField){
-					url +='detalhes='+valorSearchField;
-				}
-			}
-
-			let listaProdutosTapecaria = await Repositorio.obterDadosDoServidor(url);
-			
-			this.definirModelo("produtoTapecaria", listaProdutosTapecaria);
-		});
-			
+				let listaProdutosTapecaria = await Repositorio.obterDadosDoServidor(url);
+				
+				this.definirModelo("produtoTapecaria", listaProdutosTapecaria);
+			});
 		},
 
 		aoClicarEmProduto (evento)

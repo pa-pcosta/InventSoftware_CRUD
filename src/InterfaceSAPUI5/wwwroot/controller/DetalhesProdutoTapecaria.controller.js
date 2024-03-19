@@ -34,7 +34,7 @@ sap.ui.define([
 		aoClicarEmEditar ()
 		{
 			this.exibirEspera(() => {
-				let id = this.getView().getModel("produtoTapecaria").getData().id;
+				let id = this.obtermodelo("produtoTapecaria").id;
 				let parametro = {id};
 	
 				this.navegarPara("edicao", parametro)
@@ -44,7 +44,7 @@ sap.ui.define([
 		aoClicarEmRemover()
 		{
 			this.exibirEspera(async() => {
-				let id = this.getView().getModel("produtoTapecaria").getData().id;
+				let id = this.obtermodelo("produtoTapecaria").id;
 				let url = 'api/Tapecaria/' + id;
 				let produtoARemover = await Repositorio.obterDadosDoServidor(url);
 	

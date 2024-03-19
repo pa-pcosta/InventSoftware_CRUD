@@ -48,7 +48,7 @@ sap.ui.define([
         aoClicarEmVoltar ()
 		{
 			this.exibirEspera(() => {
-				const id = this.getView().getModel("produtoTapecaria").getData().id
+				const id = this.obtermodelo("produtoTapecaria").id;
 				
 				if (id != null)
 				{
@@ -75,7 +75,7 @@ sap.ui.define([
 				Validador.validarTodos(comboBox, datePicker, inputArea, inputPreco, inputDetalhes);
 
 				let url = 'api/Tapecaria';
-				let novoProdutoTapecaria = this.getView().getModel("produtoTapecaria").getData();
+				let novoProdutoTapecaria = this.obtermodelo("produtoTapecaria");
 				novoProdutoTapecaria.tipo = parseInt(novoProdutoTapecaria.tipo);
 				let metodoHttp = novoProdutoTapecaria.id == null ? 'POST' : 'PUT'; 
 

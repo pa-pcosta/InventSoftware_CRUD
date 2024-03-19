@@ -22,6 +22,11 @@ sap.ui.define([
             	this.getView().setModel(new JSONModel(dados), nomeModelo);
 			}
         },
+		
+		obterModelo(nomeModelo)
+		{
+			return this.getView().getModel(nomeModelo).getData();
+		},
 
 		navegarPara (rota, parametro = null){
 			const roteador = this.getOwnerComponent().getRouter();
