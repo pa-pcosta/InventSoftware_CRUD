@@ -32,6 +32,7 @@ namespace InterfaceWindowsForms
             .ConfigureServices((context, services) =>
             {
                 services.AddScoped<IRepositorio, RepositorioLinq2DB>();
+                //services.AddScoped<IRepositorio, RepositorioSqlServer>();
             });
         }
     }

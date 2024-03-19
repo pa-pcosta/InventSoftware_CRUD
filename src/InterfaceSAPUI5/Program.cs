@@ -15,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddScoped<IRepositorio, RepositorioLinq2DB>();
+//builder.Services.AddScoped<IRepositorio, RepositorioSqlServer>();
 
 var app = builder.Build();
 
