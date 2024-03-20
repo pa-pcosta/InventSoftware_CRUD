@@ -1,7 +1,6 @@
 ﻿using Dominio;
 using Microsoft.Data.SqlClient;
 using System.Configuration;
-using System.Text.RegularExpressions;
 using static Dominio.EnumTipoTapecaria;
 
 namespace InfraestruturaDeDados.Repositorios
@@ -10,7 +9,7 @@ namespace InfraestruturaDeDados.Repositorios
     {
         private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["SQL_Server_Controle_De_Estoque"].ConnectionString;
 
-        public int Criar(ProdutoTapecaria produtoTapecaria)
+        public void Criar(ProdutoTapecaria produtoTapecaria)
         {
             var conexaoSql = new SqlConnection(_connectionString);
 
@@ -35,8 +34,6 @@ namespace InfraestruturaDeDados.Repositorios
             conexaoSql.Open();
             produtoTapecaria.Id = Convert.ToInt32(comandoSql.ExecuteScalar());
             conexaoSql.Close();
-
-            return produtoTapecaria.Id;
         }
 
         public List<ProdutoTapecaria> ObterTodos(string? tipo, string? detalhes)

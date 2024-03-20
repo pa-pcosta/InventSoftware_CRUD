@@ -7,12 +7,10 @@ namespace InfraestruturaDeDados.Repositorios
     {
         static readonly List<ProdutoTapecaria> _listaTapecaria = ListaTapecariaSingleton.ObterInstancia();
 
-        public int Criar(ProdutoTapecaria produtoTapecaria)
+        public void Criar(ProdutoTapecaria produtoTapecaria)
         {
             produtoTapecaria.Id = ListaTapecariaSingleton.ObterProximoId();
             _listaTapecaria.Add(produtoTapecaria);
-
-            return produtoTapecaria.Id;
         }
 
         public List<ProdutoTapecaria> ObterTodos(string? tipo, string? detalhes)

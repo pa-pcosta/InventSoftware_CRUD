@@ -2,7 +2,7 @@
 {
     public interface IRepositorio
     {
-        public int Criar(ProdutoTapecaria produtoTapecaria);
+        public void Criar(ProdutoTapecaria produtoTapecaria);
 
         public List<ProdutoTapecaria> ObterTodos(string? tipo, string? detalhes);
 

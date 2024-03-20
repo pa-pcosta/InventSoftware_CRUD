@@ -1,71 +1,78 @@
 sap.ui.define([
 	"./Base.controller",
-	"../model/formatter"
-], (BaseController, formatter) => {
+	"../model/formatter",
+	"../Repositorio/RepositorioCRUD"
+], (BaseController, formatter, Repositorio) => {
 	"use strict";
 
 	return BaseController.extend("ui5.Controle_De_Estoque.controller.TelaListagem", {
 		formatter: formatter,
 
 		onInit() {
-			
-			this.vincularRota("telaListagem");
+			this.vincularRota("telaListagem", this.aoCoincidirRotaListagem);
 		},
 
-		async aoCoincidirRota (){
-			var resposta = await fetch("api/Tapecaria");
-			var listaProdutosTapecaria = await resposta.json();
-			
-			this.definirModelo("produtoTapecaria", listaProdutosTapecaria);
-			this.definirModelo("filtro");
+		async aoCoincidirRotaListagem ()
+		{
+			this.exibirEspera(async () => {
+				let listaProdutosTapecaria = await Repositorio.obterTodos();
+				this.definirModelo("produtoTapecaria", listaProdutosTapecaria);
+
+				let tiposTapecaria = await Repositorio.obterEnumTipoTapecaria();
+				this.definirModelo("enumTipoTapecaria", tiposTapecaria);
+
+				this.definirModelo("filtro");
+			})
 		},
 
-		async AoClicarEmFiltrar() {
+		async aoClicarEmFiltrar()
+		{
+			this.exibirEspera(async() => {
+				const modeloFiltro = this.obterModelo("filtro");
+				const valorSelecionadoComboBox = modeloFiltro.tipo;
+				const valorSearchField = modeloFiltro.detalhes;
 
-			const modeloFiltro = this.getView().getModel("filtro").getData();
-			const valorSelecionadoComboBox = modeloFiltro.tipo;
-			const valorSearchField = modeloFiltro.detalhes;
+				let filtro = '';
 
-			var url = 'api/Tapecaria';
+				if (valorSelecionadoComboBox || valorSearchField){
+					filtro += '?';
 
-			if (valorSelecionadoComboBox || valorSearchField){
-				url += '?';
+					if (valorSelecionadoComboBox){
+						filtro += "tipo="+valorSelecionadoComboBox;
+					}
 
-				if (valorSelecionadoComboBox){
-					url += "tipo="+valorSelecionadoComboBox;
+					if (valorSelecionadoComboBox && valorSearchField){
+						filtro += '&';
+					}
+
+					if (valorSearchField){
+						filtro +='detalhes='+valorSearchField;
+					}
 				}
 
-				if (valorSelecionadoComboBox && valorSearchField){
-					url += '&';
-				}
-
-				if (valorSearchField){
-					url +='detalhes='+valorSearchField;
-				}
-			}
-
-			var resposta = await fetch(url);
-			var listaProdutosTapecaria = await resposta.json();
-			
-			this.definirModelo("produtoTapecaria", listaProdutosTapecaria);
-		},
-
-		aoClicarEmProduto (evento){
-
-			var produtoTapecaria = evento.getSource();
-			var contexto = produtoTapecaria.getBindingContext("produtoTapecaria");
-			const roteador = this.getOwnerComponent().getRouter();
-
-			roteador.navTo("detalhes",{
-				id: contexto.getProperty("id")
+				let listaProdutosTapecaria = await Repositorio.obterTodos(filtro);
+				
+				this.definirModelo("produtoTapecaria", listaProdutosTapecaria);
 			});
 		},
 
-		aoClicarEmAdicionar (){
+		aoClicarEmProduto (evento)
+		{
+			this.exibirEspera(() => {
+				var produtoTapecaria = evento.getSource();
+				var contexto = produtoTapecaria.getBindingContext("produtoTapecaria");
+				let id = contexto.getProperty("id"); 
+				const parametro = {id};
 
-			const roteador = this.getOwnerComponent().getRouter();
+				this.navegarPara("detalhes", parametro);
+			});
+		},
 
-			roteador.navTo("cadastro");
+		aoClicarEmAdicionar ()
+		{
+			this.exibirEspera(() => {
+				this.navegarPara("cadastro");
+			});
 		}
 	});
 });

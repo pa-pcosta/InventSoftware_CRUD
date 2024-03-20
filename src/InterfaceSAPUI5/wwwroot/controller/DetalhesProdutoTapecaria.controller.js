@@ -1,58 +1,65 @@
 sap.ui.define([
 	"./Base.controller",
 	"../model/formatter",
-	"sap/m/MessageBox"
-], (BaseController, formatter, MessageBox) => {
+	"sap/m/MessageBox",
+	"../Repositorio/RepositorioCRUD"
+], (BaseController, formatter, MessageBox, Repositorio) => {
 	"use strict";
 
 	return BaseController.extend("ui5.Controle_De_Estoque.controller.DetalhesProdutoTapecaria", {
 		formatter: formatter,
 		
         onInit() {
-		    this.vincularRota("detalhes");
+		    this.vincularRota("detalhes",this.aoCoincidirRotaDetalhes);
 		},
 
-		async aoCoincidirRota(evento) {
-            
-            var id = evento.getParameter("arguments").id
-            var url = 'api/Tapecaria/' + id;
-			const resposta = await fetch(url);
-			const modelo = await resposta.json();
-
-            this.definirModelo("produtoTapecaria", modelo);
+		aoCoincidirRotaDetalhes(evento) 
+		{
+			this.exibirEspera(async() => {
+				var id = evento.getParameter("arguments").id
+				let produtoTapecaria = await Repositorio.obterPorId(id);
+	
+				this.definirModelo("produtoTapecaria", produtoTapecaria);
+			});
 		},
 
-        aoClicarEmVoltar (){
-            this.retornarParaPaginaAnterior();
+        aoClicarEmVoltar ()
+		{
+			this.exibirEspera(() => {
+				this.navegarPara("telaListagem");
+			});
         },
 
-		aoClicarEmEditar (){
-			let produtoTapecaria = this.getView().getModel("produtoTapecaria").getData();
-			let id = produtoTapecaria.id;
-
-			const roteador = this.getOwnerComponent().getRouter();
-			roteador.navTo("edicao", {id: id});
+		aoClicarEmEditar ()
+		{
+			this.exibirEspera(() => {
+				let id = this.obterModelo("produtoTapecaria").id;
+				let parametro = {id};
+	
+				this.navegarPara("edicao", parametro)
+			});
 		},
 
-		aoClicarEmRemover(){
-			let produtoTapecaria = this.getView().getModel("produtoTapecaria").getData();
-			let id = produtoTapecaria.id;
-			let url = 'api/Tapecaria/' + id;
-
-			MessageBox.confirm(this.obterMensagemI18n("confirmarRemocao"),{
-				onClose: (clique) => {
+		aoClicarEmRemover()
+		{
+			this.exibirEspera(async() => {
+				let id = this.obterModelo("produtoTapecaria").id;
+				let mensagemConfirmarRemocao = this.obterMensagemI18n("confirmarRemocao");
+	
+				this.exibirMensagemDeConfirmacao(mensagemConfirmarRemocao, (clique)=> {
 					if(clique == MessageBox.Action.OK)
 					{
-						fetch(url, {
-							method: 'DELETE',
-							body: JSON.stringify(produtoTapecaria),
-							headers: {
-								"Content-type": "application/json; charset=UTF-8"
-							}
-						})
-						.then(this.retornarParaPaginaAnterior());
+						Repositorio.remover(id)
+						.then( 
+							this.exibirMensagemDeSucesso(this.obterMensagemI18n("mensagemSucessoRemocao"), (clique) => {
+								if(clique == MessageBox.Action.OK)
+								{
+									this.navegarPara("telaListagem")
+								}
+							})
+						);
 					}
-				}
+				})
 			});
 		}
 	});

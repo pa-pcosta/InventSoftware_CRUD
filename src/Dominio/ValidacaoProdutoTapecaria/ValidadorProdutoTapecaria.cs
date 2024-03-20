@@ -84,7 +84,7 @@ namespace Dominio.ValidacaoProdutoTapecaria
             }
         }
 
-        public List<string> ValidarProduto(ProdutoTapecaria produtoAValidar)
+        public void ValidarProduto(ProdutoTapecaria produtoAValidar)
         {
             List<string> listaDeErros = new List<string>();
 
@@ -139,7 +139,8 @@ namespace Dominio.ValidacaoProdutoTapecaria
 
             }
 
-            return listaDeErros;
+            if (listaDeErros.Any())
+                throw new Exception("Alguns campos não atendem os critérios de validação");
         }
     }
 }

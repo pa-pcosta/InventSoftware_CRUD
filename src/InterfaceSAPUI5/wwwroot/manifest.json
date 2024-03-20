@@ -51,10 +51,6 @@
 					],
 					"fallbackLocale": ""
 				}
-			},
-			"enums": {
-			  "type": "sap.ui.model.json.JSONModel",
-			  "uri": "Enums.json"
 			}
 		},
 		"rootView": {

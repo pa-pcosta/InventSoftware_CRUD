@@ -9,67 +9,69 @@
 		showNavButton="true"
 		navButtonPress=".aoClicarEmVoltar">
 
-            <Panel backgroundDesign="Solid">
+        <headerContent>
+            <Button type="Reject"
+                text="{i18n>botaoDeletar}"
+                icon="sap-icon://delete"
+                press="aoClicarEmRemover"/>
+            <Button type="Default"
+                text="{i18n>botaoEditar}"
+                icon="sap-icon://edit"
+                press="aoClicarEmEditar"/>
+        </headerContent>
 
-                	<VBox class="sapUiSmallMargin">
-                        <f:SimpleForm
-                            minWidth="1024"
-                            editable="false"
-                            layout="ResponsiveGridLayout"
-                            labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4"
-                            columnsL="1" columnsM="1">
-                            <f:toolbar>
-                                <Toolbar>
-                                    <Title id="Title1" text="ID {produtoTapecaria>/id}" titleStyle="H3"/>
-                                    <ToolbarSpacer />
-                                    <Button type="Reject"
-                                        text="{i18n>botaoDeletar}"
-                                        icon="sap-icon://delete"
-                                        press="aoClicarEmRemover"/>
-                                    <Button type="Default"
-                                        text="{i18n>botaoEditar}"
-                                        icon="sap-icon://edit"
-                                        press="aoClicarEmEditar"/>
-                                </Toolbar>
-                            </f:toolbar>
-                            <f:content>
+        <Panel backgroundDesign="Solid">
 
-                                <Label text="{i18n>labelTipo}" design="Bold"/>
-                                <Text text="{
-                                    path: 'produtoTapecaria>/tipo',
-                                    formatter: '.formatter.enumTipoTapecaria'
-                                }"/>
+                <VBox class="sapUiSmallMargin">
+                    <f:SimpleForm
+                        minWidth="1024"
+                        editable="false"
+                        layout="ResponsiveGridLayout"
+                        labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4"
+                        columnsL="1" columnsM="1">
+                        <f:toolbar>
+                            <Toolbar>
+                                <Title id="Title1" text="ID {produtoTapecaria>/id}" titleStyle="H3"/>
+                            </Toolbar>
+                        </f:toolbar>
+                        <f:content>
 
-                                <Label text="{i18n>labelDataEntrada}" design="Bold"/>
-                                <Text text="{
-                                    path:'produtoTapecaria>/dataEntrada',
-                                    type: 'sap.ui.model.type.Date',
-                                    formatOptions: {
-                                        style: 'short',
-                                        source: {
-                                            pattern: 'yyyy-MM-ddTHH:mm:ss.SSS'
-                                        }
+                            <Label text="{i18n>labelTipo}" design="Bold"/>
+                            <Text text="{
+                                path: 'produtoTapecaria>/tipo',
+                                formatter: '.formatter.enumTipoTapecaria'
+                            }"/>
+
+                            <Label text="{i18n>labelDataEntrada}" design="Bold"/>
+                            <Text text="{
+                                path:'produtoTapecaria>/dataEntrada',
+                                type: 'sap.ui.model.type.Date',
+                                formatOptions: {
+                                    style: 'short',
+                                    source: {
+                                        pattern: 'yyyy-MM-ddTHH:mm:ss.SSS'
                                     }
-                                }"/>
+                                }
+                            }"/>
 
-                                <Label text="{i18n>labelTamanho}" design="Bold"/>
-                                <Text text="{produtoTapecaria>/area}"/>
+                            <Label text="{i18n>labelTamanho}" design="Bold"/>
+                            <Text text="{produtoTapecaria>/area}"/>
 
-                                <Label text="{i18n>labelPrecoMetroQuadrado}" design="Bold"/>
-                                <Text text="{produtoTapecaria>/precoMetroQuadrado}"/>
+                            <Label text="{i18n>labelPrecoMetroQuadrado}" design="Bold"/>
+                            <Text text="{produtoTapecaria>/precoMetroQuadrado}"/>
 
-                                <Label text="{i18n>labelEhEntrega}" design="Bold"/>
-                                <Text text="{
-                                    path: 'produtoTapecaria>/ehEntrega',
-                                    formatter: '.formatter.converteBooleanParaSimOuNao'
-                                }"/>
+                            <Label text="{i18n>labelEhEntrega}" design="Bold"/>
+                            <Text text="{
+                                path: 'produtoTapecaria>/ehEntrega',
+                                formatter: '.formatter.converteBooleanParaSimOuNao'
+                            }"/>
 
-                                <Label text="{i18n>labelDetalhes}" design="Bold"/>
-                                <Text text="{produtoTapecaria>/detalhes}"/>
-                                
-                            </f:content>
-                        </f:SimpleForm>
-                    </VBox>
-            </Panel>
+                            <Label text="{i18n>labelDetalhes}" design="Bold"/>
+                            <Text text="{produtoTapecaria>/detalhes}"/>
+                            
+                        </f:content>
+                    </f:SimpleForm>
+                </VBox>
+        </Panel>
 	</Page>
 </mvc:View>

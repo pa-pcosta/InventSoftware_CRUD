@@ -1,10 +1,6 @@
 ﻿using Dominio;
 using Dominio.ValidacaoProdutoTapecaria;
-using InfraestruturaDeDados.Repositorios;
-using LinqToDB.Common;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using static Dominio.EnumTipoTapecaria;
 
 namespace InterfaceSAPUI5.Controllers
@@ -24,19 +20,18 @@ namespace InterfaceSAPUI5.Controllers
         [HttpPost]
         public IActionResult Criar([FromBody]ProdutoTapecaria produtoTapecaria)
         {
-            if (produtoTapecaria is not null)
+            try
             {
                 var validacao = new ValidadorProdutoTapecaria();
-                var listaDeErros = validacao.ValidarProduto(produtoTapecaria);
+                validacao.ValidarProduto(produtoTapecaria);
 
-                if (!listaDeErros.Any())
-                {
-                    _repositorio.Criar(produtoTapecaria);
-                    return Created($"produtoTapecaria/{produtoTapecaria.Id}", produtoTapecaria);
-                }
-                else { return BadRequest(listaDeErros);}
+                _repositorio.Criar(produtoTapecaria);
+                return Created($"produtoTapecaria/{produtoTapecaria.Id}", produtoTapecaria);
+            }  
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
             }
-            else{ return BadRequest("É NULO");}
         }
 
         [HttpGet]
@@ -73,19 +68,18 @@ namespace InterfaceSAPUI5.Controllers
         [HttpPut]
         public IActionResult Atualizar([FromBody]ProdutoTapecaria novoProdutoTapecaria)
         {
-            if (novoProdutoTapecaria is not null)
+            try
             {
                 var validacao = new ValidadorProdutoTapecaria();
-                var listaDeErros = validacao.ValidarProduto(novoProdutoTapecaria);
+                validacao.ValidarProduto(novoProdutoTapecaria);
 
-                if (!listaDeErros.Any())
-                {
-                    _repositorio.Atualizar(novoProdutoTapecaria);
-                    return Ok(novoProdutoTapecaria);
-                }
-                else { return BadRequest(listaDeErros); }
+                _repositorio.Atualizar(novoProdutoTapecaria);
+                return Ok(novoProdutoTapecaria);
             }
-            else { return BadRequest(); }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         [HttpDelete("{id}")]

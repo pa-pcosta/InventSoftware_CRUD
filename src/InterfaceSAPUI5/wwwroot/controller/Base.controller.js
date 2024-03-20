@@ -1,18 +1,18 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
-	"sap/ui/core/routing/History",
-	"sap/m/MessageBox"
-], (Controller, JSONModel, History, MessageBox) => {
+	"sap/m/MessageBox",
+	"sap/ui/core/BusyIndicator"
+], (Controller, JSONModel, MessageBox, BusyIndicator) => {
 	"use strict";
 
 	return Controller.extend("ui5.Controle_De_Estoque.controller.Base", {
 		
-        vincularRota(nomeRota){
-			this.getOwnerComponent().getRouter().getRoute(nomeRota).attachPatternMatched(this.aoCoincidirRota, this);
+        vincularRota(nomeRota, aoCoincidirRota){
+			this.getOwnerComponent().getRouter().getRoute(nomeRota).attachPatternMatched(aoCoincidirRota, this);
         },
 
-        definirModelo(nomeModelo, dados= null){
+        definirModelo(nomeModelo, dados = null){
 			if (dados == null)
 			{
 				this.getView().setModel(new JSONModel({}), nomeModelo);
@@ -22,16 +22,63 @@ sap.ui.define([
             	this.getView().setModel(new JSONModel(dados), nomeModelo);
 			}
         },
-
-		retornarParaPaginaAnterior(){
-				const roteador = this.getOwnerComponent().getRouter();
-				roteador.navTo("telaListagem");
+		
+		obterModelo(nomeModelo)
+		{
+			return this.getView().getModel(nomeModelo).getData();
 		},
 
-		obterMensagemI18n (mensagem) {
+		navegarPara (rota, parametro){
+			const roteador = this.getOwnerComponent().getRouter();
+
+			roteador.navTo(rota, parametro);
+		},
+
+		obterMensagemI18n (mensagem, placeholders = null) {
 			const pacoteDeTexto = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 			
-			return pacoteDeTexto.getText(mensagem);
+			if (placeholders != null)
+			{
+			return pacoteDeTexto.getText(mensagem, placeholders);
+			}
+			else
+			{ 
+				return pacoteDeTexto.getText(mensagem);
+			}
+		},
+
+		exibirEspera(funcao){
+			try
+			{
+				const delayBusyIndicator = 0;
+				BusyIndicator.show(delayBusyIndicator);
+
+				return funcao()
+					.catch(erro => MessageBox.error(erro))
+					.finally(() => BusyIndicator.hide());
+			}
+			catch (execao)
+			{
+				BusyIndicator.hide();
+			}
+		},
+
+		exibirMensagemDeConfirmacao(mensagem, funcao)
+		{
+			MessageBox.confirm (mensagem, {
+				onClose: (clique) => {
+					funcao(clique);
+				}
+			})
+		},
+
+		exibirMensagemDeSucesso(mensagem, funcao)
+		{
+			MessageBox.success(mensagem, {
+				onClose: (clique) => {
+					funcao(clique);
+				}
+			})
 		}
 	});
 });
