@@ -15,11 +15,10 @@ sap.ui.define([
 		async aoCoincidirRotaListagem ()
 		{
 			this.exibirEspera(async () => {
-				let url = "api/Tapecaria";
-				let listaProdutosTapecaria = await Repositorio.obterDadosDoServidor(url);
+				let listaProdutosTapecaria = await Repositorio.obterTodos();
 				this.definirModelo("produtoTapecaria", listaProdutosTapecaria);
 
-				let tiposTapecaria = await Repositorio.obterDadosDoServidor("api/Tapecaria/enumTipoTapecaria");
+				let tiposTapecaria = await Repositorio.obterEnumTipoTapecaria();
 				this.definirModelo("enumTipoTapecaria", tiposTapecaria);
 
 				this.definirModelo("filtro");
@@ -33,25 +32,25 @@ sap.ui.define([
 				const valorSelecionadoComboBox = modeloFiltro.tipo;
 				const valorSearchField = modeloFiltro.detalhes;
 
-				var url = 'api/Tapecaria';
+				let filtro = '';
 
 				if (valorSelecionadoComboBox || valorSearchField){
-					url += '?';
+					filtro += '?';
 
 					if (valorSelecionadoComboBox){
-						url += "tipo="+valorSelecionadoComboBox;
+						filtro += "tipo="+valorSelecionadoComboBox;
 					}
 
 					if (valorSelecionadoComboBox && valorSearchField){
-						url += '&';
+						filtro += '&';
 					}
 
 					if (valorSearchField){
-						url +='detalhes='+valorSearchField;
+						filtro +='detalhes='+valorSearchField;
 					}
 				}
 
-				let listaProdutosTapecaria = await Repositorio.obterDadosDoServidor(url);
+				let listaProdutosTapecaria = await Repositorio.obterTodos(filtro);
 				
 				this.definirModelo("produtoTapecaria", listaProdutosTapecaria);
 			});

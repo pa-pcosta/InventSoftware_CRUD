@@ -23,7 +23,7 @@ sap.ui.define([
 			this.exibirEspera(async() => {
 				this.definirModelo("produtoTapecaria");
 
-				let tiposTapecaria = await Repositorio.obterDadosDoServidor("api/Tapecaria/enumTipoTapecaria");
+				let tiposTapecaria = await Repositorio.obterEnumTipoTapecaria();
 				this.definirModelo("enumTipoTapecaria", tiposTapecaria);
 				
 				let view = this.getView();
@@ -35,12 +35,11 @@ sap.ui.define([
 		{
 			this.exibirEspera(async() => {
 				var id = evento.getParameter("arguments").id
-				var url = 'api/Tapecaria/' + id;
 				
-				let produtoTapecaria = await Repositorio.obterDadosDoServidor(url)
+				let produtoTapecaria = await Repositorio.obterPorId(id)
 				this.definirModelo("produtoTapecaria", produtoTapecaria);
 				
-				let tiposTapecaria = await Repositorio.obterDadosDoServidor("api/Tapecaria/enumTipoTapecaria");
+				let tiposTapecaria = await Repositorio.obterEnumTipoTapecaria();
 				this.definirModelo("enumTipoTapecaria", tiposTapecaria);
 			});
 		},
@@ -74,12 +73,10 @@ sap.ui.define([
 
 				Validador.validarTodos(comboBox, datePicker, inputArea, inputPreco, inputDetalhes);
 
-				let url = 'api/Tapecaria';
 				let novoProdutoTapecaria = this.obterModelo("produtoTapecaria");
 				novoProdutoTapecaria.tipo = parseInt(novoProdutoTapecaria.tipo);
-				let metodoHttp = novoProdutoTapecaria.id == null ? 'POST' : 'PUT'; 
-
-				let produtoCadastrado = await Repositorio.enviarDadosParaServidor(url, metodoHttp, novoProdutoTapecaria);
+				
+				let produtoCadastrado = novoProdutoTapecaria.id == null ? await Repositorio.criar(novoProdutoTapecaria) : await Repositorio.atualizar(novoProdutoTapecaria); 
 
 				this.aoEfetuarCadastroComSucesso(produtoCadastrado);
 			});

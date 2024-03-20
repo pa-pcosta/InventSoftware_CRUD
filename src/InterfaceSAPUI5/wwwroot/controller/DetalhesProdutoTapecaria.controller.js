@@ -17,8 +17,7 @@ sap.ui.define([
 		{
 			this.exibirEspera(async() => {
 				var id = evento.getParameter("arguments").id
-				var url = 'api/Tapecaria/' + id;
-				let produtoTapecaria = await Repositorio.obterDadosDoServidor(url);
+				let produtoTapecaria = await Repositorio.obterPorId(id);
 	
 				this.definirModelo("produtoTapecaria", produtoTapecaria);
 			});
@@ -34,7 +33,7 @@ sap.ui.define([
 		aoClicarEmEditar ()
 		{
 			this.exibirEspera(() => {
-				let id = this.obtermodelo("produtoTapecaria").id;
+				let id = this.obterModelo("produtoTapecaria").id;
 				let parametro = {id};
 	
 				this.navegarPara("edicao", parametro)
@@ -45,14 +44,12 @@ sap.ui.define([
 		{
 			this.exibirEspera(async() => {
 				let id = this.obterModelo("produtoTapecaria").id;
-				let url = 'api/Tapecaria/' + id;
-				let produtoARemover = await Repositorio.obterDadosDoServidor(url);
 				let mensagemConfirmarRemocao = this.obterMensagemI18n("confirmarRemocao");
 	
 				this.exibirMensagemDeConfirmacao(mensagemConfirmarRemocao, (clique)=> {
 					if(clique == MessageBox.Action.OK)
 					{
-						Repositorio.enviarDadosParaServidor(url, 'DELETE', produtoARemover)
+						Repositorio.remover(id)
 						.then( 
 							this.exibirMensagemDeSucesso(this.obterMensagemI18n("mensagemSucessoRemocao"), (clique) => {
 								if(clique == MessageBox.Action.OK)
