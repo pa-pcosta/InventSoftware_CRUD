@@ -73,7 +73,7 @@
 		</HBox>
 		
 		<List
-			id="invoiceList"
+			id="listaProdutosTapecaria"
 			class="sapUiResponsiveMargin"
 			width="auto"
 			items="{

@@ -1,6 +1,6 @@
 specVersion: "3.0"
 metadata:
-  name: ui5.walkthrough
+  name: ui5.Controle_De_Estoque
 type: application
 framework:
   name: OpenUI5
