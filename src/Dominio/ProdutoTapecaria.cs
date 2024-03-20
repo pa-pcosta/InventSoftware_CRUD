@@ -1,9 +1,9 @@
 ﻿using LinqToDB.Mapping;
-using System.ComponentModel.DataAnnotations.Schema;
+using static Dominio.EnumTipoTapecaria;
 using ColumnAttribute = LinqToDB.Mapping.ColumnAttribute;
 using TableAttribute = LinqToDB.Mapping.TableAttribute;
 
-namespace ControleDeEstoque.Dominio
+namespace Dominio
 {
     [Table(Name = "tb_Tapecaria")]
     public class ProdutoTapecaria
@@ -15,7 +15,7 @@ namespace ControleDeEstoque.Dominio
         public TipoTapecaria Tipo { get; set; }
 
         [Column("DataEntrada")]
-        public DateTime DataEntrada { get; set; }
+        public DateTime? DataEntrada { get; set; }
 
         [Column("Area")]
         public double Area { get; set; }
@@ -29,12 +29,4 @@ namespace ControleDeEstoque.Dominio
         [Column("Detalhes")]
         public string Detalhes { get; set; }
     }
-
-    public enum TipoTapecaria
-    {
-        Tapete,
-        Cortina,
-        Estofado,
-        Outros
-    };
 }

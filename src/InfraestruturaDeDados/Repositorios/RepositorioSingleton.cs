@@ -1,18 +1,37 @@
-﻿using ControleDeEstoque.Dominio;
+﻿using Dominio;
+using InfraestruturaDeDados;
 
-namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
+namespace InfraestruturaDeDados.Repositorios
 {
     public class RepositorioSingleton : IRepositorio
     {
-        public void Criar(ProdutoTapecaria produtoTapecaria)
-        {
-            _listaTapecaria.Add(produtoTapecaria);
-        }
         static readonly List<ProdutoTapecaria> _listaTapecaria = ListaTapecariaSingleton.ObterInstancia();
 
-        public List<ProdutoTapecaria> ObterTodos()
+        public void Criar(ProdutoTapecaria produtoTapecaria)
         {
-            return _listaTapecaria;
+            produtoTapecaria.Id = ListaTapecariaSingleton.ObterProximoId();
+            _listaTapecaria.Add(produtoTapecaria);
+        }
+
+        public List<ProdutoTapecaria> ObterTodos(string? tipo, string? detalhes)
+        {
+            var listaProdutosTapecaria = _listaTapecaria;
+
+            if (tipo is not null)
+            {
+                listaProdutosTapecaria = listaProdutosTapecaria
+                                            .Where(x => Convert.ToInt32(x.Tipo) == Convert.ToInt32(tipo))
+                                            .ToList();
+            }
+
+            if (detalhes is not null)
+            {
+                listaProdutosTapecaria = listaProdutosTapecaria
+                                            .Where(x => x.Detalhes.ToLower().Contains(detalhes.ToLower()))
+                                            .ToList();
+            }
+
+            return listaProdutosTapecaria;
         }
 
         public ProdutoTapecaria? ObterPorId(int id)
@@ -21,12 +40,14 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
         }
 
 
-        public void Atualizar(ProdutoTapecaria novoProdutoTapecaria)
+        public int Atualizar(ProdutoTapecaria novoProdutoTapecaria)
         {
             var produtoASerEditado = ObterPorId(novoProdutoTapecaria.Id);
             var indexProdutoASerEditado = _listaTapecaria.IndexOf(produtoASerEditado);
 
             _listaTapecaria[indexProdutoASerEditado] = novoProdutoTapecaria;
+
+            return novoProdutoTapecaria.Id;
         }
 
         public void Remover(int id)

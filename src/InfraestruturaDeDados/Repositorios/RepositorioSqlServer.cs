@@ -1,11 +1,14 @@
-﻿using ControleDeEstoque.Dominio;
+﻿using Dominio;
 using Microsoft.Data.SqlClient;
 using System.Configuration;
+using static Dominio.EnumTipoTapecaria;
 
-namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
+namespace InfraestruturaDeDados.Repositorios
 {
     public class RepositorioSqlServer : IRepositorio
     {
+        private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["SQL_Server_Controle_De_Estoque"].ConnectionString;
+
         public void Criar(ProdutoTapecaria produtoTapecaria)
         {
             var conexaoSql = new SqlConnection(_connectionString);
@@ -16,7 +19,8 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
                                 @Area, 
                                 @PrecoMetroQuadrado, 
                                 @EhEntrega, 
-                                @Detalhes)";
+                                @Detalhes);
+                        SELECT SCOPE_IDENTITY();";
 
             var comandoSql = new SqlCommand(query, conexaoSql);
 
@@ -28,18 +32,36 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
             comandoSql.Parameters.AddWithValue("@Detalhes", produtoTapecaria.Detalhes);
 
             conexaoSql.Open();
-            comandoSql.ExecuteNonQuery();
+            produtoTapecaria.Id = Convert.ToInt32(comandoSql.ExecuteScalar());
             conexaoSql.Close();
         }
-        private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["SQL_Server_Controle_De_Estoque"].ConnectionString;
 
-        public List<ProdutoTapecaria> ObterTodos()
+        public List<ProdutoTapecaria> ObterTodos(string? tipo, string? detalhes)
         {
             var conexaoSql = new SqlConnection(_connectionString);
 
             var query = @"SELECT * 
-                        FROM tb_Tapecaria 
-                        ORDER BY Id";
+                        FROM tb_Tapecaria ";
+
+            if (tipo is not null || detalhes is not null) 
+            {
+                query += $"WHERE ";
+
+                if (tipo is not null)
+                {
+                    query += $"Tipo = {tipo} ";
+                }
+
+                if (tipo is not null & detalhes is not null)
+                {
+                    query += $"AND ";
+                }
+
+                if (detalhes is not null)
+                {
+                    query += $"LOWER(Detalhes) LIKE LOWER('%{detalhes}%') ";
+                }
+            }
 
             var comandoSql = new SqlCommand(query, conexaoSql);
             conexaoSql.Open();
@@ -74,7 +96,7 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
             return produtoTapecaria;
         }
 
-        public void Atualizar(ProdutoTapecaria novoProdutoTapecaria)
+        public int Atualizar(ProdutoTapecaria novoProdutoTapecaria)
         {
             var conexaoSql = new SqlConnection(_connectionString);
             var query = @"UPDATE tb_Tapecaria
@@ -99,6 +121,8 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
             conexaoSql.Open();
             comandoSql.ExecuteNonQuery();
             conexaoSql.Close();
+
+            return novoProdutoTapecaria.Id;
         }
 
         public void Remover(int id)

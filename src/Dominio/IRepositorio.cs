@@ -1,14 +1,14 @@
-﻿namespace ControleDeEstoque.Dominio
+﻿namespace Dominio
 {
     public interface IRepositorio
     {
         public void Criar(ProdutoTapecaria produtoTapecaria);
 
-        public List<ProdutoTapecaria> ObterTodos();
+        public List<ProdutoTapecaria> ObterTodos(string? tipo, string? detalhes);
 
         public ProdutoTapecaria? ObterPorId(int id);
 
-        public void Atualizar(ProdutoTapecaria novoProdutoTapecaria);
+        public int Atualizar(ProdutoTapecaria novoProdutoTapecaria);
 
         public void Remover(int id);
     }

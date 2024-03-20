@@ -1,21 +1,21 @@
-﻿using ControleDeEstoque.Dominio;
-using LinqToDB.Data;
+﻿using LinqToDB.Data;
 using LinqToDB;
 using System.Configuration;
+using Dominio;
 
-namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
+namespace InfraestruturaDeDados.Repositorios
 {
     public class RepositorioLinq2DB : IRepositorio
     {
         public void Criar(ProdutoTapecaria produtoTapecaria)
         {
             try
-             {
+            {
                 var conexaoSql = CriarConexao();
 
-                using (conexaoSql)
+                using(conexaoSql)
                 {
-                    conexaoSql.Insert(produtoTapecaria);
+                    produtoTapecaria.Id = conexaoSql.InsertWithInt32Identity(produtoTapecaria);
                 }
             }
             catch (Exception)
@@ -45,7 +45,7 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
             }
         }
 
-        public List<ProdutoTapecaria> ObterTodos()
+        public List<ProdutoTapecaria> ObterTodos(string? tipo, string? detalhes)
         {
             try
             {
@@ -53,9 +53,25 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
 
                 using (conexaoSql)
                 {
-                    return conexaoSql
-                                .GetTable<ProdutoTapecaria>()
-                                .ToList();
+                    var listaProdutosTapecaria = conexaoSql
+                                                    .GetTable<ProdutoTapecaria>()
+                                                    .ToList();
+
+                    if (tipo is not null)
+                    {
+                        listaProdutosTapecaria = listaProdutosTapecaria
+                                                    .Where(x => Convert.ToInt32(x.Tipo) == Convert.ToInt32(tipo))
+                                                    .ToList();
+                    }
+
+                    if (detalhes is not null)
+                    {
+                        listaProdutosTapecaria = listaProdutosTapecaria
+                                                    .Where(x => x.Detalhes.ToLower().Contains(detalhes.ToLower()))
+                                                    .ToList();
+                    }
+
+                    return listaProdutosTapecaria;
                 }
             }
             catch (Exception)
@@ -64,7 +80,7 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
             }
         }
 
-        public void Atualizar(ProdutoTapecaria novoProdutoTapecaria)
+        public int Atualizar(ProdutoTapecaria novoProdutoTapecaria)
         {
             try
             {
@@ -74,6 +90,8 @@ namespace ControleDeEstoque.InfraestruturaDeDados.Repositorios
                 {
                     conexaoSql.Update(novoProdutoTapecaria);
                 }
+
+                return novoProdutoTapecaria.Id;
             }
             catch (Exception)
             {
