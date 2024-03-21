@@ -2,7 +2,8 @@
 	controllerName="ui5.Controle_De_Estoque.controller.TelaListagem"
 	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns="sap.m">
+	xmlns="sap.m"
+	id="TelaListagem">
 
 	<Page>
 
@@ -29,11 +30,12 @@
 					value="{filtro>/detalhes}"
 				/>
 				<ToolbarSpacer/>
-				<Button text="{i18n>addNewProductButtonText}"
-						type="Emphasized"
-						icon="sap-icon://add"
-						press="aoClicarEmAdicionar"
-						ariaDescribedBy="defaultButtonDescription genericButtonDescription">
+				<Button id="botaoAdicionar"
+					text="{i18n>addNewProductButtonText}"
+					type="Emphasized"
+					icon="sap-icon://add"
+					press=".cadastroTeste"
+					ariaDescribedBy="defaultButtonDescription genericButtonDescription">
 				</Button>
 			</Toolbar>
 		</headerContent>

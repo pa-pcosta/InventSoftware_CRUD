@@ -1,36 +1,37 @@
 sap.ui.define([
-    'sap/ui/test/Opa5',
-    'sap/ui/test/matchers/AggregationLengthEquals',
-    'sap/ui/test/matchers/I18NText',
-    'sap/ui/test/actions/Press'
-],
-    function (Opa5,
-          AggregationLengthEquals,
-          I18NText,
-          Press) {
+    "sap/ui/test/Opa5",
+	"sap/ui/test/actions/Press"
+],(Opa5, Press) => {
     "use strict";
 
-    var nomeDaView = "telaListagem",
-        idLista = "listaProdutosTapecaria";
-
+    const nomeDaView = "TelaListagem";
+    
     Opa5.createPageObjects({
-        naTelaDeListagem: {
-            assertions: {
-                aListaDeveConterTodosRegistros: function () {
-                    return this.waitFor({
-                        id: idLista,
+		naTelaDeListagem: {
+			actions: {
+				oBotaoAdicionarEhAcionado() {
+					return this.waitFor({
+						id: "botaoAdicionar",
+						viewName: nomeDaView,
+						actions: new Press(),
+						errorMessage: "botaoAdicionar não encontrado na view"
+					});
+				}
+			},
+
+			assertions: {
+				umDialogoDeveAparecer() {
+					return this.waitFor({
+						controlType: "sap.m.MessageBox",
                         viewName: nomeDaView,
-                        matchers: new AggregationLengthEquals({
-                            name: "items",
-                            length: 24
-                        }),
-                        success: function () {
-                            Opa5.assert.ok(true, "A lista possui 24 items");
-                        },
-                        errorMessage: "A lista não possui 24 items"
-                    });
-                }
-            }
-        }
-    });
+						success() {
+							// we set the view busy, so we need to query the parent of the app
+							Opa5.assert.ok(true, "The dialog is open");
+						},
+						errorMessage: "Did not find the dialog control"
+					});
+				}
+			}
+		}
+	});
 });

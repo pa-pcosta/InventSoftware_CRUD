@@ -73,6 +73,11 @@ sap.ui.define([
 			this.exibirEspera(() => {
 				this.navegarPara("cadastro");
 			});
+		},
+
+		cadastroTeste()
+		{
+			this.exibirMensagemDeSucesso("Botão cadastrar acionado");
 		}
 	});
 });
