@@ -24,5 +24,14 @@ sap.ui.define([
 			Then.naTelaDeListagem
 			.listaDeProdutosEhCarregada(7);
 		});
+
+		opaTest("Deve mostrar produtos com descrição = Persa", (Given, When, Then) => {
+
+			When.naTelaDeListagem
+			.ehPesquisadoNoSearchField("listagemSearchField", "Persa");
+
+			Then.naTelaDeListagem
+			.listaDeProdutosEhCarregada(1);
+		});
 	});
 });

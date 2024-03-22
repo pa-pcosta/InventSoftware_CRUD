@@ -61,6 +61,18 @@ sap.ui.define([
 						},
 						errorMessage: `A combobox não foi fechada com sucesso`
 					});
+				},
+
+				ehPesquisadoNoSearchField (idSearchField, texto) {
+					return this.waitFor({
+						id: idSearchField,
+						viewName: NOME_DA_VIEW,
+						success: (searchField) => {
+							searchField.setValue(texto);
+							searchField.fireLiveChange();
+						},
+						errorMessage: `SearchField não encontrado na view`
+					})
 				}
 			},
 
@@ -77,10 +89,6 @@ sap.ui.define([
 							Opa5.assert.ok(true, `Lista de produtos do tipo TAPETE foi carregada com ${quantidadeDeRegistrosDoTipoSelecionado}`);
 						},
 						errorMessage: "The table does not contain all items."
-						// id: "listaProdutosTapecaria",
-						// viewName: NOME_DA_VIEW,
-						// success: () => Opa5.assert.ok(true, "Lista de produtos foi carregada"),
-						// errorMessage: "Lista de produtos não foi carregada"
 					})
 				}
 			}
