@@ -4,7 +4,7 @@ sap.ui.getCore().attachInit(() => {
 	"use strict";
 
 	sap.ui.require([
-        "ui5/Controle_De_Estoque/test/integration/ListagemJourney"
+        "ui5/controle_de_estoque/test/integration/JornadaTelaListagem"
 	], () => {
         QUnit.start();
 	});

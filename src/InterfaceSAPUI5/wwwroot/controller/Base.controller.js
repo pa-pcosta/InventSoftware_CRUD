@@ -6,7 +6,7 @@ sap.ui.define([
 ], (Controller, JSONModel, MessageBox, BusyIndicator) => {
 	"use strict";
 
-	return Controller.extend("ui5.Controle_De_Estoque.controller.Base", {
+	return Controller.extend("ui5.controle_de_estoque.controller.Base", {
 		
         vincularRota(nomeRota, aoCoincidirRota){
 			this.getOwnerComponent().getRouter().getRoute(nomeRota).attachPatternMatched(aoCoincidirRota, this);

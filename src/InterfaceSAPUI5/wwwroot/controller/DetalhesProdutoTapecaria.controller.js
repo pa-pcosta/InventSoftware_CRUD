@@ -6,7 +6,7 @@ sap.ui.define([
 ], (BaseController, formatter, MessageBox, Repositorio) => {
 	"use strict";
 
-	return BaseController.extend("ui5.Controle_De_Estoque.controller.DetalhesProdutoTapecaria", {
+	return BaseController.extend("ui5.controle_de_estoque.controller.DetalhesProdutoTapecaria", {
 		formatter: formatter,
 		
         onInit() {

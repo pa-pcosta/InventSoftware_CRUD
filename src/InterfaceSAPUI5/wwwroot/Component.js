@@ -4,7 +4,7 @@ sap.ui.define([
 ], (UIComponent, JSONModel) => {
 	"use strict";
 
-	return UIComponent.extend("ui5.Controle_De_Estoque.Component", {
+	return UIComponent.extend("ui5.controle_de_estoque.Component", {
 		metadata: {
 			interfaces: ["sap.ui.core.IAsyncContentCreation"],
 			manifest: "json"

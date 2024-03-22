@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="ui5.Controle_De_Estoque.controller.CadastroProdutoTapecaria"
+    controllerName="ui5.controle_de_estoque.controller.CadastroProdutoTapecaria"
 	xmlns="sap.m"
 	xmlns:f="sap.ui.layout.form"
 	xmlns:mvc="sap.ui.core.mvc"

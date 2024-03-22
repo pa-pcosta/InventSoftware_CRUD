@@ -1,7 +1,7 @@
 {
 	"_version": "1.58.0",
 	"sap.app": {
-		"id": "ui5.Controle_De_Estoque",
+		"id": "ui5.controle_de_estoque",
 		"i18n": {
 			"bundleUrl": "i18n/i18n.properties",
 			"supportedLocales": [
@@ -45,7 +45,7 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
-					"bundleName": "ui5.Controle_De_Estoque.i18n.i18n",
+					"bundleName": "ui5.controle_de_estoque.i18n.i18n",
 					"supportedLocales": [
 						""
 					],
@@ -54,7 +54,7 @@
 			}
 		},
 		"rootView": {
-			"viewName": "ui5.Controle_De_Estoque.view.App",
+			"viewName": "ui5.controle_de_estoque.view.App",
 			"type": "XML",
 			"id": "app"
 		},
@@ -70,7 +70,7 @@
 				"routerClass": "sap.m.routing.Router",
 				"type": "View",
 				"viewType": "XML",
-				"path": "ui5.Controle_De_Estoque.view",
+				"path": "ui5.controle_de_estoque.view",
 				"controlId": "app",
 				"controlAggregation": "pages"
 			},

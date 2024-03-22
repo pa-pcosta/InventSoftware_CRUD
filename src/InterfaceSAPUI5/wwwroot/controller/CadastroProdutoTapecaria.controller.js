@@ -7,7 +7,7 @@ sap.ui.define([
 ], (BaseController, formatter, Validador, MessageBox, Repositorio) => {
 	"use strict";
 
-	return BaseController.extend("ui5.Controle_De_Estoque.controller.CadastroProdutoTapecaria", {
+	return BaseController.extend("ui5.controle_de_estoque.controller.CadastroProdutoTapecaria", {
 		
 		formatter: formatter,
 		validador: Validador,

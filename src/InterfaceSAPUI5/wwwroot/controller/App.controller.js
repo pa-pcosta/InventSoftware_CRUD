@@ -3,5 +3,5 @@ sap.ui.define([
 ], (Controller) => {
 	"use strict";
 
-	return Controller.extend("ui5.Controle_De_Estoque.controller.App", {});
+	return Controller.extend("ui5.controle_de_estoque.controller.App", {});
 });

@@ -5,7 +5,7 @@ sap.ui.define([
 ], (BaseController, formatter, Repositorio) => {
 	"use strict";
 
-	return BaseController.extend("ui5.Controle_De_Estoque.controller.TelaListagem", {
+	return BaseController.extend("ui5.controle_de_estoque.controller.TelaListagem", {
 		formatter: formatter,
 
 		onInit() {
@@ -77,7 +77,10 @@ sap.ui.define([
 
 		cadastroTeste()
 		{
-			this.exibirMensagemDeSucesso("Botão cadastrar acionado");
+			let msg = "Botão cadastrar acionado";
+			this.exibirMensagemDeSucesso(msg,(msg)=>{
+				console.log(msg);
+			});
 		}
 	});
 });
