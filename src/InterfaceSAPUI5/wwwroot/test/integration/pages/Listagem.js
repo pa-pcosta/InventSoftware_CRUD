@@ -73,6 +73,17 @@ sap.ui.define([
 						},
 						errorMessage: `SearchField não encontrado na view`
 					})
+				},
+
+				oPrimeiroItemDaListaEhSelecionado(){
+					return this.waitFor({
+						id: "listaProdutosTapecaria",
+						viewName: NOME_DA_VIEW,
+						success: (lista) => {
+							let produtoTapecaria = lista.at(0);
+							produtoTapecaria = new Press();
+						}
+					})
 				}
 			},
 

@@ -1,6 +1,7 @@
 sap.ui.define([
 	"sap/ui/test/opaQunit",
-	"./pages/Listagem"
+	"./pages/Listagem",
+	"./pages/DetalhesProduto"
 ], (opaTest) => {
 	"use strict";
 
@@ -32,6 +33,15 @@ sap.ui.define([
 
 			Then.naTelaDeListagem
 			.listaDeProdutosEhCarregada(1);
+		});
+
+		opaTest("Deve navegar para tela de detalhes", (Given, When, Then) => {
+
+			When.naTelaDeListagem
+			.oPrimeiroItemDaListaEhSelecionado();
+
+			Then.naTelaDeCadastro
+			.paginaDeDetalhesEhCarregada(35);
 		});
 	});
 });
