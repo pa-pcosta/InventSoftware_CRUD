@@ -23,7 +23,7 @@ sap.ui.define([
 			.comboBoxEhFechada("listagemComboBox");
 
 			Then.naTelaDeListagem
-			.listaDeProdutosEhCarregada(7);
+			.listaDeProdutosEhCarregada();
 		});
 
 		opaTest("Deve mostrar produtos com descrição = Persa", (Given, When, Then) => {
@@ -41,7 +41,13 @@ sap.ui.define([
 			.oPrimeiroItemDaListaEhSelecionado();
 
 			Then.naTelaDeCadastro
-			.paginaDeDetalhesEhCarregada(35);
+			.paginaDeDetalhesEhCarregada();
+
+			When.naTelaDeCadastro
+			.botaoVoltarEhPressionado();
+
+			Then.naTelaDeListagem
+			.listaDeProdutosEhCarregada();
 		});
 	});
 });

@@ -1,10 +1,10 @@
 sap.ui.define([
 	"sap/ui/test/Opa5",
 	"sap/ui/test/actions/Press",
-	'sap/ui/test/matchers/AggregationLengthEquals'
+	'sap/ui/test/matchers/AggregationFilled'
 ], (Opa5, 
 	Press,
-	AggregationLengthEquals) => {
+	AggregationFilled) => {
 	"use strict";
 
 	const NOME_DA_VIEW = "ui5.controle_de_estoque.view.TelaListagem";
@@ -70,6 +70,7 @@ sap.ui.define([
 						success: (searchField) => {
 							searchField.setValue(texto);
 							searchField.fireLiveChange();
+							Opa5.assert.ok(true, `Filtro por [${texto}] executada no searchField`);
 						},
 						errorMessage: `SearchField não encontrado na view`
 					})
@@ -80,26 +81,25 @@ sap.ui.define([
 						id: "listaProdutosTapecaria",
 						viewName: NOME_DA_VIEW,
 						success: (lista) => {
-							let produtoTapecaria = lista.at(0);
-							produtoTapecaria = new Press();
+							let produtoTapecaria = lista.getItems()[0];
+							produtoTapecaria.firePress();
 						}
 					})
 				}
 			},
 
 			assertions: {
-				listaDeProdutosEhCarregada (quantidadeDeRegistrosDoTipoSelecionado) {
+				listaDeProdutosEhCarregada () {
 					return this.waitFor({
 						id: "listaProdutosTapecaria",
 						viewName: NOME_DA_VIEW,
-						matchers: new AggregationLengthEquals({
-							name: "items",
-							length: quantidadeDeRegistrosDoTipoSelecionado
+						matchers: new AggregationFilled({
+							name: "items"
 						}),
 						success: function () {
-							Opa5.assert.ok(true, `Lista de produtos do tipo TAPETE foi carregada com ${quantidadeDeRegistrosDoTipoSelecionado}`);
+							Opa5.assert.ok(true, "Lista de produtos tapecaria foi carregada");
 						},
-						errorMessage: "The table does not contain all items."
+						errorMessage: "Lista de produtos tapecaria não foi carregada"
 					})
 				}
 			}

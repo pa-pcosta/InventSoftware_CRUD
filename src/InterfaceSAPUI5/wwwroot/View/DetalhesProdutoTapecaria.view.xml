@@ -32,7 +32,7 @@
                         columnsL="1" columnsM="1">
                         <f:toolbar>
                             <Toolbar>
-                                <Title id="Title1" text="ID {produtoTapecaria>/id}" titleStyle="H3"/>
+                                <Title id="tituloSimpleForm" text="ID {produtoTapecaria>/id}" titleStyle="H3"/>
                             </Toolbar>
                         </f:toolbar>
                         <f:content>
