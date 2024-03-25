@@ -1,7 +1,8 @@
 sap.ui.define([
 	"sap/ui/test/opaQunit",
 	"./pages/Listagem",
-	"./pages/DetalhesProduto"
+	"./pages/DetalhesProdutoTapecaria",
+	"./pages/CadastroProdutoTapecaria"
 ], (opaTest) => {
 	"use strict";
 
@@ -32,7 +33,7 @@ sap.ui.define([
 			.ehPesquisadoNoSearchField("listagemSearchField", "Persa");
 
 			Then.naTelaDeListagem
-			.listaDeProdutosEhCarregada(1);
+			.listaDeProdutosEhCarregada();
 		});
 
 		opaTest("Deve navegar para tela de detalhes", (Given, When, Then) => {
@@ -40,11 +41,26 @@ sap.ui.define([
 			When.naTelaDeListagem
 			.oPrimeiroItemDaListaEhSelecionado();
 
-			Then.naTelaDeCadastro
+			Then.naTelaDeDetalhes
 			.paginaDeDetalhesEhCarregada();
 
-			When.naTelaDeCadastro
+			When.naTelaDeDetalhes
 			.botaoVoltarEhPressionado();
+
+			Then.naTelaDeListagem
+			.listaDeProdutosEhCarregada();
+		});
+
+		opaTest("Deve navegar para tela de CADASTRO", (Given, When, Then) => {
+
+			When.naTelaDeListagem
+			.ehPressionadoBotao("botaoAdicionar");
+
+			Then.naTelaDeCadastro
+			.paginaDeCadastroEhCarregada();
+			
+			When.naTelaDeCadastro
+			.ehPressionadoBotao("botaoVoltar");
 
 			Then.naTelaDeListagem
 			.listaDeProdutosEhCarregada();

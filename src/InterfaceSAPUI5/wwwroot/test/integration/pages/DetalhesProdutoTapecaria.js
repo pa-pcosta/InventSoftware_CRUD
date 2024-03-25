@@ -10,7 +10,7 @@ sap.ui.define([
 	const NOME_DA_VIEW = "ui5.controle_de_estoque.view.DetalhesProdutoTapecaria";
 
 	Opa5.createPageObjects({
-		naTelaDeCadastro: {
+		naTelaDeDetalhes: {
 			actions: {
 				botaoVoltarEhPressionado() {
 					return this.waitFor({

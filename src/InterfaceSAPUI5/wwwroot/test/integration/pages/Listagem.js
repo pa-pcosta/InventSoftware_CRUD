@@ -12,12 +12,15 @@ sap.ui.define([
 	Opa5.createPageObjects({
 		naTelaDeListagem: {
 			actions: {
-				botaoAdicionarEhPressionado() {
+				ehPressionadoBotao (idBotao) {
 					return this.waitFor({
-						id: "botaoAdicionar",
+						id: idBotao,
 						viewName: NOME_DA_VIEW,
 						actions: new Press(),
-						errorMessage: "BOTÃO NÃO ENCONTRADO NA VIEW"
+						success: (idBotao) => {
+						Opa5.assert.ok(true, `Botao com id '${idBotao}' pressionado com sucesso`)
+						},
+						errorMessage: `Falha ao tentar pressionar botão com id '${idBotao}'`
 					});
 				},
 
@@ -27,7 +30,7 @@ sap.ui.define([
 						viewName: NOME_DA_VIEW,
 						success: function (comboBox) {
 							comboBox.open();
-							Opa5.assert.ok(NOME_DA_VIEW, `A combobox foi aberta com sucesso`)
+							Opa5.assert.ok(NOME_DA_VIEW, `A combobox foi aberta com sucesso`);
 						},
 						errorMessage: `A combobox não foi aberta`
 					})

@@ -22,7 +22,6 @@
         </headerContent>
 
         <Panel backgroundDesign="Solid">
-
                 <VBox class="sapUiSmallMargin">
                     <f:SimpleForm
                         minWidth="1024"

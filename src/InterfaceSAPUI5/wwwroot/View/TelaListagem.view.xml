@@ -34,7 +34,7 @@
 					text="{i18n>addNewProductButtonText}"
 					type="Emphasized"
 					icon="sap-icon://add"
-					press=".cadastroTeste"
+					press="aoClicarEmAdicionar"
 					ariaDescribedBy="defaultButtonDescription genericButtonDescription">
 				</Button>
 			</Toolbar>

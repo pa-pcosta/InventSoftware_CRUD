@@ -8,7 +8,9 @@
 
         <headerContent alignItems="Center" justifyContent="Center">
 			<Toolbar width="100%">
-                <Button class="sapUiSmallMargin"
+                <Button 
+                    id="botaoVoltar"
+                    class="sapUiSmallMargin"
                     type="Default"
                     icon="sap-icon://nav-back"
                     press=".aoClicarEmVoltar"/>
@@ -21,7 +23,9 @@
                         text="{i18n>botaoCancelar}"
                         icon="sap-icon://cancel"
                         press=".aoClicarEmVoltar"/>
-                    <Button class="sapUiSmallMarginBegin" 
+                    <Button 
+                        id="botaoSalvar"
+                        class="sapUiSmallMarginBegin" 
                         type="Default"
                         text="{i18n>botaoSalvar}"
                         icon="sap-icon://save"
