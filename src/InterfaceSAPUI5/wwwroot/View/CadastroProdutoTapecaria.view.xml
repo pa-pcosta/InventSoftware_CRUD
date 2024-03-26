@@ -18,7 +18,9 @@
             	<Title text="{i18n>tituloTelaCadastro}"/>
                 <ToolbarSpacer/>
                 <HBox justifyContent="End">
-                    <Button class="sapUiSmallMarginBegin" 
+                    <Button 
+                        id="botaoCancelar"
+                        class="sapUiSmallMarginBegin" 
                         type="Reject"
                         text="{i18n>botaoCancelar}"
                         icon="sap-icon://cancel"
