@@ -1,10 +1,8 @@
 sap.ui.define([
 	"sap/ui/test/Opa5",
-	"sap/ui/test/actions/Press",
-	'sap/ui/test/matchers/PropertyStrictEquals'
+	"sap/ui/test/actions/Press"
 ], (Opa5, 
-	Press,
-	PropertyStrictEquals) => {
+	Press) => {
 	"use strict";
 
 	const NOME_DA_VIEW = "ui5.controle_de_estoque.view.CadastroProdutoTapecaria";
@@ -35,7 +33,21 @@ sap.ui.define([
 						},
 						errorMessage: "Falha ao carregar página de Cadastro De Produto"
 					})
-				}
+				},
+
+					messageBoxDeErroEhExibida () {
+						return this.waitFor({
+							controlType: "sap.m.Dialog",
+							searchOpenDialogs: true,
+							success: (messageBoxes) => {
+								messageBoxes.forEach((messageBox) => {
+									messageBox.close();
+								});
+								Opa5.assert.ok(true, "Messagebox de erro exibida com sucesso");
+							},
+							errorMessage: "Messagebox de erro não foi encontrado na view"
+						});
+					}
 			}
 		}
 	});

@@ -6,7 +6,7 @@ sap.ui.define([
 ], (opaTest) => {
 	"use strict";
 
-	QUnit.module("TelaListagem", () => {
+	QUnit.module("Tela de listagem de produtos de tapecaria", () => {
 
 		opaTest("Deve mostrar registros do tipo TAPETE", (Given, When, Then) => {
 
@@ -64,6 +64,8 @@ sap.ui.define([
 
 			Then.naTelaDeListagem
 			.listaDeProdutosEhCarregada();
+
+			Then.iTeardownMyApp();
 		});
 	});
 });
