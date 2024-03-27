@@ -1,7 +1,8 @@
 sap.ui.define([
 	"sap/ui/test/opaQunit",
 	"./pages/CadastroProdutoTapecaria",
-	"./pages/Listagem"
+	"./pages/Listagem",
+	"./pages/DetalhesProdutoTapecaria"
 ], (opaTest) => {
 	"use strict";
 
@@ -68,7 +69,7 @@ sap.ui.define([
 			.ehPressionadoBotao(ID_BOTAO_SALVAR);
 
 			Then.naTelaDeCadastro
-			.messageBoxDeErroEhExibida();
+			.messageBoxEhExibida();
 		});
 
 		opaTest("Deve retornar erro ao tentar cadastrar com dados inválidos", (Given, When, Then) => {
@@ -82,9 +83,7 @@ sap.ui.define([
 			.and
 			.ehPreenchidoInput(ID_INPUT_PRECO_METRO_QUADRADO, "caracter")
 			.and
-			.ehPreenchidoInput(ID_TEXTAREA_DETALHES, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-			.and
-			.ehPressionadoBotao(ID_BOTAO_SALVAR);
+			.ehPreenchidoInput(ID_TEXTAREA_DETALHES, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
 			Then.naTelaDeCadastro
 			.valueStateCampo(ID_COMBOBOX_TIPO, "Error")
@@ -95,7 +94,47 @@ sap.ui.define([
 			.and
 			.valueStateCampo(ID_INPUT_PRECO_METRO_QUADRADO, "Error")
 			.and
-			.valueStateCampo(ID_TEXTAREA_DETALHES, "Error")
+			.valueStateCampo(ID_TEXTAREA_DETALHES, "Error");
+
+			When.naTelaDeCadastro
+			.ehPressionadoBotao(ID_BOTAO_SALVAR);
+
+			Then.naTelaDeCadastro
+			.messageBoxEhExibida();
+		});
+		
+		opaTest("Deve cadastrar produto com sucesso", (Given, When, Then) => {
+
+			When.naTelaDeCadastro
+			.ehPreenchidaComboBox(ID_COMBOBOX_TIPO, "3")
+			.and
+			.ehPreenchidoDatePicker(ID_DATEPICKER_DATA_ENTRADA, new Date())
+			.and
+			.ehPreenchidoInput(ID_INPUT_AREA, "11")
+			.and
+			.ehPreenchidoInput(ID_INPUT_PRECO_METRO_QUADRADO, "11")
+			.and
+			.ehPreenchidoInput(ID_TEXTAREA_DETALHES, `TESTE OPA ${new Date().getHours()}:${new Date().getMinutes()}`);
+
+			Then.naTelaDeCadastro
+			.valueStateCampo(ID_COMBOBOX_TIPO, "None")
+			.and
+			.valueStateCampo(ID_DATEPICKER_DATA_ENTRADA, "None")
+			.and
+			.valueStateCampo(ID_INPUT_AREA, "None")
+			.and
+			.valueStateCampo(ID_INPUT_PRECO_METRO_QUADRADO, "None")
+			.and
+			.valueStateCampo(ID_TEXTAREA_DETALHES, "None");
+
+			When.naTelaDeCadastro
+			.ehPressionadoBotao(ID_BOTAO_SALVAR);
+
+			Then.naTelaDeCadastro
+			.messageBoxEhExibida()
+			
+			Then.naTelaDeDetalhes
+			.paginaDeDetalhesEhCarregada();
 		});
 	});
 });

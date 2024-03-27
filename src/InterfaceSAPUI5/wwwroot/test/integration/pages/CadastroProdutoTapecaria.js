@@ -28,6 +28,7 @@ sap.ui.define([
 						viewName: NOME_DA_VIEW,
 						success: (comboBox) => {
 							comboBox.setSelectedKey(valor);
+							comboBox.fireChange();
 							Opa5.assert.ok(true, `ComboBox com id '${idCombo}' preenchida com valor ${valor}`)
 						},
 						errorMessage: `Falha ao tentar preencher ComboBox com id '${idCombo}'`
@@ -40,6 +41,7 @@ sap.ui.define([
 						viewName: NOME_DA_VIEW,
 						success: (datePicker) => {
 							datePicker.setDateValue(data);
+							datePicker.fireChange();
 							Opa5.assert.ok(true, `DatePicker com id '${idDatePicker}' preenchido com valor ${data}`)
 						},
 						errorMessage: `Falha ao tentar preencher DatePicker com id '${idDatePicker}'`
@@ -52,6 +54,7 @@ sap.ui.define([
 						viewName: NOME_DA_VIEW,
 						success: (campoInput) => {
 							campoInput.setValue(valor);
+							campoInput.fireChange();
 							Opa5.assert.ok(true, `Input com id '${idInput}' preenchido com valor ${valor}`)
 						},
 						errorMessage: `Falha ao tentar preencher Input com id '${idInput}'`
@@ -71,17 +74,22 @@ sap.ui.define([
 					})
 				},
 
-				messageBoxDeErroEhExibida () {
+				messageBoxEhExibida () {
 					return this.waitFor({
 						controlType: "sap.m.Dialog",
 						searchOpenDialogs: true,
 						success: (messageBoxes) => {
 							messageBoxes.forEach((messageBox) => {
-								messageBox.close();
+								if (messageBox.getButtons().length > 0) {
+									let okButton = messageBox.getButtons()[0];
+									okButton.firePress();
+									Opa5.assert.ok(true, "Ação 'OK' da caixa de mensagem disparada com sucesso");
+								} else {
+									Opa5.assert.ok(false, "A caixa de mensagem não possui botão 'OK'");
+								}
 							});
-							Opa5.assert.ok(true, "Messagebox de erro exibida com sucesso");
 						},
-						errorMessage: "Messagebox de erro não foi encontrado na view"
+						errorMessage: "A caixa de mensagem não foi encontrada na visualização"
 					});
 				},
 
