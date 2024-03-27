@@ -88,6 +88,19 @@ sap.ui.define([
 							produtoTapecaria.firePress();
 						}
 					})
+				},
+
+				oUltimoItemDaListaEhSelecionado() {
+					return this.waitFor({
+						id: "listaProdutosTapecaria",
+						viewName: NOME_DA_VIEW,
+						success: (lista) => {
+							let itens = lista.getItems();
+							let ultimoItem = itens[itens.length - 1];
+							ultimoItem.firePress();
+						},
+						errorMessage: "A lista de produtos não foi encontrada na visualização"
+					});
 				}
 			},
 

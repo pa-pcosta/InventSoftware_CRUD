@@ -26,6 +26,18 @@ sap.ui.define([
 						},
 						errorMessage: "Botão VOLTAR não foi encontrado na view"
 					});
+				},
+
+				ehPressionadoBotao (idBotao) {
+					return this.waitFor({
+						id: idBotao,
+						viewName: NOME_DA_VIEW,
+						actions: new Press(),
+						success: (idBotao) => {
+							Opa5.assert.ok(true, `Botao com id '${idBotao}' pressionado com sucesso`)
+						},
+						errorMessage: `Falha ao tentar pressionar botão com id '${idBotao}'`
+					});
 				}
 			},
 

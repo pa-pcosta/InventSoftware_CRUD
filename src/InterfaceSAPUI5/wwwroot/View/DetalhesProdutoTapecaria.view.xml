@@ -11,11 +11,15 @@
 		navButtonPress=".aoClicarEmVoltar">
 
         <headerContent>
-            <Button type="Reject"
+            <Button 
+                id="botaoDeletar"
+                type="Reject"
                 text="{i18n>botaoDeletar}"
                 icon="sap-icon://delete"
                 press="aoClicarEmRemover"/>
-            <Button type="Default"
+            <Button 
+                id="botaoEditar"
+                type="Default"
                 text="{i18n>botaoEditar}"
                 icon="sap-icon://edit"
                 press="aoClicarEmEditar"/>

@@ -134,7 +134,9 @@ sap.ui.define([
 			.messageBoxEhExibida()
 			
 			Then.naTelaDeDetalhes
-			.paginaDeDetalhesEhCarregada();
+			.paginaDeDetalhesEhCarregada()
+			
+			Then.iTeardownMyApp();
 		});
 	});
 });

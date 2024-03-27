@@ -5,7 +5,8 @@ sap.ui.getCore().attachInit(() => {
 
 	sap.ui.require([
         "ui5/controle_de_estoque/test/integration/JornadaTelaListagem",
-		"ui5/controle_de_estoque/test/integration/JornadaCadastroProdutoTapecaria"
+		"ui5/controle_de_estoque/test/integration/JornadaCadastroProdutoTapecaria",
+		"ui5/controle_de_estoque/test/integration/JornadaDetalhesProdutoTapecaria"
 	], () => {
         QUnit.start();
 	});
