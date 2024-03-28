@@ -41,9 +41,9 @@ sap.ui.define([
             .paginaDeDetalhesEhCarregada ();
 		});
 
-        opaTest("Deve exibir tela de CADASTRO", (Given, When, Then) => {
+        opaTest("Deve exibir tela de CADASTRO na rota de edição", (Given, When, Then) => {
 
-			When.naTelaDeListagem
+			When.naTelaDeDetalhes
 			.ehPressionadoBotao(ID_BOTAO_EDITAR);
 
 			Then.naTelaDeCadastro
@@ -54,6 +54,22 @@ sap.ui.define([
 
             Then.naTelaDeDetalhes
             .paginaDeDetalhesEhCarregada ();
+		});
+
+        opaTest("Deve remover registro e navegar para tela de listagem", (Given, When, Then) => {
+
+			When.naTelaDeDetalhes
+			.ehPressionadoBotao(ID_BOTAO_REMOVER);
+
+			Then.naTelaDeDetalhes
+			.messageBoxEhExibida()
+            .and
+            .messageBoxEhExibida();
+
+            Then.naTelaDeListagem
+            .listaDeProdutosEhCarregada();
+
+            Then.iTeardownMyApp();
 		});
 	});
 });

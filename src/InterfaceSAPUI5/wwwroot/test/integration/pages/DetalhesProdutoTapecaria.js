@@ -51,7 +51,26 @@ sap.ui.define([
 						},
 						errorMessage: "Página de Detalhes do produto não foi carregada"
 					})
-				}
+				},
+
+				messageBoxEhExibida () {
+					return this.waitFor({
+						controlType: "sap.m.Dialog",
+						searchOpenDialogs: true,
+						success: (messageBoxes) => {
+							messageBoxes.forEach((messageBox) => {
+								if (messageBox.getButtons().length > 0) {
+									let okButton = messageBox.getButtons()[0];
+									okButton.firePress();
+									Opa5.assert.ok(true, "Ação 'OK' da caixa de mensagem disparada com sucesso");
+								} else {
+									Opa5.assert.ok(false, "A caixa de mensagem não possui botão 'OK'");
+								}
+							});
+						},
+						errorMessage: "A caixa de mensagem não foi encontrada na visualização"
+					});
+				},
 			}
 		}
 	});

@@ -86,7 +86,9 @@ sap.ui.define([
 						success: (lista) => {
 							let produtoTapecaria = lista.getItems()[0];
 							produtoTapecaria.firePress();
-						}
+							Opa5.assert.ok(true, "Primeiro registro da lista pressionado com sucesso");
+						},
+						errorMessage: "A lista de produtos não foi encontrada na view"
 					})
 				},
 
@@ -98,8 +100,9 @@ sap.ui.define([
 							let itens = lista.getItems();
 							let ultimoItem = itens[itens.length - 1];
 							ultimoItem.firePress();
+							Opa5.assert.ok(true, "Último registro da lista pressionado com sucesso");
 						},
-						errorMessage: "A lista de produtos não foi encontrada na visualização"
+						errorMessage: "A lista de produtos não foi encontrada na view"
 					});
 				}
 			},

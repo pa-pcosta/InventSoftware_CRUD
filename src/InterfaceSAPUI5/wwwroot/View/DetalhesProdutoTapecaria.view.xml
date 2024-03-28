@@ -12,7 +12,7 @@
 
         <headerContent>
             <Button 
-                id="botaoDeletar"
+                id="botaoRemover"
                 type="Reject"
                 text="{i18n>botaoDeletar}"
                 icon="sap-icon://delete"
