@@ -32,7 +32,7 @@ sap.ui.define([
 							comboBox.open();
 							Opa5.assert.ok(NOME_DA_VIEW, `A combobox foi aberta com sucesso`);
 						},
-						errorMessage: `A combobox não foi aberta`
+						errorMessage: `ComboBox não encontrada na view`
 					})
 				},
 
@@ -45,7 +45,7 @@ sap.ui.define([
 								comboBox.setSelectedKey(indice);
 								comboBox.fireChange();
 
-								Opa5.assert.ok(true, `Indice ${indice} foi selecionado na comboBox.`);
+								Opa5.assert.ok(true, `Indice ${indice} foi selecionado na comboBox ${idComboBox}`);
 							} catch (error) {
 								Opa5.assert.ok(false, error.message);
 							}
@@ -60,9 +60,9 @@ sap.ui.define([
 						viewName: NOME_DA_VIEW,
 						success: function (comboBox) {
 							comboBox.close();
-							Opa5.assert.ok(NOME_DA_VIEW, `A combobox foi fechada com sucesso.`);
+							Opa5.assert.ok(NOME_DA_VIEW, `A combobox ${idComboBox} foi fechada com sucesso.`);
 						},
-						errorMessage: `A combobox não foi fechada com sucesso`
+						errorMessage: `ComboBox não encontrada na view`
 					});
 				},
 

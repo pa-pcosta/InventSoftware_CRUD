@@ -18,7 +18,7 @@ sap.ui.define([
 						success: (idBotao) => {
 							Opa5.assert.ok(true, `Botao com id '${idBotao}' pressionado com sucesso`)
 						},
-						errorMessage: `Falha ao tentar pressionar botão com id '${idBotao}'`
+						errorMessage: `Botão com id '${idBotao} não foi encontrado na view'`
 					});
 				},
 
@@ -31,7 +31,7 @@ sap.ui.define([
 							comboBox.fireChange();
 							Opa5.assert.ok(true, `ComboBox com id '${idCombo}' preenchida com valor ${valor}`)
 						},
-						errorMessage: `Falha ao tentar preencher ComboBox com id '${idCombo}'`
+						errorMessage: `ComboBox com id '${idCombo} não foi encontrada na view'`
 					});
 				},
 
@@ -44,7 +44,7 @@ sap.ui.define([
 							datePicker.fireChange();
 							Opa5.assert.ok(true, `DatePicker com id '${idDatePicker}' preenchido com valor ${data}`)
 						},
-						errorMessage: `Falha ao tentar preencher DatePicker com id '${idDatePicker}'`
+						errorMessage: `DatePicker com id '${idDatePicker}' não foi encontrado na view`
 					});
 				},
 
@@ -57,7 +57,7 @@ sap.ui.define([
 							campoInput.fireChange();
 							Opa5.assert.ok(true, `Input com id '${idInput}' preenchido com valor ${valor}`)
 						},
-						errorMessage: `Falha ao tentar preencher Input com id '${idInput}'`
+						errorMessage: `Input com id '${idInput}' não foi encontrado na view`
 					});
 				}
 			},
@@ -105,7 +105,7 @@ sap.ui.define([
 								Opa5.assert.ok(true, `ValueState do campo '${idCampo}' diferente do valor ${valueState}`);
 							}
 						},
-						errorMessage: `Falha ao tentar pressionar botão com id '${idCampo}'`
+						errorMessage: `Campo com id '${idCampo}' não foi encontrado na view`
 					});
 				}
 			}

@@ -16,9 +16,9 @@ sap.ui.define([
 	const ID_INPUT_PRECO_METRO_QUADRADO = "cadastroInputPrecoMetroQuadrado";
 	const ID_TEXTAREA_DETALHES = "cadastroTextAreaDetalhes";
 
-	QUnit.module("Cadastro de produto de tapecaria", () => {
+	QUnit.module("CADASTRO DE PRODUTO DE TAPECARIA", () => {
 
-		opaTest("Deve exibir tela de CADASTRO", (Given, When, Then) => {
+		opaTest("Deve exibir tela de cadastro", (Given, When, Then) => {
 
 			Given.iStartMyUIComponent({
 				componentConfig: {
@@ -33,7 +33,7 @@ sap.ui.define([
 			.paginaDeCadastroEhCarregada ();
 		});
 
-		opaTest("Deve retornar para tela de LISTAGEM", (Given, When, Then) => {
+		opaTest("Deve navegar para tela de listagem", (Given, When, Then) => {
 
 			When.naTelaDeCadastro
 			.ehPressionadoBotao(ID_BOTAO_VOLTAR);
@@ -48,7 +48,7 @@ sap.ui.define([
 			.paginaDeCadastroEhCarregada();
 		});
 
-		opaTest("Deve cancelar cadastro e retornar para tela de LISTAGEM", (Given, When, Then) => {
+		opaTest("Deve cancelar cadastro e navegar para tela de listagem", (Given, When, Then) => {
 
 			When.naTelaDeCadastro
 			.ehPressionadoBotao(ID_BOTAO_CANCELAR);
@@ -103,7 +103,7 @@ sap.ui.define([
 			.messageBoxEhExibida();
 		});
 		
-		opaTest("Deve cadastrar produto com sucesso", (Given, When, Then) => {
+		opaTest("Deve cadastrar produto com sucesso e navegar para tela de detalhes", (Given, When, Then) => {
 
 			When.naTelaDeCadastro
 			.ehPreenchidaComboBox(ID_COMBOBOX_TIPO, "3")

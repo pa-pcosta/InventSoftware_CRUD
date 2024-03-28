@@ -22,9 +22,9 @@ sap.ui.define([
 						}),
 						actions: new Press(),
 						success: function () {
-							Opa5.assert.ok(true, "Botão de navegação pressionado com sucesso");
+							Opa5.assert.ok(true, "Botão voltar pressionado com sucesso");
 						},
-						errorMessage: "Botão VOLTAR não foi encontrado na view"
+						errorMessage: "Botão voltar não foi encontrado na view"
 					});
 				},
 
@@ -36,7 +36,7 @@ sap.ui.define([
 						success: (idBotao) => {
 							Opa5.assert.ok(true, `Botao com id '${idBotao}' pressionado com sucesso`)
 						},
-						errorMessage: `Falha ao tentar pressionar botão com id '${idBotao}'`
+						errorMessage: `Botão com id '${idBotao} não foi encontrado na view'`
 					});
 				}
 			},

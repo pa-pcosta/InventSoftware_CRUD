@@ -9,9 +9,9 @@ sap.ui.define([
 	const ID_BOTAO_REMOVER = "botaoRemover";
 	const ID_BOTAO_EDITAR = "botaoEditar";
 
-	QUnit.module("Página de DETALHES de produto de tapecaria", () => {
+	QUnit.module("DETALHES DE PRODUTO DE TAPECARIA", () => {
         
-        opaTest("Deve exibir tela de DETALHES", (Given, When, Then) => {
+        opaTest("Deve exibir tela de detalhes", (Given, When, Then) => {
 
             Given.iStartMyUIComponent({
                 componentConfig: {
@@ -26,7 +26,7 @@ sap.ui.define([
             .paginaDeDetalhesEhCarregada ();
         });
 
-        opaTest("Deve navegar para tela de LISTAGEM", (Given, When, Then) => {
+        opaTest("Deve navegar para tela de listagem", (Given, When, Then) => {
 
 			When.naTelaDeDetalhes
 			.botaoVoltarEhPressionado();
@@ -41,7 +41,7 @@ sap.ui.define([
             .paginaDeDetalhesEhCarregada ();
 		});
 
-        opaTest("Deve exibir tela de CADASTRO na rota de edição", (Given, When, Then) => {
+        opaTest("Deve navegar para tela de cadastro na rota de edição", (Given, When, Then) => {
 
 			When.naTelaDeDetalhes
 			.ehPressionadoBotao(ID_BOTAO_EDITAR);

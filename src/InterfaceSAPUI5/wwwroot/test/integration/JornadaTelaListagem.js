@@ -6,7 +6,7 @@ sap.ui.define([
 ], (opaTest) => {
 	"use strict";
 
-	QUnit.module("Tela de listagem de produtos de tapecaria", () => {
+	QUnit.module("LISTAGEM DE PRODUTO DE TAPECARIA", () => {
 
 		opaTest("Deve mostrar registros do tipo TAPETE", (Given, When, Then) => {
 
@@ -51,7 +51,7 @@ sap.ui.define([
 			.listaDeProdutosEhCarregada();
 		});
 
-		opaTest("Deve navegar para tela de CADASTRO", (Given, When, Then) => {
+		opaTest("Deve navegar para tela de cadastro", (Given, When, Then) => {
 
 			When.naTelaDeListagem
 			.ehPressionadoBotao("botaoAdicionar");
