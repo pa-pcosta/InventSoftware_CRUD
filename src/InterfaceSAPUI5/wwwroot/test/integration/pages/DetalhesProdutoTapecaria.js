@@ -1,10 +1,12 @@
 sap.ui.define([
 	"sap/ui/test/Opa5",
 	"sap/ui/test/actions/Press",
-	'sap/ui/test/matchers/PropertyStrictEquals'
+	"sap/ui/test/matchers/PropertyStrictEquals",
+	"sap/ui/test/matchers/AggregationContainsPropertyEqual"
 ], (Opa5, 
 	Press,
-	PropertyStrictEquals) => {
+	PropertyStrictEquals,
+	AggregationContainsPropertyEqual) => {
 	"use strict";
 
 	const NOME_DA_VIEW = "ui5.controle_de_estoque.view.DetalhesProdutoTapecaria";
@@ -53,20 +55,20 @@ sap.ui.define([
 					})
 				},
 
-				messageBoxEhExibida () {
+				messageBoxEhExibida (idMessageBox, titulo, texto) {
 					return this.waitFor({
-						controlType: "sap.m.Dialog",
-						searchOpenDialogs: true,
-						success: (messageBoxes) => {
-							messageBoxes.forEach((messageBox) => {
-								if (messageBox.getButtons().length > 0) {
-									let okButton = messageBox.getButtons()[0];
-									okButton.firePress();
-									Opa5.assert.ok(true, "Ação 'OK' da caixa de mensagem disparada com sucesso");
-								} else {
-									Opa5.assert.ok(false, "A caixa de mensagem não possui botão 'OK'");
-								}
-							});
+						id: idMessageBox,
+						matchers: 
+							new AggregationContainsPropertyEqual({
+								aggregationName: "content",
+                            	propertyName: "text",
+                            	propertyValue: texto
+							})
+						,
+						success: (messageBox) => {
+							let botao = messageBox.getButtons();
+							botao[0].firePress();
+							Opa5.assert.ok(true, `MessageBox ${titulo} exibida com texto "${texto}"`);
 						},
 						errorMessage: "A caixa de mensagem não foi encontrada na visualização"
 					});

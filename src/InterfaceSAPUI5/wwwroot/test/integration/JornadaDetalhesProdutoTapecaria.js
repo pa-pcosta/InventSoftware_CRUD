@@ -8,6 +8,8 @@ sap.ui.define([
 
 	const ID_BOTAO_REMOVER = "botaoRemover";
 	const ID_BOTAO_EDITAR = "botaoEditar";
+    const ID_MESSAGEBOX_CONFIRMACAO = "messageBoxConfirmacao";
+	const ID_MESSAGEBOX_SUCESSO = "messageBoxSucesso";
 
 	QUnit.module("DETALHES DE PRODUTO DE TAPECARIA", () => {
         
@@ -62,9 +64,9 @@ sap.ui.define([
 			.ehPressionadoBotao(ID_BOTAO_REMOVER);
 
 			Then.naTelaDeDetalhes
-			.messageBoxEhExibida()
+			.messageBoxEhExibida(ID_MESSAGEBOX_CONFIRMACAO, "Confirmação", "Após excluir o registro não será possível recuperar os dados. Deseja continuar?")
             .and
-            .messageBoxEhExibida();
+            .messageBoxEhExibida(ID_MESSAGEBOX_SUCESSO, "Êxito", "Produto removido com sucesso.");
 
             Then.naTelaDeListagem
             .listaDeProdutosEhCarregada();

@@ -54,7 +54,9 @@ sap.ui.define([
 				BusyIndicator.show(delayBusyIndicator);
 
 				return funcao()
-					.catch(erro => MessageBox.error(erro))
+					.catch(erro => MessageBox.error(erro, {
+						id: "messageBoxErro"
+					}))
 					.finally(() => BusyIndicator.hide());
 			}
 			catch (execao)
@@ -66,6 +68,7 @@ sap.ui.define([
 		exibirMensagemDeConfirmacao(mensagem, funcao)
 		{
 			MessageBox.confirm (mensagem, {
+				id: "messageBoxConfirmacao",
 				onClose: (clique) => {
 					funcao(clique);
 				}
@@ -75,6 +78,7 @@ sap.ui.define([
 		exibirMensagemDeSucesso(mensagem, funcao)
 		{
 			MessageBox.success(mensagem, {
+				id: "messageBoxSucesso",
 				onClose: (clique) => {
 					funcao(clique);
 				}

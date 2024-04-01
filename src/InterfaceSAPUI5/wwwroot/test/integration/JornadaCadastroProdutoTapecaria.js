@@ -15,6 +15,8 @@ sap.ui.define([
 	const ID_INPUT_AREA = "cadastroInputArea";
 	const ID_INPUT_PRECO_METRO_QUADRADO = "cadastroInputPrecoMetroQuadrado";
 	const ID_TEXTAREA_DETALHES = "cadastroTextAreaDetalhes";
+	const ID_MESSAGEBOX_ERRO = "messageBoxErro";
+	const ID_MESSAGEBOX_SUCESSO = "messageBoxSucesso";
 
 	QUnit.module("CADASTRO DE PRODUTO DE TAPECARIA", () => {
 
@@ -23,11 +25,9 @@ sap.ui.define([
 			Given.iStartMyUIComponent({
 				componentConfig: {
 					name: "ui5.controle_de_estoque"
-				}
+				},
+				hash:"cadastro"
 			});
-
-			When.naTelaDeListagem
-			.ehPressionadoBotao("botaoAdicionar");
 
 			Then.naTelaDeCadastro
 			.paginaDeCadastroEhCarregada ();
@@ -69,7 +69,7 @@ sap.ui.define([
 			.ehPressionadoBotao(ID_BOTAO_SALVAR);
 
 			Then.naTelaDeCadastro
-			.messageBoxEhExibida();
+			.messageBoxEhExibida(ID_MESSAGEBOX_ERRO, "Erro", "Alguns campos não atendem os critérios de validação");
 		});
 
 		opaTest("Deve retornar erro ao tentar cadastrar com dados inválidos", (Given, When, Then) => {
@@ -100,7 +100,7 @@ sap.ui.define([
 			.ehPressionadoBotao(ID_BOTAO_SALVAR);
 
 			Then.naTelaDeCadastro
-			.messageBoxEhExibida();
+			.messageBoxEhExibida(ID_MESSAGEBOX_ERRO, "Erro", "Alguns campos não atendem os critérios de validação");
 		});
 		
 		opaTest("Deve cadastrar produto com sucesso e navegar para tela de detalhes", (Given, When, Then) => {
@@ -131,7 +131,7 @@ sap.ui.define([
 			.ehPressionadoBotao(ID_BOTAO_SALVAR);
 
 			Then.naTelaDeCadastro
-			.messageBoxEhExibida()
+			.messageBoxEhExibida(ID_MESSAGEBOX_SUCESSO, "Êxito", "Produto cadastrado com sucesso!")
 			
 			Then.naTelaDeDetalhes
 			.paginaDeDetalhesEhCarregada()
