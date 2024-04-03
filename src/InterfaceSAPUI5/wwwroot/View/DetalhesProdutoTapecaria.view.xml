@@ -71,7 +71,9 @@
                             }"/>
 
                             <Label text="{i18n>labelDetalhes}" design="Bold"/>
-                            <Text text="{produtoTapecaria>/detalhes}"/>
+                            <Text 
+                                id="textDetalhes"
+                                text="{produtoTapecaria>/detalhes}"/>
                             
                         </f:content>
                     </f:SimpleForm>

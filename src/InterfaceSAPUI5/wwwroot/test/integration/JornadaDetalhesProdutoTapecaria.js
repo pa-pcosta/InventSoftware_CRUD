@@ -25,7 +25,7 @@ sap.ui.define([
             .oUltimoItemDaListaEhSelecionado();
 
             Then.naTelaDeDetalhes
-            .paginaDeDetalhesEhCarregada ();
+            .paginaDeDetalhesEhCarregada ("TESTE OPA");
         });
 
         opaTest("Deve navegar para tela de listagem", (Given, When, Then) => {
@@ -40,7 +40,7 @@ sap.ui.define([
             .oUltimoItemDaListaEhSelecionado();
 
             Then.naTelaDeDetalhes
-            .paginaDeDetalhesEhCarregada ();
+            .paginaDeDetalhesEhCarregada ("TESTE OPA");
 		});
 
         opaTest("Deve navegar para tela de cadastro na rota de edição", (Given, When, Then) => {
@@ -55,7 +55,7 @@ sap.ui.define([
             .ehPressionadoBotao("botaoVoltar")
 
             Then.naTelaDeDetalhes
-            .paginaDeDetalhesEhCarregada ();
+            .paginaDeDetalhesEhCarregada ("TESTE OPA");
 		});
 
         opaTest("Deve remover registro e navegar para tela de listagem", (Given, When, Then) => {
