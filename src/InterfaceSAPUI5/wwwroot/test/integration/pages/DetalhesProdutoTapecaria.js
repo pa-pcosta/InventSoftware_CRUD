@@ -49,7 +49,7 @@ sap.ui.define([
 						id: "textDetalhes",
 						viewName: NOME_DA_VIEW,
 						success: (campoText) => {
-							if(campoText){
+							if(descricaoDoRegistroEsperada){
 								let textoDoCampo = campoText.getText();
 								let ehDescriçãoEsperada = textoDoCampo.includes(descricaoDoRegistroEsperada);
 

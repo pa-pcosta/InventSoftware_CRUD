@@ -30,7 +30,7 @@ sap.ui.define([
 		opaTest("Deve mostrar produtos com descrição = Persa", (Given, When, Then) => {
 
 			When.naTelaDeListagem
-			.ehPesquisadoNoSearchField("listagemSearchField", "Persa");
+			.ehPesquisadoNoSearchField("Persa");
 
 			Then.naTelaDeListagem
 			.listaDeProdutosEhCarregada();

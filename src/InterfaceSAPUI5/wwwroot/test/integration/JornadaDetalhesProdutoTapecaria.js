@@ -10,6 +10,7 @@ sap.ui.define([
 	const ID_BOTAO_EDITAR = "botaoEditar";
     const ID_MESSAGEBOX_CONFIRMACAO = "messageBoxConfirmacao";
 	const ID_MESSAGEBOX_SUCESSO = "messageBoxSucesso";
+    const DESCRICAO_REGISTRO_TESTE = "TESTE OPA";
 
 	QUnit.module("DETALHES DE PRODUTO DE TAPECARIA", () => {
         
@@ -25,7 +26,7 @@ sap.ui.define([
             .oUltimoItemDaListaEhSelecionado();
 
             Then.naTelaDeDetalhes
-            .paginaDeDetalhesEhCarregada ("TESTE OPA");
+            .paginaDeDetalhesEhCarregada (DESCRICAO_REGISTRO_TESTE);
         });
 
         opaTest("Deve navegar para tela de listagem", (Given, When, Then) => {
@@ -40,7 +41,7 @@ sap.ui.define([
             .oUltimoItemDaListaEhSelecionado();
 
             Then.naTelaDeDetalhes
-            .paginaDeDetalhesEhCarregada ("TESTE OPA");
+            .paginaDeDetalhesEhCarregada (DESCRICAO_REGISTRO_TESTE);
 		});
 
         opaTest("Deve navegar para tela de cadastro na rota de edição", (Given, When, Then) => {
@@ -55,7 +56,7 @@ sap.ui.define([
             .ehPressionadoBotao("botaoVoltar")
 
             Then.naTelaDeDetalhes
-            .paginaDeDetalhesEhCarregada ("TESTE OPA");
+            .paginaDeDetalhesEhCarregada (DESCRICAO_REGISTRO_TESTE);
 		});
 
         opaTest("Deve remover registro e navegar para tela de listagem", (Given, When, Then) => {
@@ -71,7 +72,13 @@ sap.ui.define([
             Then.naTelaDeListagem
             .listaDeProdutosEhCarregada();
 
-            Then.iTeardownMyApp();
+            When.naTelaDeListagem
+            .ehPesquisadoNoSearchField (DESCRICAO_REGISTRO_TESTE)
+
+            Then.naTelaDeListagem
+            .listaDeProdutosEhCarregada();
+
+            //Then.iTeardownMyApp();
 		});
 	});
 });

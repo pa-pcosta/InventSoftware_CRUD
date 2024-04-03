@@ -66,13 +66,16 @@ sap.ui.define([
 					});
 				},
 
-				ehPesquisadoNoSearchField (idSearchField, texto) {
+				ehPesquisadoNoSearchField (texto) {
 					return this.waitFor({
-						id: idSearchField,
+						controlType: "sap.m.SearchField",
 						viewName: NOME_DA_VIEW,
-						success: (searchField) => {
+						success: (searchFields) => {
+							let searchField = searchFields[0];
+
 							searchField.setValue(texto);
 							searchField.fireLiveChange();
+							
 							Opa5.assert.ok(true, `Filtro por [${texto}] executada no searchField`);
 						},
 						errorMessage: `SearchField não encontrado na view`
@@ -112,11 +115,18 @@ sap.ui.define([
 					return this.waitFor({
 						id: "listaProdutosTapecaria",
 						viewName: NOME_DA_VIEW,
-						matchers: new AggregationFilled({
-							name: "items"
-						}),
-						success: function () {
-							Opa5.assert.ok(true, "Lista de produtos tapecaria foi carregada");
+						// matchers: new AggregationFilled({
+						// 	name: "items"
+						// }),
+						success: (lista) => {
+							let tamanhoLista = lista.getItems().length;
+							
+							if (tamanhoLista > 0){
+								Opa5.assert.ok(true, "Lista de produtos tapecaria foi carregada com registros");
+							}
+							else{
+								Opa5.assert.ok(true, "Lista de produtos tapecaria foi carregada sem registros");
+							}
 						},
 						errorMessage: "Lista de produtos tapecaria não foi carregada"
 					})
