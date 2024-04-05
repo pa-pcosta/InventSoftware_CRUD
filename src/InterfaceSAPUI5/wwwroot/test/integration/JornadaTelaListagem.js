@@ -10,11 +10,7 @@ sap.ui.define([
 
 		opaTest("Deve mostrar registros do tipo TAPETE", (Given, When, Then) => {
 
-			Given.iStartMyUIComponent({
-				componentConfig: {
-					name: "ui5.controle_de_estoque"
-				}
-			});
+			Given.iStartMyApp();
 
 			When.naTelaDeListagem
 			.comboBoxEhAberta("listagemComboBox")

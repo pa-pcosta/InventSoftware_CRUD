@@ -22,10 +22,7 @@ sap.ui.define([
 
 		opaTest("Deve exibir tela de cadastro", (Given, When, Then) => {
 
-			Given.iStartMyUIComponent({
-				componentConfig: {
-					name: "ui5.controle_de_estoque"
-				},
+			Given.iStartMyApp({
 				hash:"cadastro"
 			});
 

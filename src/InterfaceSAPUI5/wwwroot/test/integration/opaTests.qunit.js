@@ -1,13 +1,15 @@
 QUnit.config.autostart = false;
 
-sap.ui.getCore().attachInit(() => {
-	"use strict";
+sap.ui.require(
+	[
+		"sap/ui/core/Core",
+		"ui5/controle_de_estoque/test/integration/TodasJornadas"
+	], 
+	async function (Core) {
+		"use strict";
 
-	sap.ui.require([
-        "ui5/controle_de_estoque/test/integration/JornadaTelaListagem",
-		"ui5/controle_de_estoque/test/integration/JornadaCadastroProdutoTapecaria",
-		"ui5/controle_de_estoque/test/integration/JornadaDetalhesProdutoTapecaria"
-	], () => {
-        QUnit.start();
-	});
-});
+		await Core.ready();
+
+		QUnit.start();
+	}
+);

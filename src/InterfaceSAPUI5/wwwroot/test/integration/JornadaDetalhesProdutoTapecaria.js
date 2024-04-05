@@ -16,14 +16,9 @@ sap.ui.define([
         
         opaTest("Deve exibir tela de detalhes", (Given, When, Then) => {
 
-            Given.iStartMyUIComponent({
-                componentConfig: {
-                    name: "ui5.controle_de_estoque"
-                }
+            Given.iStartMyApp({
+                hash: "detalhes/35"
             });
-
-            When.naTelaDeListagem
-            .oUltimoItemDaListaEhSelecionado();
 
             Then.naTelaDeDetalhes
             .paginaDeDetalhesEhCarregada (DESCRICAO_REGISTRO_TESTE);
@@ -78,7 +73,7 @@ sap.ui.define([
             Then.naTelaDeListagem
             .listaDeProdutosEhCarregada();
 
-            //Then.iTeardownMyApp();
+            Then.iTeardownMyApp();
 		});
 	});
 });
