@@ -23,10 +23,69 @@ sap.ui.define([
 			.listaDeProdutosEhCarregada();
 		});
 
-		opaTest("Deve mostrar produtos com descrição = Persa", (Given, When, Then) => {
+		opaTest("Deve mostrar registros do tipo CORTINA", (Given, When, Then) => {
 
 			When.naTelaDeListagem
-			.ehPesquisadoNoSearchField("Persa");
+			.comboBoxEhAberta("listagemComboBox")
+			.and
+			.ehSelecionadoItemDaComboBoxAberta("listagemComboBox", 1)
+			.and
+			.comboBoxEhFechada("listagemComboBox");
+
+			Then.naTelaDeListagem
+			.listaDeProdutosEhCarregada();
+		});
+
+		opaTest("Deve mostrar registros do tipo ESTOFADO", (Given, When, Then) => {
+
+			When.naTelaDeListagem
+			.comboBoxEhAberta("listagemComboBox")
+			.and
+			.ehSelecionadoItemDaComboBoxAberta("listagemComboBox", 2)
+			.and
+			.comboBoxEhFechada("listagemComboBox");
+
+			Then.naTelaDeListagem
+			.listaDeProdutosEhCarregada();
+		});
+
+		opaTest("Deve mostrar registros do tipo OUTROS", (Given, When, Then) => {
+
+			When.naTelaDeListagem
+			.comboBoxEhAberta("listagemComboBox")
+			.and
+			.ehSelecionadoItemDaComboBoxAberta("listagemComboBox", 3)
+			.and
+			.comboBoxEhFechada("listagemComboBox");
+
+			Then.naTelaDeListagem
+			.listaDeProdutosEhCarregada();
+		});
+
+		opaTest("Deve mostrar produtos com descrição = Bebê Conforto", (Given, When, Then) => {
+
+			When.naTelaDeListagem
+			.ehPesquisadoNoSearchField("Bebê Conforto");
+
+			Then.naTelaDeListagem
+			.listaDeProdutosEhCarregada();
+		});
+
+		opaTest("Deve mostrar lista vazia ao procurar por registro inexistente", (Given, When, Then) => {
+
+			When.naTelaDeListagem
+			.ehPesquisadoNoSearchField("aleatorio");
+
+			Then.naTelaDeListagem
+			.listaDeProdutosEhCarregada();
+		});
+
+		opaTest("Deve mostrar todos os registros", (Given, When, Then) => {
+
+			When.naTelaDeListagem
+			.ehSelecionadoItemDaComboBoxAberta("listagemComboBox", "")
+			.and
+			.ehPesquisadoNoSearchField("");
 
 			Then.naTelaDeListagem
 			.listaDeProdutosEhCarregada();
