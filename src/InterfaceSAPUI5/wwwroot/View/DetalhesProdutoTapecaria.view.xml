@@ -6,6 +6,7 @@
 	xmlns="sap.m"
     id="viewDetalhesProdutoTapecaria">
 	<Page
+        id="paginaDeDetalhes"
 		title="{i18n>tituloTelaDetalhes}"
 		showNavButton="true"
 		navButtonPress=".aoClicarEmVoltar">

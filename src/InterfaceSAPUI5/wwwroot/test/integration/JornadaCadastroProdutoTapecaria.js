@@ -17,6 +17,7 @@ sap.ui.define([
 	const ID_TEXTAREA_DETALHES = "cadastroTextAreaDetalhes";
 	const ID_MESSAGEBOX_ERRO = "messageBoxErro";
 	const ID_MESSAGEBOX_SUCESSO = "messageBoxSucesso";
+	const DESCRICAO_REGISTRO_TESTE = "TESTE OPA";
 
 	QUnit.module("CADASTRO DE PRODUTO DE TAPECARIA", () => {
 

@@ -21,7 +21,7 @@ sap.ui.define([
             });
 
             Then.naTelaDeDetalhes
-            .paginaDeDetalhesEhCarregada (DESCRICAO_REGISTRO_TESTE);
+            .paginaDeDetalhesEhCarregadaComRegistroEspecifico ("35");
         });
 
         opaTest("Deve navegar para tela de listagem", (Given, When, Then) => {
@@ -36,7 +36,7 @@ sap.ui.define([
             .oUltimoItemDaListaEhSelecionado();
 
             Then.naTelaDeDetalhes
-            .paginaDeDetalhesEhCarregada (DESCRICAO_REGISTRO_TESTE);
+            .paginaDeDetalhesEhCarregada ();
 		});
 
         opaTest("Deve navegar para tela de cadastro na rota de edição", (Given, When, Then) => {

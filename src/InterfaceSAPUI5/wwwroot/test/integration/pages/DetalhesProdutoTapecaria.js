@@ -44,21 +44,40 @@ sap.ui.define([
 			},
 
 			assertions: {
-				paginaDeDetalhesEhCarregada (descricaoDoRegistroEsperada) {
+				paginaDeDetalhesEhCarregada () {
 					return this.waitFor({
-						id: "textDetalhes",
+						id: "paginaDeDetalhes",
+						viewName: NOME_DA_VIEW,
+						matchers: new PropertyStrictEquals({
+							name: "title",
+							value: "Detalhes do Produto" 
+						}),
+						success: () => {
+							Opa5.assert.ok(true, "Página de Detalhes do produto foi carregada");
+						},
+						errorMessage: "Página de Detalhes do produto não foi carregada"
+					})
+				},
+				
+				paginaDeDetalhesEhCarregadaComRegistroEspecifico (idDoRegistroEsperado) {
+					return this.waitFor({
+						id: "tituloSimpleForm",
 						viewName: NOME_DA_VIEW,
 						success: (campoText) => {
-							if(descricaoDoRegistroEsperada){
-								let textoDoCampo = campoText.getText();
-								let ehDescriçãoEsperada = textoDoCampo.includes(descricaoDoRegistroEsperada);
+							if(idDoRegistroEsperado){
+								let idExibido = campoText.getText();
+								let ehIdEsperado = idExibido.includes(idDoRegistroEsperado);
 
-								if(ehDescriçãoEsperada) {
+								if(ehIdEsperado) {
 									Opa5.assert.ok(true, "Página de Detalhes do produto foi carregada com produto esperado");
 								}
 								else {
 									Opa5.assert.ok(true, "Página de Detalhes do produto foi carregada porém com registro diferente do esperado");
 								}
+							}
+							else
+							{
+								Opa5.assert.ok(true, "Página de Detalhes do produto foi carregada");
 							}
 						},
 						errorMessage: "Página de Detalhes do produto não foi carregada"

@@ -38,7 +38,7 @@ sap.ui.define([
 			.oPrimeiroItemDaListaEhSelecionado();
 
 			Then.naTelaDeDetalhes
-			.paginaDeDetalhesEhCarregada();
+			.paginaDeDetalhesEhCarregadaComRegistroEspecifico("35");
 
 			When.naTelaDeDetalhes
 			.botaoVoltarEhPressionado();
