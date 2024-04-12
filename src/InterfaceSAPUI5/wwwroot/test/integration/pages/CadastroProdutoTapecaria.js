@@ -64,12 +64,18 @@ sap.ui.define([
 			},
 
 			assertions: {
-				paginaDeCadastroEhCarregada () {
+				paginaDeCadastroEhCarregadaComTitulo(chaveI18n) {
 					return this.waitFor({
-						id: "botaoSalvar",
+						controlType:"sap.m.Title",
 						viewName: NOME_DA_VIEW,
+						matchers: {
+							i18NText: {
+								propertyName: 'text',
+								key: chaveI18n
+							}
+						},
 						success: () => {
-							Opa5.assert.ok(true, "Página de Cadastro De Produto carregada com sucesso");
+							Opa5.assert.ok(true, `Página de Cadastro De Produto carregada com título "${chaveI18n}"`);
 						},
 						errorMessage: "Falha ao carregar página de Cadastro De Produto"
 					})

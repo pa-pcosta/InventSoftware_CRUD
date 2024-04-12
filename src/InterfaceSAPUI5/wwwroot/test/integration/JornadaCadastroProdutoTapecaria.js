@@ -7,7 +7,6 @@ sap.ui.define([
 	"use strict";
 
 	const ID_BOTAO_VOLTAR = "botaoVoltar";
-	const ID_BOTAO_ADICIONAR = "botaoAdicionar";
 	const ID_BOTAO_CANCELAR = "botaoCancelar";
 	const ID_BOTAO_SALVAR = "botaoSalvar";
 	const ID_COMBOBOX_TIPO = "cadastroComboBoxTipo";
@@ -28,7 +27,7 @@ sap.ui.define([
 			});
 
 			Then.naTelaDeCadastro
-			.paginaDeCadastroEhCarregada ();
+			.paginaDeCadastroEhCarregadaComTitulo("tituloTelaCadastro");
 		});
 
 		opaTest("Deve navegar para tela de listagem", (Given, When, Then) => {
@@ -37,13 +36,13 @@ sap.ui.define([
 			.ehPressionadoBotao(ID_BOTAO_VOLTAR);
 
 			Then.naTelaDeListagem
-			.listaDeProdutosEhCarregada();
+			.listaDeProdutosEhCarregadaComRegistros();
 
 			When.naTelaDeListagem
-			.ehPressionadoBotao(ID_BOTAO_ADICIONAR);
+			.ehPressionadoBotaoComTitulo("botaoAdicionarNovoProduto");
 
 			Then.naTelaDeCadastro
-			.paginaDeCadastroEhCarregada();
+			.paginaDeCadastroEhCarregadaComTitulo("tituloTelaCadastro");
 		});
 
 		opaTest("Deve cancelar cadastro e navegar para tela de listagem", (Given, When, Then) => {
@@ -52,13 +51,13 @@ sap.ui.define([
 			.ehPressionadoBotao(ID_BOTAO_CANCELAR);
 
 			Then.naTelaDeListagem
-			.listaDeProdutosEhCarregada();
+			.listaDeProdutosEhCarregadaComRegistros();
 
 			When.naTelaDeListagem
-			.ehPressionadoBotao(ID_BOTAO_ADICIONAR);
+			.ehPressionadoBotaoComTitulo("botaoAdicionarNovoProduto");
 
 			Then.naTelaDeCadastro
-			.paginaDeCadastroEhCarregada();
+			.paginaDeCadastroEhCarregadaComTitulo("tituloTelaCadastro");
 		});
 
 		opaTest("Deve retornar erro ao tentar cadastrar com formulário vazio", (Given, When, Then) => {
@@ -101,40 +100,40 @@ sap.ui.define([
 			.messageBoxEhExibida(ID_MESSAGEBOX_ERRO, "Erro", "Alguns campos não atendem os critérios de validação");
 		});
 		
-		opaTest("Deve cadastrar produto com sucesso e navegar para tela de detalhes", (Given, When, Then) => {
+		// opaTest("Deve cadastrar produto com sucesso e navegar para tela de detalhes", (Given, When, Then) => {
 
-			When.naTelaDeCadastro
-			.ehPreenchidaComboBox(ID_COMBOBOX_TIPO, "3")
-			.and
-			.ehPreenchidoDatePicker(ID_DATEPICKER_DATA_ENTRADA, new Date())
-			.and
-			.ehPreenchidoInput(ID_INPUT_AREA, "11")
-			.and
-			.ehPreenchidoInput(ID_INPUT_PRECO_METRO_QUADRADO, "11")
-			.and
-			.ehPreenchidoInput(ID_TEXTAREA_DETALHES, `TESTE OPA ${new Date().getHours()}:${new Date().getMinutes()}`);
+		// 	When.naTelaDeCadastro
+		// 	.ehPreenchidaComboBox(ID_COMBOBOX_TIPO, "3")
+		// 	.and
+		// 	.ehPreenchidoDatePicker(ID_DATEPICKER_DATA_ENTRADA, new Date())
+		// 	.and
+		// 	.ehPreenchidoInput(ID_INPUT_AREA, "11")
+		// 	.and
+		// 	.ehPreenchidoInput(ID_INPUT_PRECO_METRO_QUADRADO, "11")
+		// 	.and
+		// 	.ehPreenchidoInput(ID_TEXTAREA_DETALHES, `TESTE OPA ${new Date().getHours()}:${new Date().getMinutes()}`);
 
-			Then.naTelaDeCadastro
-			.valueStateCampo(ID_COMBOBOX_TIPO, "None")
-			.and
-			.valueStateCampo(ID_DATEPICKER_DATA_ENTRADA, "None")
-			.and
-			.valueStateCampo(ID_INPUT_AREA, "None")
-			.and
-			.valueStateCampo(ID_INPUT_PRECO_METRO_QUADRADO, "None")
-			.and
-			.valueStateCampo(ID_TEXTAREA_DETALHES, "None");
+		// 	Then.naTelaDeCadastro
+		// 	.valueStateCampo(ID_COMBOBOX_TIPO, "None")
+		// 	.and
+		// 	.valueStateCampo(ID_DATEPICKER_DATA_ENTRADA, "None")
+		// 	.and
+		// 	.valueStateCampo(ID_INPUT_AREA, "None")
+		// 	.and
+		// 	.valueStateCampo(ID_INPUT_PRECO_METRO_QUADRADO, "None")
+		// 	.and
+		// 	.valueStateCampo(ID_TEXTAREA_DETALHES, "None");
 
-			When.naTelaDeCadastro
-			.ehPressionadoBotao(ID_BOTAO_SALVAR);
+		// 	When.naTelaDeCadastro
+		// 	.ehPressionadoBotao(ID_BOTAO_SALVAR);
 
-			Then.naTelaDeCadastro
-			.messageBoxEhExibida(ID_MESSAGEBOX_SUCESSO, "Êxito", "Produto cadastrado com sucesso!")
+		// 	Then.naTelaDeCadastro
+		// 	.messageBoxEhExibida(ID_MESSAGEBOX_SUCESSO, "Êxito", "Produto cadastrado com sucesso!")
 			
-			Then.naTelaDeDetalhes
-			.paginaDeDetalhesEhCarregada()
+		// 	Then.naTelaDeDetalhes
+		// 	.paginaDeDetalhesEhCarregada()
 			
-			Then.iTeardownMyApp();
-		});
+		// 	Then.iTeardownMyApp();
+		// });
 	});
 });

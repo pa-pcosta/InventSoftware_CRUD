@@ -112,7 +112,7 @@ sap.ui.define([
 			.ehPressionadoBotaoComTitulo("botaoAdicionarNovoProduto");
 
 			Then.naTelaDeCadastro
-			.paginaDeCadastroEhCarregada();
+			.paginaDeCadastroEhCarregadaComTitulo("tituloTelaCadastro");
 			
 			When.naTelaDeCadastro
 			.ehPressionadoBotao("botaoVoltar");
