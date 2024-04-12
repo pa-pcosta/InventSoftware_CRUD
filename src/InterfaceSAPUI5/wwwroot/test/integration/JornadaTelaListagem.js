@@ -65,7 +65,7 @@ sap.ui.define([
 		opaTest("Deve mostrar produtos com descrição = Bebê Conforto", (Given, When, Then) => {
 
 			When.naTelaDeListagem
-			.ehPesquisadoNoSearchField("Bebê Conforto");
+			.ehPesquisadoNoSearchField("searchFieldPlaceholder", "Bebê Conforto");
 
 			Then.naTelaDeListagem
 			.listaDeProdutosEhCarregadaComRegistros();
@@ -74,7 +74,7 @@ sap.ui.define([
 		opaTest("Deve mostrar lista vazia ao procurar por registro inexistente", (Given, When, Then) => {
 
 			When.naTelaDeListagem
-			.ehPesquisadoNoSearchField("aleatorio");
+			.ehPesquisadoNoSearchField("searchFieldPlaceholder", "aleatorio");
 
 			Then.naTelaDeListagem
 			.listaDeProdutosEhCarregadaSemRegistros();
@@ -85,7 +85,7 @@ sap.ui.define([
 			When.naTelaDeListagem
 			.ehSelecionadoItemDaComboBoxComPlaceHolderEspecificoAberta("placeHolderComboBoxFiltroTelaListagem", "")
 			.and
-			.ehPesquisadoNoSearchField("");
+			.ehPesquisadoNoSearchField("searchFieldPlaceholder", "");
 
 			Then.naTelaDeListagem
 			.listaDeProdutosEhCarregadaComRegistros();

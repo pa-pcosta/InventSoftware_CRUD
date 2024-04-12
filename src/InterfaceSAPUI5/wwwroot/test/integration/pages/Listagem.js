@@ -92,17 +92,22 @@ sap.ui.define([
 					});
 				},
 
-				ehPesquisadoNoSearchField (texto) {
+				ehPesquisadoNoSearchField (chaveI18n, texto) {
 					return this.waitFor({
 						controlType: "sap.m.SearchField",
 						viewName: NOME_DA_VIEW,
-						success: (searchFields) => {
-							let searchField = searchFields[0];
-
+						matchers: {
+							i18NText: {
+								propertyName: 'placeholder',
+								key: chaveI18n
+							}
+						},
+						actions: (searchField) => {
 							searchField.setValue(texto);
 							searchField.fireLiveChange();
-							
-							Opa5.assert.ok(true, `Filtro por [${texto}] executada no searchField`);
+						},
+						success: () => {
+							Opa5.assert.ok(true, `Pesquisa por "${texto}" executada no searchField`);
 						},
 						errorMessage: `SearchField não encontrado na view`
 					})
