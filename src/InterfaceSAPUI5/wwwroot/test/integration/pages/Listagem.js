@@ -33,43 +33,60 @@ sap.ui.define([
 					});
 				},
 
-				comboBoxEhAberta(idComboBox) {
+				comboBoxComPlaceHolderEspecificoEhAberta(chaveI18n) {
 					return this.waitFor({
-						id: idComboBox,
+						controlType:"sap.m.ComboBox",
 						viewName: NOME_DA_VIEW,
-						success: function (comboBox) {
-							comboBox.open();
+						matchers: {
+							i18NText: {
+								propertyName: 'placeholder',
+								key: chaveI18n
+							}
+						},
+						actions: new Press (),
+						success: function () {
 							Opa5.assert.ok(NOME_DA_VIEW, `A combobox foi aberta com sucesso`);
 						},
 						errorMessage: `ComboBox não encontrada na view`
 					})
 				},
 
-				ehSelecionadoItemDaComboBoxAberta (idComboBox, indice) {
+				ehSelecionadoItemDaComboBoxComPlaceHolderEspecificoAberta (chaveI18n, indice) {
 					return this.waitFor({
-						id: idComboBox,
+						controlType:"sap.m.ComboBox",
 						viewName: NOME_DA_VIEW,
-						actions: (comboBox) => {
-							try {
-								comboBox.setSelectedKey(indice);
-								comboBox.fireChange();
-
-								Opa5.assert.ok(true, `Indice ${indice} foi selecionado na comboBox ${idComboBox}`);
-							} catch (error) {
-								Opa5.assert.ok(false, error.message);
+						matchers: {
+							i18NText: {
+								propertyName: 'placeholder',
+								key: chaveI18n
 							}
+						},
+						actions: (comboBox) => {
+							comboBox.setSelectedKey(indice);
+							comboBox.fireChange();
+						},
+						success: () => {
+							Opa5.assert.ok(NOME_DA_VIEW, `Indice ${indice} foi selecionado na comboBox`);
 						},
 						errorMessage: `ComboBox não encontrada na view`
 					})
 				},
 
-				comboBoxEhFechada (idComboBox) {
+				comboBoxComPlaceHolderEspecificoEhFechada (chaveI18n) {
 					return this.waitFor({
-						id: idComboBox,
+						controlType:"sap.m.ComboBox",
 						viewName: NOME_DA_VIEW,
-						success: function (comboBox) {
+						matchers: {
+							i18NText: {
+								propertyName: 'placeholder',
+								key: chaveI18n
+							}
+						},
+						actions: (comboBox) => {
 							comboBox.close();
-							Opa5.assert.ok(NOME_DA_VIEW, `A combobox ${idComboBox} foi fechada com sucesso.`);
+						},
+						success: function () {
+							Opa5.assert.ok(NOME_DA_VIEW, `A combobox foi fechada com sucesso.`);
 						},
 						errorMessage: `ComboBox não encontrada na view`
 					});
@@ -127,7 +144,7 @@ sap.ui.define([
 						matchers: new AggregationFilled({
 							name: "items"
 						}),
-						success: () => {
+						success: (lista) => {
 							Opa5.assert.ok(true, `Lista de produtos tapecaria foi carregada com registros`);
 						},
 						errorMessage: "Lista de produtos tapecaria não foi carregada"

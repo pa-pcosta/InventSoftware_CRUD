@@ -17,7 +17,7 @@
 				<ComboBox id="listagemComboBox"
 					width="9rem"
 					items="{enumTipoTapecaria>/}"
-					placeholder="{i18n>comboBoxPlaceholder}"
+					placeholder="{i18n>placeHolderComboBoxFiltroTelaListagem}"
 					selectedKey = "{filtro>/tipo}"
 					change=".aoClicarEmFiltrar">
 					<core:Item key="{enumTipoTapecaria>chave}" text="{enumTipoTapecaria>descricao}" />

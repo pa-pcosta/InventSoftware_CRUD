@@ -13,11 +13,11 @@ sap.ui.define([
 			Given.iStartMyApp();
 
 			When.naTelaDeListagem
-			.comboBoxEhAberta("listagemComboBox")
+			.comboBoxComPlaceHolderEspecificoEhAberta("placeHolderComboBoxFiltroTelaListagem")
 			.and
-			.ehSelecionadoItemDaComboBoxAberta("listagemComboBox", 0)
+			.ehSelecionadoItemDaComboBoxComPlaceHolderEspecificoAberta("placeHolderComboBoxFiltroTelaListagem", 0)
 			.and
-			.comboBoxEhFechada("listagemComboBox");
+			.comboBoxComPlaceHolderEspecificoEhFechada("placeHolderComboBoxFiltroTelaListagem");
 
 			Then.naTelaDeListagem
 			.listaDeProdutosEhCarregadaComRegistros();
@@ -26,11 +26,11 @@ sap.ui.define([
 		opaTest("Deve mostrar registros do tipo CORTINA", (Given, When, Then) => {
 
 			When.naTelaDeListagem
-			.comboBoxEhAberta("listagemComboBox")
+			.comboBoxComPlaceHolderEspecificoEhAberta("placeHolderComboBoxFiltroTelaListagem")
 			.and
-			.ehSelecionadoItemDaComboBoxAberta("listagemComboBox", 1)
+			.ehSelecionadoItemDaComboBoxComPlaceHolderEspecificoAberta("placeHolderComboBoxFiltroTelaListagem", 1)
 			.and
-			.comboBoxEhFechada("listagemComboBox");
+			.comboBoxComPlaceHolderEspecificoEhFechada("placeHolderComboBoxFiltroTelaListagem");
 
 			Then.naTelaDeListagem
 			.listaDeProdutosEhCarregadaComRegistros();
@@ -39,11 +39,11 @@ sap.ui.define([
 		opaTest("Deve mostrar registros do tipo ESTOFADO", (Given, When, Then) => {
 
 			When.naTelaDeListagem
-			.comboBoxEhAberta("listagemComboBox")
+			.comboBoxComPlaceHolderEspecificoEhAberta("placeHolderComboBoxFiltroTelaListagem")
 			.and
-			.ehSelecionadoItemDaComboBoxAberta("listagemComboBox", 2)
+			.ehSelecionadoItemDaComboBoxComPlaceHolderEspecificoAberta("placeHolderComboBoxFiltroTelaListagem", 2)
 			.and
-			.comboBoxEhFechada("listagemComboBox");
+			.comboBoxComPlaceHolderEspecificoEhFechada("placeHolderComboBoxFiltroTelaListagem");
 
 			Then.naTelaDeListagem
 			.listaDeProdutosEhCarregadaComRegistros();
@@ -52,11 +52,11 @@ sap.ui.define([
 		opaTest("Deve mostrar registros do tipo OUTROS", (Given, When, Then) => {
 
 			When.naTelaDeListagem
-			.comboBoxEhAberta("listagemComboBox")
+			.comboBoxComPlaceHolderEspecificoEhAberta("placeHolderComboBoxFiltroTelaListagem")
 			.and
-			.ehSelecionadoItemDaComboBoxAberta("listagemComboBox", 3)
+			.ehSelecionadoItemDaComboBoxComPlaceHolderEspecificoAberta("placeHolderComboBoxFiltroTelaListagem", 3)
 			.and
-			.comboBoxEhFechada("listagemComboBox");
+			.comboBoxComPlaceHolderEspecificoEhFechada("placeHolderComboBoxFiltroTelaListagem");
 
 			Then.naTelaDeListagem
 			.listaDeProdutosEhCarregadaComRegistros();
@@ -83,7 +83,7 @@ sap.ui.define([
 		opaTest("Deve mostrar todos os registros", (Given, When, Then) => {
 
 			When.naTelaDeListagem
-			.ehSelecionadoItemDaComboBoxAberta("listagemComboBox", "")
+			.ehSelecionadoItemDaComboBoxComPlaceHolderEspecificoAberta("placeHolderComboBoxFiltroTelaListagem", "")
 			.and
 			.ehPesquisadoNoSearchField("");
 
