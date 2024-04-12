@@ -115,11 +115,13 @@ sap.ui.define([
 
 				oPrimeiroItemDaListaEhSelecionado(){
 					return this.waitFor({
-						id: "listaProdutosTapecaria",
+						controlType:"sap.m.List",
 						viewName: NOME_DA_VIEW,
-						success: (lista) => {
+						actions: (lista) => {
 							let produtoTapecaria = lista.getItems()[0];
 							produtoTapecaria.firePress();
+						},
+						success: () => {
 							Opa5.assert.ok(true, "Primeiro registro da lista pressionado com sucesso");
 						},
 						errorMessage: "A lista de produtos não foi encontrada na view"
@@ -128,12 +130,14 @@ sap.ui.define([
 
 				oUltimoItemDaListaEhSelecionado() {
 					return this.waitFor({
-						id: "listaProdutosTapecaria",
+						controlType:"sap.m.List",
 						viewName: NOME_DA_VIEW,
-						success: (lista) => {
+						actions: (lista) => {
 							let itens = lista.getItems();
 							let ultimoItem = itens[itens.length - 1];
 							ultimoItem.firePress();
+						},
+						success: () => {
 							Opa5.assert.ok(true, "Último registro da lista pressionado com sucesso");
 						},
 						errorMessage: "A lista de produtos não foi encontrada na view"
