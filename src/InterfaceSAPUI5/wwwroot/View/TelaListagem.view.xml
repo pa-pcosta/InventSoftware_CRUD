@@ -31,7 +31,7 @@
 				/>
 				<ToolbarSpacer/>
 				<Button id="botaoAdicionar"
-					text="{i18n>addNewProductButtonText}"
+					text="{i18n>botaoAdicionarNovoProduto}"
 					type="Emphasized"
 					icon="sap-icon://add"
 					press="aoClicarEmAdicionar"

@@ -1,10 +1,12 @@
 sap.ui.define([
 	"sap/ui/test/Opa5",
 	"sap/ui/test/actions/Press",
-	'sap/ui/test/matchers/AggregationFilled'
+	"sap/ui/test/matchers/AggregationFilled",
+	"sap/ui/test/matchers/AggregationEmpty"
 ], (Opa5, 
 	Press,
-	AggregationFilled) => {
+	AggregationFilled,
+	AggregationEmpty) => {
 	"use strict";
 
 	const NOME_DA_VIEW = "ui5.controle_de_estoque.view.TelaListagem";
@@ -12,15 +14,22 @@ sap.ui.define([
 	Opa5.createPageObjects({
 		naTelaDeListagem: {
 			actions: {
-				ehPressionadoBotao (idBotao) {
+				ehPressionadoBotaoComTitulo (chaveI18n) {
 					return this.waitFor({
-						id: idBotao,
+						controlType: "sap.m.Button",
+						viewName: NOME_DA_VIEW,
+						matchers: {
+							i18NText: {
+								propertyName: 'text',
+								key: chaveI18n
+							}
+						},
 						viewName: NOME_DA_VIEW,
 						actions: new Press(),
-						success: (idBotao) => {
-						Opa5.assert.ok(true, `Botao com id '${idBotao}' pressionado com sucesso`)
+						success: () => {
+						Opa5.assert.ok(true, `Botao com titulo '${chaveI18n}' pressionado com sucesso`)
 						},
-						errorMessage: `Falha ao tentar pressionar botão com id '${idBotao}'`
+						errorMessage: `Falha ao tentar pressionar botão com id '${chaveI18n}'`
 					});
 				},
 
@@ -111,22 +120,29 @@ sap.ui.define([
 			},
 
 			assertions: {
-				listaDeProdutosEhCarregada () {
+				listaDeProdutosEhCarregadaComRegistros() {
 					return this.waitFor({
-						id: "listaProdutosTapecaria",
+						controlType:"sap.m.List",
 						viewName: NOME_DA_VIEW,
-						// matchers: new AggregationFilled({
-						// 	name: "items"
-						// }),
-						success: (lista) => {
-							let tamanhoLista = lista.getItems().length;
-							
-							if (tamanhoLista > 0){
-								Opa5.assert.ok(true, "Lista de produtos tapecaria foi carregada com registros");
-							}
-							else{
-								Opa5.assert.ok(true, "Lista de produtos tapecaria foi carregada sem registros");
-							}
+						matchers: new AggregationFilled({
+							name: "items"
+						}),
+						success: () => {
+							Opa5.assert.ok(true, `Lista de produtos tapecaria foi carregada com registros`);
+						},
+						errorMessage: "Lista de produtos tapecaria não foi carregada"
+					})
+				},
+
+				listaDeProdutosEhCarregadaSemRegistros(){
+					return this.waitFor({
+						controlType:"sap.m.List",
+						viewName: NOME_DA_VIEW,
+						matchers: new AggregationEmpty({
+							name: "items"
+						}),
+						success: () => {
+							Opa5.assert.ok(true, `Lista de produtos tapecaria foi carregada sem registros`);
 						},
 						errorMessage: "Lista de produtos tapecaria não foi carregada"
 					})

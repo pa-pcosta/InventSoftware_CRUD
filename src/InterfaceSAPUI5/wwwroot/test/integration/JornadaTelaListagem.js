@@ -20,7 +20,7 @@ sap.ui.define([
 			.comboBoxEhFechada("listagemComboBox");
 
 			Then.naTelaDeListagem
-			.listaDeProdutosEhCarregada();
+			.listaDeProdutosEhCarregadaComRegistros();
 		});
 
 		opaTest("Deve mostrar registros do tipo CORTINA", (Given, When, Then) => {
@@ -33,7 +33,7 @@ sap.ui.define([
 			.comboBoxEhFechada("listagemComboBox");
 
 			Then.naTelaDeListagem
-			.listaDeProdutosEhCarregada();
+			.listaDeProdutosEhCarregadaComRegistros();
 		});
 
 		opaTest("Deve mostrar registros do tipo ESTOFADO", (Given, When, Then) => {
@@ -46,7 +46,7 @@ sap.ui.define([
 			.comboBoxEhFechada("listagemComboBox");
 
 			Then.naTelaDeListagem
-			.listaDeProdutosEhCarregada();
+			.listaDeProdutosEhCarregadaComRegistros();
 		});
 
 		opaTest("Deve mostrar registros do tipo OUTROS", (Given, When, Then) => {
@@ -59,7 +59,7 @@ sap.ui.define([
 			.comboBoxEhFechada("listagemComboBox");
 
 			Then.naTelaDeListagem
-			.listaDeProdutosEhCarregada();
+			.listaDeProdutosEhCarregadaComRegistros();
 		});
 
 		opaTest("Deve mostrar produtos com descrição = Bebê Conforto", (Given, When, Then) => {
@@ -68,7 +68,7 @@ sap.ui.define([
 			.ehPesquisadoNoSearchField("Bebê Conforto");
 
 			Then.naTelaDeListagem
-			.listaDeProdutosEhCarregada();
+			.listaDeProdutosEhCarregadaComRegistros();
 		});
 
 		opaTest("Deve mostrar lista vazia ao procurar por registro inexistente", (Given, When, Then) => {
@@ -77,7 +77,7 @@ sap.ui.define([
 			.ehPesquisadoNoSearchField("aleatorio");
 
 			Then.naTelaDeListagem
-			.listaDeProdutosEhCarregada();
+			.listaDeProdutosEhCarregadaSemRegistros();
 		});
 
 		opaTest("Deve mostrar todos os registros", (Given, When, Then) => {
@@ -88,7 +88,7 @@ sap.ui.define([
 			.ehPesquisadoNoSearchField("");
 
 			Then.naTelaDeListagem
-			.listaDeProdutosEhCarregada();
+			.listaDeProdutosEhCarregadaComRegistros();
 		});
 
 		opaTest("Deve navegar para tela de detalhes", (Given, When, Then) => {
@@ -103,13 +103,13 @@ sap.ui.define([
 			.botaoVoltarEhPressionado();
 
 			Then.naTelaDeListagem
-			.listaDeProdutosEhCarregada();
+			.listaDeProdutosEhCarregadaComRegistros();
 		});
 
 		opaTest("Deve navegar para tela de cadastro", (Given, When, Then) => {
 
 			When.naTelaDeListagem
-			.ehPressionadoBotao("botaoAdicionar");
+			.ehPressionadoBotaoComTitulo("botaoAdicionarNovoProduto");
 
 			Then.naTelaDeCadastro
 			.paginaDeCadastroEhCarregada();
@@ -118,7 +118,7 @@ sap.ui.define([
 			.ehPressionadoBotao("botaoVoltar");
 
 			Then.naTelaDeListagem
-			.listaDeProdutosEhCarregada();
+			.listaDeProdutosEhCarregadaComRegistros();
 
 			Then.iTeardownMyApp();
 		});
