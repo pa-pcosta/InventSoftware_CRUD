@@ -103,8 +103,9 @@ sap.ui.define([
 					})
 				},
 
-				messageBoxEhExibida (idMessageBox, titulo, texto) {
+				messageBoxEhExibida (idMessageBox, texto) {
 					return this.waitFor({
+						// searchOpenDialogs: true,
 						id: idMessageBox,
 						matchers: 
 							new AggregationContainsPropertyEqual({
@@ -113,10 +114,12 @@ sap.ui.define([
                             	propertyValue: texto
 							})
 						,
-						success: (messageBox) => {
+						actions : (messageBox) => {
 							let botao = messageBox.getButtons();
 							botao[0].firePress();
-							Opa5.assert.ok(true, `MessageBox ${titulo} exibida com texto "${texto}"`);
+						},
+						success: () => {
+							Opa5.assert.ok(true, `MessageBox exibida com texto "${texto}"`);
 						},
 						errorMessage: "A caixa de mensagem não foi encontrada na visualização"
 					});

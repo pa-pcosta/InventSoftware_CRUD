@@ -66,7 +66,7 @@ sap.ui.define([
 			.ehPressionadoBotaoComTitulo("botaoSalvar");
 
 			Then.naTelaDeCadastro
-			.messageBoxEhExibida(ID_MESSAGEBOX_ERRO, "Erro", "Alguns campos não atendem os critérios de validação");
+			.messageBoxEhExibida(ID_MESSAGEBOX_ERRO, "Alguns campos não atendem os critérios de validação");
 		});
 
 		opaTest("Deve retornar erro ao tentar cadastrar com dados inválidos", (Given, When, Then) => {
@@ -94,10 +94,10 @@ sap.ui.define([
 			.valueStateCampo(ID_TEXTAREA_DETALHES, "Error");
 
 			When.naTelaDeCadastro
-			.ehPressionadoBotaoComTitulo("sap-icon://save");
+			.ehPressionadoBotaoComTitulo("botaoSalvar");
 
 			Then.naTelaDeCadastro
-			.messageBoxEhExibida(ID_MESSAGEBOX_ERRO, "Erro", "Alguns campos não atendem os critérios de validação");
+			.messageBoxEhExibida(ID_MESSAGEBOX_ERRO, "Alguns campos não atendem os critérios de validação");
 		});
 		
 		// opaTest("Deve cadastrar produto com sucesso e navegar para tela de detalhes", (Given, When, Then) => {
@@ -128,7 +128,7 @@ sap.ui.define([
 		// 	.ehPressionadoBotaoComTitulo("botaoSalvar");
 
 		// 	Then.naTelaDeCadastro
-		// 	.messageBoxEhExibida(ID_MESSAGEBOX_SUCESSO, "Êxito", "Produto cadastrado com sucesso!")
+		// 	.messageBoxEhExibida(ID_MESSAGEBOX_SUCESSO, "Produto cadastrado com sucesso!")
 			
 		// 	Then.naTelaDeDetalhes
 		// 	.paginaDeDetalhesEhCarregada()
