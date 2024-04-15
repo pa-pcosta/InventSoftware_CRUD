@@ -33,7 +33,7 @@ sap.ui.define([
 		opaTest("Deve navegar para tela de listagem", (Given, When, Then) => {
 
 			When.naTelaDeCadastro
-			.ehPressionadoBotao(ID_BOTAO_VOLTAR);
+			.ehPressionadoBotaoComIcone("sap-icon://nav-back");
 
 			Then.naTelaDeListagem
 			.listaDeProdutosEhCarregadaComRegistros();
@@ -48,7 +48,7 @@ sap.ui.define([
 		opaTest("Deve cancelar cadastro e navegar para tela de listagem", (Given, When, Then) => {
 
 			When.naTelaDeCadastro
-			.ehPressionadoBotao(ID_BOTAO_CANCELAR);
+			.ehPressionadoBotaoComTitulo("botaoCancelar");
 
 			Then.naTelaDeListagem
 			.listaDeProdutosEhCarregadaComRegistros();
@@ -63,7 +63,7 @@ sap.ui.define([
 		opaTest("Deve retornar erro ao tentar cadastrar com formulário vazio", (Given, When, Then) => {
 
 			When.naTelaDeCadastro
-			.ehPressionadoBotao(ID_BOTAO_SALVAR);
+			.ehPressionadoBotaoComTitulo("botaoSalvar");
 
 			Then.naTelaDeCadastro
 			.messageBoxEhExibida(ID_MESSAGEBOX_ERRO, "Erro", "Alguns campos não atendem os critérios de validação");
@@ -94,7 +94,7 @@ sap.ui.define([
 			.valueStateCampo(ID_TEXTAREA_DETALHES, "Error");
 
 			When.naTelaDeCadastro
-			.ehPressionadoBotao(ID_BOTAO_SALVAR);
+			.ehPressionadoBotaoComTitulo("sap-icon://save");
 
 			Then.naTelaDeCadastro
 			.messageBoxEhExibida(ID_MESSAGEBOX_ERRO, "Erro", "Alguns campos não atendem os critérios de validação");
@@ -125,7 +125,7 @@ sap.ui.define([
 		// 	.valueStateCampo(ID_TEXTAREA_DETALHES, "None");
 
 		// 	When.naTelaDeCadastro
-		// 	.ehPressionadoBotao(ID_BOTAO_SALVAR);
+		// 	.ehPressionadoBotaoComTitulo("botaoSalvar");
 
 		// 	Then.naTelaDeCadastro
 		// 	.messageBoxEhExibida(ID_MESSAGEBOX_SUCESSO, "Êxito", "Produto cadastrado com sucesso!")

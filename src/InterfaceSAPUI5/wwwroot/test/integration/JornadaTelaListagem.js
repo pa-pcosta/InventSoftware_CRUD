@@ -115,7 +115,7 @@ sap.ui.define([
 			.paginaDeCadastroEhCarregadaComTitulo("tituloTelaCadastro");
 			
 			When.naTelaDeCadastro
-			.ehPressionadoBotao("botaoVoltar");
+			.ehPressionadoBotaoComIcone("sap-icon://nav-back");
 
 			Then.naTelaDeListagem
 			.listaDeProdutosEhCarregadaComRegistros();

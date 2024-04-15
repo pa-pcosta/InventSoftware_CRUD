@@ -11,15 +11,37 @@ sap.ui.define([
 	Opa5.createPageObjects({
 		naTelaDeCadastro: {
 			actions: {
-                ehPressionadoBotao (idBotao) {
+				ehPressionadoBotaoComTitulo (chaveI18n) {
 					return this.waitFor({
-						id: idBotao,
+						controlType: "sap.m.Button",
+						viewName: NOME_DA_VIEW,
+						matchers: {
+							i18NText: {
+								propertyName: 'text',
+								key: chaveI18n
+							}
+						},
 						viewName: NOME_DA_VIEW,
 						actions: new Press(),
-						success: (idBotao) => {
-							Opa5.assert.ok(true, `Botao com id '${idBotao}' pressionado com sucesso`)
+						success: () => {
+						Opa5.assert.ok(true, `Botao com titulo '${chaveI18n}' pressionado com sucesso`)
 						},
-						errorMessage: `Botão com id '${idBotao} não foi encontrado na view'`
+						errorMessage: `Falha ao tentar pressionar botão com id '${chaveI18n}'`
+					});
+				},
+
+                ehPressionadoBotaoComIcone (iconeBotao) {
+					return this.waitFor({
+						controlType: "sap.m.Button",
+						matchers: new PropertyStrictEquals({
+							name: "icon",
+							value: iconeBotao
+						}),
+						actions: new Press(),
+						success: () => {
+							Opa5.assert.ok(true, `Botao com icone "${iconeBotao}" pressionado com sucesso`)
+						},
+						errorMessage: `Botão com id "${iconeBotao}" não foi encontrado na view`
 					});
 				},
 
