@@ -49,9 +49,11 @@ sap.ui.define([
 					return this.waitFor({
 						id: idCombo,
 						viewName: NOME_DA_VIEW,
-						success: (comboBox) => {
+						actions: (comboBox) => {
 							comboBox.setSelectedKey(valor);
 							comboBox.fireChange();
+						},
+						success: () => {
 							Opa5.assert.ok(true, `ComboBox com id '${idCombo}' preenchida com valor ${valor}`)
 						},
 						errorMessage: `ComboBox com id '${idCombo} não foi encontrada na view'`
@@ -62,9 +64,11 @@ sap.ui.define([
 					return this.waitFor({
 						id: idDatePicker,
 						viewName: NOME_DA_VIEW,
-						success: (datePicker) => {
+						actions: (datePicker) => {
 							datePicker.setDateValue(data);
 							datePicker.fireChange();
+						},
+						success: () => {
 							Opa5.assert.ok(true, `DatePicker com id '${idDatePicker}' preenchido com valor ${data}`)
 						},
 						errorMessage: `DatePicker com id '${idDatePicker}' não foi encontrado na view`
@@ -75,9 +79,11 @@ sap.ui.define([
 					return this.waitFor({
 						id: idInput,
 						viewName: NOME_DA_VIEW,
-						success: (campoInput) => {
+						actions: (campoInput) => {
 							campoInput.setValue(valor);
 							campoInput.fireChange();
+						},
+						success: () => {
 							Opa5.assert.ok(true, `Input com id '${idInput}' preenchido com valor ${valor}`)
 						},
 						errorMessage: `Input com id '${idInput}' não foi encontrado na view`
