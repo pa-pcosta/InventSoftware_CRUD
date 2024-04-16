@@ -34,15 +34,22 @@ sap.ui.define([
 					});
 				},
 
-				ehPressionadoBotao (idBotao) {
+				ehPressionadoBotaoComTitulo (chaveI18n) {
 					return this.waitFor({
-						id: idBotao,
+						controlType: "sap.m.Button",
+						viewName: NOME_DA_VIEW,
+						matchers: {
+							i18NText: {
+								propertyName: 'text',
+								key: chaveI18n
+							}
+						},
 						viewName: NOME_DA_VIEW,
 						actions: new Press(),
-						success: (idBotao) => {
-							Opa5.assert.ok(true, `Botao com id '${idBotao}' pressionado com sucesso`)
+						success: () => {
+						Opa5.assert.ok(true, `Botao com titulo '${chaveI18n}' pressionado com sucesso`)
 						},
-						errorMessage: `Botão com id '${idBotao} não foi encontrado na view'`
+						errorMessage: `Falha ao tentar pressionar botão com id '${chaveI18n}'`
 					});
 				}
 			},
@@ -78,7 +85,7 @@ sap.ui.define([
 					})
 				},
 
-				messageBoxEhExibida (idMessageBox, titulo, texto) {
+				messageBoxEhExibida (idMessageBox, texto) {
 					return this.waitFor({
 						id: idMessageBox,
 						matchers: 
@@ -91,7 +98,7 @@ sap.ui.define([
 						success: (messageBox) => {
 							let botao = messageBox.getButtons();
 							botao[0].firePress();
-							Opa5.assert.ok(true, `MessageBox ${titulo} exibida com texto "${texto}"`);
+							Opa5.assert.ok(true, `MessageBox exibida com texto "${texto}"`);
 						},
 						errorMessage: "A caixa de mensagem não foi encontrada na visualização"
 					});

@@ -42,38 +42,38 @@ sap.ui.define([
         opaTest("Deve navegar para tela de cadastro na rota de edição", (Given, When, Then) => {
 
 			When.naTelaDeDetalhes
-			.ehPressionadoBotao(ID_BOTAO_EDITAR);
+			.ehPressionadoBotaoComTitulo("botaoEditar")
 
 			Then.naTelaDeCadastro
-			.paginaDeCadastroEhCarregada();
+			.paginaDeCadastroEhCarregadaComTitulo("tituloTelaCadastro")
 
             When.naTelaDeCadastro
-            .ehPressionadoBotao("botaoVoltar")
+            .ehPressionadoBotaoComIcone("sap-icon://nav-back")
 
             Then.naTelaDeDetalhes
             .paginaDeDetalhesEhCarregadaComRegistroCriado (DESCRICAO_REGISTRO_TESTE);
 		});
 
-        // opaTest("Deve remover registro e navegar para tela de listagem", (Given, When, Then) => {
+        opaTest("Deve remover registro e navegar para tela de listagem", (Given, When, Then) => {
 
-		// 	When.naTelaDeDetalhes
-		// 	.ehPressionadoBotao(ID_BOTAO_REMOVER);
+			When.naTelaDeDetalhes
+			.ehPressionadoBotaoComTitulo("botaoDeletar");
 
-		// 	Then.naTelaDeDetalhes
-		// 	.messageBoxEhExibida(ID_MESSAGEBOX_CONFIRMACAO, "Confirmação", "Após excluir o registro não será possível recuperar os dados. Deseja continuar?")
-        //     .and
-        //     .messageBoxEhExibida(ID_MESSAGEBOX_SUCESSO, "Êxito", "Produto removido com sucesso.");
+			Then.naTelaDeDetalhes
+			.messageBoxEhExibida(ID_MESSAGEBOX_CONFIRMACAO, "Após excluir o registro não será possível recuperar os dados. Deseja continuar?")
+            .and
+            .messageBoxEhExibida(ID_MESSAGEBOX_SUCESSO, "Produto removido com sucesso.");
 
-        //     Then.naTelaDeListagem
-        //     .listaDeProdutosEhCarregada();
+            Then.naTelaDeListagem
+            .listaDeProdutosEhCarregadaComRegistros();
 
-        //     When.naTelaDeListagem
-        //     .ehPesquisadoNoSearchField (DESCRICAO_REGISTRO_TESTE)
+            When.naTelaDeListagem
+            .ehPesquisadoNoSearchField ("searchFieldPlaceholder", DESCRICAO_REGISTRO_TESTE)
 
-        //     Then.naTelaDeListagem
-        //     .listaDeProdutosEhCarregada();
+            Then.naTelaDeListagem
+            .listaDeProdutosEhCarregadaSemRegistros();
 
-        //     Then.iTeardownMyApp();
-		// });
+            Then.iTeardownMyApp();
+		});
 	});
 });
