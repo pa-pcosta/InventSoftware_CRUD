@@ -1,11 +1,12 @@
 {
-  "name": "ui5.walkthrough",
+  "name": "ui5.controle_de_estoque",
   "version": "1.0.0",
   "private": true,
   "author": "SAP SE",
   "description": "UI5 Demo App - Walkthrough Tutorial",
   "scripts": {
-    "start": "ui5 serve -o test/mockServer.html"
+    "start": "ui5 serve -o index.html",
+    "testeDeIntegracaoOpa": "ui5 serve -o ./wwwroot/test/integration/opaTests.qunit.html"
   },
   "devDependencies": {
     "@ui5/cli": "^3",

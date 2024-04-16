@@ -7,7 +7,7 @@ sap.ui.define([
 ], (BaseController, formatter, Validador, MessageBox, Repositorio) => {
 	"use strict";
 
-	return BaseController.extend("ui5.Controle_De_Estoque.controller.CadastroProdutoTapecaria", {
+	return BaseController.extend("ui5.controle_de_estoque.controller.CadastroProdutoTapecaria", {
 		
 		formatter: formatter,
 		validador: Validador,
@@ -69,7 +69,7 @@ sap.ui.define([
 				let datePicker = this.getView().byId("cadastroDatePickerDataEntrada");
 				let inputArea = this.getView().byId("cadastroInputArea");
 				let inputPreco = this.getView().byId("cadastroInputPrecoMetroQuadrado");
-				let inputDetalhes = this.getView().byId("cadastroInputDetalhes");
+				let inputDetalhes = this.getView().byId("cadastroTextAreaDetalhes");
 
 				Validador.validarTodos(comboBox, datePicker, inputArea, inputPreco, inputDetalhes);
 

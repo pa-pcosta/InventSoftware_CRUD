@@ -105,7 +105,7 @@ sap.ui.define([], () => {
 
         validarDetalhes(inputDetalhes) {
             let tamanhoInputDetalhes = inputDetalhes.getValue().length;
-            let maximoDeCaracteres = 50;
+            let maximoDeCaracteres = 40;
 
             if (tamanhoInputDetalhes > maximoDeCaracteres)
             {

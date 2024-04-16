@@ -1,27 +1,32 @@
 <mvc:View
-    controllerName="ui5.Controle_De_Estoque.controller.DetalhesProdutoTapecaria"
+    controllerName="ui5.controle_de_estoque.controller.DetalhesProdutoTapecaria"
 	xmlns:f="sap.ui.layout.form"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"
-	xmlns="sap.m">
+	xmlns="sap.m"
+    id="viewDetalhesProdutoTapecaria">
 	<Page
+        id="paginaDeDetalhes"
 		title="{i18n>tituloTelaDetalhes}"
 		showNavButton="true"
 		navButtonPress=".aoClicarEmVoltar">
 
         <headerContent>
-            <Button type="Reject"
+            <Button 
+                id="botaoRemover"
+                type="Reject"
                 text="{i18n>botaoDeletar}"
                 icon="sap-icon://delete"
                 press="aoClicarEmRemover"/>
-            <Button type="Default"
+            <Button 
+                id="botaoEditar"
+                type="Default"
                 text="{i18n>botaoEditar}"
                 icon="sap-icon://edit"
                 press="aoClicarEmEditar"/>
         </headerContent>
 
         <Panel backgroundDesign="Solid">
-
                 <VBox class="sapUiSmallMargin">
                     <f:SimpleForm
                         minWidth="1024"
@@ -31,7 +36,7 @@
                         columnsL="1" columnsM="1">
                         <f:toolbar>
                             <Toolbar>
-                                <Title id="Title1" text="ID {produtoTapecaria>/id}" titleStyle="H3"/>
+                                <Title id="tituloSimpleForm" text="ID {produtoTapecaria>/id}" titleStyle="H3"/>
                             </Toolbar>
                         </f:toolbar>
                         <f:content>
@@ -67,7 +72,9 @@
                             }"/>
 
                             <Label text="{i18n>labelDetalhes}" design="Bold"/>
-                            <Text text="{produtoTapecaria>/detalhes}"/>
+                            <Text 
+                                id="textDetalhes"
+                                text="{produtoTapecaria>/detalhes}"/>
                             
                         </f:content>
                     </f:SimpleForm>

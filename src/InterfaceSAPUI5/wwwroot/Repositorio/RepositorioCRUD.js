@@ -1,6 +1,6 @@
 sap.ui.define([], () => {
 	"use strict";
-    const urlApiTapecaria = "api/Tapecaria";
+    const urlApiTapecaria = "https://localhost:7202/api/Tapecaria";
 	
     return {
         

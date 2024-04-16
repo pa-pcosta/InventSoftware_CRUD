@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="ui5.Controle_De_Estoque.controller.CadastroProdutoTapecaria"
+    controllerName="ui5.controle_de_estoque.controller.CadastroProdutoTapecaria"
 	xmlns="sap.m"
 	xmlns:f="sap.ui.layout.form"
 	xmlns:mvc="sap.ui.core.mvc"
@@ -8,7 +8,9 @@
 
         <headerContent alignItems="Center" justifyContent="Center">
 			<Toolbar width="100%">
-                <Button class="sapUiSmallMargin"
+                <Button 
+                    id="botaoVoltar"
+                    class="sapUiSmallMargin"
                     type="Default"
                     icon="sap-icon://nav-back"
                     press=".aoClicarEmVoltar"/>
@@ -16,12 +18,16 @@
             	<Title text="{i18n>tituloTelaCadastro}"/>
                 <ToolbarSpacer/>
                 <HBox justifyContent="End">
-                    <Button class="sapUiSmallMarginBegin" 
+                    <Button 
+                        id="botaoCancelar"
+                        class="sapUiSmallMarginBegin" 
                         type="Reject"
                         text="{i18n>botaoCancelar}"
                         icon="sap-icon://cancel"
                         press=".aoClicarEmVoltar"/>
-                    <Button class="sapUiSmallMarginBegin" 
+                    <Button 
+                        id="botaoSalvar"
+                        class="sapUiSmallMarginBegin" 
                         type="Default"
                         text="{i18n>botaoSalvar}"
                         icon="sap-icon://save"
@@ -34,7 +40,8 @@
             <VBox width="40%">
                 <VBox class="sapUiSmallMarginTop">
                     <Label text="{i18n>labelTipo}" design="Bold" required="true"/>
-                    <ComboBox id="cadastroComboBoxTipo"
+                    <ComboBox 
+                        id="cadastroComboBoxTipo"
                         width="100%"
                         items="{enumTipoTapecaria>/}"
                         placeholder="{i18n>comboBoxPlaceholder}"
@@ -45,7 +52,8 @@
                 </VBox>
                 <VBox class="sapUiSmallMarginTop" width="100%">
                     <Label text="{i18n>labelDataEntrada}" design="Bold" required="true"/>
-                    <DatePicker id="cadastroDatePickerDataEntrada"
+                    <DatePicker 
+                        id="cadastroDatePickerDataEntrada"
                         width="100%"
                         placeholder="{i18n>placeholderDataEntrada}"
                         value="{
@@ -62,7 +70,8 @@
                 </VBox>
                 <VBox class="sapUiSmallMarginTop">
                     <Label text="{i18n>labelTamanho}" design="Bold" required="true"/>
-                    <Input id="cadastroInputArea"
+                    <Input 
+                        id="cadastroInputArea"
                         value="{produtoTapecaria>/area}"
                         fieldWidth="100%"
                         showClearIcon="true"
@@ -71,7 +80,8 @@
                 </VBox>
                 <VBox class="sapUiSmallMarginTop">
                     <Label text="{i18n>labelPrecoMetroQuadrado}" design="Bold" required="true"/>
-                    <Input id="cadastroInputPrecoMetroQuadrado"
+                    <Input 
+                        id="cadastroInputPrecoMetroQuadrado"
                         value="{produtoTapecaria>/precoMetroQuadrado}"
                         fieldWidth="100%"
                         showClearIcon="true"
@@ -84,7 +94,8 @@
                 </VBox>
                 <VBox class="sapUiSmallMarginTop" width="100%">
                     <Label text="{i18n>labelDetalhes}" design="Bold"/>
-                    <TextArea id="cadastroInputDetalhes"
+                    <TextArea 
+                        id="cadastroTextAreaDetalhes"
                         value="{produtoTapecaria>/detalhes}"
                         width="100%"
                         change=".aoMudarValorDetalhes"
