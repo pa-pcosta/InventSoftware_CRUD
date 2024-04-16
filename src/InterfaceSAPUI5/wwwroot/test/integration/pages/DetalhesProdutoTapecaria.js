@@ -61,24 +61,14 @@ sap.ui.define([
 				
 				paginaDeDetalhesEhCarregadaComRegistroEspecifico (idDoRegistroEsperado) {
 					return this.waitFor({
-						id: "tituloSimpleForm",
+						controlType: "sap.m.Title",
 						viewName: NOME_DA_VIEW,
-						success: (campoText) => {
-							if(idDoRegistroEsperado){
-								let idExibido = campoText.getText();
-								let ehIdEsperado = idExibido.includes(idDoRegistroEsperado);
-
-								if(ehIdEsperado) {
-									Opa5.assert.ok(true, "Página de Detalhes do produto foi carregada com produto esperado");
-								}
-								else {
-									Opa5.assert.ok(true, "Página de Detalhes do produto foi carregada porém com registro diferente do esperado");
-								}
-							}
-							else
-							{
-								Opa5.assert.ok(true, "Página de Detalhes do produto foi carregada");
-							}
+						matchers: new PropertyStrictEquals({
+							name: "text",
+							value: `ID ${idDoRegistroEsperado}`
+						}),
+						success: (title) => {
+							Opa5.assert.ok(true, "Página de Detalhes do produto foi carregada com produto esperado")
 						},
 						errorMessage: "Página de Detalhes do produto não foi carregada"
 					})
