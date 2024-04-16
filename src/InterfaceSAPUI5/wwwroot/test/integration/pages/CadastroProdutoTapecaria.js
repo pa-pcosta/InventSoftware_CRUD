@@ -125,7 +125,7 @@ sap.ui.define([
 					});
 				},
 
-				valueStateCampo (idCampo, valueState) {
+				confereValueStateCampo (idCampo, valueState) {
 					return this.waitFor({
 						id: idCampo,
 						viewName: NOME_DA_VIEW,

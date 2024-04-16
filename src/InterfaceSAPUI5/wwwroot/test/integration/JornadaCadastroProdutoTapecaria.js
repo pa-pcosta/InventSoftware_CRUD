@@ -83,15 +83,15 @@ sap.ui.define([
 			.ehPreenchidoInput(ID_TEXTAREA_DETALHES, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
 			Then.naTelaDeCadastro
-			.valueStateCampo(ID_COMBOBOX_TIPO, "Error")
+			.confereValueStateCampo(ID_COMBOBOX_TIPO, "Error")
 			.and
-			.valueStateCampo(ID_DATEPICKER_DATA_ENTRADA, "Error")
+			.confereValueStateCampo(ID_DATEPICKER_DATA_ENTRADA, "Error")
 			.and
-			.valueStateCampo(ID_INPUT_AREA, "Error")
+			.confereValueStateCampo(ID_INPUT_AREA, "Error")
 			.and
-			.valueStateCampo(ID_INPUT_PRECO_METRO_QUADRADO, "Error")
+			.confereValueStateCampo(ID_INPUT_PRECO_METRO_QUADRADO, "Error")
 			.and
-			.valueStateCampo(ID_TEXTAREA_DETALHES, "Error");
+			.confereValueStateCampo(ID_TEXTAREA_DETALHES, "Error");
 
 			When.naTelaDeCadastro
 			.ehPressionadoBotaoComTitulo("botaoSalvar");
@@ -100,40 +100,40 @@ sap.ui.define([
 			.messageBoxEhExibida(ID_MESSAGEBOX_ERRO, "Alguns campos não atendem os critérios de validação");
 		});
 		
-		// opaTest("Deve cadastrar produto com sucesso e navegar para tela de detalhes", (Given, When, Then) => {
+		opaTest("Deve cadastrar produto com sucesso e navegar para tela de detalhes", (Given, When, Then) => {
 
-		// 	When.naTelaDeCadastro
-		// 	.ehPreenchidaComboBox(ID_COMBOBOX_TIPO, "3")
-		// 	.and
-		// 	.ehPreenchidoDatePicker(ID_DATEPICKER_DATA_ENTRADA, new Date())
-		// 	.and
-		// 	.ehPreenchidoInput(ID_INPUT_AREA, "11")
-		// 	.and
-		// 	.ehPreenchidoInput(ID_INPUT_PRECO_METRO_QUADRADO, "11")
-		// 	.and
-		// 	.ehPreenchidoInput(ID_TEXTAREA_DETALHES, `TESTE OPA ${new Date().getHours()}:${new Date().getMinutes()}`);
+			When.naTelaDeCadastro
+			.ehPreenchidaComboBox(ID_COMBOBOX_TIPO, "3")
+			.and
+			.ehPreenchidoDatePicker(ID_DATEPICKER_DATA_ENTRADA, new Date())
+			.and
+			.ehPreenchidoInput(ID_INPUT_AREA, "11")
+			.and
+			.ehPreenchidoInput(ID_INPUT_PRECO_METRO_QUADRADO, "11")
+			.and
+			.ehPreenchidoInput(ID_TEXTAREA_DETALHES, `TESTE OPA ${new Date().getHours()}:${new Date().getMinutes()}`);
 
-		// 	Then.naTelaDeCadastro
-		// 	.valueStateCampo(ID_COMBOBOX_TIPO, "None")
-		// 	.and
-		// 	.valueStateCampo(ID_DATEPICKER_DATA_ENTRADA, "None")
-		// 	.and
-		// 	.valueStateCampo(ID_INPUT_AREA, "None")
-		// 	.and
-		// 	.valueStateCampo(ID_INPUT_PRECO_METRO_QUADRADO, "None")
-		// 	.and
-		// 	.valueStateCampo(ID_TEXTAREA_DETALHES, "None");
+			Then.naTelaDeCadastro
+			.confereValueStateCampo(ID_COMBOBOX_TIPO, "None")
+			.and
+			.confereValueStateCampo(ID_DATEPICKER_DATA_ENTRADA, "None")
+			.and
+			.confereValueStateCampo(ID_INPUT_AREA, "None")
+			.and
+			.confereValueStateCampo(ID_INPUT_PRECO_METRO_QUADRADO, "None")
+			.and
+			.confereValueStateCampo(ID_TEXTAREA_DETALHES, "None");
 
-		// 	When.naTelaDeCadastro
-		// 	.ehPressionadoBotaoComTitulo("botaoSalvar");
+			When.naTelaDeCadastro
+			.ehPressionadoBotaoComTitulo("botaoSalvar");
 
-		// 	Then.naTelaDeCadastro
-		// 	.messageBoxEhExibida(ID_MESSAGEBOX_SUCESSO, "Produto cadastrado com sucesso!")
+			Then.naTelaDeCadastro
+			.messageBoxEhExibida(ID_MESSAGEBOX_SUCESSO, "Produto cadastrado com sucesso!")
 			
-		// 	Then.naTelaDeDetalhes
-		// 	.paginaDeDetalhesEhCarregada()
+			Then.naTelaDeDetalhes
+			.paginaDeDetalhesEhCarregada()
 			
-		// 	Then.iTeardownMyApp();
-		// });
+			Then.iTeardownMyApp();
+		});
 	});
 });
