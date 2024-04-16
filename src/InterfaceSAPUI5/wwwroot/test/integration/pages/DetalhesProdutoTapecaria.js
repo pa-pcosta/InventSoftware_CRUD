@@ -17,12 +17,16 @@ sap.ui.define([
 				botaoVoltarEhPressionado() {
 					return this.waitFor({
 						viewName: NOME_DA_VIEW,
-						controlType: "sap.m.Button",
-						matchers: new PropertyStrictEquals({
-							name: "icon",
-							value: "" 
-						}),
-						actions: new Press(),
+						controlType: "sap.m.Page",
+						matchers: {
+							i18NText: {
+								propertyName: "title",
+								key: "tituloTelaDetalhes"
+							}
+						},
+						actions: (pagina) => {
+							pagina.fireNavButtonPress();
+						},
 						success: function () {
 							Opa5.assert.ok(true, "Botão voltar pressionado com sucesso");
 						},

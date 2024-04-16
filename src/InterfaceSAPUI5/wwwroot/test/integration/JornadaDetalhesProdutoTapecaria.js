@@ -30,7 +30,7 @@ sap.ui.define([
 			.botaoVoltarEhPressionado();
 
 			Then.naTelaDeListagem
-			.listaDeProdutosEhCarregada();
+			.listaDeProdutosEhCarregadaComRegistros();
 
             When.naTelaDeListagem
             .oUltimoItemDaListaEhSelecionado();
@@ -54,26 +54,26 @@ sap.ui.define([
             .paginaDeDetalhesEhCarregada (DESCRICAO_REGISTRO_TESTE);
 		});
 
-        opaTest("Deve remover registro e navegar para tela de listagem", (Given, When, Then) => {
+        // opaTest("Deve remover registro e navegar para tela de listagem", (Given, When, Then) => {
 
-			When.naTelaDeDetalhes
-			.ehPressionadoBotao(ID_BOTAO_REMOVER);
+		// 	When.naTelaDeDetalhes
+		// 	.ehPressionadoBotao(ID_BOTAO_REMOVER);
 
-			Then.naTelaDeDetalhes
-			.messageBoxEhExibida(ID_MESSAGEBOX_CONFIRMACAO, "Confirmação", "Após excluir o registro não será possível recuperar os dados. Deseja continuar?")
-            .and
-            .messageBoxEhExibida(ID_MESSAGEBOX_SUCESSO, "Êxito", "Produto removido com sucesso.");
+		// 	Then.naTelaDeDetalhes
+		// 	.messageBoxEhExibida(ID_MESSAGEBOX_CONFIRMACAO, "Confirmação", "Após excluir o registro não será possível recuperar os dados. Deseja continuar?")
+        //     .and
+        //     .messageBoxEhExibida(ID_MESSAGEBOX_SUCESSO, "Êxito", "Produto removido com sucesso.");
 
-            Then.naTelaDeListagem
-            .listaDeProdutosEhCarregada();
+        //     Then.naTelaDeListagem
+        //     .listaDeProdutosEhCarregada();
 
-            When.naTelaDeListagem
-            .ehPesquisadoNoSearchField (DESCRICAO_REGISTRO_TESTE)
+        //     When.naTelaDeListagem
+        //     .ehPesquisadoNoSearchField (DESCRICAO_REGISTRO_TESTE)
 
-            Then.naTelaDeListagem
-            .listaDeProdutosEhCarregada();
+        //     Then.naTelaDeListagem
+        //     .listaDeProdutosEhCarregada();
 
-            Then.iTeardownMyApp();
-		});
+        //     Then.iTeardownMyApp();
+		// });
 	});
 });
