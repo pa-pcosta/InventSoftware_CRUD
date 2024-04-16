@@ -48,14 +48,14 @@ sap.ui.define([
 			},
 
 			assertions: {
-				paginaDeDetalhesEhCarregada () {
+				paginaDeDetalhesEhCarregadaComRegistroCriado (descricaoEsperada) {
 					return this.waitFor({
-						id: "paginaDeDetalhes",
+						id: "textDetalhes",
 						viewName: NOME_DA_VIEW,
-						matchers: new PropertyStrictEquals({
-							name: "title",
-							value: "Detalhes do Produto" 
-						}),
+						check: (campoText) => {
+							let descricao = campoText.getText();
+							return descricao.includes(descricaoEsperada);
+						},
 						success: () => {
 							Opa5.assert.ok(true, "Página de Detalhes do produto foi carregada");
 						},

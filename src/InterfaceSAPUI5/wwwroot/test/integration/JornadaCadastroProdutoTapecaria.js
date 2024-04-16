@@ -111,7 +111,7 @@ sap.ui.define([
 			.and
 			.ehPreenchidoInput(ID_INPUT_PRECO_METRO_QUADRADO, "11")
 			.and
-			.ehPreenchidoInput(ID_TEXTAREA_DETALHES, `TESTE OPA ${new Date().getHours()}:${new Date().getMinutes()}`);
+			.ehPreenchidoInput(ID_TEXTAREA_DETALHES, `${ DESCRICAO_REGISTRO_TESTE + "" + new Date().getHours()}:${new Date().getMinutes()}`);
 
 			Then.naTelaDeCadastro
 			.confereValueStateCampo(ID_COMBOBOX_TIPO, "None")
@@ -131,7 +131,7 @@ sap.ui.define([
 			.messageBoxEhExibida(ID_MESSAGEBOX_SUCESSO, "Produto cadastrado com sucesso!")
 			
 			Then.naTelaDeDetalhes
-			.paginaDeDetalhesEhCarregada()
+			.paginaDeDetalhesEhCarregadaComRegistroCriado(DESCRICAO_REGISTRO_TESTE)
 			
 			Then.iTeardownMyApp();
 		});

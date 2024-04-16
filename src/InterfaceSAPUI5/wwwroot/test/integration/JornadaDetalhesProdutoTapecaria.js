@@ -36,7 +36,7 @@ sap.ui.define([
             .oUltimoItemDaListaEhSelecionado();
 
             Then.naTelaDeDetalhes
-            .paginaDeDetalhesEhCarregada ();
+            .paginaDeDetalhesEhCarregadaComRegistroCriado(DESCRICAO_REGISTRO_TESTE);
 		});
 
         opaTest("Deve navegar para tela de cadastro na rota de edição", (Given, When, Then) => {
@@ -51,7 +51,7 @@ sap.ui.define([
             .ehPressionadoBotao("botaoVoltar")
 
             Then.naTelaDeDetalhes
-            .paginaDeDetalhesEhCarregada (DESCRICAO_REGISTRO_TESTE);
+            .paginaDeDetalhesEhCarregadaComRegistroCriado (DESCRICAO_REGISTRO_TESTE);
 		});
 
         // opaTest("Deve remover registro e navegar para tela de listagem", (Given, When, Then) => {
